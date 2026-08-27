@@ -1,0 +1,1146 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Whole-market statistics</title>
+<link rel="icon" href="data:," />
+<script>(function(){try{var t=localStorage.getItem('pk-theme');if(t==='dark'||t==='light'||t==='pastel')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+
+:root{
+--surface:#faf9f7;
+--panel:#ffffff;
+--panel-alt:#f4f2ee;
+--ink:#27272a;
+--ink-muted:#52525b;
+--ink-subtle:#6b6b73;
+--border:#e4e4e7;
+--border-strong:#d4d4d8;
+--accent:#3d5a80;
+--accent-ink:#2c4360;
+--up:#0d9488;
+--up-text:#0a6d64;
+--down:#c0392b;
+--down-text:#992b20;
+--neutral:#a1a1aa;
+--accent-rgb:61,90,128;
+--up-rgb:13,148,136;
+--down-rgb:192,57,43;
+--on-accent:#ffffff;
+--warn-ink:#8a5a12;
+--warn-bg:#fbf3e2;
+--warn-border:#ead9b6;
+--warn-ink-hover:#6f480d;
+--warn-bg-hover:#f8ebd2;
+--warn-border-hover:#d9bd7f;
+--warn-dot:#c58a2a;
+--shadow-tint:39,39,42;
+--radius:3px;
+--ease:cubic-bezier(.16,1,.3,1);
+--t-fast:.15s;
+--t-mid:.24s;
+--rv-step:42ms;
+--nav-h:52px;
+--tbl-pad-y:6px;
+--tbl-pad-x:12px;
+--tbl-fs:0.85rem;
+--section-gap:30px;
+--spark-w:84px;
+--spark-h:22px;
+--band-w:150px;
+}
+@media (prefers-color-scheme: dark){
+:root:not([data-theme="light"]):not([data-theme="pastel"]){
+--surface:#1a1917;
+--panel:#221f1d;
+--panel-alt:#2a2724;
+--ink:#ece8e1;
+--ink-muted:#b2aca1;
+--ink-subtle:#959083;
+--border:#37332e;
+--border-strong:#48433c;
+--accent:#8fb0d4;
+--accent-ink:#9dbbdd;
+--up:#2dd4bf;
+--up-text:#5ad6c6;
+--down:#f0705c;
+--down-text:#f2897a;
+--neutral:#7a756d;
+--accent-rgb:143,176,212;
+--up-rgb:45,212,191;
+--down-rgb:240,112,92;
+--on-accent:#1a1917;
+--warn-ink:#e8b877;
+--warn-bg:#3a2f1c;
+--warn-border:#5a4826;
+--warn-ink-hover:#f0c88a;
+--warn-bg-hover:#463722;
+--warn-border-hover:#6b5730;
+--warn-dot:#d8a24e;
+--shadow-tint:0,0,0;
+}
+}
+:root[data-theme="dark"]{
+--surface:#1a1917;
+--panel:#221f1d;
+--panel-alt:#2a2724;
+--ink:#ece8e1;
+--ink-muted:#b2aca1;
+--ink-subtle:#959083;
+--border:#37332e;
+--border-strong:#48433c;
+--accent:#8fb0d4;
+--accent-ink:#9dbbdd;
+--up:#2dd4bf;
+--up-text:#5ad6c6;
+--down:#f0705c;
+--down-text:#f2897a;
+--neutral:#7a756d;
+--accent-rgb:143,176,212;
+--up-rgb:45,212,191;
+--down-rgb:240,112,92;
+--on-accent:#1a1917;
+--warn-ink:#e8b877;
+--warn-bg:#3a2f1c;
+--warn-border:#5a4826;
+--warn-ink-hover:#f0c88a;
+--warn-bg-hover:#463722;
+--warn-border-hover:#6b5730;
+--warn-dot:#d8a24e;
+--shadow-tint:0,0,0;
+}
+:root[data-theme="pastel"]{
+--surface:#f3e1d7;
+--panel:#fffcfa;
+--panel-alt:#e8cabb;
+--ink:#2b201d;
+--ink-muted:#63483f;
+--ink-subtle:#684f47;
+--border:#e8d3c8;
+--border-strong:#a8695d;
+--accent:#bf5b4f;
+--accent-ink:#7c342b;
+--up:#217c6a;
+--up-text:#1c6255;
+--down:#712318;
+--down-text:#5c1c12;
+--neutral:#a89287;
+--accent-rgb:191,91,79;
+--up-rgb:33,124,106;
+--down-rgb:113,35,24;
+--on-accent:#0d0908;
+--warn-ink:#8a5a12;
+--warn-bg:#faf0dd;
+--warn-border:#e8d0a0;
+--warn-ink-hover:#6f480d;
+--warn-bg-hover:#f6e7c8;
+--warn-border-hover:#d8b978;
+--warn-dot:#c58a2a;
+--shadow-tint:43,32,29;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+@media (prefers-reduced-motion:no-preference){ html{scroll-behavior:smooth;} }
+body{
+background:var(--surface);
+color:var(--ink);
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+font-size:15px;
+line-height:1.55;
+-webkit-font-smoothing:antialiased;
+}
+@media (prefers-reduced-motion:no-preference){ body{transition:background-color .2s,color .2s;} }
+.num,td.num,th.num,.stat-value,.tick-label{
+font-variant-numeric:tabular-nums;
+font-feature-settings:"tnum" 1,"lnum" 1;
+}
+a{color:var(--accent-ink);}
+a:hover{color:var(--accent);}
+.page{max-width:1360px;margin:0 auto;padding:20px 20px 44px;}
+.prose{max-width:66ch;}
+.ret-pos{color:var(--up-text);}
+.ret-neg{color:var(--down);}
+.topnav{
+position:sticky;top:0;z-index:40;
+background:var(--surface);border-bottom:1px solid var(--border);
+}
+.nav-inner{
+max-width:1240px;margin:0 auto;padding:0 20px;
+height:var(--nav-h);display:flex;align-items:center;gap:10px;
+}
+.brand{
+font-weight:700;letter-spacing:-0.01em;color:var(--ink);
+text-decoration:none;font-size:0.98rem;flex:none;
+position:relative;display:inline-block;
+}
+.brand:hover{color:var(--accent-ink);}
+.brand::after{
+content:"";position:absolute;left:0;right:0;bottom:-3px;height:1.5px;
+background:var(--accent);opacity:0.34;
+}
+@media (prefers-reduced-motion:no-preference){
+.brand::after{animation:pk-breathe 5.5s ease-in-out infinite;
+transition:opacity var(--t-mid) var(--ease);}
+.brand:hover::after,.brand:focus-visible::after{animation:none;opacity:1;}
+@keyframes pk-breathe{
+0%,100%{opacity:0.22;}
+50%{opacity:0.6;}
+}
+html.motion .brand{animation:pk-brand .5s var(--ease) both;}
+@keyframes pk-brand{
+from{opacity:0;letter-spacing:.08em;}
+to{opacity:1;letter-spacing:-0.01em;}
+}
+}
+.nav-links{
+display:flex;gap:2px;flex:1;overflow-x:auto;overflow-y:hidden;
+scrollbar-width:none;-ms-overflow-style:none;
+}
+.nav-links::-webkit-scrollbar{display:none;}
+.nav-links a{
+font-size:0.83rem;color:var(--ink-muted);text-decoration:none;
+padding:6px 7px;border-radius:var(--radius);white-space:nowrap;
+transition:background-color .15s ease-out,color .15s ease-out;
+}
+.nav-links a:hover{background:var(--panel-alt);color:var(--ink);}
+.nav-links a.active{color:var(--accent-ink);background:rgba(var(--accent-rgb),0.10);font-weight:600;}
+.density-toggle{flex:none;white-space:nowrap;font-size:0.78rem;padding:6px 10px;}
+.copy-toggle{flex:none;white-space:nowrap;font-size:0.78rem;padding:6px 10px;}
+html:not(.plain) [data-copy="plain"]{display:none;}
+html.plain [data-copy="full"]{display:none;}
+@media (prefers-reduced-motion:no-preference){
+html.copy-anim.plain [data-copy="plain"],
+html.copy-anim:not(.plain) [data-copy="full"]{
+animation:pk-copyswap var(--t-mid) var(--ease);
+}
+@keyframes pk-copyswap{from{opacity:0;transform:translateY(-3px);}to{opacity:1;transform:none;}}
+.depth-in > *{animation:pk-rowin var(--t-mid) var(--ease) both;}
+.depth-in > *:nth-child(n+6){animation-delay:calc((var(--rowi,0)) * 1ms);}
+.depth-in > *:nth-child(6){--rowi:0;}
+.depth-in > *:nth-child(7){--rowi:45;}
+.depth-in > *:nth-child(8){--rowi:90;}
+.depth-in > *:nth-child(9){--rowi:135;}
+.depth-in > *:nth-child(10){--rowi:180;}
+@keyframes pk-rowin{from{opacity:0;transform:translateY(-4px);}to{opacity:1;transform:none;}}
+}
+.theme-group{flex:none;}
+.theme-group button{font-size:0.74rem;padding:5px 8px;white-space:nowrap;}
+.theme-opt[aria-pressed="true"]{background:var(--accent);color:var(--on-accent);}
+@media (max-width:720px){
+.nav-links{
+-webkit-mask-image:linear-gradient(to right,#000 calc(100% - 22px),transparent);
+mask-image:linear-gradient(to right,#000 calc(100% - 22px),transparent);
+}
+}
+@media (max-width:560px){
+.nav-inner{
+flex-wrap:wrap;height:auto;row-gap:2px;padding-top:6px;padding-bottom:8px;
+}
+.nav-links{order:3;flex:0 0 100%;width:100%;}
+.brand{margin-right:auto;}
+.nav-inner{gap:8px;padding-left:12px;padding-right:12px;}
+.theme-group button{font-size:0.7rem;padding:4px 7px;}
+.density-toggle{font-size:0.72rem;padding:5px 8px;}
+}
+header.masthead{border-bottom:1px solid var(--border);padding-bottom:14px;margin-bottom:18px;text-align:center;scroll-margin-top:calc(var(--nav-h) + 14px);}
+header.masthead h1{font-size:1.4rem;font-weight:650;margin:0 0 5px;letter-spacing:-0.01em;}
+header.masthead p.lede{margin:0 auto 8px;max-width:80ch;color:var(--ink-muted);font-size:0.92rem;}
+.summary-strip{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+gap:1px;
+background:var(--border);
+border:1px solid var(--border);
+border-radius:var(--radius);
+overflow:hidden;
+}
+.summary-cell{background:var(--panel);padding:9px 12px;text-align:center;}
+.summary-cell .k{font-size:0.72rem;text-transform:uppercase;letter-spacing:0.04em;color:var(--ink-subtle);margin:0 0 4px;}
+.summary-cell .v{font-size:1.15rem;font-weight:650;margin:0;line-height:1.25;}
+.summary-cell .v small{
+font-weight:500;color:var(--ink-muted);font-size:0.7rem;display:-webkit-box;
+-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.3;
+}
+.verdict-cell{background:var(--panel-alt);}
+.verdict-chip{
+display:inline-flex;align-items:center;gap:7px;
+font-size:0.82rem;font-weight:650;color:var(--warn-ink);
+background:var(--warn-bg);border:1px solid var(--warn-border);border-radius:999px;
+padding:4px 12px;text-decoration:none;
+transition:background-color .15s ease-out,border-color .15s ease-out;
+}
+.verdict-chip:hover{border-color:var(--warn-border-hover);color:var(--warn-ink-hover);background:var(--warn-bg-hover);}
+.verdict-chip .dot{width:7px;height:7px;border-radius:50%;background:var(--warn-dot);}
+section{margin-bottom:var(--section-gap);scroll-margin-top:calc(var(--nav-h) + 14px);}
+section > h2{font-size:1.08rem;font-weight:650;margin:0 0 4px;letter-spacing:-0.005em;text-align:center;}
+section > p.section-note{margin:0 auto 10px;color:var(--ink-muted);font-size:0.88rem;max-width:78ch;text-align:center;}
+details.explain{
+max-width:78ch;margin:0 auto 12px;border:1px solid var(--border);
+border-radius:var(--radius);background:var(--panel);
+}
+details.explain > summary{
+cursor:pointer;list-style:none;padding:9px 14px;
+font-size:0.82rem;font-weight:600;color:var(--accent-ink);
+display:flex;align-items:center;gap:8px;user-select:none;
+transition:background-color .15s ease-out;border-radius:var(--radius);
+}
+details.explain > summary:hover{background:var(--panel-alt);}
+details.explain > summary::-webkit-details-marker{display:none;}
+details.explain > summary::before{
+content:"";width:6px;height:6px;border-right:1.5px solid var(--accent);
+border-bottom:1.5px solid var(--accent);transform:rotate(-45deg);
+transition:transform .15s ease-out;flex:none;margin-left:2px;
+}
+details.explain[open] > summary::before{transform:rotate(45deg);}
+details.explain > summary::after{content:"How to read this";}
+details.explain > summary span.custom{display:none;}
+@media (prefers-reduced-motion:no-preference){
+details.explain[open] .explain-body{animation:pk-explain var(--t-mid) var(--ease);}
+@keyframes pk-explain{from{opacity:0;transform:translateY(-4px);}to{opacity:1;transform:none;}}
+}
+ul.kpi-key{margin:4px 0 12px;padding-left:18px;}
+ul.kpi-key li{margin-bottom:5px;}
+ul.kpi-key li strong{color:var(--ink);}
+details.explain .explain-body{
+padding:2px 16px 14px 30px;font-size:0.86rem;color:var(--ink-muted);
+line-height:1.6;border-top:1px solid var(--border);margin-top:0;padding-top:12px;
+}
+details.explain .explain-body p{margin:0 0 9px;}
+details.explain .explain-body p:last-child{margin-bottom:0;}
+details.explain .explain-body strong{color:var(--ink);}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:center;margin-bottom:16px;}
+input[type="search"],select{
+font-family:inherit;font-size:0.88rem;padding:7px 10px;
+border:1px solid var(--border-strong);border-radius:var(--radius);
+background:var(--panel);color:var(--ink);
+}
+input[type="search"]{min-width:220px;}
+input[type="search"]:focus,select:focus,button:focus{outline:2px solid var(--accent);outline-offset:1px;}
+a:focus-visible,summary:focus-visible,.hub-card:focus-visible,.verdict-chip:focus-visible{
+outline:2px solid var(--accent);outline-offset:2px;border-radius:var(--radius);
+}
+.preset-group{display:flex;gap:0;border:1px solid var(--border-strong);border-radius:var(--radius);overflow:hidden;}
+.preset-group button{border:none;border-right:1px solid var(--border-strong);border-radius:0;background:var(--panel);}
+.preset-group button:last-child{border-right:none;}
+.depth-group{margin:0 0 10px auto;width:max-content;}
+.depth-group button{font-size:0.76rem;padding:4px 11px;}
+button{
+font-family:inherit;font-size:0.85rem;padding:7px 12px;
+border:1px solid var(--border-strong);border-radius:var(--radius);
+background:var(--panel);color:var(--ink);cursor:pointer;
+transition:background-color var(--t-fast) ease-out,border-color var(--t-fast) ease-out,
+color var(--t-fast) ease-out;
+}
+button:hover{border-color:var(--accent);}
+@media (prefers-reduced-motion:no-preference){
+button{transition:background-color var(--t-fast) ease-out,border-color var(--t-fast) ease-out,
+color var(--t-fast) ease-out,transform var(--t-fast) var(--ease);}
+button:active{transform:translateY(1px);}
+}
+button.active{background:var(--accent);border-color:var(--accent);color:var(--on-accent);}
+.preset-group button.active{background:var(--accent);color:var(--on-accent);}
+.table-wrap{border:1px solid var(--border);border-radius:var(--radius);overflow-x:auto;}
+table{border-collapse:collapse;width:100%;font-size:var(--tbl-fs);}
+thead th{
+text-align:left;padding:calc(var(--tbl-pad-y) + 1px) var(--tbl-pad-x);
+border-bottom:1px solid var(--border-strong);
+background:var(--panel-alt);font-weight:600;white-space:nowrap;
+position:sticky;top:0;
+}
+thead th.sortable{cursor:pointer;user-select:none;}
+thead th.num{text-align:right;}
+thead th[title]{text-decoration:underline dotted var(--border-strong);text-underline-offset:3px;}
+thead th.sortable:hover{color:var(--accent-ink);}
+thead th .arrow{color:var(--accent);margin-left:3px;font-size:0.75em;}
+tbody td{padding:var(--tbl-pad-y) var(--tbl-pad-x);border-bottom:1px solid var(--border);vertical-align:middle;}
+tbody tr:last-child td{border-bottom:none;}
+tbody tr{transition:background-color .13s ease-out;}
+tbody tr:hover{background:var(--panel-alt);}
+tbody tr:hover td:first-child{box-shadow:inset 2px 0 0 var(--accent);}
+td.num{text-align:right;}
+.card-name{font-weight:600;}
+.card-set{color:var(--ink-subtle);font-size:0.8rem;}
+.rarity-tag{font-size:0.74rem;color:var(--ink-muted);white-space:nowrap;}
+.band-cell{min-width:170px;}
+.band-val{font-weight:700;font-size:0.95rem;font-variant-numeric:tabular-nums;}
+.band-val.up{color:var(--up-text);}
+.band-val.down{color:var(--down);}
+svg.band{display:block;margin-top:3px;overflow:visible;width:var(--band-w);height:14px;}
+svg.spark{display:block;width:var(--spark-w);height:var(--spark-h);}
+.flag-badge{
+display:inline-block;font-size:0.72rem;font-weight:700;padding:2px 8px;
+border-radius:999px;white-space:nowrap;letter-spacing:0.01em;
+}
+.flag-badge.up{background:rgba(var(--up-rgb),0.13);color:var(--up-text);}
+.flag-badge.down{background:rgba(var(--down-rgb),0.13);color:var(--down-text);}
+.flag-badge.none{background:var(--panel-alt);color:var(--ink-subtle);font-weight:600;}
+.flag-chip{
+display:inline-block;font-size:0.68rem;font-weight:600;padding:1px 7px;margin-top:3px;
+border-radius:999px;border:1px solid var(--border-strong);white-space:nowrap;color:var(--ink-subtle);
+}
+.flag-chip.up{border-color:rgba(var(--up-rgb),0.5);color:var(--up-text);}
+.flag-chip.down{border-color:rgba(var(--down-rgb),0.5);color:var(--down-text);}
+.flag-stack{display:flex;flex-direction:column;align-items:flex-start;gap:0;}
+.drivers{font-size:0.74rem;color:var(--ink-muted);white-space:normal;max-width:210px;line-height:1.4;}
+.drivers .dw{display:inline-block;margin-right:8px;white-space:nowrap;}
+.eur-cell{font-size:0.78rem;color:var(--ink-muted);white-space:nowrap;}
+.eur-cell .z{font-weight:650;}
+.eur-cell .z.pos{color:var(--up-text);}
+.eur-cell .z.neg{color:var(--down);}
+.table-footer{display:flex;justify-content:space-between;align-items:center;margin-top:12px;font-size:0.82rem;color:var(--ink-subtle);gap:12px;flex-wrap:wrap;}
+.wl-block{margin-bottom:38px;}
+.wl-block:last-child{margin-bottom:0;}
+.wl-block h3{font-size:0.98rem;font-weight:650;margin:0 0 3px;text-align:center;letter-spacing:-0.005em;}
+.wl-sub{text-align:center;color:var(--ink-muted);font-size:0.86rem;margin:0 auto 10px;max-width:78ch;}
+.wl-duo{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start;}
+.wl-duo > *{min-width:0;}
+@media (max-width:820px){.wl-duo{grid-template-columns:1fr;}}
+.duo-head{font-size:0.78rem;font-weight:650;color:var(--ink-muted);text-align:center;margin:0 0 5px;text-transform:uppercase;letter-spacing:0.04em;}
+.stat-cards{
+display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;
+background:var(--border);border:1px solid var(--border);border-radius:var(--radius);
+overflow:hidden;margin:0 auto 16px;max-width:760px;
+}
+.stat-card{background:var(--panel);padding:12px 14px;text-align:center;}
+.stat-card .k{font-size:0.7rem;text-transform:uppercase;letter-spacing:0.04em;color:var(--ink-subtle);margin:0 0 4px;}
+.stat-card .v{font-size:1.1rem;font-weight:650;margin:0;line-height:1.2;}
+.stat-card .v small{font-weight:500;color:var(--ink-muted);font-size:0.7rem;display:block;margin-top:2px;}
+#leaderboard tbody tr.selected{background:rgba(var(--accent-rgb),0.08);}
+#leaderboard tbody tr.selected td:first-child{box-shadow:inset 3px 0 0 var(--accent);}
+#leaderboard tbody tr.baseline td{color:var(--ink-subtle);}
+.sel-tag{font-size:0.68rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:0.04em;margin-left:6px;}
+.attr-note{margin-top:14px;}
+.verdict-word{font-weight:700;}
+.verdict-word.reversion{color:var(--down);}
+.verdict-word.momentum{color:var(--up-text);}
+.verdict-word.null{color:var(--ink-subtle);}
+.verdict-word.insufficient{color:var(--warn-ink);font-weight:650;}
+tr.slice-anchor{background:var(--panel-alt);}
+tr.slice-anchor td{font-weight:650;}
+tr.slice-total td:first-child{box-shadow:inset 3px 0 0 var(--accent);}
+.thin-tag{
+display:inline-block;font-size:0.64rem;font-weight:700;letter-spacing:0.04em;
+text-transform:uppercase;padding:1px 6px;margin-left:6px;border-radius:999px;
+color:var(--warn-ink);background:var(--warn-bg);border:1px solid var(--warn-border);
+white-space:nowrap;vertical-align:1px;
+}
+.call-word{font-weight:650;font-size:0.82em;white-space:nowrap;}
+.call-word.clears{color:var(--up-text);}
+.call-word.negative{color:var(--down);}
+.call-word.flat{color:var(--ink-subtle);}
+.call-word.skipped{color:var(--ink-subtle);}
+.slice-legend{
+font-size:0.8rem;color:var(--ink-subtle);margin:10px auto 0;max-width:80ch;line-height:1.5;
+}
+html.compact .slice-legend{display:none;}
+.callout{
+border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:var(--radius);
+padding:14px 18px;background:var(--panel);font-size:0.9rem;color:var(--ink-muted);margin-bottom:18px;
+}
+.callout strong{color:var(--ink);}
+.split{display:grid;grid-template-columns:1.15fr 1fr;gap:24px;align-items:start;}
+.split > *{min-width:0;}
+@media (max-width:900px){.split{grid-template-columns:1fr;}}
+.caveats{
+border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:var(--radius);
+padding:18px 20px;background:var(--panel);font-size:0.86rem;color:var(--ink-muted);
+}
+.caveats h4{margin:0 0 10px;color:var(--ink);font-size:0.9rem;font-weight:650;}
+.caveats ul{margin:0;padding-left:1.15em;}
+.caveats li{margin-bottom:11px;}
+.caveats li:last-child{margin-bottom:0;}
+.caveats strong{color:var(--ink);}
+.methods-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px;}
+.methods-grid > *{min-width:0;}
+@media (max-width:760px){.methods-grid{grid-template-columns:1fr;}}
+.method-card{border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;background:var(--panel);font-size:0.86rem;color:var(--ink-muted);}
+.method-card h4{margin:0 0 8px;color:var(--ink);font-size:0.9rem;font-weight:650;}
+.method-card ul{margin:0;padding-left:1.1em;}
+.method-card li{margin-bottom:6px;}
+.method-card p{margin:0 0 8px;}
+.method-card p:last-child{margin-bottom:0;}
+.hub-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin:0 0 8px;}
+.hub-card{
+display:block;border:1px solid var(--border);border-radius:var(--radius);
+padding:15px 17px;background:var(--panel);text-decoration:none;color:inherit;
+transition:border-color .15s ease-out,transform .15s ease-out;
+}
+.hub-card:hover{border-color:var(--accent);transform:translateY(-1px);}
+.hub-card .hc-title{font-weight:650;color:var(--ink);font-size:0.95rem;margin:0 0 4px;}
+.hub-card .hc-desc{color:var(--ink-muted);font-size:0.83rem;margin:0;line-height:1.45;}
+.stub{
+border:1px dashed var(--border-strong);border-radius:var(--radius);
+padding:34px 26px;background:var(--panel);text-align:center;color:var(--ink-muted);
+max-width:72ch;margin:0 auto;
+}
+.stub h3{margin:0 0 8px;color:var(--ink);font-size:1.02rem;}
+.stub p{margin:0 auto;max-width:60ch;}
+#tooltip{
+position:fixed;pointer-events:none;background:var(--ink);color:var(--surface);
+border-radius:var(--radius);padding:8px 10px;font-size:12px;line-height:1.45;max-width:250px;
+opacity:0;transition:opacity 60ms linear;z-index:50;box-shadow:0 2px 10px rgba(var(--shadow-tint),0.22);
+}
+#tooltip.show{opacity:1;}
+#tooltip .tt-name{font-weight:650;display:block;margin-bottom:2px;}
+.mark{cursor:pointer;}
+.mark:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+.mark-dot{fill-opacity:0;transition:fill-opacity var(--t-fast) ease-out;}
+.mark-dot:hover,.mark-dot:focus-visible{fill-opacity:1;}
+footer{border-top:1px solid var(--border);padding-top:18px;margin-top:8px;font-size:0.82rem;color:var(--ink-subtle);}
+footer code{background:var(--panel-alt);padding:1px 5px;border-radius:2px;font-size:0.92em;}
+html.motion [data-reveal]{opacity:0;transform:translateY(10px);
+transition:opacity var(--t-mid) var(--ease),transform var(--t-mid) var(--ease);
+transition-delay:calc(var(--rv,0) * var(--rv-step));}
+html.motion [data-reveal].in-view{opacity:1;transform:none;}
+.pagenav{
+position:fixed;right:18px;bottom:18px;z-index:44;
+display:flex;flex-direction:column;align-items:flex-end;gap:8px;
+}
+.pagenav[hidden]{display:none;}
+.pn-row{display:flex;gap:6px;}
+.pagenav button{
+font-size:0.78rem;padding:6px 11px;background:var(--panel);
+border:1px solid var(--border-strong);border-radius:var(--radius);
+color:var(--ink-muted);box-shadow:0 2px 10px rgba(var(--shadow-tint),0.18);
+}
+.pagenav button:hover{color:var(--ink);border-color:var(--accent);}
+.pn-list{
+display:flex;flex-direction:column;max-height:min(58vh,420px);overflow-y:auto;
+width:250px;background:var(--panel);border:1px solid var(--border-strong);
+border-radius:var(--radius);box-shadow:0 4px 18px rgba(var(--shadow-tint),0.22);
+}
+.pn-list[hidden]{display:none;}
+.pn-list a{
+padding:7px 12px;font-size:0.79rem;line-height:1.35;color:var(--ink-muted);
+text-decoration:none;border-left:2px solid transparent;
+}
+.pn-list a + a{border-top:1px solid var(--border);}
+.pn-list a:hover{background:var(--panel-alt);color:var(--ink);}
+.pn-list a.active{color:var(--accent-ink);border-left-color:var(--accent);font-weight:600;}
+@media (prefers-reduced-motion:no-preference){
+.pagenav button{transition:color var(--t-fast) ease-out,border-color var(--t-fast) ease-out,
+transform var(--t-fast) var(--ease);}
+.pn-list a{transition:background-color var(--t-fast) ease-out,color var(--t-fast) ease-out;}
+.pn-list{animation:pk-pn var(--t-mid) var(--ease);}
+@keyframes pk-pn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+}
+@media (max-width:560px){
+.pagenav{right:10px;bottom:10px;}
+.pn-list{width:min(74vw,250px);}
+}
+@media (prefers-reduced-motion:no-preference){
+@supports (animation-timeline:scroll()){
+body::after{
+content:"";position:fixed;top:0;left:0;height:2px;width:100%;
+transform-origin:0 50%;transform:scaleX(0);
+background:var(--accent);z-index:45;pointer-events:none;
+animation:pk-progress linear;animation-timeline:scroll(root);
+}
+@keyframes pk-progress{from{transform:scaleX(0);}to{transform:scaleX(1);}}
+}
+}
+html.compact{
+font-size:14px;
+--nav-h:46px;
+--tbl-pad-y:4px;
+--tbl-pad-x:9px;
+--tbl-fs:0.79rem;
+--section-gap:20px;
+--spark-w:66px;
+--spark-h:18px;
+--band-w:120px;
+}
+@media (max-width:560px){
+:root{--nav-h:82px;}
+html.compact{--nav-h:78px;}
+}
+html.compact .page{padding-top:22px;}
+html.compact header.masthead{padding-bottom:10px;margin-bottom:12px;}
+html.compact header.masthead h1{font-size:1.34rem;margin-bottom:6px;}
+html.compact .lede{display:none;}
+html.compact .section-note{display:none;}
+html.compact .wl-sub{display:none;}
+html.compact section > h2{font-size:1.02rem;margin-bottom:10px;}
+html.compact .summary-cell{padding:8px 11px;}
+html.compact .summary-cell .v{font-size:1rem;}
+html.compact .stat-card{padding:8px 11px;}
+html.compact .stat-card .v{font-size:0.98rem;}
+html.compact .band-cell{min-width:132px;}
+html.compact .band-val{font-size:0.85rem;}
+html.compact .drivers{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:150px;}
+html.compact .toolbar{margin-bottom:10px;}
+html.compact details.explain{margin-bottom:12px;}
+html.compact .wl-block{margin-bottom:24px;}
+html.compact .callout{padding:10px 14px;margin-bottom:12px;}
+html.compact .caveats{padding:13px 15px;}
+.cardcell{display:flex;gap:9px;align-items:flex-start;min-width:0;}
+.cc-thumb,.cc-thumb--fallback{
+flex:none;width:40px;height:56px;border-radius:var(--radius);
+background:var(--panel-alt);border:1px solid var(--border);
+}
+img.cc-thumb{object-fit:cover;display:block;}
+.cc-thumb--fallback{position:relative;display:inline-block;}
+.cc-thumb--fallback::after{
+content:"";position:absolute;inset:7px;border:1px solid var(--border-strong);
+border-radius:2px;opacity:0.55;
+background:
+linear-gradient(var(--border-strong),var(--border-strong)) no-repeat center/60% 1px;
+}
+.cc-body{display:flex;flex-direction:column;min-width:0;gap:1px;}
+.cc-name{font-weight:600;font-size:0.85rem;line-height:1.28;color:var(--ink);}
+.cc-meta{color:var(--ink-subtle);font-size:0.74rem;line-height:1.3;}
+.cc-price{font-weight:600;font-size:0.8rem;font-variant-numeric:tabular-nums;color:var(--ink);}
+.cc-links{display:flex;gap:5px;margin-top:2px;flex-wrap:wrap;}
+.cc-links .chip{
+display:inline-block;font-size:0.68rem;font-weight:600;padding:1px 7px;
+border-radius:999px;border:1px solid var(--border-strong);white-space:nowrap;
+color:var(--ink-subtle);text-decoration:none;
+transition:border-color .15s ease-out,color .15s ease-out;
+}
+.cc-links .chip:hover{border-color:var(--accent);color:var(--accent-ink);}
+.cardcell.cc-compact{gap:7px;}
+.cardcell.cc-compact .cc-thumb,.cardcell.cc-compact .cc-thumb--fallback{width:28px;height:39px;}
+.cardcell.cc-compact .cc-name{font-size:0.82rem;}
+.cardcell.cc-compact .cc-meta{
+white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:220px;
+}
+html.compact .cardcell .cc-thumb,html.compact .cardcell .cc-thumb--fallback{width:28px;height:39px;}
+html.compact .cardcell .cc-meta{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:200px;}
+figure.chartfig{
+margin:0 0 10px;border:1px solid var(--border);border-radius:var(--radius);
+background:var(--panel);padding:16px 18px 12px;overflow-x:auto;
+}
+figure.chartfig figcaption.chart-cap{
+font-size:0.78rem;color:var(--ink-subtle);margin-top:10px;text-align:center;
+line-height:1.5;
+}
+.mchart{max-width:100%;}
+.takeaway{
+max-width:74ch;margin:0 auto;border:1px solid var(--border);
+border-left:3px solid var(--accent);border-radius:var(--radius);
+padding:11px 15px;background:var(--panel);font-size:0.88rem;color:var(--ink-muted);
+}
+.takeaway strong{color:var(--ink);}
+html.compact figure.chartfig{padding:11px 12px 9px;}
+html.compact .takeaway{padding:8px 12px;font-size:0.84rem;}
+
+svg.mchart .k0{fill:var(--accent);opacity:0.28}svg.mchart .k1{stroke:var(--border-strong)}svg.mchart .k2{fill:var(--ink-subtle);font-size:11px;text-anchor:middle}svg.mchart .k3{opacity:0.7;stroke:var(--border)}svg.mchart .k4{fill:var(--ink);font-size:10px}svg.mchart .k5{fill:var(--ink);font-size:10px;text-anchor:end}svg.mchart .k6{fill:var(--ink-subtle);font-size:11px;text-anchor:end}svg.mchart .k7{fill:var(--ink-subtle);font-size:9px;text-anchor:middle}svg.mchart .k8{fill:var(--up);opacity:0.8}svg.mchart .k9{fill:var(--neutral);opacity:0.8}svg.mchart .k10{fill:var(--ink-muted);font-size:12px;text-anchor:middle}svg.mchart .k11{fill:var(--ink);font-size:11px;text-anchor:end}svg.mchart .k12{fill:var(--up-text);font-size:10px}svg.mchart .k13{fill:var(--up);opacity:0.65}svg.mchart .k14{fill:var(--accent);opacity:0.8}svg.mchart .k15{stroke:var(--accent)}svg.mchart .k16{fill:var(--accent)}svg.mchart .k17{fill:var(--ink)}svg.mchart .k18{fill:var(--accent-ink)}svg.mchart .k19{fill:var(--neutral)}svg.mchart .k20{fill:var(--down);opacity:0.65}svg.mchart .k21{fill:var(--ink);font-size:11px;font-weight:600;text-anchor:end}svg.mchart .k22{fill:var(--accent);opacity:0.14}svg.mchart .k23{stroke:var(--accent-ink);stroke-width:2}svg.mchart .k24{fill:var(--ink);font-size:11px;font-weight:600;text-anchor:middle}svg.mchart .k25{fill:var(--accent-ink);opacity:0.8}svg.mchart .k26{stroke:var(--border-strong);stroke-dasharray:3 3}svg.mchart .k27{fill:none;stroke:var(--accent);stroke-linecap:round;stroke-linejoin:round;stroke-width:2.6}svg.mchart .k28{fill:var(--down-text);font-size:10px;text-anchor:middle}svg.mchart .k29{fill:none;stroke:var(--ink);stroke-linecap:round;stroke-linejoin:round;stroke-width:1.7}svg.mchart .k30{fill:var(--accent);font-size:11px;font-weight:600}svg.mchart .k31{fill:none;stroke:var(--ink);stroke-dasharray:6 4;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.7}
+</style>
+</head>
+<body>
+
+<nav class="topnav" aria-label="Site navigation">
+  <div class="nav-inner">
+    <a class="brand" href="dashboard.html">pokestat</a>
+    <div class="nav-links" id="nav-links">
+      <a href="dashboard.html">Summary</a>
+      <a href="outlook.html">Outlook</a>
+      <a href="watchlists.html">Watchlists</a>
+      <a href="valuation.html">Valuation</a>
+      <a href="market.html" class="active" aria-current="page">Market</a>
+      <a href="etb.html">Trainer boxes</a>
+      <a href="models.html">Models</a>
+      <a href="momentum.html">Momentum</a>
+      <a href="backtest.html">Backtest</a>
+      <a href="how-it-works.html">How it works</a>
+      <a href="methods.html">Methods</a>
+    </div>
+    <button class="density-toggle" id="density-toggle" aria-pressed="false" title="Toggle information density">Compact</button>
+    <button class="copy-toggle" id="copy-toggle" title="Switch between plain-language and full technical wording">Plain</button>
+    <div class="preset-group theme-group" role="group" aria-label="Colour theme">
+      <button type="button" class="theme-opt" data-theme-opt="light" aria-pressed="false">Light</button>
+      <button type="button" class="theme-opt" data-theme-opt="dark" aria-pressed="false">Dark</button>
+      <button type="button" class="theme-opt" data-theme-opt="pastel" aria-pressed="false">Rose</button>
+    </div>
+  </div>
+</nav>
+
+<div class="page">
+
+  <header class="masthead" data-reveal>
+    <h1>Whole-market statistics</h1>
+    <p class="lede prose">How the broader Pokemon TCG chase-card and sealed market has behaved across 30 monthly snapshots, from March 2024 to August 2026. Price indices use a fixed basket of cards priced in every month, so the lines show price movement rather than the basket growing as new sets are printed. The second half of the page is a standalone sealed-product study: whether sealed and singles prices lead each other, and how much of a box price the hits inside it explain.</p>
+  </header>
+
+
+  <section id="mkt-index" data-reveal>
+    <h2>Chase-single price index by tier</h2>
+    <p class="section-note">Each tier is a fixed basket of cards priced in every month, so the line isolates price movement from the changing set of cards printed over time.</p>
+    <figure class="chartfig" data-reveal><svg class="mchart" viewBox="0 0 680 300" width="680" height="300" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Price index (first month = 100)" style="max-width:680px;width:100%;height:auto;display:block;margin:0 auto;"><line x1="52" y1="218" x2="584" y2="218" class="k3"/><text x="44" y="221.5" class="k6">80</text><line x1="52" y1="157" x2="584" y2="157" class="k3"/><text x="44" y="160.5" class="k6">100</text><line x1="52" y1="96.1" x2="584" y2="96.1" class="k3"/><text x="44" y="99.6" class="k6">120</text><line x1="52" y1="35.2" x2="584" y2="35.2" class="k3"/><text x="44" y="38.7" class="k6">140</text><line x1="52" y1="157" x2="584" y2="157" class="k26"/><line x1="52" y1="16" x2="52" y2="260" class="k1"/><line x1="52" y1="260" x2="584" y2="260" class="k1"/><line x1="52" y1="260" x2="52" y2="264" class="k1"/><text x="52" y="276" class="k2">2024-03</text><line x1="162.1" y1="260" x2="162.1" y2="264" class="k1"/><text x="162.1" y="276" class="k2">2024-09</text><line x1="272.1" y1="260" x2="272.1" y2="264" class="k1"/><text x="272.1" y="276" class="k2">2025-03</text><line x1="382.2" y1="260" x2="382.2" y2="264" class="k1"/><text x="382.2" y="276" class="k2">2025-09</text><line x1="492.3" y1="260" x2="492.3" y2="264" class="k1"/><text x="492.3" y="276" class="k2">2026-03</text><line x1="584" y1="260" x2="584" y2="264" class="k1"/><text x="584" y="276" class="k2">2026-08</text><text x="318" y="296" class="k10">Month</text><text x="14" y="138" transform="rotate(-90 14 138)" class="k10">Price index (first month = 100)</text><polyline points="52,157 70.3,203 88.7,173.8 107,174.4 125.4,167.1 143.7,161 162.1,192.7 180.4,188.1 198.8,191.8 217.1,195.7 235.4,177.4 253.8,98.2 272.1,47.4 290.5,85.8 308.8,136.3 327.2,158.9 345.5,187.2 363.9,182.9 382.2,150.3 400.6,129.3 418.9,126.6 437.2,165.9 455.6,184.1 473.9,176.5 492.3,133.6 510.6,91.2 529,30.6 547.3,16 565.7,17.2 584,44" class="k29"/><circle cx="52" cy="157" r="4.5" fill="var(--ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;SIR&lt;/span&gt;2024-03: 100" aria-label="SIR, 2024-03: 100"/><circle cx="70.3" cy="203" r="4.5" fill="var(--ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;SIR&lt;/span&gt;2024-04: 84.9" aria-label="SIR, 2024-04: 84.9"/><circle cx="88.7" cy="173.8" r="4.5" fill="var(--ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;SIR&lt;/span&gt;2024-05: 94.5" aria-label="SIR, 2024-05: 94.5"/><circle cx="107" cy="174.4" r="4.5" fill="var(--ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;SIR&lt;/span&gt;2024-06: 94.3" aria-label="SIR, 2024-06: 94.3"/><circle cx="125.4" cy="167.1" r="4.5" fill="var(--ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;SIR&lt;/span&gt;2024-07: 96.7" aria-label="SIR, 2024-07: 96.7"/><circle cx="143.7" cy="161" r="4.5" fill="var(--ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;SIR&lt;/span&gt;2024-08: 98.7" aria-label="SIR, 2024-08: 98.7"/><circle cx="162.1" cy="192.7" r="4.5" fill="var(--ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;SIR&lt;/span&gt;2024-09: 88.3" aria-label="SIR, 2024-09: 88.3"/><circle cx="180.4" cy="188.1" r="4.5" fill="var(--ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;SIR&lt;/span&gt;2024-10: 89.8" aria-label="SIR, 2024-10: 89.8"/><circle cx="198.8" cy="191.8" r="4.5" fill="var(--ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;SIR&lt;/span&gt;2024-11: 88.6" aria-label="SIR, 2024-11: 88.6"/><circle cx="217.1" cy="195.7" r="4.5" fill="var(--ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;SIR&lt;/span&gt;2024-12: 87.3" aria-label="SIR, 2024-12: 87.3"/><circle cx="235.4" cy="177.4" r="4.5" fill="var(--ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;SIR&lt;/span&gt;2025-01: 93.3" aria-label="SIR, 2025-01: 93.3"/><circle cx="253.8" cy="98.2" r="4.5" fill="var(--ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;SIR&lt;/span&gt;2025-02: 119.3" aria-label="SIR, 2025-02: 119.3"/><circle cx="272.1" cy="47.4" r="4.5" fill="var(--ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;SIR&lt;/span&gt;2025-03: 136" aria-label="SIR, 2025-03: 136"/><circle cx="290.5" cy="85.8" r="4.5" fill="var(--ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;SIR&lt;/span&gt;2025-04: 123.4" aria-label="SIR, 2025-04: 123.4"/><circle cx="308.8" cy="136.3" r="4.5" fill="var(--ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;SIR&lt;/span&gt;2025-05: 106.8" aria-label="SIR, 2025-05: 106.8"/><circle cx="327.2" cy="158.9" r="4.5" fill="var(--ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;SIR&lt;/span&gt;2025-06: 99.4" aria-label="SIR, 2025-06: 99.4"/><circle cx="345.5" cy="187.2" r="4.5" fill="var(--ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;SIR&lt;/span&gt;2025-07: 90.1" aria-label="SIR, 2025-07: 90.1"/><circle cx="363.9" cy="182.9" r="4.5" fill="var(--ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;SIR&lt;/span&gt;2025-08: 91.5" aria-label="SIR, 2025-08: 91.5"/><circle cx="382.2" cy="150.3" r="4.5" fill="var(--ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;SIR&lt;/span&gt;2025-09: 102.2" aria-label="SIR, 2025-09: 102.2"/><circle cx="400.6" cy="129.3" r="4.5" fill="var(--ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;SIR&lt;/span&gt;2025-10: 109.1" aria-label="SIR, 2025-10: 109.1"/><circle cx="418.9" cy="126.6" r="4.5" fill="var(--ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;SIR&lt;/span&gt;2025-11: 110" aria-label="SIR, 2025-11: 110"/><circle cx="437.2" cy="165.9" r="4.5" fill="var(--ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;SIR&lt;/span&gt;2025-12: 97.1" aria-label="SIR, 2025-12: 97.1"/><circle cx="455.6" cy="184.1" r="4.5" fill="var(--ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;SIR&lt;/span&gt;2026-01: 91.1" aria-label="SIR, 2026-01: 91.1"/><circle cx="473.9" cy="176.5" r="4.5" fill="var(--ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;SIR&lt;/span&gt;2026-02: 93.6" aria-label="SIR, 2026-02: 93.6"/><circle cx="492.3" cy="133.6" r="4.5" fill="var(--ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;SIR&lt;/span&gt;2026-03: 107.7" aria-label="SIR, 2026-03: 107.7"/><circle cx="510.6" cy="91.2" r="4.5" fill="var(--ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;SIR&lt;/span&gt;2026-04: 121.6" aria-label="SIR, 2026-04: 121.6"/><circle cx="529" cy="30.6" r="4.5" fill="var(--ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;SIR&lt;/span&gt;2026-05: 141.5" aria-label="SIR, 2026-05: 141.5"/><circle cx="547.3" cy="16" r="4.5" fill="var(--ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;SIR&lt;/span&gt;2026-06: 146.3" aria-label="SIR, 2026-06: 146.3"/><circle cx="565.7" cy="17.2" r="4.5" fill="var(--ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;SIR&lt;/span&gt;2026-07: 145.9" aria-label="SIR, 2026-07: 145.9"/><circle cx="584" cy="44" r="4.5" fill="var(--ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;SIR&lt;/span&gt;2026-08: 137.1" aria-label="SIR, 2026-08: 137.1"/><polyline points="52,157 70.3,175.9 88.7,178.4 107,173.5 125.4,176.5 143.7,205.8 162.1,177.8 180.4,212.5 198.8,213.1 217.1,209.4 235.4,193 253.8,168 272.1,161.3 290.5,173.5 308.8,158.3 327.2,188.7 345.5,214.3 363.9,221 382.2,205.2 400.6,194.2 418.9,207 437.2,196.6 455.6,228.9 473.9,210 492.3,194.2 510.6,191.8 529,187.5 547.3,182 565.7,169.2 584,171.1" fill="none" stroke="var(--accent-ink)" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="6 4"/><circle cx="52" cy="157" r="4.5" fill="var(--accent-ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;UR&lt;/span&gt;2024-03: 100" aria-label="UR, 2024-03: 100"/><circle cx="70.3" cy="175.9" r="4.5" fill="var(--accent-ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;UR&lt;/span&gt;2024-04: 93.8" aria-label="UR, 2024-04: 93.8"/><circle cx="88.7" cy="178.4" r="4.5" fill="var(--accent-ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;UR&lt;/span&gt;2024-05: 93" aria-label="UR, 2024-05: 93"/><circle cx="107" cy="173.5" r="4.5" fill="var(--accent-ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;UR&lt;/span&gt;2024-06: 94.6" aria-label="UR, 2024-06: 94.6"/><circle cx="125.4" cy="176.5" r="4.5" fill="var(--accent-ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;UR&lt;/span&gt;2024-07: 93.6" aria-label="UR, 2024-07: 93.6"/><circle cx="143.7" cy="205.8" r="4.5" fill="var(--accent-ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;UR&lt;/span&gt;2024-08: 84" aria-label="UR, 2024-08: 84"/><circle cx="162.1" cy="177.8" r="4.5" fill="var(--accent-ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;UR&lt;/span&gt;2024-09: 93.2" aria-label="UR, 2024-09: 93.2"/><circle cx="180.4" cy="212.5" r="4.5" fill="var(--accent-ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;UR&lt;/span&gt;2024-10: 81.8" aria-label="UR, 2024-10: 81.8"/><circle cx="198.8" cy="213.1" r="4.5" fill="var(--accent-ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;UR&lt;/span&gt;2024-11: 81.6" aria-label="UR, 2024-11: 81.6"/><circle cx="217.1" cy="209.4" r="4.5" fill="var(--accent-ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;UR&lt;/span&gt;2024-12: 82.8" aria-label="UR, 2024-12: 82.8"/><circle cx="235.4" cy="193" r="4.5" fill="var(--accent-ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;UR&lt;/span&gt;2025-01: 88.2" aria-label="UR, 2025-01: 88.2"/><circle cx="253.8" cy="168" r="4.5" fill="var(--accent-ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;UR&lt;/span&gt;2025-02: 96.4" aria-label="UR, 2025-02: 96.4"/><circle cx="272.1" cy="161.3" r="4.5" fill="var(--accent-ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;UR&lt;/span&gt;2025-03: 98.6" aria-label="UR, 2025-03: 98.6"/><circle cx="290.5" cy="173.5" r="4.5" fill="var(--accent-ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;UR&lt;/span&gt;2025-04: 94.6" aria-label="UR, 2025-04: 94.6"/><circle cx="308.8" cy="158.3" r="4.5" fill="var(--accent-ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;UR&lt;/span&gt;2025-05: 99.6" aria-label="UR, 2025-05: 99.6"/><circle cx="327.2" cy="188.7" r="4.5" fill="var(--accent-ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;UR&lt;/span&gt;2025-06: 89.6" aria-label="UR, 2025-06: 89.6"/><circle cx="345.5" cy="214.3" r="4.5" fill="var(--accent-ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;UR&lt;/span&gt;2025-07: 81.2" aria-label="UR, 2025-07: 81.2"/><circle cx="363.9" cy="221" r="4.5" fill="var(--accent-ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;UR&lt;/span&gt;2025-08: 79" aria-label="UR, 2025-08: 79"/><circle cx="382.2" cy="205.2" r="4.5" fill="var(--accent-ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;UR&lt;/span&gt;2025-09: 84.2" aria-label="UR, 2025-09: 84.2"/><circle cx="400.6" cy="194.2" r="4.5" fill="var(--accent-ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;UR&lt;/span&gt;2025-10: 87.8" aria-label="UR, 2025-10: 87.8"/><circle cx="418.9" cy="207" r="4.5" fill="var(--accent-ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;UR&lt;/span&gt;2025-11: 83.6" aria-label="UR, 2025-11: 83.6"/><circle cx="437.2" cy="196.6" r="4.5" fill="var(--accent-ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;UR&lt;/span&gt;2025-12: 87" aria-label="UR, 2025-12: 87"/><circle cx="455.6" cy="228.9" r="4.5" fill="var(--accent-ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;UR&lt;/span&gt;2026-01: 76.4" aria-label="UR, 2026-01: 76.4"/><circle cx="473.9" cy="210" r="4.5" fill="var(--accent-ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;UR&lt;/span&gt;2026-02: 82.6" aria-label="UR, 2026-02: 82.6"/><circle cx="492.3" cy="194.2" r="4.5" fill="var(--accent-ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;UR&lt;/span&gt;2026-03: 87.8" aria-label="UR, 2026-03: 87.8"/><circle cx="510.6" cy="191.8" r="4.5" fill="var(--accent-ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;UR&lt;/span&gt;2026-04: 88.6" aria-label="UR, 2026-04: 88.6"/><circle cx="529" cy="187.5" r="4.5" fill="var(--accent-ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;UR&lt;/span&gt;2026-05: 90" aria-label="UR, 2026-05: 90"/><circle cx="547.3" cy="182" r="4.5" fill="var(--accent-ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;UR&lt;/span&gt;2026-06: 91.8" aria-label="UR, 2026-06: 91.8"/><circle cx="565.7" cy="169.2" r="4.5" fill="var(--accent-ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;UR&lt;/span&gt;2026-07: 96" aria-label="UR, 2026-07: 96"/><circle cx="584" cy="171.1" r="4.5" fill="var(--accent-ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;UR&lt;/span&gt;2026-08: 95.4" aria-label="UR, 2026-08: 95.4"/><polyline points="52,157 70.3,179.3 88.7,153.1 107,161 125.4,189.3 143.7,201.2 162.1,208.8 180.4,236.2 198.8,254.5 217.1,230.1 235.4,213.1 253.8,205.2 272.1,208.8 290.5,200.9 308.8,225.3 327.2,232.3 345.5,260 363.9,246.9 382.2,226.5 400.6,224.1 418.9,219.5 437.2,221.9 455.6,223.1 473.9,226.5 492.3,226.2 510.6,218.3 529,207.3 547.3,192.4 565.7,191.2 584,189" fill="none" stroke="var(--neutral)" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="2 3"/><circle cx="52" cy="157" r="4.5" fill="var(--neutral)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Hyper&lt;/span&gt;2024-03: 100" aria-label="Hyper, 2024-03: 100"/><circle cx="70.3" cy="179.3" r="4.5" fill="var(--neutral)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Hyper&lt;/span&gt;2024-04: 92.7" aria-label="Hyper, 2024-04: 92.7"/><circle cx="88.7" cy="153.1" r="4.5" fill="var(--neutral)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Hyper&lt;/span&gt;2024-05: 101.3" aria-label="Hyper, 2024-05: 101.3"/><circle cx="107" cy="161" r="4.5" fill="var(--neutral)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Hyper&lt;/span&gt;2024-06: 98.7" aria-label="Hyper, 2024-06: 98.7"/><circle cx="125.4" cy="189.3" r="4.5" fill="var(--neutral)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Hyper&lt;/span&gt;2024-07: 89.4" aria-label="Hyper, 2024-07: 89.4"/><circle cx="143.7" cy="201.2" r="4.5" fill="var(--neutral)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Hyper&lt;/span&gt;2024-08: 85.5" aria-label="Hyper, 2024-08: 85.5"/><circle cx="162.1" cy="208.8" r="4.5" fill="var(--neutral)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Hyper&lt;/span&gt;2024-09: 83" aria-label="Hyper, 2024-09: 83"/><circle cx="180.4" cy="236.2" r="4.5" fill="var(--neutral)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Hyper&lt;/span&gt;2024-10: 74" aria-label="Hyper, 2024-10: 74"/><circle cx="198.8" cy="254.5" r="4.5" fill="var(--neutral)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Hyper&lt;/span&gt;2024-11: 68" aria-label="Hyper, 2024-11: 68"/><circle cx="217.1" cy="230.1" r="4.5" fill="var(--neutral)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Hyper&lt;/span&gt;2024-12: 76" aria-label="Hyper, 2024-12: 76"/><circle cx="235.4" cy="213.1" r="4.5" fill="var(--neutral)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Hyper&lt;/span&gt;2025-01: 81.6" aria-label="Hyper, 2025-01: 81.6"/><circle cx="253.8" cy="205.2" r="4.5" fill="var(--neutral)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Hyper&lt;/span&gt;2025-02: 84.2" aria-label="Hyper, 2025-02: 84.2"/><circle cx="272.1" cy="208.8" r="4.5" fill="var(--neutral)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Hyper&lt;/span&gt;2025-03: 83" aria-label="Hyper, 2025-03: 83"/><circle cx="290.5" cy="200.9" r="4.5" fill="var(--neutral)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Hyper&lt;/span&gt;2025-04: 85.6" aria-label="Hyper, 2025-04: 85.6"/><circle cx="308.8" cy="225.3" r="4.5" fill="var(--neutral)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Hyper&lt;/span&gt;2025-05: 77.6" aria-label="Hyper, 2025-05: 77.6"/><circle cx="327.2" cy="232.3" r="4.5" fill="var(--neutral)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Hyper&lt;/span&gt;2025-06: 75.3" aria-label="Hyper, 2025-06: 75.3"/><circle cx="345.5" cy="260" r="4.5" fill="var(--neutral)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Hyper&lt;/span&gt;2025-07: 66.2" aria-label="Hyper, 2025-07: 66.2"/><circle cx="363.9" cy="246.9" r="4.5" fill="var(--neutral)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Hyper&lt;/span&gt;2025-08: 70.5" aria-label="Hyper, 2025-08: 70.5"/><circle cx="382.2" cy="226.5" r="4.5" fill="var(--neutral)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Hyper&lt;/span&gt;2025-09: 77.2" aria-label="Hyper, 2025-09: 77.2"/><circle cx="400.6" cy="224.1" r="4.5" fill="var(--neutral)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Hyper&lt;/span&gt;2025-10: 78" aria-label="Hyper, 2025-10: 78"/><circle cx="418.9" cy="219.5" r="4.5" fill="var(--neutral)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Hyper&lt;/span&gt;2025-11: 79.5" aria-label="Hyper, 2025-11: 79.5"/><circle cx="437.2" cy="221.9" r="4.5" fill="var(--neutral)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Hyper&lt;/span&gt;2025-12: 78.7" aria-label="Hyper, 2025-12: 78.7"/><circle cx="455.6" cy="223.1" r="4.5" fill="var(--neutral)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Hyper&lt;/span&gt;2026-01: 78.3" aria-label="Hyper, 2026-01: 78.3"/><circle cx="473.9" cy="226.5" r="4.5" fill="var(--neutral)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Hyper&lt;/span&gt;2026-02: 77.2" aria-label="Hyper, 2026-02: 77.2"/><circle cx="492.3" cy="226.2" r="4.5" fill="var(--neutral)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Hyper&lt;/span&gt;2026-03: 77.3" aria-label="Hyper, 2026-03: 77.3"/><circle cx="510.6" cy="218.3" r="4.5" fill="var(--neutral)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Hyper&lt;/span&gt;2026-04: 79.9" aria-label="Hyper, 2026-04: 79.9"/><circle cx="529" cy="207.3" r="4.5" fill="var(--neutral)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Hyper&lt;/span&gt;2026-05: 83.5" aria-label="Hyper, 2026-05: 83.5"/><circle cx="547.3" cy="192.4" r="4.5" fill="var(--neutral)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Hyper&lt;/span&gt;2026-06: 88.4" aria-label="Hyper, 2026-06: 88.4"/><circle cx="565.7" cy="191.2" r="4.5" fill="var(--neutral)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Hyper&lt;/span&gt;2026-07: 88.8" aria-label="Hyper, 2026-07: 88.8"/><circle cx="584" cy="189" r="4.5" fill="var(--neutral)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Hyper&lt;/span&gt;2026-08: 89.5" aria-label="Hyper, 2026-08: 89.5"/><polyline points="52,157 70.3,158.6 88.7,164.7 107,170.7 125.4,163.1 143.7,186 162.1,186.9 180.4,182.9 198.8,175.6 217.1,174.7 235.4,165.3 253.8,162.2 272.1,146.1 290.5,154.6 308.8,151.3 327.2,159.5 345.5,175.3 363.9,172.3 382.2,168.3 400.6,145.2 418.9,143 437.2,158.6 455.6,161.3 473.9,152.8 492.3,142.7 510.6,104.3 529,85.1 547.3,68.1 565.7,38.2 584,59.6" class="k27"/><circle cx="52" cy="157" r="4.5" fill="var(--accent)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;All modeled&lt;/span&gt;2024-03: 100" aria-label="All modeled, 2024-03: 100"/><circle cx="70.3" cy="158.6" r="4.5" fill="var(--accent)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;All modeled&lt;/span&gt;2024-04: 99.5" aria-label="All modeled, 2024-04: 99.5"/><circle cx="88.7" cy="164.7" r="4.5" fill="var(--accent)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;All modeled&lt;/span&gt;2024-05: 97.5" aria-label="All modeled, 2024-05: 97.5"/><circle cx="107" cy="170.7" r="4.5" fill="var(--accent)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;All modeled&lt;/span&gt;2024-06: 95.5" aria-label="All modeled, 2024-06: 95.5"/><circle cx="125.4" cy="163.1" r="4.5" fill="var(--accent)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;All modeled&lt;/span&gt;2024-07: 98" aria-label="All modeled, 2024-07: 98"/><circle cx="143.7" cy="186" r="4.5" fill="var(--accent)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;All modeled&lt;/span&gt;2024-08: 90.5" aria-label="All modeled, 2024-08: 90.5"/><circle cx="162.1" cy="186.9" r="4.5" fill="var(--accent)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;All modeled&lt;/span&gt;2024-09: 90.2" aria-label="All modeled, 2024-09: 90.2"/><circle cx="180.4" cy="182.9" r="4.5" fill="var(--accent)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;All modeled&lt;/span&gt;2024-10: 91.5" aria-label="All modeled, 2024-10: 91.5"/><circle cx="198.8" cy="175.6" r="4.5" fill="var(--accent)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;All modeled&lt;/span&gt;2024-11: 93.9" aria-label="All modeled, 2024-11: 93.9"/><circle cx="217.1" cy="174.7" r="4.5" fill="var(--accent)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;All modeled&lt;/span&gt;2024-12: 94.2" aria-label="All modeled, 2024-12: 94.2"/><circle cx="235.4" cy="165.3" r="4.5" fill="var(--accent)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;All modeled&lt;/span&gt;2025-01: 97.3" aria-label="All modeled, 2025-01: 97.3"/><circle cx="253.8" cy="162.2" r="4.5" fill="var(--accent)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;All modeled&lt;/span&gt;2025-02: 98.3" aria-label="All modeled, 2025-02: 98.3"/><circle cx="272.1" cy="146.1" r="4.5" fill="var(--accent)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;All modeled&lt;/span&gt;2025-03: 103.6" aria-label="All modeled, 2025-03: 103.6"/><circle cx="290.5" cy="154.6" r="4.5" fill="var(--accent)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;All modeled&lt;/span&gt;2025-04: 100.8" aria-label="All modeled, 2025-04: 100.8"/><circle cx="308.8" cy="151.3" r="4.5" fill="var(--accent)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;All modeled&lt;/span&gt;2025-05: 101.9" aria-label="All modeled, 2025-05: 101.9"/><circle cx="327.2" cy="159.5" r="4.5" fill="var(--accent)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;All modeled&lt;/span&gt;2025-06: 99.2" aria-label="All modeled, 2025-06: 99.2"/><circle cx="345.5" cy="175.3" r="4.5" fill="var(--accent)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;All modeled&lt;/span&gt;2025-07: 94" aria-label="All modeled, 2025-07: 94"/><circle cx="363.9" cy="172.3" r="4.5" fill="var(--accent)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;All modeled&lt;/span&gt;2025-08: 95" aria-label="All modeled, 2025-08: 95"/><circle cx="382.2" cy="168.3" r="4.5" fill="var(--accent)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;All modeled&lt;/span&gt;2025-09: 96.3" aria-label="All modeled, 2025-09: 96.3"/><circle cx="400.6" cy="145.2" r="4.5" fill="var(--accent)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;All modeled&lt;/span&gt;2025-10: 103.9" aria-label="All modeled, 2025-10: 103.9"/><circle cx="418.9" cy="143" r="4.5" fill="var(--accent)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;All modeled&lt;/span&gt;2025-11: 104.6" aria-label="All modeled, 2025-11: 104.6"/><circle cx="437.2" cy="158.6" r="4.5" fill="var(--accent)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;All modeled&lt;/span&gt;2025-12: 99.5" aria-label="All modeled, 2025-12: 99.5"/><circle cx="455.6" cy="161.3" r="4.5" fill="var(--accent)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;All modeled&lt;/span&gt;2026-01: 98.6" aria-label="All modeled, 2026-01: 98.6"/><circle cx="473.9" cy="152.8" r="4.5" fill="var(--accent)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;All modeled&lt;/span&gt;2026-02: 101.4" aria-label="All modeled, 2026-02: 101.4"/><circle cx="492.3" cy="142.7" r="4.5" fill="var(--accent)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;All modeled&lt;/span&gt;2026-03: 104.7" aria-label="All modeled, 2026-03: 104.7"/><circle cx="510.6" cy="104.3" r="4.5" fill="var(--accent)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;All modeled&lt;/span&gt;2026-04: 117.3" aria-label="All modeled, 2026-04: 117.3"/><circle cx="529" cy="85.1" r="4.5" fill="var(--accent)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;All modeled&lt;/span&gt;2026-05: 123.6" aria-label="All modeled, 2026-05: 123.6"/><circle cx="547.3" cy="68.1" r="4.5" fill="var(--accent)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;All modeled&lt;/span&gt;2026-06: 129.2" aria-label="All modeled, 2026-06: 129.2"/><circle cx="565.7" cy="38.2" r="4.5" fill="var(--accent)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;All modeled&lt;/span&gt;2026-07: 139" aria-label="All modeled, 2026-07: 139"/><circle cx="584" cy="59.6" r="4.5" fill="var(--accent)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;All modeled&lt;/span&gt;2026-08: 132" aria-label="All modeled, 2026-08: 132"/><text x="590" y="47.5" font-size="11" fill="var(--ink)">SIR</text><text x="590" y="63.1" class="k30">All modeled</text><text x="590" y="174.6" font-size="11" fill="var(--accent-ink)">UR</text><text x="590" y="192.5" font-size="11" fill="var(--ink-muted)">Hyper</text></svg><figcaption class="chart-cap">Constant basket of chase singles priced in all 29 months, rebased to 100 at 2024-03; median per month. Data: price_history, 2024-03 to 2026-08. Mega Hyper is excluded from the index (all cards in that tier are too new to have 29 months of history).</figcaption></figure>
+    <p class="takeaway">A fixed basket of 252 modeled chase singles is essentially flat over the 29 months (index <strong>132</strong>). Across tiers, <strong>SIR</strong> is the strongest at 137.1 while <strong>Hyper</strong> sits at 89.5: mature chase singles have not broadly rallied, and the drift the model rewards is a within-lifecycle set-age effect, not a market-wide bull run.</p>
+  </section>
+
+  <section id="mkt-dist" data-reveal>
+    <h2>Price distribution by tier</h2>
+    <p class="section-note">How wide the price range is inside each chase tier at the latest snapshot.</p>
+    <figure class="chartfig" data-reveal><svg class="mchart" viewBox="0 0 680 232" width="680" height="232" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Price distribution by chase tier, log dollar scale" style="max-width:680px;width:100%;height:auto;display:block;margin:0 auto;"><line x1="92" y1="14" x2="92" y2="198" class="k3"/><text x="92" y="218" class="k2">$0.1</text><line x1="205.6" y1="14" x2="205.6" y2="198" class="k3"/><text x="205.6" y="218" class="k2">$1</text><line x1="319.2" y1="14" x2="319.2" y2="198" class="k3"/><text x="319.2" y="218" class="k2">$10</text><line x1="432.8" y1="14" x2="432.8" y2="198" class="k3"/><text x="432.8" y="218" class="k2">$100</text><line x1="546.4" y1="14" x2="546.4" y2="198" class="k3"/><text x="546.4" y="218" class="k2">$1000</text><line x1="660" y1="14" x2="660" y2="198" class="k3"/><text x="660" y="218" class="k2">$10000</text><text x="376" y="228" class="k10">Market price, USD (log scale)</text><line x1="290.1" y1="37" x2="566.8" y2="37" class="k1"/><circle cx="290.1" cy="37" r="1.5" class="k0"/><circle cx="292.9" cy="37" r="1.5" class="k0"/><circle cx="304.1" cy="37" r="1.5" class="k0"/><circle cx="310" cy="37" r="1.5" class="k0"/><circle cx="319.8" cy="37" r="1.5" class="k0"/><circle cx="328.1" cy="37" r="1.5" class="k0"/><circle cx="329" cy="37" r="1.5" class="k0"/><circle cx="331.7" cy="37" r="1.5" class="k0"/><circle cx="333.2" cy="37" r="1.5" class="k0"/><circle cx="340" cy="37" r="1.5" class="k0"/><circle cx="340.3" cy="37" r="1.5" class="k0"/><circle cx="343.7" cy="37" r="1.5" class="k0"/><circle cx="344.8" cy="37" r="1.5" class="k0"/><circle cx="348.2" cy="37" r="1.5" class="k0"/><circle cx="350.8" cy="37" r="1.5" class="k0"/><circle cx="352.1" cy="37" r="1.5" class="k0"/><circle cx="352.4" cy="37" r="1.5" class="k0"/><circle cx="352.5" cy="37" r="1.5" class="k0"/><circle cx="352.9" cy="37" r="1.5" class="k0"/><circle cx="354.7" cy="37" r="1.5" class="k0"/><circle cx="354.7" cy="37" r="1.5" class="k0"/><circle cx="355.1" cy="37" r="1.5" class="k0"/><circle cx="355.7" cy="37" r="1.5" class="k0"/><circle cx="356.4" cy="37" r="1.5" class="k0"/><circle cx="357.3" cy="37" r="1.5" class="k0"/><circle cx="358.6" cy="37" r="1.5" class="k0"/><circle cx="359.3" cy="37" r="1.5" class="k0"/><circle cx="359.5" cy="37" r="1.5" class="k0"/><circle cx="365.3" cy="37" r="1.5" class="k0"/><circle cx="366.9" cy="37" r="1.5" class="k0"/><circle cx="367.4" cy="37" r="1.5" class="k0"/><circle cx="368.2" cy="37" r="1.5" class="k0"/><circle cx="374.1" cy="37" r="1.5" class="k0"/><circle cx="376.2" cy="37" r="1.5" class="k0"/><circle cx="377" cy="37" r="1.5" class="k0"/><circle cx="379.4" cy="37" r="1.5" class="k0"/><circle cx="380.2" cy="37" r="1.5" class="k0"/><circle cx="380.6" cy="37" r="1.5" class="k0"/><circle cx="380.8" cy="37" r="1.5" class="k0"/><circle cx="381.7" cy="37" r="1.5" class="k0"/><circle cx="383.1" cy="37" r="1.5" class="k0"/><circle cx="383.3" cy="37" r="1.5" class="k0"/><circle cx="383.5" cy="37" r="1.5" class="k0"/><circle cx="386.4" cy="37" r="1.5" class="k0"/><circle cx="386.9" cy="37" r="1.5" class="k0"/><circle cx="387.9" cy="37" r="1.5" class="k0"/><circle cx="389" cy="37" r="1.5" class="k0"/><circle cx="390" cy="37" r="1.5" class="k0"/><circle cx="392" cy="37" r="1.5" class="k0"/><circle cx="394.3" cy="37" r="1.5" class="k0"/><circle cx="397.4" cy="37" r="1.5" class="k0"/><circle cx="398.6" cy="37" r="1.5" class="k0"/><circle cx="400.9" cy="37" r="1.5" class="k0"/><circle cx="403.7" cy="37" r="1.5" class="k0"/><circle cx="403.7" cy="37" r="1.5" class="k0"/><circle cx="404.4" cy="37" r="1.5" class="k0"/><circle cx="405.3" cy="37" r="1.5" class="k0"/><circle cx="405.4" cy="37" r="1.5" class="k0"/><circle cx="406.4" cy="37" r="1.5" class="k0"/><circle cx="406.7" cy="37" r="1.5" class="k0"/><circle cx="407.1" cy="37" r="1.5" class="k0"/><circle cx="408" cy="37" r="1.5" class="k0"/><circle cx="410.1" cy="37" r="1.5" class="k0"/><circle cx="410.7" cy="37" r="1.5" class="k0"/><circle cx="411.8" cy="37" r="1.5" class="k0"/><circle cx="413.2" cy="37" r="1.5" class="k0"/><circle cx="413.2" cy="37" r="1.5" class="k0"/><circle cx="414.1" cy="37" r="1.5" class="k0"/><circle cx="414.5" cy="37" r="1.5" class="k0"/><circle cx="415" cy="37" r="1.5" class="k0"/><circle cx="415.2" cy="37" r="1.5" class="k0"/><circle cx="416.7" cy="37" r="1.5" class="k0"/><circle cx="418.6" cy="37" r="1.5" class="k0"/><circle cx="425.1" cy="37" r="1.5" class="k0"/><circle cx="428.1" cy="37" r="1.5" class="k0"/><circle cx="429.5" cy="37" r="1.5" class="k0"/><circle cx="431.2" cy="37" r="1.5" class="k0"/><circle cx="434.1" cy="37" r="1.5" class="k0"/><circle cx="434.4" cy="37" r="1.5" class="k0"/><circle cx="435.9" cy="37" r="1.5" class="k0"/><circle cx="436.7" cy="37" r="1.5" class="k0"/><circle cx="438.8" cy="37" r="1.5" class="k0"/><circle cx="439" cy="37" r="1.5" class="k0"/><circle cx="440.1" cy="37" r="1.5" class="k0"/><circle cx="440.9" cy="37" r="1.5" class="k0"/><circle cx="445.1" cy="37" r="1.5" class="k0"/><circle cx="451.1" cy="37" r="1.5" class="k0"/><circle cx="455.1" cy="37" r="1.5" class="k0"/><circle cx="458.8" cy="37" r="1.5" class="k0"/><circle cx="459.4" cy="37" r="1.5" class="k0"/><circle cx="460.1" cy="37" r="1.5" class="k0"/><circle cx="461.4" cy="37" r="1.5" class="k0"/><circle cx="461.5" cy="37" r="1.5" class="k0"/><circle cx="462.2" cy="37" r="1.5" class="k0"/><circle cx="464.8" cy="37" r="1.5" class="k0"/><circle cx="465.2" cy="37" r="1.5" class="k0"/><circle cx="468.2" cy="37" r="1.5" class="k0"/><circle cx="469.8" cy="37" r="1.5" class="k0"/><circle cx="473.4" cy="37" r="1.5" class="k0"/><circle cx="479.7" cy="37" r="1.5" class="k0"/><circle cx="485.2" cy="37" r="1.5" class="k0"/><circle cx="486.1" cy="37" r="1.5" class="k0"/><circle cx="487.3" cy="37" r="1.5" class="k0"/><circle cx="488.5" cy="37" r="1.5" class="k0"/><circle cx="490.8" cy="37" r="1.5" class="k0"/><circle cx="493.2" cy="37" r="1.5" class="k0"/><circle cx="497.2" cy="37" r="1.5" class="k0"/><circle cx="498.7" cy="37" r="1.5" class="k0"/><circle cx="499.5" cy="37" r="1.5" class="k0"/><circle cx="500" cy="37" r="1.5" class="k0"/><circle cx="514.9" cy="37" r="1.5" class="k0"/><circle cx="516.6" cy="37" r="1.5" class="k0"/><circle cx="531.2" cy="37" r="1.5" class="k0"/><circle cx="534.2" cy="37" r="1.5" class="k0"/><circle cx="546.8" cy="37" r="1.5" class="k0"/><circle cx="553.7" cy="37" r="1.5" class="k0"/><circle cx="556.4" cy="37" r="1.5" class="k0"/><circle cx="566.8" cy="37" r="1.5" class="k0"/><rect x="367" y="30" width="90.9" height="14" rx="2" class="k22"/><line x1="367" y1="30" x2="367" y2="44" class="k15"/><line x1="457.9" y1="30" x2="457.9" y2="44" class="k15"/><line x1="406.5" y1="29" x2="406.5" y2="45" class="k23"/><text x="82" y="36" class="k21">SIR</text><text x="82" y="48" class="k6">n=118</text><line x1="189.4" y1="83" x2="409.8" y2="83" class="k1"/><circle cx="189.4" cy="83" r="1.5" class="k0"/><circle cx="195.2" cy="83" r="1.5" class="k0"/><circle cx="197" cy="83" r="1.5" class="k0"/><circle cx="202.5" cy="83" r="1.5" class="k0"/><circle cx="205.1" cy="83" r="1.5" class="k0"/><circle cx="205.6" cy="83" r="1.5" class="k0"/><circle cx="206.1" cy="83" r="1.5" class="k0"/><circle cx="206.1" cy="83" r="1.5" class="k0"/><circle cx="207.5" cy="83" r="1.5" class="k0"/><circle cx="207.5" cy="83" r="1.5" class="k0"/><circle cx="207.5" cy="83" r="1.5" class="k0"/><circle cx="209.4" cy="83" r="1.5" class="k0"/><circle cx="209.4" cy="83" r="1.5" class="k0"/><circle cx="209.9" cy="83" r="1.5" class="k0"/><circle cx="211.6" cy="83" r="1.5" class="k0"/><circle cx="213.3" cy="83" r="1.5" class="k0"/><circle cx="214.6" cy="83" r="1.5" class="k0"/><circle cx="215" cy="83" r="1.5" class="k0"/><circle cx="215.4" cy="83" r="1.5" class="k0"/><circle cx="216.2" cy="83" r="1.5" class="k0"/><circle cx="217.4" cy="83" r="1.5" class="k0"/><circle cx="218.5" cy="83" r="1.5" class="k0"/><circle cx="219.3" cy="83" r="1.5" class="k0"/><circle cx="220" cy="83" r="1.5" class="k0"/><circle cx="220" cy="83" r="1.5" class="k0"/><circle cx="220.4" cy="83" r="1.5" class="k0"/><circle cx="220.4" cy="83" r="1.5" class="k0"/><circle cx="220.8" cy="83" r="1.5" class="k0"/><circle cx="220.8" cy="83" r="1.5" class="k0"/><circle cx="221.8" cy="83" r="1.5" class="k0"/><circle cx="222.2" cy="83" r="1.5" class="k0"/><circle cx="223.2" cy="83" r="1.5" class="k0"/><circle cx="224.6" cy="83" r="1.5" class="k0"/><circle cx="225.9" cy="83" r="1.5" class="k0"/><circle cx="227.9" cy="83" r="1.5" class="k0"/><circle cx="227.9" cy="83" r="1.5" class="k0"/><circle cx="229.7" cy="83" r="1.5" class="k0"/><circle cx="229.7" cy="83" r="1.5" class="k0"/><circle cx="231.5" cy="83" r="1.5" class="k0"/><circle cx="232.1" cy="83" r="1.5" class="k0"/><circle cx="232.9" cy="83" r="1.5" class="k0"/><circle cx="234" cy="83" r="1.5" class="k0"/><circle cx="234.3" cy="83" r="1.5" class="k0"/><circle cx="234.6" cy="83" r="1.5" class="k0"/><circle cx="235.4" cy="83" r="1.5" class="k0"/><circle cx="235.7" cy="83" r="1.5" class="k0"/><circle cx="236.2" cy="83" r="1.5" class="k0"/><circle cx="236.5" cy="83" r="1.5" class="k0"/><circle cx="236.5" cy="83" r="1.5" class="k0"/><circle cx="237.8" cy="83" r="1.5" class="k0"/><circle cx="238" cy="83" r="1.5" class="k0"/><circle cx="238" cy="83" r="1.5" class="k0"/><circle cx="238.8" cy="83" r="1.5" class="k0"/><circle cx="239.3" cy="83" r="1.5" class="k0"/><circle cx="239.3" cy="83" r="1.5" class="k0"/><circle cx="239.3" cy="83" r="1.5" class="k0"/><circle cx="240.5" cy="83" r="1.5" class="k0"/><circle cx="240.8" cy="83" r="1.5" class="k0"/><circle cx="241.3" cy="83" r="1.5" class="k0"/><circle cx="242.2" cy="83" r="1.5" class="k0"/><circle cx="242.2" cy="83" r="1.5" class="k0"/><circle cx="242.4" cy="83" r="1.5" class="k0"/><circle cx="242.4" cy="83" r="1.5" class="k0"/><circle cx="243.1" cy="83" r="1.5" class="k0"/><circle cx="243.4" cy="83" r="1.5" class="k0"/><circle cx="244.5" cy="83" r="1.5" class="k0"/><circle cx="244.7" cy="83" r="1.5" class="k0"/><circle cx="244.9" cy="83" r="1.5" class="k0"/><circle cx="244.9" cy="83" r="1.5" class="k0"/><circle cx="246" cy="83" r="1.5" class="k0"/><circle cx="247.5" cy="83" r="1.5" class="k0"/><circle cx="247.8" cy="83" r="1.5" class="k0"/><circle cx="247.8" cy="83" r="1.5" class="k0"/><circle cx="251.4" cy="83" r="1.5" class="k0"/><circle cx="251.6" cy="83" r="1.5" class="k0"/><circle cx="252" cy="83" r="1.5" class="k0"/><circle cx="252.6" cy="83" r="1.5" class="k0"/><circle cx="253.3" cy="83" r="1.5" class="k0"/><circle cx="253.9" cy="83" r="1.5" class="k0"/><circle cx="254.6" cy="83" r="1.5" class="k0"/><circle cx="255" cy="83" r="1.5" class="k0"/><circle cx="255" cy="83" r="1.5" class="k0"/><circle cx="256.9" cy="83" r="1.5" class="k0"/><circle cx="257.3" cy="83" r="1.5" class="k0"/><circle cx="257.6" cy="83" r="1.5" class="k0"/><circle cx="258.6" cy="83" r="1.5" class="k0"/><circle cx="262.8" cy="83" r="1.5" class="k0"/><circle cx="264.8" cy="83" r="1.5" class="k0"/><circle cx="265.8" cy="83" r="1.5" class="k0"/><circle cx="266.4" cy="83" r="1.5" class="k0"/><circle cx="267" cy="83" r="1.5" class="k0"/><circle cx="267.1" cy="83" r="1.5" class="k0"/><circle cx="267.4" cy="83" r="1.5" class="k0"/><circle cx="267.5" cy="83" r="1.5" class="k0"/><circle cx="269.1" cy="83" r="1.5" class="k0"/><circle cx="269.2" cy="83" r="1.5" class="k0"/><circle cx="270.5" cy="83" r="1.5" class="k0"/><circle cx="271.1" cy="83" r="1.5" class="k0"/><circle cx="271.7" cy="83" r="1.5" class="k0"/><circle cx="273.7" cy="83" r="1.5" class="k0"/><circle cx="274" cy="83" r="1.5" class="k0"/><circle cx="277.6" cy="83" r="1.5" class="k0"/><circle cx="278.5" cy="83" r="1.5" class="k0"/><circle cx="278.7" cy="83" r="1.5" class="k0"/><circle cx="279.3" cy="83" r="1.5" class="k0"/><circle cx="280.4" cy="83" r="1.5" class="k0"/><circle cx="280.6" cy="83" r="1.5" class="k0"/><circle cx="280.7" cy="83" r="1.5" class="k0"/><circle cx="283.5" cy="83" r="1.5" class="k0"/><circle cx="283.6" cy="83" r="1.5" class="k0"/><circle cx="286.5" cy="83" r="1.5" class="k0"/><circle cx="286.7" cy="83" r="1.5" class="k0"/><circle cx="287" cy="83" r="1.5" class="k0"/><circle cx="287" cy="83" r="1.5" class="k0"/><circle cx="288.2" cy="83" r="1.5" class="k0"/><circle cx="289.3" cy="83" r="1.5" class="k0"/><circle cx="292.7" cy="83" r="1.5" class="k0"/><circle cx="292.8" cy="83" r="1.5" class="k0"/><circle cx="295.9" cy="83" r="1.5" class="k0"/><circle cx="302.3" cy="83" r="1.5" class="k0"/><circle cx="303.2" cy="83" r="1.5" class="k0"/><circle cx="304.8" cy="83" r="1.5" class="k0"/><circle cx="306.6" cy="83" r="1.5" class="k0"/><circle cx="306.8" cy="83" r="1.5" class="k0"/><circle cx="310.2" cy="83" r="1.5" class="k0"/><circle cx="312.6" cy="83" r="1.5" class="k0"/><circle cx="319.9" cy="83" r="1.5" class="k0"/><circle cx="322.7" cy="83" r="1.5" class="k0"/><circle cx="325.1" cy="83" r="1.5" class="k0"/><circle cx="328" cy="83" r="1.5" class="k0"/><circle cx="330.7" cy="83" r="1.5" class="k0"/><circle cx="332.6" cy="83" r="1.5" class="k0"/><circle cx="333" cy="83" r="1.5" class="k0"/><circle cx="334.1" cy="83" r="1.5" class="k0"/><circle cx="337.9" cy="83" r="1.5" class="k0"/><circle cx="342.1" cy="83" r="1.5" class="k0"/><circle cx="343" cy="83" r="1.5" class="k0"/><circle cx="343.1" cy="83" r="1.5" class="k0"/><circle cx="353.9" cy="83" r="1.5" class="k0"/><circle cx="355.1" cy="83" r="1.5" class="k0"/><circle cx="357.5" cy="83" r="1.5" class="k0"/><circle cx="372.5" cy="83" r="1.5" class="k0"/><circle cx="373.5" cy="83" r="1.5" class="k0"/><circle cx="381.5" cy="83" r="1.5" class="k0"/><circle cx="393.2" cy="83" r="1.5" class="k0"/><circle cx="409.8" cy="83" r="1.5" class="k0"/><rect x="229.7" y="76" width="53.9" height="14" rx="2" class="k22"/><line x1="229.7" y1="76" x2="229.7" y2="90" class="k15"/><line x1="283.6" y1="76" x2="283.6" y2="90" class="k15"/><line x1="249.6" y1="75" x2="249.6" y2="91" class="k23"/><text x="82" y="82" class="k21">UR</text><text x="82" y="94" class="k6">n=146</text><line x1="284" y1="129" x2="429.6" y2="129" class="k1"/><circle cx="284" cy="129" r="1.5" class="k0"/><circle cx="295.9" cy="129" r="1.5" class="k0"/><circle cx="297.6" cy="129" r="1.5" class="k0"/><circle cx="299.8" cy="129" r="1.5" class="k0"/><circle cx="302.3" cy="129" r="1.5" class="k0"/><circle cx="307.3" cy="129" r="1.5" class="k0"/><circle cx="310.2" cy="129" r="1.5" class="k0"/><circle cx="310.2" cy="129" r="1.5" class="k0"/><circle cx="310.9" cy="129" r="1.5" class="k0"/><circle cx="314.5" cy="129" r="1.5" class="k0"/><circle cx="316" cy="129" r="1.5" class="k0"/><circle cx="317" cy="129" r="1.5" class="k0"/><circle cx="321" cy="129" r="1.5" class="k0"/><circle cx="325.8" cy="129" r="1.5" class="k0"/><circle cx="326" cy="129" r="1.5" class="k0"/><circle cx="326.4" cy="129" r="1.5" class="k0"/><circle cx="327.4" cy="129" r="1.5" class="k0"/><circle cx="328.5" cy="129" r="1.5" class="k0"/><circle cx="328.7" cy="129" r="1.5" class="k0"/><circle cx="330.7" cy="129" r="1.5" class="k0"/><circle cx="340.9" cy="129" r="1.5" class="k0"/><circle cx="341.6" cy="129" r="1.5" class="k0"/><circle cx="342.6" cy="129" r="1.5" class="k0"/><circle cx="342.7" cy="129" r="1.5" class="k0"/><circle cx="344.6" cy="129" r="1.5" class="k0"/><circle cx="346" cy="129" r="1.5" class="k0"/><circle cx="357.6" cy="129" r="1.5" class="k0"/><circle cx="370.1" cy="129" r="1.5" class="k0"/><circle cx="373.2" cy="129" r="1.5" class="k0"/><circle cx="382.2" cy="129" r="1.5" class="k0"/><circle cx="408.9" cy="129" r="1.5" class="k0"/><circle cx="409.3" cy="129" r="1.5" class="k0"/><circle cx="429.6" cy="129" r="1.5" class="k0"/><rect x="310.9" y="122" width="33.7" height="14" rx="2" class="k22"/><line x1="310.9" y1="122" x2="310.9" y2="136" class="k15"/><line x1="344.6" y1="122" x2="344.6" y2="136" class="k15"/><line x1="327.4" y1="121" x2="327.4" y2="137" class="k23"/><text x="82" y="128" class="k21">Hyper</text><text x="82" y="140" class="k6">n=33</text><line x1="469" y1="175" x2="506.5" y2="175" class="k1"/><circle cx="469" cy="175" r="1.5" class="k0"/><circle cx="482.5" cy="175" r="1.5" class="k0"/><circle cx="484.1" cy="175" r="1.5" class="k0"/><circle cx="491.1" cy="175" r="1.5" class="k0"/><circle cx="506.5" cy="175" r="1.5" class="k0"/><rect x="482.5" y="168" width="8.6" height="14" rx="2" class="k22"/><line x1="482.5" y1="168" x2="482.5" y2="182" class="k15"/><line x1="491.1" y1="168" x2="491.1" y2="182" class="k15"/><line x1="484.1" y1="167" x2="484.1" y2="183" class="k23"/><text x="82" y="174" class="k21">Mega Hyper</text><text x="82" y="186" class="k6">n=5</text></svg><figcaption class="chart-cap">Every modeled card's market price at the 2026-08 snapshot, log scale; box is the interquartile range, the darker tick the median. Data: forward_outlook, 2026-08.</figcaption></figure>
+    <p class="takeaway">Chase prices span orders of magnitude. Ultra Rare medians sit near <strong>$2.44</strong>, while Special Illustration Rare runs from $5.54 to <strong>$1,513</strong> (median $59): a handful of SIR chase cards carry most of the dollar value in the universe.</p>
+  </section>
+
+  <section id="mkt-models" data-reveal>
+    <h2>Model skill versus baselines</h2>
+    <p class="section-note">How much cross-sectional ranking skill each model shows on the selection folds, against a zero, a momentum, and a reversion baseline.</p>
+    <figure class="chartfig" data-reveal><svg class="mchart" viewBox="0 0 680 424" width="680" height="424" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Walk-forward mean information coefficient by model" style="max-width:680px;width:100%;height:auto;display:block;margin:0 auto;"><line x1="166.8" y1="16" x2="166.8" y2="390" class="k3"/><text x="166.8" y="410" class="k2">0</text><line x1="289.5" y1="16" x2="289.5" y2="390" class="k3"/><text x="289.5" y="410" class="k2">0.1</text><line x1="412.2" y1="16" x2="412.2" y2="390" class="k3"/><text x="412.2" y="410" class="k2">0.2</text><line x1="534.9" y1="16" x2="534.9" y2="390" class="k3"/><text x="534.9" y="410" class="k2">0.3</text><line x1="166.8" y1="16" x2="166.8" y2="390" class="k1"/><text x="338" y="420" class="k10">Mean information coefficient (selection folds)</text><rect x="166.8" y="24" width="417.2" height="18" fill="var(--accent)" opacity="0.5" rx="2" class="mark" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;ensemble&lt;/span&gt;Mean IC +0.340; quintile spread +17.9% Q5-Q1" aria-label="ensemble, mean information coefficient +0.340"/><text x="82" y="36.5" class="k11">ensemble</text><text x="590" y="36.5" class="k12">+17.9% Q5-Q1</text><rect x="166.8" y="58" width="402.4" height="18" fill="var(--accent)" opacity="0.95" rx="2" class="mark" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;rf&lt;/span&gt;Mean IC +0.328; quintile spread +17.0% Q5-Q1" aria-label="rf, mean information coefficient +0.328"/><text x="82" y="70.5" class="k21">rf *</text><text x="590" y="70.5" class="k12">+17.0% Q5-Q1</text><rect x="166.8" y="92" width="395.1" height="18" fill="var(--accent)" opacity="0.5" rx="2" class="mark" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;huber&lt;/span&gt;Mean IC +0.322; quintile spread +16.7% Q5-Q1" aria-label="huber, mean information coefficient +0.322"/><text x="82" y="104.5" class="k11">huber</text><text x="590" y="104.5" class="k12">+16.7% Q5-Q1</text><rect x="166.8" y="126" width="393.8" height="18" fill="var(--accent)" opacity="0.5" rx="2" class="mark" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;rank_linear&lt;/span&gt;Mean IC +0.321; quintile spread +17.3% Q5-Q1" aria-label="rank_linear, mean information coefficient +0.321"/><text x="82" y="138.5" class="k11">rank_linear</text><text x="590" y="138.5" class="k12">+17.3% Q5-Q1</text><rect x="166.8" y="160" width="390.2" height="18" fill="var(--accent)" opacity="0.5" rx="2" class="mark" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;ridge&lt;/span&gt;Mean IC +0.318; quintile spread +17.2% Q5-Q1" aria-label="ridge, mean information coefficient +0.318"/><text x="82" y="172.5" class="k11">ridge</text><text x="590" y="172.5" class="k12">+17.2% Q5-Q1</text><rect x="166.8" y="194" width="387.7" height="18" fill="var(--accent)" opacity="0.5" rx="2" class="mark" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;gbm&lt;/span&gt;Mean IC +0.316; quintile spread +17.3% Q5-Q1" aria-label="gbm, mean information coefficient +0.316"/><text x="82" y="206.5" class="k11">gbm</text><text x="590" y="206.5" class="k12">+17.3% Q5-Q1</text><rect x="166.8" y="228" width="358.3" height="18" fill="var(--accent)" opacity="0.5" rx="2" class="mark" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;elasticnet&lt;/span&gt;Mean IC +0.292; quintile spread +14.9% Q5-Q1" aria-label="elasticnet, mean information coefficient +0.292"/><text x="82" y="240.5" class="k11">elasticnet</text><text x="590" y="240.5" class="k12">+14.9% Q5-Q1</text><rect x="166.8" y="262" width="355.8" height="18" fill="var(--accent)" opacity="0.5" rx="2" class="mark" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;pls&lt;/span&gt;Mean IC +0.290; quintile spread +15.1% Q5-Q1" aria-label="pls, mean information coefficient +0.290"/><text x="82" y="274.5" class="k11">pls</text><text x="590" y="274.5" class="k12">+15.1% Q5-Q1</text><rect x="166.8" y="296" width="168.1" height="18" fill="var(--neutral)" opacity="0.55" rx="2" class="mark" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;reversion&lt;/span&gt;Mean IC +0.137; quintile spread +6.6% Q5-Q1" aria-label="reversion, mean information coefficient +0.137"/><text x="82" y="308.5" class="k11">reversion</text><text x="590" y="308.5" class="k12">+6.6% Q5-Q1</text><rect x="166.8" y="330" width="0" height="18" fill="var(--neutral)" opacity="0.55" rx="2" class="mark" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;zero&lt;/span&gt;Mean IC +0.000; quintile spread +7.6% Q5-Q1" aria-label="zero, mean information coefficient +0.000"/><text x="82" y="342.5" class="k11">zero</text><text x="590" y="342.5" class="k12">+7.6% Q5-Q1</text><rect x="92" y="364" width="74.8" height="18" fill="var(--neutral)" opacity="0.55" rx="2" class="mark" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;momentum&lt;/span&gt;Mean IC -0.061; quintile spread -3.0% Q5-Q1" aria-label="momentum, mean information coefficient -0.061"/><text x="82" y="376.5" class="k11">momentum</text><text x="590" y="376.5" font-size="10" fill="var(--down-text)">-3.0% Q5-Q1</text></svg><figcaption class="chart-cap">Walk-forward mean information coefficient (cross-sectional rank correlation of predicted versus realized 90-day return) per model; the quintile spread is annotated at each bar end. Selected model starred. Data: forward_validation.</figcaption></figure>
+    <p class="takeaway">The selected <strong>rf</strong> reaches mean IC <strong>0.328</strong> with a +17.0% quintile spread, but the momentum (-0.061) and reversion (+0.137) baselines land near zero -- and the models page shows a non-static edge survives ablating the static set-age features (the basis for the strong verdict): ablation removes a substantial minority of the all-fold signal (21%). The ranking is still substantially a lifecycle ordering &mdash; set age alone, with no model, scores 0.296 of the 0.328 full-feature IC.</p>
+  </section>
+
+  <section id="mkt-momentum" data-reveal>
+    <h2>Do recent winners keep winning?</h2>
+    <p class="section-note">Sorting the universe into quintiles by past return and holding forward three months, for four different formation windows.</p>
+    <figure class="chartfig" data-reveal><svg class="mchart" viewBox="0 0 680 220" width="680" height="220" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Forward-return by formation-return quintile" style="max-width:680px;width:100%;height:auto;display:block;margin:0 auto;"><line x1="18" y1="141.7" x2="165.5" y2="141.7" class="k1"/><rect x="22.1" y="119.8" width="21.2" height="21.8" rx="1" class="k8"/><text x="32.8" y="187" class="k7">Q1</text><rect x="51.6" y="94.5" width="21.2" height="47.1" rx="1" class="k8"/><text x="62.2" y="187" class="k7">Q2</text><rect x="81.1" y="85.3" width="21.2" height="56.3" rx="1" class="k8"/><text x="91.8" y="187" class="k7">Q3</text><rect x="110.6" y="94.5" width="21.2" height="47.1" rx="1" class="k8"/><text x="121.2" y="187" class="k7">Q4</text><rect x="140.1" y="141.7" width="21.2" height="8" fill="var(--down)" opacity="0.8" rx="1"/><text x="150.8" y="187" class="k7">Q5</text><text x="91.8" y="14" class="k24">1-month</text><text x="91.8" y="204" class="k28">rank corr -0.3</text><line x1="183.5" y1="141.7" x2="331" y2="141.7" class="k1"/><rect x="187.6" y="95.7" width="21.2" height="46" rx="1" class="k8"/><text x="198.2" y="187" class="k7">Q1</text><rect x="217.1" y="75" width="21.2" height="66.7" rx="1" class="k8"/><text x="227.8" y="187" class="k7">Q2</text><rect x="246.6" y="70.4" width="21.2" height="71.3" rx="1" class="k8"/><text x="257.2" y="187" class="k7">Q3</text><rect x="276.1" y="96.8" width="21.2" height="44.8" rx="1" class="k8"/><text x="286.8" y="187" class="k7">Q4</text><rect x="305.6" y="141.7" width="21.2" height="18.4" fill="var(--down)" opacity="0.8" rx="1"/><text x="316.2" y="187" class="k7">Q5</text><text x="257.2" y="14" class="k24">3-month</text><text x="257.2" y="204" class="k28">rank corr -0.6</text><line x1="349" y1="141.7" x2="496.5" y2="141.7" class="k1"/><rect x="353.1" y="77.3" width="21.2" height="64.4" rx="1" class="k8"/><text x="363.8" y="187" class="k7">Q1</text><rect x="382.6" y="43.9" width="21.2" height="97.7" rx="1" class="k8"/><text x="393.2" y="187" class="k7">Q2</text><rect x="412.1" y="49.7" width="21.2" height="92" rx="1" class="k8"/><text x="422.8" y="187" class="k7">Q3</text><rect x="441.6" y="64.6" width="21.2" height="77" rx="1" class="k8"/><text x="452.2" y="187" class="k7">Q4</text><rect x="471.1" y="102.6" width="21.2" height="39.1" rx="1" class="k8"/><text x="481.8" y="187" class="k7">Q5</text><text x="422.8" y="14" class="k24">6-month</text><text x="422.8" y="204" class="k28">rank corr -0.4</text><line x1="514.5" y1="141.7" x2="662" y2="141.7" class="k1"/><rect x="518.6" y="91.1" width="21.2" height="50.6" rx="1" class="k8"/><text x="529.2" y="187" class="k7">Q1</text><rect x="548.1" y="56.6" width="21.2" height="85.1" rx="1" class="k8"/><text x="558.8" y="187" class="k7">Q2</text><rect x="577.6" y="45.1" width="21.2" height="96.6" rx="1" class="k8"/><text x="588.2" y="187" class="k7">Q3</text><rect x="607.1" y="60" width="21.2" height="81.6" rx="1" class="k8"/><text x="617.8" y="187" class="k7">Q4</text><rect x="636.6" y="63.5" width="21.2" height="78.2" rx="1" class="k8"/><text x="647.2" y="187" class="k7">Q5</text><text x="588.2" y="14" class="k24">6-month skip-1</text><text x="588.2" y="204" font-size="10" fill="var(--up-text)" text-anchor="middle">rank corr +0.1</text><text x="340" y="216" class="k10">Formation-return quintile (Q1 losers to Q5 winners)</text></svg><figcaption class="chart-cap">Mean forward 3-month return by formation-return quintile, per formation window; each ladder averaged over all rebalances. Data: momentum_summary.</figcaption></figure>
+    <p class="takeaway">Short formation windows lean toward reversion in point estimate (Q5 recent winners below Q1 losers: rank correlation -0.3 at 1 month, -0.6 at 3 months), but once the overlapping holds are deflated none of the horizons is statistically distinguishable from noise -- no tradeable momentum or reversion. That is the pooled sort, which partly ranks cards on era membership. Ranking the same cards inside their own era instead turns form1m, form3m directional toward reversion; it is a post-hoc, cost-free subgroup result on one calendar window, and the momentum page carries the full comparison and its caveats.</p>
+  </section>
+
+  <section id="mkt-divergence" data-reveal>
+    <h2>EUR versus USD pricing</h2>
+    <p class="section-note">Whether the same card is priced consistently in Europe and the US, as a z-score of the cross-Atlantic gap.</p>
+    <figure class="chartfig" data-reveal><svg class="mchart" viewBox="0 0 680 260" width="680" height="260" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Distribution of the EUR/USD divergence z-score" style="max-width:680px;width:100%;height:auto;display:block;margin:0 auto;"><line x1="48" y1="218" x2="660" y2="218" class="k3"/><text x="40" y="221.5" class="k6">0</text><line x1="48" y1="167.5" x2="660" y2="167.5" class="k3"/><text x="40" y="171" class="k6">25</text><line x1="48" y1="117" x2="660" y2="117" class="k3"/><text x="40" y="120.5" class="k6">50</text><line x1="48" y1="66.5" x2="660" y2="66.5" class="k3"/><text x="40" y="70" class="k6">75</text><line x1="48" y1="16" x2="660" y2="16" class="k3"/><text x="40" y="19.5" class="k6">100</text><line x1="48" y1="218" x2="660" y2="218" class="k1"/><rect x="211.8" y="216" width="19.2" height="2" rx="1" class="k20"/><rect x="252.6" y="211.9" width="19.2" height="6.1" rx="1" class="k20"/><rect x="273" y="193.8" width="19.2" height="24.2" rx="1" class="k20"/><rect x="293.4" y="123.1" width="19.2" height="94.9" rx="1" class="k20"/><rect x="313.8" y="60.4" width="19.2" height="157.6" rx="1" class="k20"/><rect x="334.2" y="-10.3" width="19.2" height="228.3" rx="1" class="k20"/><rect x="354.6" y="42.3" width="19.2" height="175.7" rx="1" class="k13"/><rect x="375" y="96.8" width="19.2" height="121.2" rx="1" class="k13"/><rect x="395.4" y="149.3" width="19.2" height="68.7" rx="1" class="k13"/><rect x="415.8" y="193.8" width="19.2" height="24.2" rx="1" class="k13"/><rect x="436.2" y="199.8" width="19.2" height="18.2" rx="1" class="k13"/><rect x="456.6" y="207.9" width="19.2" height="10.1" rx="1" class="k13"/><rect x="477" y="216" width="19.2" height="2" rx="1" class="k13"/><rect x="497.4" y="216" width="19.2" height="2" rx="1" class="k13"/><rect x="640.2" y="216" width="19.2" height="2" rx="1" class="k13"/><line x1="354" y1="16" x2="354" y2="218" stroke="var(--border-strong)" stroke-width="1.4" stroke-dasharray="3 3"/><line x1="150" y1="218" x2="150" y2="222" class="k1"/><text x="150" y="235" class="k2">-5</text><line x1="354" y1="218" x2="354" y2="222" class="k1"/><text x="354" y="235" class="k2">0</text><line x1="558" y1="218" x2="558" y2="222" class="k1"/><text x="558" y="235" class="k2">5</text><text x="354" y="256" class="k10">EUR/USD divergence z-score (negative: cheaper in EUR)</text><text x="12" y="117" transform="rotate(-90 12 117)" class="k10">Cards</text></svg><figcaption class="chart-cap">Distribution of the EUR/USD divergence z-score across 464 cards with Cardmarket coverage; negative means cheaper in EUR than the USD trend implies. Data: forward_outlook, 2026-08.</figcaption></figure>
+    <p class="takeaway">European (Cardmarket) and US (TCGplayer) pricing move largely together: the divergence z-score is centered near zero (mean <strong>+0.00</strong>, n 464), with only a modest tail of cards trading rich or cheap across the Atlantic. The Cardmarket column is a cross-check, not an independent signal.</p>
+  </section>
+
+  <section id="mkt-sealed" data-reveal>
+    <h2>Sealed product versus singles</h2>
+    <p class="section-note">Booster boxes go out of print and get scarcer; open singles do not. This overlays the two fixed-basket indices on one rebased scale.</p>
+    <figure class="chartfig" data-reveal><svg class="mchart" viewBox="0 0 680 300" width="680" height="300" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Price index (first month = 100)" style="max-width:680px;width:100%;height:auto;display:block;margin:0 auto;"><line x1="52" y1="250" x2="538" y2="250" class="k3"/><text x="44" y="253.5" class="k6">100</text><line x1="52" y1="198.9" x2="538" y2="198.9" class="k3"/><text x="44" y="202.4" class="k6">150</text><line x1="52" y1="147.8" x2="538" y2="147.8" class="k3"/><text x="44" y="151.3" class="k6">200</text><line x1="52" y1="96.7" x2="538" y2="96.7" class="k3"/><text x="44" y="100.2" class="k6">250</text><line x1="52" y1="45.5" x2="538" y2="45.5" class="k3"/><text x="44" y="49" class="k6">300</text><line x1="52" y1="250" x2="538" y2="250" class="k26"/><line x1="52" y1="16" x2="52" y2="260" class="k1"/><line x1="52" y1="260" x2="538" y2="260" class="k1"/><line x1="52" y1="260" x2="52" y2="264" class="k1"/><text x="52" y="276" class="k2">2024-03</text><line x1="152.6" y1="260" x2="152.6" y2="264" class="k1"/><text x="152.6" y="276" class="k2">2024-09</text><line x1="253.1" y1="260" x2="253.1" y2="264" class="k1"/><text x="253.1" y="276" class="k2">2025-03</text><line x1="353.7" y1="260" x2="353.7" y2="264" class="k1"/><text x="353.7" y="276" class="k2">2025-09</text><line x1="454.2" y1="260" x2="454.2" y2="264" class="k1"/><text x="454.2" y="276" class="k2">2026-03</text><line x1="538" y1="260" x2="538" y2="264" class="k1"/><text x="538" y="276" class="k2">2026-08</text><text x="295" y="296" class="k10">Month</text><text x="14" y="138" transform="rotate(-90 14 138)" class="k10">Price index (first month = 100)</text><polyline points="52,250 68.8,250.5 85.5,252.5 102.3,254.6 119,252 135.8,259.7 152.6,260 169.3,258.7 186.1,256.2 202.8,255.9 219.6,252.7 236.3,251.7 253.1,246.3 269.9,249.2 286.6,248 303.4,250.8 320.1,256.1 336.9,255.1 353.7,253.8 370.4,246 387.2,245.3 403.9,250.5 420.7,251.4 437.4,248.6 454.2,245.2 471,232.3 487.7,225.9 504.5,220.1 521.2,210.1 538,217.3" class="k29"/><circle cx="52" cy="250" r="4.5" fill="var(--ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Modeled singles&lt;/span&gt;2024-03: 100" aria-label="Modeled singles, 2024-03: 100"/><circle cx="68.8" cy="250.5" r="4.5" fill="var(--ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Modeled singles&lt;/span&gt;2024-04: 99.5" aria-label="Modeled singles, 2024-04: 99.5"/><circle cx="85.5" cy="252.5" r="4.5" fill="var(--ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Modeled singles&lt;/span&gt;2024-05: 97.5" aria-label="Modeled singles, 2024-05: 97.5"/><circle cx="102.3" cy="254.6" r="4.5" fill="var(--ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Modeled singles&lt;/span&gt;2024-06: 95.5" aria-label="Modeled singles, 2024-06: 95.5"/><circle cx="119" cy="252" r="4.5" fill="var(--ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Modeled singles&lt;/span&gt;2024-07: 98" aria-label="Modeled singles, 2024-07: 98"/><circle cx="135.8" cy="259.7" r="4.5" fill="var(--ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Modeled singles&lt;/span&gt;2024-08: 90.5" aria-label="Modeled singles, 2024-08: 90.5"/><circle cx="152.6" cy="260" r="4.5" fill="var(--ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Modeled singles&lt;/span&gt;2024-09: 90.2" aria-label="Modeled singles, 2024-09: 90.2"/><circle cx="169.3" cy="258.7" r="4.5" fill="var(--ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Modeled singles&lt;/span&gt;2024-10: 91.5" aria-label="Modeled singles, 2024-10: 91.5"/><circle cx="186.1" cy="256.2" r="4.5" fill="var(--ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Modeled singles&lt;/span&gt;2024-11: 93.9" aria-label="Modeled singles, 2024-11: 93.9"/><circle cx="202.8" cy="255.9" r="4.5" fill="var(--ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Modeled singles&lt;/span&gt;2024-12: 94.2" aria-label="Modeled singles, 2024-12: 94.2"/><circle cx="219.6" cy="252.7" r="4.5" fill="var(--ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Modeled singles&lt;/span&gt;2025-01: 97.3" aria-label="Modeled singles, 2025-01: 97.3"/><circle cx="236.3" cy="251.7" r="4.5" fill="var(--ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Modeled singles&lt;/span&gt;2025-02: 98.3" aria-label="Modeled singles, 2025-02: 98.3"/><circle cx="253.1" cy="246.3" r="4.5" fill="var(--ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Modeled singles&lt;/span&gt;2025-03: 103.6" aria-label="Modeled singles, 2025-03: 103.6"/><circle cx="269.9" cy="249.2" r="4.5" fill="var(--ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Modeled singles&lt;/span&gt;2025-04: 100.8" aria-label="Modeled singles, 2025-04: 100.8"/><circle cx="286.6" cy="248" r="4.5" fill="var(--ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Modeled singles&lt;/span&gt;2025-05: 101.9" aria-label="Modeled singles, 2025-05: 101.9"/><circle cx="303.4" cy="250.8" r="4.5" fill="var(--ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Modeled singles&lt;/span&gt;2025-06: 99.2" aria-label="Modeled singles, 2025-06: 99.2"/><circle cx="320.1" cy="256.1" r="4.5" fill="var(--ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Modeled singles&lt;/span&gt;2025-07: 94" aria-label="Modeled singles, 2025-07: 94"/><circle cx="336.9" cy="255.1" r="4.5" fill="var(--ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Modeled singles&lt;/span&gt;2025-08: 95" aria-label="Modeled singles, 2025-08: 95"/><circle cx="353.7" cy="253.8" r="4.5" fill="var(--ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Modeled singles&lt;/span&gt;2025-09: 96.3" aria-label="Modeled singles, 2025-09: 96.3"/><circle cx="370.4" cy="246" r="4.5" fill="var(--ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Modeled singles&lt;/span&gt;2025-10: 103.9" aria-label="Modeled singles, 2025-10: 103.9"/><circle cx="387.2" cy="245.3" r="4.5" fill="var(--ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Modeled singles&lt;/span&gt;2025-11: 104.6" aria-label="Modeled singles, 2025-11: 104.6"/><circle cx="403.9" cy="250.5" r="4.5" fill="var(--ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Modeled singles&lt;/span&gt;2025-12: 99.5" aria-label="Modeled singles, 2025-12: 99.5"/><circle cx="420.7" cy="251.4" r="4.5" fill="var(--ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Modeled singles&lt;/span&gt;2026-01: 98.6" aria-label="Modeled singles, 2026-01: 98.6"/><circle cx="437.4" cy="248.6" r="4.5" fill="var(--ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Modeled singles&lt;/span&gt;2026-02: 101.4" aria-label="Modeled singles, 2026-02: 101.4"/><circle cx="454.2" cy="245.2" r="4.5" fill="var(--ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Modeled singles&lt;/span&gt;2026-03: 104.7" aria-label="Modeled singles, 2026-03: 104.7"/><circle cx="471" cy="232.3" r="4.5" fill="var(--ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Modeled singles&lt;/span&gt;2026-04: 117.3" aria-label="Modeled singles, 2026-04: 117.3"/><circle cx="487.7" cy="225.9" r="4.5" fill="var(--ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Modeled singles&lt;/span&gt;2026-05: 123.6" aria-label="Modeled singles, 2026-05: 123.6"/><circle cx="504.5" cy="220.1" r="4.5" fill="var(--ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Modeled singles&lt;/span&gt;2026-06: 129.2" aria-label="Modeled singles, 2026-06: 129.2"/><circle cx="521.2" cy="210.1" r="4.5" fill="var(--ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Modeled singles&lt;/span&gt;2026-07: 139" aria-label="Modeled singles, 2026-07: 139"/><circle cx="538" cy="217.3" r="4.5" fill="var(--ink)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Modeled singles&lt;/span&gt;2026-08: 132" aria-label="Modeled singles, 2026-08: 132"/><polyline points="52,250 68.8,244 85.5,244.8 102.3,245.6 119,240.5 135.8,244.9 152.6,244.7 169.3,245.3 186.1,240.7 202.8,235.2 219.6,207.3 236.3,177.9 253.1,192.6 269.9,173.1 286.6,164.6 303.4,143 320.1,132.9 336.9,122.9 353.7,77.3 370.4,72.3 387.2,87.5 403.9,62.1 420.7,48.4 437.4,39.6 454.2,27.2 471,20.2 487.7,20.2 504.5,18.2 521.2,17.7 538,16" class="k27"/><circle cx="52" cy="250" r="4.5" fill="var(--accent)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Sealed booster boxes&lt;/span&gt;2024-03: 100" aria-label="Sealed booster boxes, 2024-03: 100"/><circle cx="68.8" cy="244" r="4.5" fill="var(--accent)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Sealed booster boxes&lt;/span&gt;2024-04: 105.9" aria-label="Sealed booster boxes, 2024-04: 105.9"/><circle cx="85.5" cy="244.8" r="4.5" fill="var(--accent)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Sealed booster boxes&lt;/span&gt;2024-05: 105.1" aria-label="Sealed booster boxes, 2024-05: 105.1"/><circle cx="102.3" cy="245.6" r="4.5" fill="var(--accent)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Sealed booster boxes&lt;/span&gt;2024-06: 104.3" aria-label="Sealed booster boxes, 2024-06: 104.3"/><circle cx="119" cy="240.5" r="4.5" fill="var(--accent)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Sealed booster boxes&lt;/span&gt;2024-07: 109.3" aria-label="Sealed booster boxes, 2024-07: 109.3"/><circle cx="135.8" cy="244.9" r="4.5" fill="var(--accent)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Sealed booster boxes&lt;/span&gt;2024-08: 105" aria-label="Sealed booster boxes, 2024-08: 105"/><circle cx="152.6" cy="244.7" r="4.5" fill="var(--accent)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Sealed booster boxes&lt;/span&gt;2024-09: 105.2" aria-label="Sealed booster boxes, 2024-09: 105.2"/><circle cx="169.3" cy="245.3" r="4.5" fill="var(--accent)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Sealed booster boxes&lt;/span&gt;2024-10: 104.6" aria-label="Sealed booster boxes, 2024-10: 104.6"/><circle cx="186.1" cy="240.7" r="4.5" fill="var(--accent)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Sealed booster boxes&lt;/span&gt;2024-11: 109.1" aria-label="Sealed booster boxes, 2024-11: 109.1"/><circle cx="202.8" cy="235.2" r="4.5" fill="var(--accent)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Sealed booster boxes&lt;/span&gt;2024-12: 114.5" aria-label="Sealed booster boxes, 2024-12: 114.5"/><circle cx="219.6" cy="207.3" r="4.5" fill="var(--accent)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Sealed booster boxes&lt;/span&gt;2025-01: 141.8" aria-label="Sealed booster boxes, 2025-01: 141.8"/><circle cx="236.3" cy="177.9" r="4.5" fill="var(--accent)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Sealed booster boxes&lt;/span&gt;2025-02: 170.5" aria-label="Sealed booster boxes, 2025-02: 170.5"/><circle cx="253.1" cy="192.6" r="4.5" fill="var(--accent)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Sealed booster boxes&lt;/span&gt;2025-03: 156.1" aria-label="Sealed booster boxes, 2025-03: 156.1"/><circle cx="269.9" cy="173.1" r="4.5" fill="var(--accent)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Sealed booster boxes&lt;/span&gt;2025-04: 175.2" aria-label="Sealed booster boxes, 2025-04: 175.2"/><circle cx="286.6" cy="164.6" r="4.5" fill="var(--accent)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Sealed booster boxes&lt;/span&gt;2025-05: 183.5" aria-label="Sealed booster boxes, 2025-05: 183.5"/><circle cx="303.4" cy="143" r="4.5" fill="var(--accent)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Sealed booster boxes&lt;/span&gt;2025-06: 204.7" aria-label="Sealed booster boxes, 2025-06: 204.7"/><circle cx="320.1" cy="132.9" r="4.5" fill="var(--accent)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Sealed booster boxes&lt;/span&gt;2025-07: 214.5" aria-label="Sealed booster boxes, 2025-07: 214.5"/><circle cx="336.9" cy="122.9" r="4.5" fill="var(--accent)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Sealed booster boxes&lt;/span&gt;2025-08: 224.3" aria-label="Sealed booster boxes, 2025-08: 224.3"/><circle cx="353.7" cy="77.3" r="4.5" fill="var(--accent)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Sealed booster boxes&lt;/span&gt;2025-09: 268.9" aria-label="Sealed booster boxes, 2025-09: 268.9"/><circle cx="370.4" cy="72.3" r="4.5" fill="var(--accent)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Sealed booster boxes&lt;/span&gt;2025-10: 273.8" aria-label="Sealed booster boxes, 2025-10: 273.8"/><circle cx="387.2" cy="87.5" r="4.5" fill="var(--accent)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Sealed booster boxes&lt;/span&gt;2025-11: 259" aria-label="Sealed booster boxes, 2025-11: 259"/><circle cx="403.9" cy="62.1" r="4.5" fill="var(--accent)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Sealed booster boxes&lt;/span&gt;2025-12: 283.8" aria-label="Sealed booster boxes, 2025-12: 283.8"/><circle cx="420.7" cy="48.4" r="4.5" fill="var(--accent)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Sealed booster boxes&lt;/span&gt;2026-01: 297.2" aria-label="Sealed booster boxes, 2026-01: 297.2"/><circle cx="437.4" cy="39.6" r="4.5" fill="var(--accent)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Sealed booster boxes&lt;/span&gt;2026-02: 305.8" aria-label="Sealed booster boxes, 2026-02: 305.8"/><circle cx="454.2" cy="27.2" r="4.5" fill="var(--accent)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Sealed booster boxes&lt;/span&gt;2026-03: 317.9" aria-label="Sealed booster boxes, 2026-03: 317.9"/><circle cx="471" cy="20.2" r="4.5" fill="var(--accent)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Sealed booster boxes&lt;/span&gt;2026-04: 324.8" aria-label="Sealed booster boxes, 2026-04: 324.8"/><circle cx="487.7" cy="20.2" r="4.5" fill="var(--accent)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Sealed booster boxes&lt;/span&gt;2026-05: 324.8" aria-label="Sealed booster boxes, 2026-05: 324.8"/><circle cx="504.5" cy="18.2" r="4.5" fill="var(--accent)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Sealed booster boxes&lt;/span&gt;2026-06: 326.7" aria-label="Sealed booster boxes, 2026-06: 326.7"/><circle cx="521.2" cy="17.7" r="4.5" fill="var(--accent)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Sealed booster boxes&lt;/span&gt;2026-07: 327.2" aria-label="Sealed booster boxes, 2026-07: 327.2"/><circle cx="538" cy="16" r="4.5" fill="var(--accent)" class="mark mark-dot" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Sealed booster boxes&lt;/span&gt;2026-08: 328.9" aria-label="Sealed booster boxes, 2026-08: 328.9"/><text x="544" y="27.5" class="k30">Sealed booster boxes</text><text x="544" y="220.8" font-size="11" fill="var(--ink)">Modeled singles</text></svg><figcaption class="chart-cap">Constant-basket median index rebased to 100 at 2024-03: 29 sealed booster boxes versus 252 modeled singles. Data: sealed_index and price_history, 2024-03 to 2026-08.</figcaption></figure>
+    <p class="takeaway">Sealed booster boxes have run to index <strong>328.9</strong> while modeled singles held near <strong>132</strong>. The mechanical scarcity drift as sets go out of print lives in sealed product, not in the singles this site models: an honest reminder that a rising sealed market does not lift the graded-single chase cards with it.</p>
+  </section>
+
+  <section id="sealed-coverage" data-reveal>
+    <h2>The sealed side of the catalogue</h2>
+    <p class="section-note">Sealed product is tracked separately from the modeled singles and is never used as a training feature. This block is a standalone study: what sealed data exists, whether sealed and singles prices lead each other, and how a box price compares to the expected value of the hits inside it.</p>
+    <p class="takeaway"><strong>69 sets</strong> and <strong>210 sealed products</strong> carry a monthly price across 2024-03 to 2026-08; <strong>41</strong> of them clear the gates for the lead/lag study (12+ overlapping months and 5+ chase singles priced throughout); <strong>29</strong> have a computable box EV. The limit to hold in mind throughout: <strong>82.6%</strong> of sets have a median of one priced sealed product per month. A set's &ldquo;sealed price&rdquo; is usually ONE product's series, not a cross-sectional average, so a single delisting or one thin-volume seller moves it and there is no within-set averaging to damp that.</p>
+  </section>
+
+  <section id="sealed-leadlag" data-reveal>
+    <h2>Do sealed prices lead the singles, or just track them?</h2>
+    <p class="section-note">A booster box is a claim on the singles it contains, so the two prices ought to be linked. This measures the link directly: k &lt; 0 means the singles moved earlier, k &gt; 0 means the sealed price did, k = 0 is contemporaneous.</p>
+    <figure class="chartfig" data-reveal><svg class="mchart" viewBox="0 0 680 330" width="680" height="330" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Sealed versus singles return correlation by lag" style="max-width:680px;width:100%;height:auto;display:block;margin:0 auto;"><line x1="54" y1="243.1" x2="564" y2="243.1" class="k3"/><text x="46" y="246.6" class="k6">-0.1</text><line x1="54" y1="186.9" x2="564" y2="186.9" class="k3"/><text x="46" y="190.4" class="k6">0</text><line x1="54" y1="130.6" x2="564" y2="130.6" class="k3"/><text x="46" y="134.1" class="k6">0.1</text><line x1="54" y1="74.4" x2="564" y2="74.4" class="k3"/><text x="46" y="77.9" class="k6">0.2</text><line x1="54" y1="186.9" x2="564" y2="186.9" class="k26"/><line x1="309" y1="30" x2="309" y2="256" stroke="var(--border-strong)" opacity="0.8"/><text x="309" y="20" font-size="10" fill="var(--ink-muted)" text-anchor="middle">contemporaneous</text><line x1="54" y1="30" x2="54" y2="256" class="k1"/><line x1="54" y1="256" x2="564" y2="256" class="k1"/><line x1="54" y1="256" x2="54" y2="260" class="k1"/><text x="54" y="272" class="k2">-3</text><line x1="139" y1="256" x2="139" y2="260" class="k1"/><text x="139" y="272" class="k2">-2</text><line x1="224" y1="256" x2="224" y2="260" class="k1"/><text x="224" y="272" class="k2">-1</text><line x1="309" y1="256" x2="309" y2="260" class="k1"/><text x="309" y="272" class="k2">+0</text><line x1="394" y1="256" x2="394" y2="260" class="k1"/><text x="394" y="272" class="k2">+1</text><line x1="479" y1="256" x2="479" y2="260" class="k1"/><text x="479" y="272" class="k2">+2</text><line x1="564" y1="256" x2="564" y2="260" class="k1"/><text x="564" y="272" class="k2">+3</text><text x="54" y="289" font-size="10" fill="var(--ink-subtle)">← singles moved earlier</text><text x="564" y="289" font-size="10" fill="var(--ink-subtle)" text-anchor="end">sealed moved earlier →</text><text x="309" y="289" class="k10">lag k, months</text><text x="14" y="143" transform="rotate(-90 14 143)" class="k10">Rank correlation (rho)</text><polyline points="54,207.1 139,177.3 224,148.6 309,86.2 394,109.8 479,162.7 564,234.1" fill="none" stroke="var(--accent)" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/><circle cx="54" cy="207.1" r="2.6" class="k16"><title>1-month returns, raw | lag -3: rho -0.036, 966 pairs, t(month) -0.13, t(set) -1.20, clears both bars: no</title></circle><circle cx="139" cy="177.3" r="2.6" class="k16"><title>1-month returns, raw | lag -2: rho +0.017, 1008 pairs, t(month) +0.06, t(set) +1.39, clears both bars: no</title></circle><circle cx="224" cy="148.6" r="2.6" class="k16"><title>1-month returns, raw | lag -1: rho +0.068, 1050 pairs, t(month) +0.26, t(set) +2.82, clears both bars: no</title></circle><circle cx="309" cy="86.2" r="2.6" class="k16"><title>1-month returns, raw | lag +0: rho +0.179, 1094 pairs, t(month) +0.70, t(set) +5.68, clears both bars: no</title></circle><circle cx="394" cy="109.8" r="2.6" class="k16"><title>1-month returns, raw | lag +1: rho +0.137, 1050 pairs, t(month) +0.54, t(set) +4.82, clears both bars: no</title></circle><circle cx="479" cy="162.7" r="2.6" class="k16"><title>1-month returns, raw | lag +2: rho +0.043, 1008 pairs, t(month) +0.16, t(set) +1.72, clears both bars: no</title></circle><circle cx="564" cy="234.1" r="2.6" class="k16"><title>1-month returns, raw | lag +3: rho -0.084, 966 pairs, t(month) -0.31, t(set) -1.02, clears both bars: no</title></circle><polyline points="54,207.1 139,146.9 224,141.3 309,118.2 394,136.8 479,185.2 564,228.5" class="k31"/><circle cx="54" cy="207.1" r="2.6" class="k17"><title>1-month returns, market-tide-neutralized | lag -3: rho -0.036, 966 pairs, t(month) -0.18, t(set) -1.93, clears both bars: no</title></circle><circle cx="139" cy="146.9" r="2.6" class="k17"><title>1-month returns, market-tide-neutralized | lag -2: rho +0.071, 1008 pairs, t(month) +0.35, t(set) +1.65, clears both bars: no</title></circle><circle cx="224" cy="141.3" r="2.6" class="k17"><title>1-month returns, market-tide-neutralized | lag -1: rho +0.081, 1050 pairs, t(month) +0.41, t(set) +2.09, clears both bars: no</title></circle><circle cx="309" cy="118.2" r="2.6" class="k17"><title>1-month returns, market-tide-neutralized | lag +0: rho +0.122, 1094 pairs, t(month) +0.64, t(set) +3.53, clears both bars: no</title></circle><circle cx="394" cy="136.8" r="2.6" class="k17"><title>1-month returns, market-tide-neutralized | lag +1: rho +0.089, 1050 pairs, t(month) +0.46, t(set) +3.21, clears both bars: no</title></circle><circle cx="479" cy="185.2" r="2.6" class="k17"><title>1-month returns, market-tide-neutralized | lag +2: rho +0.003, 1008 pairs, t(month) +0.01, t(set) -0.42, clears both bars: no</title></circle><circle cx="564" cy="228.5" r="2.6" class="k17"><title>1-month returns, market-tide-neutralized | lag +3: rho -0.074, 966 pairs, t(month) -0.36, t(set) -1.38, clears both bars: no</title></circle><polyline points="54,149.8 139,121.1 224,80.6 309,51.9 394,69.3 479,139.1 564,227.4" fill="none" stroke="var(--accent-ink)" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="2 3"/><circle cx="54" cy="149.8" r="2.6" class="k18"><title>3-month returns, raw | lag -3: rho +0.066, 876 pairs, t(month) +0.05, t(set) +1.40, clears both bars: no</title></circle><circle cx="139" cy="121.1" r="2.6" class="k18"><title>3-month returns, raw | lag -2: rho +0.117, 919 pairs, t(month) +0.11, t(set) +2.40, clears both bars: no</title></circle><circle cx="224" cy="80.6" r="2.6" class="k18"><title>3-month returns, raw | lag -1: rho +0.189, 962 pairs, t(month) +0.18, t(set) +4.33, clears both bars: no</title></circle><circle cx="309" cy="51.9" r="2.6" class="k18"><title>3-month returns, raw | lag +0: rho +0.240, 1006 pairs, t(month) +0.25, t(set) +6.30, clears both bars: no</title></circle><circle cx="394" cy="69.3" r="2.6" class="k18"><title>3-month returns, raw | lag +1: rho +0.209, 962 pairs, t(month) +0.21, t(set) +4.46, clears both bars: no</title></circle><circle cx="479" cy="139.1" r="2.6" class="k18"><title>3-month returns, raw | lag +2: rho +0.085, 919 pairs, t(month) +0.08, t(set) +2.35, clears both bars: no</title></circle><circle cx="564" cy="227.4" r="2.6" class="k18"><title>3-month returns, raw | lag +3: rho -0.072, 876 pairs, t(month) -0.06, t(set) -1.85, clears both bars: no</title></circle><polyline points="54,170.6 139,126.1 224,103.6 309,91.2 394,121.1 479,177.3 564,229.1" fill="none" stroke="var(--neutral)" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="1 3"/><circle cx="54" cy="170.6" r="2.6" class="k19"><title>3-month returns, market-tide-neutralized | lag -3: rho +0.029, 876 pairs, t(month) +0.13, t(set) +0.68, clears both bars: no</title></circle><circle cx="139" cy="126.1" r="2.6" class="k19"><title>3-month returns, market-tide-neutralized | lag -2: rho +0.108, 919 pairs, t(month) +0.52, t(set) +2.69, clears both bars: no</title></circle><circle cx="224" cy="103.6" r="2.6" class="k19"><title>3-month returns, market-tide-neutralized | lag -1: rho +0.148, 962 pairs, t(month) +0.73, t(set) +3.06, clears both bars: no</title></circle><circle cx="309" cy="91.2" r="2.6" class="k19"><title>3-month returns, market-tide-neutralized | lag +0: rho +0.170, 1006 pairs, t(month) +0.86, t(set) +3.69, clears both bars: no</title></circle><circle cx="394" cy="121.1" r="2.6" class="k19"><title>3-month returns, market-tide-neutralized | lag +1: rho +0.117, 962 pairs, t(month) +0.58, t(set) +2.45, clears both bars: no</title></circle><circle cx="479" cy="177.3" r="2.6" class="k19"><title>3-month returns, market-tide-neutralized | lag +2: rho +0.017, 919 pairs, t(month) +0.08, t(set) +0.70, clears both bars: no</title></circle><circle cx="564" cy="229.1" r="2.6" class="k19"><title>3-month returns, market-tide-neutralized | lag +3: rho -0.075, 876 pairs, t(month) -0.35, t(set) -2.64, clears both bars: no</title></circle><text x="571" y="230.9" font-size="10" fill="var(--accent-ink)">3-month raw</text><text x="571" y="244.9" class="k4">1-month tide-adj.</text><text x="571" y="258.9" font-size="10" fill="var(--ink-muted)">3-month tide-adj.</text><text x="571" y="259.5" font-size="10" fill="var(--accent)">1-month raw</text></svg><figcaption class="chart-cap">Cross-correlation of monthly sealed and singles returns at lags −3 to +3 months, 4 profiles over 1141 (set, month) pairs from 41 sets. Singles are a constant-basket median (median basket 16 chase cards) so the index moves on price, not on basket growth. A ringed point would mark a lag clearing both error bars. Data: sealed_summary.</figcaption></figure>
+    <p class="takeaway"><strong>Neither side leads. The data cannot even establish that they reliably co-move.</strong> Not one lag in any of the 4 profiles clears both error bars, so the study claims no direction: every profile’s verdict is <code>insufficient</code>. What the numbers do show descriptively is a symmetric hump centred on zero: the correlation peaks at lag 0 in <strong>4 of 4</strong> profiles, which is the shape of two prices tracking each other rather than one moving first. The size is the interesting part &mdash; the contemporaneous correlation runs only <strong>0.122&ndash;0.240</strong>. A booster box is a claim on the singles inside it, so the naive expectation is near-lockstep co-movement; what is actually there is a weak positive association the conservative error bar cannot separate from the common market tide.</p>
+    <div class="table-wrap" style="margin-top:14px;">
+      <table><thead><tr><th title="Return horizon and whether the common market tide was removed first.">Profile</th><th class="num" title="Lag with the largest correlation in magnitude. Zero means contemporaneous.">Peak lag</th><th class="num" title="Rank correlation at that lag.">Peak rho</th><th class="num" title="How many of the seven lags clear BOTH the conservative month-clustered and the permissive set-clustered error bar.">Lags clearing both bars</th><th title="The study's own verdict word for this profile.">Verdict</th></tr></thead><tbody><tr><td>1-month returns, raw</td><td class="num">+0</td><td class="num">+0.179</td><td class="num">0 of 7</td><td><span class="call-word flat">insufficient</span></td></tr><tr><td>1-month returns, market-tide-neutralized</td><td class="num">+0</td><td class="num">+0.122</td><td class="num">0 of 7</td><td><span class="call-word flat">insufficient</span></td></tr><tr><td>3-month returns, raw</td><td class="num">+0</td><td class="num">+0.240</td><td class="num">0 of 7</td><td><span class="call-word flat">insufficient</span></td></tr><tr><td>3-month returns, market-tide-neutralized</td><td class="num">+0</td><td class="num">+0.170</td><td class="num">0 of 7</td><td><span class="call-word flat">insufficient</span></td></tr></tbody></table>
+    </div>
+    <p class="slice-legend">Two error bars bracket the truth and a direction is claimed only when both clear |t| &ge; 2. <strong>t (month)</strong> is conservative: one calendar month counts as one observation because every set rides the same tide, and that count is deflated for autocorrelation. <strong>t (set)</strong> is permissive: it pretends sets are independent draws, which they are not. Under the permissive bar alone the reading would be <code>tracks</code> &mdash; never <code>leads</code>. Full lag tables are in <code>sealed_summary.md</code>.</p>
+  </section>
+
+  <section id="sealed-ev" data-reveal>
+    <h2>How much of a box price do the hits explain?</h2>
+    <p class="section-note">For every set with both pull-rate data and a booster-box price series, the expected value of the tracked hit tiers is computed per pack, scaled to a 36-pack box, and divided by the box's market price &mdash; both sides read at the same month, from historical prices only.</p>
+    <figure class="chartfig" data-reveal><svg class="mchart" viewBox="0 0 680 300" width="680" height="300" preserveAspectRatio="xMidYMid meet" role="img" aria-label="EV of tracked hits / box price" style="max-width:680px;width:100%;height:auto;display:block;margin:0 auto;"><line x1="56" y1="220.4" x2="522" y2="220.4" class="k3"/><text x="48" y="223.9" class="k6">8%</text><line x1="56" y1="166.6" x2="522" y2="166.6" class="k3"/><text x="48" y="170.1" class="k6">10%</text><line x1="56" y1="112.8" x2="522" y2="112.8" class="k3"/><text x="48" y="116.3" class="k6">12%</text><line x1="56" y1="59" x2="522" y2="59" class="k3"/><text x="48" y="62.5" class="k6">14%</text><line x1="56" y1="16" x2="56" y2="258" class="k1"/><line x1="56" y1="258" x2="522" y2="258" class="k1"/><line x1="56" y1="258" x2="56" y2="262" class="k1"/><text x="56" y="274" class="k2">2024-03</text><line x1="152.4" y1="258" x2="152.4" y2="262" class="k1"/><text x="152.4" y="274" class="k2">2024-09</text><line x1="248.8" y1="258" x2="248.8" y2="262" class="k1"/><text x="248.8" y="274" class="k2">2025-03</text><line x1="345.2" y1="258" x2="345.2" y2="262" class="k1"/><text x="345.2" y="274" class="k2">2025-09</text><line x1="441.7" y1="258" x2="441.7" y2="262" class="k1"/><text x="441.7" y="274" class="k2">2026-03</text><line x1="522" y1="258" x2="522" y2="262" class="k1"/><text x="522" y="274" class="k2">2026-08</text><text x="289" y="294" class="k10">Month</text><text x="14" y="137" transform="rotate(-90 14 137)" class="k10">EV of tracked hits / box price</text><polyline points="56,118.2 72.1,142.4 88.1,115.5 104.2,48.3 120.3,45.6 136.3,61.7 152.4,61.7 168.5,64.4 184.6,21.4 200.6,16 216.7,26.8 232.8,48.3 248.8,53.6 264.9,91.3 281,102 297,142.4 313.1,161.2 329.2,188.1 345.2,201.5 361.3,185.4 377.4,198.8 393.4,198.8 409.5,198.8 425.6,201.5 441.7,198.8 457.7,174.6 473.8,137 489.9,147.8 505.9,137 522,131.6" class="k31"/><polyline points="56,115.5 72.1,131.6 88.1,104.7 104.2,48.3 120.3,45.6 136.3,61.7 152.4,91.3 168.5,96.7 184.6,126.2 200.6,134.3 216.7,112.8 232.8,128.9 248.8,115.5 264.9,118.2 281,115.5 297,174.6 313.1,196.2 329.2,198.8 345.2,239.2 361.3,236.5 377.4,236.5 393.4,233.8 409.5,228.4 425.6,258 441.7,255.3 457.7,239.2 473.8,236.5 489.9,190.8 505.9,177.3 522,163.9" class="k27"/><text x="528" y="135.1" class="k4">All sets (basket grows)</text><text x="528" y="167.4" font-size="10" fill="var(--accent)" font-weight="600">Constant basket</text></svg><figcaption class="chart-cap">Median EV of the tracked hit tiers as a percent of booster-box price, per month, over 29 sets and 724 set-months. The all-sets basket GROWS as new sets are released, so part of its move is composition; the constant basket holds the 17 sets priced in every month. Data: sealed_summary (price_history + pull_rates, same month on both sides).</figcaption></figure>
+    <p class="takeaway"><strong>The two lines agree this run.</strong> Across all available sets the median ratio ran 11.8% &rarr; 11.3% (18 &rarr; 29 sets); on the constant basket of 17 sets priced in all 30 months it ran 11.9% &rarr; 10.1%. The all-sets line still GROWS as sets enter the panel, so it carries a composition effect the constant basket does not -- but on this panel that effect is not large enough for the study to call the two readings different, so no divergence is claimed here.</p>
+    <div class="wl-block" style="margin-top:26px;">
+      <h3>Where a box's price actually comes from</h3>
+      <p class="wl-sub">Per set at 2026-08, and the era split behind it. Read this as <em>what fraction of the box price is explained by the tracked hit tiers</em>, not as how overpriced boxes are: a 25% ratio does not mean a box is four times too expensive, it means the tiers <code>pull_rates</code> covers account for a quarter of the price and everything in the caveat list accounts for the rest.</p>
+      <figure class="chartfig" data-reveal><svg class="mchart" viewBox="0 0 680 808" width="680" height="808" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Expected value of tracked hit tiers as a percent of box price" style="max-width:680px;width:100%;height:auto;display:block;margin:0 auto;"><line x1="108" y1="16" x2="108" y2="770" class="k3"/><text x="108" y="792" class="k2">0%</text><line x1="287.1" y1="16" x2="287.1" y2="770" class="k3"/><text x="287.1" y="792" class="k2">20%</text><line x1="466.2" y1="16" x2="466.2" y2="770" class="k3"/><text x="466.2" y="792" class="k2">40%</text><line x1="108" y1="16" x2="108" y2="770" class="k1"/><rect x="108" y="21" width="480" height="16" rx="2" class="k25"/><text x="100" y="32.5" class="k5">me5 (ME)</text><text x="594" y="32.5" class="k4">53.6%</text><title>me5 2026-08: EV/box $100.52 of $187.58 box price = 53.6%</title><rect x="108" y="47" width="360.9" height="16" rx="2" class="k14"/><text x="100" y="58.5" class="k5">sv5 (SV)</text><text x="594" y="58.5" class="k4">40.3%</text><title>sv5 2026-08: EV/box $126.62 of $314.11 box price = 40.3%</title><rect x="108" y="73" width="349.3" height="16" rx="2" class="k25"/><text x="100" y="84.5" class="k5">me4 (ME)</text><text x="594" y="84.5" class="k4">39.0%</text><title>me4 2026-08: EV/box $72.13 of $185.03 box price = 39.0%</title><rect x="108" y="99" width="337.6" height="16" rx="2" class="k14"/><text x="100" y="110.5" class="k5">sv6 (SV)</text><text x="594" y="110.5" class="k4">37.7%</text><title>sv6 2026-08: EV/box $104.86 of $277.86 box price = 37.7%</title><rect x="108" y="125" width="322.4" height="16" rx="2" class="k14"/><text x="100" y="136.5" class="k5">sv7 (SV)</text><text x="594" y="136.5" class="k4">36.0%</text><title>sv7 2026-08: EV/box $101.13 of $280.59 box price = 36.0%</title><rect x="108" y="151" width="293.7" height="16" rx="2" class="k14"/><text x="100" y="162.5" class="k5">sv8 (SV)</text><text x="594" y="162.5" class="k4">32.8%</text><title>sv8 2026-08: EV/box $77.98 of $238.07 box price = 32.8%</title><rect x="108" y="177" width="281.2" height="16" rx="2" class="k14"/><text x="100" y="188.5" class="k5">sv4 (SV)</text><text x="594" y="188.5" class="k4">31.4%</text><title>sv4 2026-08: EV/box $91.57 of $291.92 box price = 31.4%</title><rect x="108" y="203" width="280.3" height="16" rx="2" class="k25"/><text x="100" y="214.5" class="k5">me2 (ME)</text><text x="594" y="214.5" class="k4">31.3%</text><title>me2 2026-08: EV/box $128.87 of $411.27 box price = 31.3%</title><rect x="108" y="229" width="264.2" height="16" rx="2" class="k14"/><text x="100" y="240.5" class="k5">sv1 (SV)</text><text x="594" y="240.5" class="k4">29.5%</text><title>sv1 2026-08: EV/box $91.79 of $310.93 box price = 29.5%</title><rect x="108" y="255" width="240.9" height="16" rx="2" class="k25"/><text x="100" y="266.5" class="k5">me1 (ME)</text><text x="594" y="266.5" class="k4">26.9%</text><title>me1 2026-08: EV/box $85.77 of $319.00 box price = 26.9%</title><rect x="108" y="281" width="237.3" height="16" rx="2" class="k14"/><text x="100" y="292.5" class="k5">sv10 (SV)</text><text x="594" y="292.5" class="k4">26.5%</text><title>sv10 2026-08: EV/box $108.80 of $410.28 box price = 26.5%</title><rect x="108" y="307" width="227.5" height="16" rx="2" class="k14"/><text x="100" y="318.5" class="k5">sv3 (SV)</text><text x="594" y="318.5" class="k4">25.4%</text><title>sv3 2026-08: EV/box $96.68 of $379.99 box price = 25.4%</title><rect x="108" y="333" width="202.4" height="16" rx="2" class="k14"/><text x="100" y="344.5" class="k5">sv9 (SV)</text><text x="594" y="344.5" class="k4">22.6%</text><title>sv9 2026-08: EV/box $63.59 of $281.14 box price = 22.6%</title><rect x="108" y="359" width="109.3" height="16" rx="2" class="k9"/><text x="100" y="370.5" class="k5">swsh9 (SWSH)</text><text x="594" y="370.5" class="k4">12.2%</text><title>swsh9 2026-08: EV/box $76.87 of $630.09 box price = 12.2%</title><rect x="108" y="385" width="101.2" height="16" rx="2" class="k9"/><text x="100" y="396.5" class="k5">swsh7 (SWSH)</text><text x="594" y="396.5" class="k4">11.3%</text><title>swsh7 2026-08: EV/box $232.90 of $2,052.82 box price = 11.3%</title><rect x="108" y="411" width="100.3" height="16" rx="2" class="k9"/><text x="100" y="422.5" class="k5">swsh10 (SWSH)</text><text x="594" y="422.5" class="k4">11.2%</text><title>swsh10 2026-08: EV/box $47.32 of $421.90 box price = 11.2%</title><rect x="108" y="437" width="98.5" height="16" rx="2" class="k9"/><text x="100" y="448.5" class="k5">swsh12 (SWSH)</text><text x="594" y="448.5" class="k4">11.0%</text><title>swsh12 2026-08: EV/box $57.73 of $526.77 box price = 11.0%</title><rect x="108" y="463" width="96.7" height="16" rx="2" class="k9"/><text x="100" y="474.5" class="k5">swsh11 (SWSH)</text><text x="594" y="474.5" class="k4">10.8%</text><title>swsh11 2026-08: EV/box $79.24 of $733.43 box price = 10.8%</title><rect x="108" y="489" width="90.4" height="16" rx="2" class="k9"/><text x="100" y="500.5" class="k5">sm5 (SM)</text><text x="594" y="500.5" class="k4">10.1%</text><title>sm5 2026-08: EV/box $148.69 of $1,466.66 box price = 10.1%</title><rect x="108" y="515" width="70.7" height="16" rx="2" class="k9"/><text x="100" y="526.5" class="k5">sm8 (SM)</text><text x="594" y="526.5" class="k4">7.9%</text><title>sm8 2026-08: EV/box $118.78 of $1,496.33 box price = 7.9%</title><rect x="108" y="541" width="66.3" height="16" rx="2" class="k9"/><text x="100" y="552.5" class="k5">sm11 (SM)</text><text x="594" y="552.5" class="k4">7.4%</text><title>sm11 2026-08: EV/box $216.66 of $2,938.33 box price = 7.4%</title><rect x="108" y="567" width="60.9" height="16" rx="2" class="k9"/><text x="100" y="578.5" class="k5">sm10 (SM)</text><text x="594" y="578.5" class="k4">6.8%</text><title>sm10 2026-08: EV/box $171.28 of $2,509.28 box price = 6.8%</title><rect x="108" y="593" width="53.7" height="16" rx="2" class="k9"/><text x="100" y="604.5" class="k5">sm9 (SM)</text><text x="594" y="604.5" class="k4">6.0%</text><title>sm9 2026-08: EV/box $675.87 of $11,333.47 box price = 6.0%</title><rect x="108" y="619" width="52.8" height="16" rx="2" class="k9"/><text x="100" y="630.5" class="k5">sm12 (SM)</text><text x="594" y="630.5" class="k4">5.9%</text><title>sm12 2026-08: EV/box $230.79 of $3,935.50 box price = 5.9%</title><rect x="108" y="645" width="51.9" height="16" rx="2" class="k9"/><text x="100" y="656.5" class="k5">sm3 (SM)</text><text x="594" y="656.5" class="k4">5.8%</text><title>sm3 2026-08: EV/box $71.22 of $1,226.00 box price = 5.8%</title><rect x="108" y="671" width="49.3" height="16" rx="2" class="k9"/><text x="100" y="682.5" class="k5">sm4 (SM)</text><text x="594" y="682.5" class="k4">5.5%</text><title>sm4 2026-08: EV/box $35.31 of $638.75 box price = 5.5%</title><rect x="108" y="697" width="38.5" height="16" rx="2" class="k9"/><text x="100" y="708.5" class="k5">sm6 (SM)</text><text x="594" y="708.5" class="k4">4.3%</text><title>sm6 2026-08: EV/box $70.14 of $1,647.98 box price = 4.3%</title><rect x="108" y="723" width="36.7" height="16" rx="2" class="k9"/><text x="100" y="734.5" class="k5">sm7 (SM)</text><text x="594" y="734.5" class="k4">4.1%</text><title>sm7 2026-08: EV/box $100.64 of $2,463.87 box price = 4.1%</title><rect x="108" y="749" width="20.6" height="16" rx="2" class="k9"/><text x="100" y="760.5" class="k5">sm2 (SM)</text><text x="594" y="760.5" class="k4">2.3%</text><title>sm2 2026-08: EV/box $40.31 of $1,783.00 box price = 2.3%</title><text x="348" y="802" class="k10">EV of tracked hit tiers as a percent of box price</text></svg><figcaption class="chart-cap">EV of the tracked hit tiers as a percent of booster-box market price, latest month per set. Elite-trainer-box sets are excluded because an ETB pack count is not comparable to a 36-pack box. Data: sealed_summary.</figcaption></figure>
+      <div class="table-wrap">
+        <table><thead><tr><th>Era</th><th class="num">Sets</th><th class="num">Median EV / price</th><th class="num">Range</th></tr></thead><tbody><tr><td>ME</td><td class="num">4</td><td class="num">35.2%</td><td class="num">26.9%&ndash;53.6%</td></tr><tr><td>SV</td><td class="num">9</td><td class="num">31.4%</td><td class="num">22.6%&ndash;40.3%</td></tr><tr><td>SWSH</td><td class="num">5</td><td class="num">11.2%</td><td class="num">10.8%&ndash;12.2%</td></tr><tr><td>SM</td><td class="num">11</td><td class="num">5.9%</td><td class="num">2.3%&ndash;10.1%</td></tr></tbody></table>
+      </div>
+      <p class="takeaway" style="margin-top:14px;">The spread across eras is large and systematic: <strong>ME</strong> boxes sit at a median ratio of 35.2% while <strong>SM</strong> boxes sit at 5.9%. The natural reading is that an out-of-print box is priced as a scarce collectible in its own right rather than as a claim on the singles inside it &mdash; but this study measures the ratio, it does not test that explanation.</p>
+    </div>
+    <details class="explain" style="margin-top:18px;"><summary><span class="custom">What this EV number ignores</span></summary>
+      <div class="explain-body"><p>This is a <strong>floor</strong> on box value, not a valuation. The study's own list:</p><ul><li>Only the tiers <code>pull_rates</code> covers contribute. Commons, uncommons, ordinary rares, reverse holos and energy carry real bulk value that is counted as zero here.</li><li>Within a tier every card is assumed equally likely, and the tier&#x27;s expected value is the MEAN market price of its priced cards. Real pack collation is not uniform.</li><li>Prices are TCGplayer raw near-mint market prices. Condition, centering, and any grading upside or downside are ignored.</li><li>Seller fees, shipping, and sales tax are ignored on both sides.</li><li>A box is assumed to hold 36 packs (see PACKS_PER_BOX). The ratio is exactly linear in that count.</li><li><code>packs_per_hit</code> is a point estimate from a finite opening study (sample_size packs); its own sampling error is not propagated.</li><li>Guaranteed-hit collation inside a box (a box is not 36 independent packs) is ignored; only the average rate is used.</li><li>Sealed product has option value -- it can be held, opened later, or graded as sealed. None of that is priced here.</li></ul></div>
+    </details>
+  </section>
+
+  <section id="sealed-limits" data-reveal>
+    <h2>What the sealed study deliberately does not do</h2>
+    <p class="section-note">Lifted from the study itself, so these travel with every number above.</p>
+    <div class="callout"><ul style="margin:0;padding-left:1.1em;"><li><strong>Sealed is NOT wired into the forward-model training panel.</strong> It is a set-level cross-section with its own leakage questions (a sealed price is shared by every card in the set, so a naive card-level merge manufactures cross-sectional dependence). The panel&#x27;s existing <code>sealed_trend_3m</code> feature is unchanged by this study.</li><li><strong>No predictive claim.</strong> Nothing here is scored out-of-sample against future returns. The lead/lag profiles are contemporaneous descriptions of a co-movement structure, not a trading signal.</li><li><strong>82.6% of sets have a median of one priced sealed product per month.</strong> A single delisting, relisting, or one thin-volume seller moves that set&#x27;s entire &quot;sealed price&quot; for the month, and there is no within-set averaging to damp it.</li><li><strong>Booster-bundle prices are discarded upstream</strong> by <code>sealed_index</code>, and ETB prices only stand in where a set never had a booster box. Mixing pack counts would corrupt the EV ratio, so the EV section uses booster boxes only.</li><li><strong>Pull rates are a single snapshot per set</strong> from one opening study, applied to every month. Collation does not actually change over a set&#x27;s life, so this is benign, but the rate&#x27;s own sampling error is not propagated.</li></ul></div>
+  </section>
+
+</div>
+
+<div id="tooltip" role="tooltip"></div>
+
+<script>
+
+// ---------- formatting ----------
+function fmtMoney(v){ return v == null ? "" : "$" + v.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2}); }
+function fmtPct(v, d){ if(v==null) return ""; d = d==null?1:d; const s = v>0?"+":""; return s + (v*100).toFixed(d) + "%"; }
+function fmtSigned(v, d){ if(v==null) return ""; d=d==null?2:d; const s=v>0?"+":""; return s+v.toFixed(d); }
+function esc(s){ return String(s).replace(/[&<>"]/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
+// Generated reports are written in ASCII, where a parenthetical dash is "--".
+// Sentences lifted verbatim from them get that rendered as an en dash so the
+// quote reads as prose without any of its wording being changed.
+function dashes(s){ return String(s).replace(/ -- /g, " \u2013 "); }
+// percent-point value (already scaled, e.g. 57.1) -> "+57.1", null -> "n/a"
+function pp(v){ return v==null?"n/a":(v>0?"+":"")+v.toFixed(1); }
+function ppTd(v){ if(v==null) return '<td class="num">n/a</td>';
+const c=v>0?"ret-pos":(v<0?"ret-neg":""); return '<td class="num '+c+'">'+pp(v)+'</td>'; }
+function shortRarity(r){
+return {"Special Illustration Rare":"SIR","Ultra Rare":"Ultra","Hyper Rare":"Hyper","Mega Hyper Rare":"Mega Hyper"}[r]||r;
+}
+const SVGNS = "http://www.w3.org/2000/svg";
+// ---------- tooltip ----------
+const tip = document.getElementById("tooltip");
+function showTip(evt, html){ tip.innerHTML = html; tip.classList.add("show"); moveTip(evt); }
+function moveTip(evt){ const p=14, r=tip.getBoundingClientRect(); let x=evt.clientX+p, y=evt.clientY+p;
+if(x+r.width>window.innerWidth) x=evt.clientX-r.width-p; if(y+r.height>window.innerHeight) y=evt.clientY-r.height-p;
+tip.style.left=x+"px"; tip.style.top=y+"px"; }
+function hideTip(){ tip.classList.remove("show"); }
+// ---------- chart mark tooltips ----------
+// Wires every [data-tip] mark emitted by charts.py (line_index points, ic_bars
+// bars, the labelled value_scatter outliers) to the tooltip above. Bound once
+// at load, not per chart function, since the marks are all server-rendered
+// static markup already in the DOM by the time this runs (see chart builder
+// docstrings). Focus/blur mirror mouseenter/mouseleave so a keyboard user gets
+// the identical payload a mouse user does -- required for WCAG AA operability
+// on a control that is otherwise mouse-only.
+function initMarkTips(){
+document.querySelectorAll("[data-tip]").forEach(function(el){
+var content = el.getAttribute("data-tip");
+el.addEventListener("mouseenter", function(e){ showTip(e, content); });
+el.addEventListener("mousemove", moveTip);
+el.addEventListener("mouseleave", hideTip);
+el.addEventListener("focus", function(){
+var r = el.getBoundingClientRect();
+showTip({clientX:r.left + r.width / 2, clientY:r.top}, content);
+});
+el.addEventListener("blur", hideTip);
+});
+}
+// ---------- sparkline ----------
+// series is a flat array of y-values [y0,y1,...]; the x-axis is pure array
+// position (the source series always had consecutive integer x-indices), so
+// x = index here.
+function buildSparkline(series){
+const w=84,h=22,padX=2,padY=3;
+if(!series || series.length<2) return '<svg class="spark" width="'+w+'" height="'+h+'"></svg>';
+const n=series.length;
+const minY=Math.min.apply(null,series),maxY=Math.max.apply(null,series);
+const sx=i=>padX+i/(n-1)*(w-2*padX);
+const sy=v=>maxY===minY?h/2:(h-padY)-(v-minY)/(maxY-minY)*(h-2*padY);
+let d="";
+for(let i=0;i<n;i++){ d+=(i?"L":"M")+sx(i).toFixed(1)+" "+sy(series[i]).toFixed(1); }
+const up = series[n-1] >= series[0];
+const col = up ? "var(--up)" : "var(--down)";
+return '<svg class="spark" width="'+w+'" height="'+h+'" viewBox="0 0 '+w+' '+h+'">'
++ '<path d="'+d+'" fill="none" stroke="'+col+'" stroke-width="1.25" stroke-linejoin="round"/>'
++ '<circle cx="'+sx(n-1).toFixed(1)+'" cy="'+sy(series[n-1]).toFixed(1)+'" r="1.6" fill="'+col+'"/></svg>';
+}
+// ---------- interval band ----------
+// BAND_LO/BAND_HI are the drawing bounds; each page that renders bands sets them
+// once from its data via setBandBounds() before rendering, so the same buildBand
+// is shared across the outlook and the how-it-works worked example.
+let BAND_LO = -0.25, BAND_HI = 0.55;
+function setBandBounds(lo, hi){ const pad=(hi-lo)*0.04; BAND_LO=lo-pad; BAND_HI=hi+pad; }
+function bandX(v){ const w=150; return ((v-BAND_LO)/(BAND_HI-BAND_LO))*w; }
+function buildBand(o){
+const w=150,h=14,y=h/2;
+if(o.lo==null||o.hi==null) return '';
+const col = o.flag==="candidate_up" ? "var(--up)" : (o.flag==="candidate_down" ? "var(--down)" : "var(--neutral)");
+const zx = bandX(0).toFixed(1);
+const x0 = bandX(o.lo).toFixed(1), x1 = bandX(o.hi).toFixed(1), xp = bandX(o.pred).toFixed(1);
+return '<svg class="band" width="'+w+'" height="'+h+'" viewBox="0 0 '+w+' '+h+'">'
++ '<line x1="0" y1="'+y+'" x2="'+w+'" y2="'+y+'" stroke="var(--border)" stroke-width="1"/>'
++ '<line x1="'+zx+'" y1="1" x2="'+zx+'" y2="'+(h-1)+'" stroke="var(--border-strong)" stroke-width="1" stroke-dasharray="2 2"/>'
++ '<line x1="'+x0+'" y1="'+y+'" x2="'+x1+'" y2="'+y+'" stroke="'+col+'" stroke-width="3" opacity="0.45" stroke-linecap="round"/>'
++ '<line x1="'+x0+'" y1="'+(y-3)+'" x2="'+x0+'" y2="'+(y+3)+'" stroke="'+col+'" stroke-width="1"/>'
++ '<line x1="'+x1+'" y1="'+(y-3)+'" x2="'+x1+'" y2="'+(y+3)+'" stroke="'+col+'" stroke-width="1"/>'
++ '<circle cx="'+xp+'" cy="'+y+'" r="2.6" fill="'+col+'"/></svg>';
+}
+// ---------- density toggle ----------
+const DENSITY_KEY = "pk-density";
+function applyDensity(mode){
+const compact = mode==="compact";
+document.documentElement.classList.toggle("compact", compact);
+const btn = document.getElementById("density-toggle");
+if(!btn) return;
+btn.textContent = compact ? "Full view" : "Compact";
+btn.setAttribute("aria-pressed", compact ? "true" : "false");
+}
+function initDensity(){
+const params = new URLSearchParams(location.search);
+let mode = params.get("density");
+if(mode!=="compact" && mode!=="full"){
+try { mode = localStorage.getItem(DENSITY_KEY) || "full"; } catch(e){ mode = "full"; }
+}
+applyDensity(mode);
+try { localStorage.setItem(DENSITY_KEY, mode); } catch(e){}
+const btn = document.getElementById("density-toggle");
+if(btn) btn.addEventListener("click", ()=>{
+const next = document.documentElement.classList.contains("compact") ? "full" : "compact";
+applyDensity(next);
+try { localStorage.setItem(DENSITY_KEY, next); } catch(e){}
+});
+}
+// ---------- plain / full wording ----------
+// The stats prose is written for someone who already knows what an IC is. The
+// plain variant says the same thing without the vocabulary. Neither is a
+// summary of the other: both state the caveat, because dropping the caveat is
+// what makes plain language dishonest.
+const COPY_KEY = "pk-copy";
+function applyCopy(mode){
+const plain = mode === "plain";
+document.documentElement.classList.toggle("plain", plain);
+const btn = document.getElementById("copy-toggle");
+if(!btn) return;
+btn.textContent = plain ? "Full" : "Plain";
+btn.setAttribute("aria-pressed", plain ? "true" : "false");
+btn.setAttribute("aria-label", plain
+? "Plain wording is on. Switch to full technical wording."
+: "Full technical wording is on. Switch to plain wording.");
+}
+function initCopy(){
+// Plain is the default for a first-time visitor (no stored choice yet): the
+// jargon-heavy full wording used to win by default, so a reader had to
+// discover the toggle just to get the jargon-free copy. Anyone who has
+// already chosen either wording keeps that stored choice untouched.
+let mode = "plain";
+try { mode = localStorage.getItem(COPY_KEY) || "plain"; } catch(e){}
+applyCopy(mode);
+const btn = document.getElementById("copy-toggle");
+if(btn) btn.addEventListener("click", ()=>{
+// Armed on first use only, so the load paint is never animated.
+document.documentElement.classList.add("copy-anim");
+const next = document.documentElement.classList.contains("plain") ? "full" : "plain";
+applyCopy(next);
+try { localStorage.setItem(COPY_KEY, next); } catch(e){}
+});
+window.addEventListener("storage", e=>{ if(e.key===COPY_KEY && e.newValue) applyCopy(e.newValue); });
+}
+// ---------- theme toggle ----------
+const THEME_KEY = "pk-theme";
+// Three themes now, so the control is a cycle rather than a binary switch.
+// "pastel" is opt-in only: prefers-color-scheme has no value that means pastel,
+// so it is never reached by OS preference, only by an explicit stored choice.
+const THEMES = ["light","dark","pastel"];
+function currentTheme(){
+const a = document.documentElement.getAttribute("data-theme");
+if(a && THEMES.indexOf(a) >= 0) return a;
+return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+}
+function applyTheme(mode){
+document.documentElement.setAttribute("data-theme", mode);
+// Each segment is genuinely two-state, so aria-pressed is the right thing to
+// put on it; the group element carries the label.
+document.querySelectorAll("[data-theme-opt]").forEach(b=>{
+b.setAttribute("aria-pressed", b.getAttribute("data-theme-opt")===mode ? "true":"false");
+});
+}
+function initTheme(){
+applyTheme(currentTheme());
+document.querySelectorAll("[data-theme-opt]").forEach(b=>{
+b.addEventListener("click", ()=>{
+const next = b.getAttribute("data-theme-opt");
+applyTheme(next);
+try{ localStorage.setItem(THEME_KEY, next); }catch(e){}
+});
+});
+// live cross-tab / cross-page sync
+window.addEventListener("storage", e=>{ if(e.key===THEME_KEY && e.newValue) applyTheme(e.newValue); });
+}
+// ---------- floating page nav (jump list + back to top) ----------
+// Built from the DOM: every section already carries a stable id, so nothing is
+// emitted server-side for this. Sections without a heading, and sections a page
+// script has left hidden, are skipped. Below MIN_SECTIONS the control would be
+// noise, so short pages never get one.
+const MIN_SECTIONS = 3;
+function sectionHeading(sec){
+const h = sec.querySelector("h2, h3");
+if(!h) return "";
+return (h.textContent || "").trim();
+}
+function initPageNav(){
+const page = document.querySelector(".page");
+if(!page) return;
+const secs = Array.prototype.slice.call(page.querySelectorAll("section[id]"))
+.filter(function(sec){
+if(sec.offsetParent === null) return false;   // page script left it hidden
+return sectionHeading(sec).length > 0;
+});
+if(secs.length < MIN_SECTIONS) return;
+const wrap = document.createElement("div");
+wrap.className = "pagenav";
+const list = document.createElement("nav");
+list.className = "pn-list";
+list.id = "pn-list";
+list.hidden = true;
+list.setAttribute("aria-label", "Sections on this page");
+const byId = {};
+secs.forEach(function(sec){
+const a = document.createElement("a");
+a.href = "#" + sec.id;
+a.textContent = sectionHeading(sec);
+list.appendChild(a);
+byId[sec.id] = a;
+});
+const row = document.createElement("div");
+row.className = "pn-row";
+const secBtn = document.createElement("button");
+secBtn.type = "button";
+secBtn.id = "pn-sections";
+secBtn.textContent = "Sections";
+secBtn.setAttribute("aria-expanded", "false");
+secBtn.setAttribute("aria-controls", "pn-list");
+const topBtn = document.createElement("button");
+topBtn.type = "button";
+topBtn.id = "pn-top";
+topBtn.textContent = "Top";
+topBtn.setAttribute("aria-label", "Back to top");
+row.appendChild(secBtn);
+row.appendChild(topBtn);
+wrap.appendChild(list);
+wrap.appendChild(row);
+document.body.appendChild(wrap);
+function closeList(){
+// Hiding the element that currently holds focus drops focus to <body> and
+// the keyboard user loses their place, so hand it back to the trigger.
+if(list.contains(document.activeElement)) secBtn.focus();
+list.hidden = true;
+secBtn.setAttribute("aria-expanded","false");
+}
+secBtn.addEventListener("click", function(){
+const open = list.hidden;
+list.hidden = !open;
+secBtn.setAttribute("aria-expanded", open ? "true" : "false");
+});
+list.addEventListener("click", function(e){ if(e.target.tagName === "A") closeList(); });
+document.addEventListener("keydown", function(e){ if(e.key === "Escape") closeList(); });
+document.addEventListener("click", function(e){
+if(!wrap.contains(e.target)) closeList();
+});
+topBtn.addEventListener("click", function(){
+closeList();
+const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+window.scrollTo({top:0, behavior: reduce ? "auto" : "smooth"});
+});
+// The cluster stays visible rather than appearing on scroll. Gating it on the
+// masthead leaving the viewport read better on the first screen, but it made
+// the control's existence depend on an IntersectionObserver callback, so a
+// browser that never delivered one would hide the feature outright. A small
+// corner cluster costs little; being reliably there is worth more than being
+// clever. Active-section highlighting below stays a pure enhancement: if the
+// observer never fires, the jump list simply has no highlight.
+// Mark the section currently occupying the upper part of the viewport.
+if("IntersectionObserver" in window){
+const spy = new IntersectionObserver(function(entries){
+entries.forEach(function(en){
+const a = byId[en.target.id];
+if(!a) return;
+if(en.isIntersecting){
+for(const k in byId){ byId[k].classList.remove("active"); }
+a.classList.add("active");
+}
+});
+}, {rootMargin:"-15% 0px -70% 0px", threshold:0});
+secs.forEach(function(sec){ spy.observe(sec); });
+}
+}
+// ---------- reveal motion (no scroll-spy: pages are separate documents) ----------
+// --rv is the stagger index the CSS multiplies by --rv-step. It is assigned
+// per batch (per observer callback, or per above-the-fold sweep) rather than
+// per document, so a section entering the viewport resolves in reading order
+// while a section further down still starts from zero. RV_MAX caps the delay
+// so a batch of twenty rows never ends on a half-second lag.
+const RV_MAX = 6;
+function revealBatch(list){
+let i = 0;
+for(let k=0;k<list.length;k++){
+const t = list[k];
+if(t.classList.contains("in-view")) continue;
+const r = t.getBoundingClientRect();
+if(r.top < window.innerHeight && r.bottom > 0){
+t.style.setProperty("--rv", String(i < RV_MAX ? i : RV_MAX));
+i++;
+t.classList.add("in-view");
+}
+}
+}
+function initReveal(){
+const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const targets = Array.prototype.slice.call(document.querySelectorAll("[data-reveal]"));
+if(reduce || !("IntersectionObserver" in window) || location.hash) return;
+document.documentElement.classList.add("motion");
+const reveal = new IntersectionObserver((entries)=>{
+let i = 0;
+entries.forEach(e=>{
+if(e.isIntersecting){
+e.target.style.setProperty("--rv", String(i < RV_MAX ? i : RV_MAX));
+i++;
+e.target.classList.add("in-view");
+reveal.unobserve(e.target);
+}
+});
+}, {rootMargin:"0px 0px -5% 0px", threshold:0});
+targets.forEach(t=>reveal.observe(t));
+revealBatch(targets);
+setTimeout(()=>{ revealBatch(targets); }, 1200);
+}
+// ---------- active nav visibility ----------
+// The link strip scrolls horizontally on narrow viewports; bring the active
+// page's link into view on load so the highlighted item is visible at first
+// paint (keyboard Tab already auto-scrolls a focused link, but no focus exists
+// on load). block:"nearest" keeps the page from scrolling vertically.
+function initActiveNav(){
+const a = document.querySelector(".nav-links a.active");
+if(a && a.scrollIntoView){
+try{ a.scrollIntoView({inline:"center", block:"nearest"}); }catch(e){}
+}
+}
+document.addEventListener("mousemove", e=>{ if(tip && tip.classList.contains("show")) moveTip(e); });
+initTheme();
+initCopy();
+initDensity();
+initReveal();
+initActiveNav();
+initMarkTips();
+// Deferred by one task: page-specific extra_js is appended AFTER JS_CORE inside
+// the same script tag, and two pages (models #within-era, momentum #stratified)
+// un-hide a section from there. Running inline would measure those sections
+// while they are still display:none and drop them from the jump list forever.
+setTimeout(initPageNav, 0);
+// ---------- one site-wide card cell ----------
+// OBYID (Map id->{name,set,rarity,...}) and CARDLINKS (object id->{set_id,number,
+// tcg_pid,cm_pid}) are defined per page in EXTRA_JS before any cardCell() call.
+function ccFallback(img){ img.classList.add('cc-thumb--fallback'); img.removeAttribute('src'); }
+function cardCell(id, opts){
+opts = opts || {};
+const wantThumb = opts.thumb !== false;
+const compact = !!opts.compact;
+const o = (typeof OBYID !== "undefined" && OBYID.get) ? (OBYID.get(id) || {}) : {};
+const cl = (typeof CARDLINKS !== "undefined" && CARDLINKS) ? (CARDLINKS[id] || {}) : {};
+const name = o.name != null ? o.name : id;
+const setName = o.set != null ? o.set : "";
+const number = (cl.number != null) ? cl.number : (o.number != null ? o.number : null);
+const rarity = shortRarity(o.rarity != null ? o.rarity : "");
+const metaParts = [];
+if(setName) metaParts.push(esc(setName));
+if(number != null && number !== "") metaParts.push("#" + esc(number));
+if(rarity) metaParts.push(esc(rarity));
+const meta = metaParts.join(" · ");
+let thumbHtml = "";
+if(wantThumb){
+if(cl.set_id && number != null && number !== ""){
+const src = "https://images.pokemontcg.io/" + cl.set_id + "/" + number + ".png";
+thumbHtml = '<img class="cc-thumb" loading="lazy" decoding="async" src="' + src
++ '" alt="" width="40" height="56" onerror="ccFallback(this)">';
+} else {
+thumbHtml = '<span class="cc-thumb cc-thumb--fallback" aria-hidden="true"></span>';
+}
+}
+let links = "";
+if(cl.tcg_pid != null){
+links += '<a class="chip" href="https://www.tcgplayer.com/product/' + cl.tcg_pid
++ '" target="_blank" rel="noopener noreferrer nofollow">TCGplayer</a>';
+}
+if(cl.cm_pid != null){
+links += '<a class="chip" href="https://www.cardmarket.com/en/Pokemon/Products/Singles?idProduct='
++ cl.cm_pid + '" target="_blank" rel="noopener noreferrer nofollow">Cardmarket</a>';
+}
+const priceHtml = opts.price ? '<span class="cc-price">' + fmtMoney(o.market) + '</span>' : "";
+return '<div class="cardcell' + (compact ? ' cc-compact' : '') + '">'
++ thumbHtml
++ '<div class="cc-body">'
++   '<span class="cc-name">' + esc(name) + '</span>'
++   '<span class="cc-meta">' + meta + '</span>'
++   priceHtml
++   (links ? '<span class="cc-links">' + links + '</span>' : '')
++ '</div></div>';
+}
+
+const PAGE = {};
+
+</script>
+</body>
+</html>

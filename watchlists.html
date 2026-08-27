@@ -1,0 +1,1258 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Watchlists: where the model and the market disagree</title>
+<link rel="icon" href="data:," />
+<script>(function(){try{var t=localStorage.getItem('pk-theme');if(t==='dark'||t==='light'||t==='pastel')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+
+:root{
+--surface:#faf9f7;
+--panel:#ffffff;
+--panel-alt:#f4f2ee;
+--ink:#27272a;
+--ink-muted:#52525b;
+--ink-subtle:#6b6b73;
+--border:#e4e4e7;
+--border-strong:#d4d4d8;
+--accent:#3d5a80;
+--accent-ink:#2c4360;
+--up:#0d9488;
+--up-text:#0a6d64;
+--down:#c0392b;
+--down-text:#992b20;
+--neutral:#a1a1aa;
+--accent-rgb:61,90,128;
+--up-rgb:13,148,136;
+--down-rgb:192,57,43;
+--on-accent:#ffffff;
+--warn-ink:#8a5a12;
+--warn-bg:#fbf3e2;
+--warn-border:#ead9b6;
+--warn-ink-hover:#6f480d;
+--warn-bg-hover:#f8ebd2;
+--warn-border-hover:#d9bd7f;
+--warn-dot:#c58a2a;
+--shadow-tint:39,39,42;
+--radius:3px;
+--ease:cubic-bezier(.16,1,.3,1);
+--t-fast:.15s;
+--t-mid:.24s;
+--rv-step:42ms;
+--nav-h:52px;
+--tbl-pad-y:6px;
+--tbl-pad-x:12px;
+--tbl-fs:0.85rem;
+--section-gap:30px;
+--spark-w:84px;
+--spark-h:22px;
+--band-w:150px;
+}
+@media (prefers-color-scheme: dark){
+:root:not([data-theme="light"]):not([data-theme="pastel"]){
+--surface:#1a1917;
+--panel:#221f1d;
+--panel-alt:#2a2724;
+--ink:#ece8e1;
+--ink-muted:#b2aca1;
+--ink-subtle:#959083;
+--border:#37332e;
+--border-strong:#48433c;
+--accent:#8fb0d4;
+--accent-ink:#9dbbdd;
+--up:#2dd4bf;
+--up-text:#5ad6c6;
+--down:#f0705c;
+--down-text:#f2897a;
+--neutral:#7a756d;
+--accent-rgb:143,176,212;
+--up-rgb:45,212,191;
+--down-rgb:240,112,92;
+--on-accent:#1a1917;
+--warn-ink:#e8b877;
+--warn-bg:#3a2f1c;
+--warn-border:#5a4826;
+--warn-ink-hover:#f0c88a;
+--warn-bg-hover:#463722;
+--warn-border-hover:#6b5730;
+--warn-dot:#d8a24e;
+--shadow-tint:0,0,0;
+}
+}
+:root[data-theme="dark"]{
+--surface:#1a1917;
+--panel:#221f1d;
+--panel-alt:#2a2724;
+--ink:#ece8e1;
+--ink-muted:#b2aca1;
+--ink-subtle:#959083;
+--border:#37332e;
+--border-strong:#48433c;
+--accent:#8fb0d4;
+--accent-ink:#9dbbdd;
+--up:#2dd4bf;
+--up-text:#5ad6c6;
+--down:#f0705c;
+--down-text:#f2897a;
+--neutral:#7a756d;
+--accent-rgb:143,176,212;
+--up-rgb:45,212,191;
+--down-rgb:240,112,92;
+--on-accent:#1a1917;
+--warn-ink:#e8b877;
+--warn-bg:#3a2f1c;
+--warn-border:#5a4826;
+--warn-ink-hover:#f0c88a;
+--warn-bg-hover:#463722;
+--warn-border-hover:#6b5730;
+--warn-dot:#d8a24e;
+--shadow-tint:0,0,0;
+}
+:root[data-theme="pastel"]{
+--surface:#f3e1d7;
+--panel:#fffcfa;
+--panel-alt:#e8cabb;
+--ink:#2b201d;
+--ink-muted:#63483f;
+--ink-subtle:#684f47;
+--border:#e8d3c8;
+--border-strong:#a8695d;
+--accent:#bf5b4f;
+--accent-ink:#7c342b;
+--up:#217c6a;
+--up-text:#1c6255;
+--down:#712318;
+--down-text:#5c1c12;
+--neutral:#a89287;
+--accent-rgb:191,91,79;
+--up-rgb:33,124,106;
+--down-rgb:113,35,24;
+--on-accent:#0d0908;
+--warn-ink:#8a5a12;
+--warn-bg:#faf0dd;
+--warn-border:#e8d0a0;
+--warn-ink-hover:#6f480d;
+--warn-bg-hover:#f6e7c8;
+--warn-border-hover:#d8b978;
+--warn-dot:#c58a2a;
+--shadow-tint:43,32,29;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+@media (prefers-reduced-motion:no-preference){ html{scroll-behavior:smooth;} }
+body{
+background:var(--surface);
+color:var(--ink);
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+font-size:15px;
+line-height:1.55;
+-webkit-font-smoothing:antialiased;
+}
+@media (prefers-reduced-motion:no-preference){ body{transition:background-color .2s,color .2s;} }
+.num,td.num,th.num,.stat-value,.tick-label{
+font-variant-numeric:tabular-nums;
+font-feature-settings:"tnum" 1,"lnum" 1;
+}
+a{color:var(--accent-ink);}
+a:hover{color:var(--accent);}
+.page{max-width:1360px;margin:0 auto;padding:20px 20px 44px;}
+.prose{max-width:66ch;}
+.ret-pos{color:var(--up-text);}
+.ret-neg{color:var(--down);}
+.topnav{
+position:sticky;top:0;z-index:40;
+background:var(--surface);border-bottom:1px solid var(--border);
+}
+.nav-inner{
+max-width:1240px;margin:0 auto;padding:0 20px;
+height:var(--nav-h);display:flex;align-items:center;gap:10px;
+}
+.brand{
+font-weight:700;letter-spacing:-0.01em;color:var(--ink);
+text-decoration:none;font-size:0.98rem;flex:none;
+position:relative;display:inline-block;
+}
+.brand:hover{color:var(--accent-ink);}
+.brand::after{
+content:"";position:absolute;left:0;right:0;bottom:-3px;height:1.5px;
+background:var(--accent);opacity:0.34;
+}
+@media (prefers-reduced-motion:no-preference){
+.brand::after{animation:pk-breathe 5.5s ease-in-out infinite;
+transition:opacity var(--t-mid) var(--ease);}
+.brand:hover::after,.brand:focus-visible::after{animation:none;opacity:1;}
+@keyframes pk-breathe{
+0%,100%{opacity:0.22;}
+50%{opacity:0.6;}
+}
+html.motion .brand{animation:pk-brand .5s var(--ease) both;}
+@keyframes pk-brand{
+from{opacity:0;letter-spacing:.08em;}
+to{opacity:1;letter-spacing:-0.01em;}
+}
+}
+.nav-links{
+display:flex;gap:2px;flex:1;overflow-x:auto;overflow-y:hidden;
+scrollbar-width:none;-ms-overflow-style:none;
+}
+.nav-links::-webkit-scrollbar{display:none;}
+.nav-links a{
+font-size:0.83rem;color:var(--ink-muted);text-decoration:none;
+padding:6px 7px;border-radius:var(--radius);white-space:nowrap;
+transition:background-color .15s ease-out,color .15s ease-out;
+}
+.nav-links a:hover{background:var(--panel-alt);color:var(--ink);}
+.nav-links a.active{color:var(--accent-ink);background:rgba(var(--accent-rgb),0.10);font-weight:600;}
+.density-toggle{flex:none;white-space:nowrap;font-size:0.78rem;padding:6px 10px;}
+.copy-toggle{flex:none;white-space:nowrap;font-size:0.78rem;padding:6px 10px;}
+html:not(.plain) [data-copy="plain"]{display:none;}
+html.plain [data-copy="full"]{display:none;}
+@media (prefers-reduced-motion:no-preference){
+html.copy-anim.plain [data-copy="plain"],
+html.copy-anim:not(.plain) [data-copy="full"]{
+animation:pk-copyswap var(--t-mid) var(--ease);
+}
+@keyframes pk-copyswap{from{opacity:0;transform:translateY(-3px);}to{opacity:1;transform:none;}}
+.depth-in > *{animation:pk-rowin var(--t-mid) var(--ease) both;}
+.depth-in > *:nth-child(n+6){animation-delay:calc((var(--rowi,0)) * 1ms);}
+.depth-in > *:nth-child(6){--rowi:0;}
+.depth-in > *:nth-child(7){--rowi:45;}
+.depth-in > *:nth-child(8){--rowi:90;}
+.depth-in > *:nth-child(9){--rowi:135;}
+.depth-in > *:nth-child(10){--rowi:180;}
+@keyframes pk-rowin{from{opacity:0;transform:translateY(-4px);}to{opacity:1;transform:none;}}
+}
+.theme-group{flex:none;}
+.theme-group button{font-size:0.74rem;padding:5px 8px;white-space:nowrap;}
+.theme-opt[aria-pressed="true"]{background:var(--accent);color:var(--on-accent);}
+@media (max-width:720px){
+.nav-links{
+-webkit-mask-image:linear-gradient(to right,#000 calc(100% - 22px),transparent);
+mask-image:linear-gradient(to right,#000 calc(100% - 22px),transparent);
+}
+}
+@media (max-width:560px){
+.nav-inner{
+flex-wrap:wrap;height:auto;row-gap:2px;padding-top:6px;padding-bottom:8px;
+}
+.nav-links{order:3;flex:0 0 100%;width:100%;}
+.brand{margin-right:auto;}
+.nav-inner{gap:8px;padding-left:12px;padding-right:12px;}
+.theme-group button{font-size:0.7rem;padding:4px 7px;}
+.density-toggle{font-size:0.72rem;padding:5px 8px;}
+}
+header.masthead{border-bottom:1px solid var(--border);padding-bottom:14px;margin-bottom:18px;text-align:center;scroll-margin-top:calc(var(--nav-h) + 14px);}
+header.masthead h1{font-size:1.4rem;font-weight:650;margin:0 0 5px;letter-spacing:-0.01em;}
+header.masthead p.lede{margin:0 auto 8px;max-width:80ch;color:var(--ink-muted);font-size:0.92rem;}
+.summary-strip{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+gap:1px;
+background:var(--border);
+border:1px solid var(--border);
+border-radius:var(--radius);
+overflow:hidden;
+}
+.summary-cell{background:var(--panel);padding:9px 12px;text-align:center;}
+.summary-cell .k{font-size:0.72rem;text-transform:uppercase;letter-spacing:0.04em;color:var(--ink-subtle);margin:0 0 4px;}
+.summary-cell .v{font-size:1.15rem;font-weight:650;margin:0;line-height:1.25;}
+.summary-cell .v small{
+font-weight:500;color:var(--ink-muted);font-size:0.7rem;display:-webkit-box;
+-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.3;
+}
+.verdict-cell{background:var(--panel-alt);}
+.verdict-chip{
+display:inline-flex;align-items:center;gap:7px;
+font-size:0.82rem;font-weight:650;color:var(--warn-ink);
+background:var(--warn-bg);border:1px solid var(--warn-border);border-radius:999px;
+padding:4px 12px;text-decoration:none;
+transition:background-color .15s ease-out,border-color .15s ease-out;
+}
+.verdict-chip:hover{border-color:var(--warn-border-hover);color:var(--warn-ink-hover);background:var(--warn-bg-hover);}
+.verdict-chip .dot{width:7px;height:7px;border-radius:50%;background:var(--warn-dot);}
+section{margin-bottom:var(--section-gap);scroll-margin-top:calc(var(--nav-h) + 14px);}
+section > h2{font-size:1.08rem;font-weight:650;margin:0 0 4px;letter-spacing:-0.005em;text-align:center;}
+section > p.section-note{margin:0 auto 10px;color:var(--ink-muted);font-size:0.88rem;max-width:78ch;text-align:center;}
+details.explain{
+max-width:78ch;margin:0 auto 12px;border:1px solid var(--border);
+border-radius:var(--radius);background:var(--panel);
+}
+details.explain > summary{
+cursor:pointer;list-style:none;padding:9px 14px;
+font-size:0.82rem;font-weight:600;color:var(--accent-ink);
+display:flex;align-items:center;gap:8px;user-select:none;
+transition:background-color .15s ease-out;border-radius:var(--radius);
+}
+details.explain > summary:hover{background:var(--panel-alt);}
+details.explain > summary::-webkit-details-marker{display:none;}
+details.explain > summary::before{
+content:"";width:6px;height:6px;border-right:1.5px solid var(--accent);
+border-bottom:1.5px solid var(--accent);transform:rotate(-45deg);
+transition:transform .15s ease-out;flex:none;margin-left:2px;
+}
+details.explain[open] > summary::before{transform:rotate(45deg);}
+details.explain > summary::after{content:"How to read this";}
+details.explain > summary span.custom{display:none;}
+@media (prefers-reduced-motion:no-preference){
+details.explain[open] .explain-body{animation:pk-explain var(--t-mid) var(--ease);}
+@keyframes pk-explain{from{opacity:0;transform:translateY(-4px);}to{opacity:1;transform:none;}}
+}
+ul.kpi-key{margin:4px 0 12px;padding-left:18px;}
+ul.kpi-key li{margin-bottom:5px;}
+ul.kpi-key li strong{color:var(--ink);}
+details.explain .explain-body{
+padding:2px 16px 14px 30px;font-size:0.86rem;color:var(--ink-muted);
+line-height:1.6;border-top:1px solid var(--border);margin-top:0;padding-top:12px;
+}
+details.explain .explain-body p{margin:0 0 9px;}
+details.explain .explain-body p:last-child{margin-bottom:0;}
+details.explain .explain-body strong{color:var(--ink);}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:center;margin-bottom:16px;}
+input[type="search"],select{
+font-family:inherit;font-size:0.88rem;padding:7px 10px;
+border:1px solid var(--border-strong);border-radius:var(--radius);
+background:var(--panel);color:var(--ink);
+}
+input[type="search"]{min-width:220px;}
+input[type="search"]:focus,select:focus,button:focus{outline:2px solid var(--accent);outline-offset:1px;}
+a:focus-visible,summary:focus-visible,.hub-card:focus-visible,.verdict-chip:focus-visible{
+outline:2px solid var(--accent);outline-offset:2px;border-radius:var(--radius);
+}
+.preset-group{display:flex;gap:0;border:1px solid var(--border-strong);border-radius:var(--radius);overflow:hidden;}
+.preset-group button{border:none;border-right:1px solid var(--border-strong);border-radius:0;background:var(--panel);}
+.preset-group button:last-child{border-right:none;}
+.depth-group{margin:0 0 10px auto;width:max-content;}
+.depth-group button{font-size:0.76rem;padding:4px 11px;}
+button{
+font-family:inherit;font-size:0.85rem;padding:7px 12px;
+border:1px solid var(--border-strong);border-radius:var(--radius);
+background:var(--panel);color:var(--ink);cursor:pointer;
+transition:background-color var(--t-fast) ease-out,border-color var(--t-fast) ease-out,
+color var(--t-fast) ease-out;
+}
+button:hover{border-color:var(--accent);}
+@media (prefers-reduced-motion:no-preference){
+button{transition:background-color var(--t-fast) ease-out,border-color var(--t-fast) ease-out,
+color var(--t-fast) ease-out,transform var(--t-fast) var(--ease);}
+button:active{transform:translateY(1px);}
+}
+button.active{background:var(--accent);border-color:var(--accent);color:var(--on-accent);}
+.preset-group button.active{background:var(--accent);color:var(--on-accent);}
+.table-wrap{border:1px solid var(--border);border-radius:var(--radius);overflow-x:auto;}
+table{border-collapse:collapse;width:100%;font-size:var(--tbl-fs);}
+thead th{
+text-align:left;padding:calc(var(--tbl-pad-y) + 1px) var(--tbl-pad-x);
+border-bottom:1px solid var(--border-strong);
+background:var(--panel-alt);font-weight:600;white-space:nowrap;
+position:sticky;top:0;
+}
+thead th.sortable{cursor:pointer;user-select:none;}
+thead th.num{text-align:right;}
+thead th[title]{text-decoration:underline dotted var(--border-strong);text-underline-offset:3px;}
+thead th.sortable:hover{color:var(--accent-ink);}
+thead th .arrow{color:var(--accent);margin-left:3px;font-size:0.75em;}
+tbody td{padding:var(--tbl-pad-y) var(--tbl-pad-x);border-bottom:1px solid var(--border);vertical-align:middle;}
+tbody tr:last-child td{border-bottom:none;}
+tbody tr{transition:background-color .13s ease-out;}
+tbody tr:hover{background:var(--panel-alt);}
+tbody tr:hover td:first-child{box-shadow:inset 2px 0 0 var(--accent);}
+td.num{text-align:right;}
+.card-name{font-weight:600;}
+.card-set{color:var(--ink-subtle);font-size:0.8rem;}
+.rarity-tag{font-size:0.74rem;color:var(--ink-muted);white-space:nowrap;}
+.band-cell{min-width:170px;}
+.band-val{font-weight:700;font-size:0.95rem;font-variant-numeric:tabular-nums;}
+.band-val.up{color:var(--up-text);}
+.band-val.down{color:var(--down);}
+svg.band{display:block;margin-top:3px;overflow:visible;width:var(--band-w);height:14px;}
+svg.spark{display:block;width:var(--spark-w);height:var(--spark-h);}
+.flag-badge{
+display:inline-block;font-size:0.72rem;font-weight:700;padding:2px 8px;
+border-radius:999px;white-space:nowrap;letter-spacing:0.01em;
+}
+.flag-badge.up{background:rgba(var(--up-rgb),0.13);color:var(--up-text);}
+.flag-badge.down{background:rgba(var(--down-rgb),0.13);color:var(--down-text);}
+.flag-badge.none{background:var(--panel-alt);color:var(--ink-subtle);font-weight:600;}
+.flag-chip{
+display:inline-block;font-size:0.68rem;font-weight:600;padding:1px 7px;margin-top:3px;
+border-radius:999px;border:1px solid var(--border-strong);white-space:nowrap;color:var(--ink-subtle);
+}
+.flag-chip.up{border-color:rgba(var(--up-rgb),0.5);color:var(--up-text);}
+.flag-chip.down{border-color:rgba(var(--down-rgb),0.5);color:var(--down-text);}
+.flag-stack{display:flex;flex-direction:column;align-items:flex-start;gap:0;}
+.drivers{font-size:0.74rem;color:var(--ink-muted);white-space:normal;max-width:210px;line-height:1.4;}
+.drivers .dw{display:inline-block;margin-right:8px;white-space:nowrap;}
+.eur-cell{font-size:0.78rem;color:var(--ink-muted);white-space:nowrap;}
+.eur-cell .z{font-weight:650;}
+.eur-cell .z.pos{color:var(--up-text);}
+.eur-cell .z.neg{color:var(--down);}
+.table-footer{display:flex;justify-content:space-between;align-items:center;margin-top:12px;font-size:0.82rem;color:var(--ink-subtle);gap:12px;flex-wrap:wrap;}
+.wl-block{margin-bottom:38px;}
+.wl-block:last-child{margin-bottom:0;}
+.wl-block h3{font-size:0.98rem;font-weight:650;margin:0 0 3px;text-align:center;letter-spacing:-0.005em;}
+.wl-sub{text-align:center;color:var(--ink-muted);font-size:0.86rem;margin:0 auto 10px;max-width:78ch;}
+.wl-duo{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start;}
+.wl-duo > *{min-width:0;}
+@media (max-width:820px){.wl-duo{grid-template-columns:1fr;}}
+.duo-head{font-size:0.78rem;font-weight:650;color:var(--ink-muted);text-align:center;margin:0 0 5px;text-transform:uppercase;letter-spacing:0.04em;}
+.stat-cards{
+display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;
+background:var(--border);border:1px solid var(--border);border-radius:var(--radius);
+overflow:hidden;margin:0 auto 16px;max-width:760px;
+}
+.stat-card{background:var(--panel);padding:12px 14px;text-align:center;}
+.stat-card .k{font-size:0.7rem;text-transform:uppercase;letter-spacing:0.04em;color:var(--ink-subtle);margin:0 0 4px;}
+.stat-card .v{font-size:1.1rem;font-weight:650;margin:0;line-height:1.2;}
+.stat-card .v small{font-weight:500;color:var(--ink-muted);font-size:0.7rem;display:block;margin-top:2px;}
+#leaderboard tbody tr.selected{background:rgba(var(--accent-rgb),0.08);}
+#leaderboard tbody tr.selected td:first-child{box-shadow:inset 3px 0 0 var(--accent);}
+#leaderboard tbody tr.baseline td{color:var(--ink-subtle);}
+.sel-tag{font-size:0.68rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:0.04em;margin-left:6px;}
+.attr-note{margin-top:14px;}
+.verdict-word{font-weight:700;}
+.verdict-word.reversion{color:var(--down);}
+.verdict-word.momentum{color:var(--up-text);}
+.verdict-word.null{color:var(--ink-subtle);}
+.verdict-word.insufficient{color:var(--warn-ink);font-weight:650;}
+tr.slice-anchor{background:var(--panel-alt);}
+tr.slice-anchor td{font-weight:650;}
+tr.slice-total td:first-child{box-shadow:inset 3px 0 0 var(--accent);}
+.thin-tag{
+display:inline-block;font-size:0.64rem;font-weight:700;letter-spacing:0.04em;
+text-transform:uppercase;padding:1px 6px;margin-left:6px;border-radius:999px;
+color:var(--warn-ink);background:var(--warn-bg);border:1px solid var(--warn-border);
+white-space:nowrap;vertical-align:1px;
+}
+.call-word{font-weight:650;font-size:0.82em;white-space:nowrap;}
+.call-word.clears{color:var(--up-text);}
+.call-word.negative{color:var(--down);}
+.call-word.flat{color:var(--ink-subtle);}
+.call-word.skipped{color:var(--ink-subtle);}
+.slice-legend{
+font-size:0.8rem;color:var(--ink-subtle);margin:10px auto 0;max-width:80ch;line-height:1.5;
+}
+html.compact .slice-legend{display:none;}
+.callout{
+border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:var(--radius);
+padding:14px 18px;background:var(--panel);font-size:0.9rem;color:var(--ink-muted);margin-bottom:18px;
+}
+.callout strong{color:var(--ink);}
+.split{display:grid;grid-template-columns:1.15fr 1fr;gap:24px;align-items:start;}
+.split > *{min-width:0;}
+@media (max-width:900px){.split{grid-template-columns:1fr;}}
+.caveats{
+border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:var(--radius);
+padding:18px 20px;background:var(--panel);font-size:0.86rem;color:var(--ink-muted);
+}
+.caveats h4{margin:0 0 10px;color:var(--ink);font-size:0.9rem;font-weight:650;}
+.caveats ul{margin:0;padding-left:1.15em;}
+.caveats li{margin-bottom:11px;}
+.caveats li:last-child{margin-bottom:0;}
+.caveats strong{color:var(--ink);}
+.methods-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px;}
+.methods-grid > *{min-width:0;}
+@media (max-width:760px){.methods-grid{grid-template-columns:1fr;}}
+.method-card{border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;background:var(--panel);font-size:0.86rem;color:var(--ink-muted);}
+.method-card h4{margin:0 0 8px;color:var(--ink);font-size:0.9rem;font-weight:650;}
+.method-card ul{margin:0;padding-left:1.1em;}
+.method-card li{margin-bottom:6px;}
+.method-card p{margin:0 0 8px;}
+.method-card p:last-child{margin-bottom:0;}
+.hub-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin:0 0 8px;}
+.hub-card{
+display:block;border:1px solid var(--border);border-radius:var(--radius);
+padding:15px 17px;background:var(--panel);text-decoration:none;color:inherit;
+transition:border-color .15s ease-out,transform .15s ease-out;
+}
+.hub-card:hover{border-color:var(--accent);transform:translateY(-1px);}
+.hub-card .hc-title{font-weight:650;color:var(--ink);font-size:0.95rem;margin:0 0 4px;}
+.hub-card .hc-desc{color:var(--ink-muted);font-size:0.83rem;margin:0;line-height:1.45;}
+.stub{
+border:1px dashed var(--border-strong);border-radius:var(--radius);
+padding:34px 26px;background:var(--panel);text-align:center;color:var(--ink-muted);
+max-width:72ch;margin:0 auto;
+}
+.stub h3{margin:0 0 8px;color:var(--ink);font-size:1.02rem;}
+.stub p{margin:0 auto;max-width:60ch;}
+#tooltip{
+position:fixed;pointer-events:none;background:var(--ink);color:var(--surface);
+border-radius:var(--radius);padding:8px 10px;font-size:12px;line-height:1.45;max-width:250px;
+opacity:0;transition:opacity 60ms linear;z-index:50;box-shadow:0 2px 10px rgba(var(--shadow-tint),0.22);
+}
+#tooltip.show{opacity:1;}
+#tooltip .tt-name{font-weight:650;display:block;margin-bottom:2px;}
+.mark{cursor:pointer;}
+.mark:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+.mark-dot{fill-opacity:0;transition:fill-opacity var(--t-fast) ease-out;}
+.mark-dot:hover,.mark-dot:focus-visible{fill-opacity:1;}
+footer{border-top:1px solid var(--border);padding-top:18px;margin-top:8px;font-size:0.82rem;color:var(--ink-subtle);}
+footer code{background:var(--panel-alt);padding:1px 5px;border-radius:2px;font-size:0.92em;}
+html.motion [data-reveal]{opacity:0;transform:translateY(10px);
+transition:opacity var(--t-mid) var(--ease),transform var(--t-mid) var(--ease);
+transition-delay:calc(var(--rv,0) * var(--rv-step));}
+html.motion [data-reveal].in-view{opacity:1;transform:none;}
+.pagenav{
+position:fixed;right:18px;bottom:18px;z-index:44;
+display:flex;flex-direction:column;align-items:flex-end;gap:8px;
+}
+.pagenav[hidden]{display:none;}
+.pn-row{display:flex;gap:6px;}
+.pagenav button{
+font-size:0.78rem;padding:6px 11px;background:var(--panel);
+border:1px solid var(--border-strong);border-radius:var(--radius);
+color:var(--ink-muted);box-shadow:0 2px 10px rgba(var(--shadow-tint),0.18);
+}
+.pagenav button:hover{color:var(--ink);border-color:var(--accent);}
+.pn-list{
+display:flex;flex-direction:column;max-height:min(58vh,420px);overflow-y:auto;
+width:250px;background:var(--panel);border:1px solid var(--border-strong);
+border-radius:var(--radius);box-shadow:0 4px 18px rgba(var(--shadow-tint),0.22);
+}
+.pn-list[hidden]{display:none;}
+.pn-list a{
+padding:7px 12px;font-size:0.79rem;line-height:1.35;color:var(--ink-muted);
+text-decoration:none;border-left:2px solid transparent;
+}
+.pn-list a + a{border-top:1px solid var(--border);}
+.pn-list a:hover{background:var(--panel-alt);color:var(--ink);}
+.pn-list a.active{color:var(--accent-ink);border-left-color:var(--accent);font-weight:600;}
+@media (prefers-reduced-motion:no-preference){
+.pagenav button{transition:color var(--t-fast) ease-out,border-color var(--t-fast) ease-out,
+transform var(--t-fast) var(--ease);}
+.pn-list a{transition:background-color var(--t-fast) ease-out,color var(--t-fast) ease-out;}
+.pn-list{animation:pk-pn var(--t-mid) var(--ease);}
+@keyframes pk-pn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+}
+@media (max-width:560px){
+.pagenav{right:10px;bottom:10px;}
+.pn-list{width:min(74vw,250px);}
+}
+@media (prefers-reduced-motion:no-preference){
+@supports (animation-timeline:scroll()){
+body::after{
+content:"";position:fixed;top:0;left:0;height:2px;width:100%;
+transform-origin:0 50%;transform:scaleX(0);
+background:var(--accent);z-index:45;pointer-events:none;
+animation:pk-progress linear;animation-timeline:scroll(root);
+}
+@keyframes pk-progress{from{transform:scaleX(0);}to{transform:scaleX(1);}}
+}
+}
+html.compact{
+font-size:14px;
+--nav-h:46px;
+--tbl-pad-y:4px;
+--tbl-pad-x:9px;
+--tbl-fs:0.79rem;
+--section-gap:20px;
+--spark-w:66px;
+--spark-h:18px;
+--band-w:120px;
+}
+@media (max-width:560px){
+:root{--nav-h:82px;}
+html.compact{--nav-h:78px;}
+}
+html.compact .page{padding-top:22px;}
+html.compact header.masthead{padding-bottom:10px;margin-bottom:12px;}
+html.compact header.masthead h1{font-size:1.34rem;margin-bottom:6px;}
+html.compact .lede{display:none;}
+html.compact .section-note{display:none;}
+html.compact .wl-sub{display:none;}
+html.compact section > h2{font-size:1.02rem;margin-bottom:10px;}
+html.compact .summary-cell{padding:8px 11px;}
+html.compact .summary-cell .v{font-size:1rem;}
+html.compact .stat-card{padding:8px 11px;}
+html.compact .stat-card .v{font-size:0.98rem;}
+html.compact .band-cell{min-width:132px;}
+html.compact .band-val{font-size:0.85rem;}
+html.compact .drivers{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:150px;}
+html.compact .toolbar{margin-bottom:10px;}
+html.compact details.explain{margin-bottom:12px;}
+html.compact .wl-block{margin-bottom:24px;}
+html.compact .callout{padding:10px 14px;margin-bottom:12px;}
+html.compact .caveats{padding:13px 15px;}
+.cardcell{display:flex;gap:9px;align-items:flex-start;min-width:0;}
+.cc-thumb,.cc-thumb--fallback{
+flex:none;width:40px;height:56px;border-radius:var(--radius);
+background:var(--panel-alt);border:1px solid var(--border);
+}
+img.cc-thumb{object-fit:cover;display:block;}
+.cc-thumb--fallback{position:relative;display:inline-block;}
+.cc-thumb--fallback::after{
+content:"";position:absolute;inset:7px;border:1px solid var(--border-strong);
+border-radius:2px;opacity:0.55;
+background:
+linear-gradient(var(--border-strong),var(--border-strong)) no-repeat center/60% 1px;
+}
+.cc-body{display:flex;flex-direction:column;min-width:0;gap:1px;}
+.cc-name{font-weight:600;font-size:0.85rem;line-height:1.28;color:var(--ink);}
+.cc-meta{color:var(--ink-subtle);font-size:0.74rem;line-height:1.3;}
+.cc-price{font-weight:600;font-size:0.8rem;font-variant-numeric:tabular-nums;color:var(--ink);}
+.cc-links{display:flex;gap:5px;margin-top:2px;flex-wrap:wrap;}
+.cc-links .chip{
+display:inline-block;font-size:0.68rem;font-weight:600;padding:1px 7px;
+border-radius:999px;border:1px solid var(--border-strong);white-space:nowrap;
+color:var(--ink-subtle);text-decoration:none;
+transition:border-color .15s ease-out,color .15s ease-out;
+}
+.cc-links .chip:hover{border-color:var(--accent);color:var(--accent-ink);}
+.cardcell.cc-compact{gap:7px;}
+.cardcell.cc-compact .cc-thumb,.cardcell.cc-compact .cc-thumb--fallback{width:28px;height:39px;}
+.cardcell.cc-compact .cc-name{font-size:0.82rem;}
+.cardcell.cc-compact .cc-meta{
+white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:220px;
+}
+html.compact .cardcell .cc-thumb,html.compact .cardcell .cc-thumb--fallback{width:28px;height:39px;}
+html.compact .cardcell .cc-meta{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:200px;}
+
+</style>
+</head>
+<body>
+
+<nav class="topnav" aria-label="Site navigation">
+  <div class="nav-inner">
+    <a class="brand" href="dashboard.html">pokestat</a>
+    <div class="nav-links" id="nav-links">
+      <a href="dashboard.html">Summary</a>
+      <a href="outlook.html">Outlook</a>
+      <a href="watchlists.html" class="active" aria-current="page">Watchlists</a>
+      <a href="valuation.html">Valuation</a>
+      <a href="market.html">Market</a>
+      <a href="etb.html">Trainer boxes</a>
+      <a href="models.html">Models</a>
+      <a href="momentum.html">Momentum</a>
+      <a href="backtest.html">Backtest</a>
+      <a href="how-it-works.html">How it works</a>
+      <a href="methods.html">Methods</a>
+    </div>
+    <button class="density-toggle" id="density-toggle" aria-pressed="false" title="Toggle information density">Compact</button>
+    <button class="copy-toggle" id="copy-toggle" title="Switch between plain-language and full technical wording">Plain</button>
+    <div class="preset-group theme-group" role="group" aria-label="Colour theme">
+      <button type="button" class="theme-opt" data-theme-opt="light" aria-pressed="false">Light</button>
+      <button type="button" class="theme-opt" data-theme-opt="dark" aria-pressed="false">Dark</button>
+      <button type="button" class="theme-opt" data-theme-opt="pastel" aria-pressed="false">Rose</button>
+    </div>
+  </div>
+</nav>
+
+<div class="page">
+
+  <header class="masthead" data-reveal>
+    <h1>Watchlists: where the model and the market disagree</h1>
+    <p class="lede prose">Five compact, decision-relevant reads derived from the same outlook and the price-history panel: today's biggest movers set against whatever the momentum study actually measures, a per-set and per-tier pulse, the largest Cardmarket-versus-US divergences, and a plain realized-movers list.</p>
+  </header>
+
+
+  <section id="watchlists" data-reveal>
+    <div class="wl-block" id="wl-reversion">
+      <h3>Reversion watch</h3>
+      <p class="wl-sub" id="reversion-sub"></p>
+      <div class="stat-cards" id="reversion-stats"></div>
+      <details class="explain"><summary><span class="custom"></span></summary>
+        <div class="explain-body" id="explain-reversion"><p>NOT A SIGNAL. Pooled over the whole modeled universe the study measures a 1-month formation spread of -3.0 pts (t_eff -1.77, verdict null) and a 3-month spread of -6.4 pts (t_eff -1.67, verdict null); spread = past winners minus past losers over the next 3 months. Neither is distinguishable from zero once the overlapping 3-month holds are deflated, so the pooled study supports NO tradeable momentum and NO reliable reversion. What follows is simply today&#x27;s biggest realized movers: there is no measured cross-sectional tendency behind the ordering, and nothing here is a forecast. The only forecast on the row is the model&#x27;s own predicted 3m. A stratified re-run (see momentum_summary.md) does find reversion inside individual strata, but that is a post-hoc subgroup result with no trading costs applied and it does not license reading this list as a signal.</p></div></details>
+      <div class="wl-duo">
+        <div>
+          <p class="duo-head" id="spikers-head">Spikers (largest recent gainers)</p>
+          <div class="table-wrap"><table id="spikers-table">
+            <thead><tr>
+              <th title="Card, set, number and links.">Card</th>
+              <th class="num" title="Snapshot USD market price.">Price</th>
+              <th class="num" title="Trailing 1-month realized return, percent points (log return times 100).">1m</th>
+              <th class="num" title="Trailing 3-month realized return, percent points.">3m</th>
+              <th class="num" title="The model's own predicted 3-month return and interval flag, for the same card.">Model 3m</th>
+            </tr></thead><tbody id="spikers-body"></tbody></table></div>
+        </div>
+        <div>
+          <p class="duo-head" id="droppers-head">Droppers (largest recent losers)</p>
+          <div class="table-wrap"><table id="droppers-table">
+            <thead><tr>
+              <th title="Card, set, number and links.">Card</th>
+              <th class="num" title="Snapshot USD market price.">Price</th>
+              <th class="num" title="Trailing 1-month realized return, percent points.">1m</th>
+              <th class="num" title="Trailing 3-month realized return, percent points.">3m</th>
+              <th class="num" title="The model's own predicted 3-month return and interval flag.">Model 3m</th>
+            </tr></thead><tbody id="droppers-body"></tbody></table></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wl-block" id="wl-setpulse">
+      <h3>Set pulse</h3>
+      <p class="wl-sub">Each set's modeled chase cards aggregated: what the model expects next, how
+        many carry an up-flag, and what those cards actually did over the past quarter.</p>
+      <details class="explain"><summary><span class="custom"></span></summary>
+        <div class="explain-body" id="explain-setpulse"><p>Each row aggregates a set&#x27;s modeled chase cards: the median model-predicted 3-month return, how many carry an up-flag (interval / percentile presets), and the median return those cards have actually realized over the past 3 months. Sets are ordered by median predicted return; predicted and realized columns need not agree.</p></div></details>
+      <div class="table-wrap"><table id="setpulse-table">
+        <thead><tr>
+          <th title="Set name.">Set</th>
+          <th class="num" title="Number of modeled chase cards in the set.">n</th>
+          <th class="num" title="Median model-predicted 3-month market-relative return, percent points.">Med pred 3m</th>
+          <th class="num" title="Up-flags under the strict interval rule (whole band clears zero).">Up (int)</th>
+          <th class="num" title="Up-flags under the broader top-decile percentile rule.">Up (pct)</th>
+          <th class="num" title="Median realized trailing 3-month return of the set's cards, percent points.">Med real 3m</th>
+          <th class="num" title="Months from the set's release date to the snapshot.">Age (mo)</th>
+        </tr></thead><tbody id="setpulse-body"></tbody></table></div>
+    </div>
+
+    <div class="wl-block" id="wl-tier">
+      <h3>Tier lens</h3>
+      <p class="wl-sub">The universe split by rarity tier. A higher tier is not automatically a
+        higher predicted return.</p>
+      <details class="explain"><summary><span class="custom"></span></summary>
+        <div class="explain-body" id="explain-tier"><p>Within each rarity tier: the typical (median) USD price and model-predicted 3-month return, the spread of those predictions (interquartile range, Q3-Q1), and how many cards are flagged up or down. A higher tier is not automatically a higher predicted return.</p></div></details>
+      <div class="table-wrap"><table id="tier-table">
+        <thead><tr>
+          <th title="Rarity tier.">Rarity</th>
+          <th class="num" title="Cards in the tier.">n</th>
+          <th class="num" title="Median USD market price in the tier.">Med price</th>
+          <th class="num" title="Median model-predicted 3-month return, percent points.">Med pred 3m</th>
+          <th class="num" title="Interquartile range (Q3 minus Q1) of predicted returns, a spread measure.">IQR pred</th>
+          <th class="num" title="Interval-rule up-flags in the tier.">Up</th>
+          <th class="num" title="Interval-rule down-flags in the tier.">Down</th>
+        </tr></thead><tbody id="tier-body"></tbody></table></div>
+    </div>
+
+    <div class="wl-block" id="wl-divergence">
+      <h3>Divergence watch</h3>
+      <p class="wl-sub">Cards where the Cardmarket EU trend price (converted to USD) sits furthest
+        from the US market price, by z-score. A single-snapshot mispricing watch, not guaranteed
+        arbitrage.</p>
+      <details class="explain"><summary><span class="custom"></span></summary>
+        <div class="explain-body" id="explain-divergence"><p>Cards where the Cardmarket trend price (EUR, converted to $ at the ECB reference rate) diverges most from the US market price, measured as a z-score. A positive gap means Cardmarket sits above the US market. This is a single-snapshot mispricing watch that can also reflect data-vintage differences between the two markets, not a guaranteed arbitrage.</p></div></details>
+      <div class="table-wrap"><table id="divergence-table">
+        <thead><tr>
+          <th title="Card, set, number and links.">Card</th>
+          <th class="num" title="US TCGplayer market price, USD.">Market $</th>
+          <th class="num" id="div-cm-head" title="Cardmarket EU trend price, converted to USD at the ECB reference rate.">Cardmarket</th>
+          <th class="num" title="Gap of Cardmarket over the US market as a percent of the US price. Positive means Cardmarket is higher.">Gap %</th>
+          <th class="num" title="Divergence z-score across the universe. Larger magnitude means a more unusual gap.">div-z</th>
+        </tr></thead><tbody id="divergence-body"></tbody></table></div>
+    </div>
+
+    <div class="wl-block" id="wl-movers">
+      <h3>Realized movers</h3>
+      <p class="wl-sub">The largest realized 3-month price moves among modeled cards, shown purely
+        for context. No model prediction attached.</p>
+      <details class="explain"><summary><span class="custom"></span></summary>
+        <div class="explain-body" id="explain-movers"><p>The largest realized 3-month price moves among modeled cards, shown purely for context: realized history from price_history, with no model prediction attached.</p></div></details>
+      <div class="wl-duo">
+        <div>
+          <p class="duo-head">Top gainers</p>
+          <div class="table-wrap"><table id="gainers-table">
+            <thead><tr>
+              <th title="Card, set, number and links.">Card</th>
+              <th class="num" title="Snapshot USD market price.">Price</th>
+              <th class="num" title="Trailing 3-month realized return, percent points.">3m</th>
+            </tr></thead><tbody id="gainers-body"></tbody></table></div>
+        </div>
+        <div>
+          <p class="duo-head">Top losers</p>
+          <div class="table-wrap"><table id="losers-table">
+            <thead><tr>
+              <th title="Card, set, number and links.">Card</th>
+              <th class="num" title="Snapshot USD market price.">Price</th>
+              <th class="num" title="Trailing 3-month realized return, percent points.">3m</th>
+            </tr></thead><tbody id="losers-body"></tbody></table></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<div id="tooltip" role="tooltip"></div>
+
+<script>
+
+// ---------- formatting ----------
+function fmtMoney(v){ return v == null ? "" : "$" + v.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2}); }
+function fmtPct(v, d){ if(v==null) return ""; d = d==null?1:d; const s = v>0?"+":""; return s + (v*100).toFixed(d) + "%"; }
+function fmtSigned(v, d){ if(v==null) return ""; d=d==null?2:d; const s=v>0?"+":""; return s+v.toFixed(d); }
+function esc(s){ return String(s).replace(/[&<>"]/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
+// Generated reports are written in ASCII, where a parenthetical dash is "--".
+// Sentences lifted verbatim from them get that rendered as an en dash so the
+// quote reads as prose without any of its wording being changed.
+function dashes(s){ return String(s).replace(/ -- /g, " \u2013 "); }
+// percent-point value (already scaled, e.g. 57.1) -> "+57.1", null -> "n/a"
+function pp(v){ return v==null?"n/a":(v>0?"+":"")+v.toFixed(1); }
+function ppTd(v){ if(v==null) return '<td class="num">n/a</td>';
+const c=v>0?"ret-pos":(v<0?"ret-neg":""); return '<td class="num '+c+'">'+pp(v)+'</td>'; }
+function shortRarity(r){
+return {"Special Illustration Rare":"SIR","Ultra Rare":"Ultra","Hyper Rare":"Hyper","Mega Hyper Rare":"Mega Hyper"}[r]||r;
+}
+const SVGNS = "http://www.w3.org/2000/svg";
+// ---------- tooltip ----------
+const tip = document.getElementById("tooltip");
+function showTip(evt, html){ tip.innerHTML = html; tip.classList.add("show"); moveTip(evt); }
+function moveTip(evt){ const p=14, r=tip.getBoundingClientRect(); let x=evt.clientX+p, y=evt.clientY+p;
+if(x+r.width>window.innerWidth) x=evt.clientX-r.width-p; if(y+r.height>window.innerHeight) y=evt.clientY-r.height-p;
+tip.style.left=x+"px"; tip.style.top=y+"px"; }
+function hideTip(){ tip.classList.remove("show"); }
+// ---------- chart mark tooltips ----------
+// Wires every [data-tip] mark emitted by charts.py (line_index points, ic_bars
+// bars, the labelled value_scatter outliers) to the tooltip above. Bound once
+// at load, not per chart function, since the marks are all server-rendered
+// static markup already in the DOM by the time this runs (see chart builder
+// docstrings). Focus/blur mirror mouseenter/mouseleave so a keyboard user gets
+// the identical payload a mouse user does -- required for WCAG AA operability
+// on a control that is otherwise mouse-only.
+function initMarkTips(){
+document.querySelectorAll("[data-tip]").forEach(function(el){
+var content = el.getAttribute("data-tip");
+el.addEventListener("mouseenter", function(e){ showTip(e, content); });
+el.addEventListener("mousemove", moveTip);
+el.addEventListener("mouseleave", hideTip);
+el.addEventListener("focus", function(){
+var r = el.getBoundingClientRect();
+showTip({clientX:r.left + r.width / 2, clientY:r.top}, content);
+});
+el.addEventListener("blur", hideTip);
+});
+}
+// ---------- sparkline ----------
+// series is a flat array of y-values [y0,y1,...]; the x-axis is pure array
+// position (the source series always had consecutive integer x-indices), so
+// x = index here.
+function buildSparkline(series){
+const w=84,h=22,padX=2,padY=3;
+if(!series || series.length<2) return '<svg class="spark" width="'+w+'" height="'+h+'"></svg>';
+const n=series.length;
+const minY=Math.min.apply(null,series),maxY=Math.max.apply(null,series);
+const sx=i=>padX+i/(n-1)*(w-2*padX);
+const sy=v=>maxY===minY?h/2:(h-padY)-(v-minY)/(maxY-minY)*(h-2*padY);
+let d="";
+for(let i=0;i<n;i++){ d+=(i?"L":"M")+sx(i).toFixed(1)+" "+sy(series[i]).toFixed(1); }
+const up = series[n-1] >= series[0];
+const col = up ? "var(--up)" : "var(--down)";
+return '<svg class="spark" width="'+w+'" height="'+h+'" viewBox="0 0 '+w+' '+h+'">'
++ '<path d="'+d+'" fill="none" stroke="'+col+'" stroke-width="1.25" stroke-linejoin="round"/>'
++ '<circle cx="'+sx(n-1).toFixed(1)+'" cy="'+sy(series[n-1]).toFixed(1)+'" r="1.6" fill="'+col+'"/></svg>';
+}
+// ---------- interval band ----------
+// BAND_LO/BAND_HI are the drawing bounds; each page that renders bands sets them
+// once from its data via setBandBounds() before rendering, so the same buildBand
+// is shared across the outlook and the how-it-works worked example.
+let BAND_LO = -0.25, BAND_HI = 0.55;
+function setBandBounds(lo, hi){ const pad=(hi-lo)*0.04; BAND_LO=lo-pad; BAND_HI=hi+pad; }
+function bandX(v){ const w=150; return ((v-BAND_LO)/(BAND_HI-BAND_LO))*w; }
+function buildBand(o){
+const w=150,h=14,y=h/2;
+if(o.lo==null||o.hi==null) return '';
+const col = o.flag==="candidate_up" ? "var(--up)" : (o.flag==="candidate_down" ? "var(--down)" : "var(--neutral)");
+const zx = bandX(0).toFixed(1);
+const x0 = bandX(o.lo).toFixed(1), x1 = bandX(o.hi).toFixed(1), xp = bandX(o.pred).toFixed(1);
+return '<svg class="band" width="'+w+'" height="'+h+'" viewBox="0 0 '+w+' '+h+'">'
++ '<line x1="0" y1="'+y+'" x2="'+w+'" y2="'+y+'" stroke="var(--border)" stroke-width="1"/>'
++ '<line x1="'+zx+'" y1="1" x2="'+zx+'" y2="'+(h-1)+'" stroke="var(--border-strong)" stroke-width="1" stroke-dasharray="2 2"/>'
++ '<line x1="'+x0+'" y1="'+y+'" x2="'+x1+'" y2="'+y+'" stroke="'+col+'" stroke-width="3" opacity="0.45" stroke-linecap="round"/>'
++ '<line x1="'+x0+'" y1="'+(y-3)+'" x2="'+x0+'" y2="'+(y+3)+'" stroke="'+col+'" stroke-width="1"/>'
++ '<line x1="'+x1+'" y1="'+(y-3)+'" x2="'+x1+'" y2="'+(y+3)+'" stroke="'+col+'" stroke-width="1"/>'
++ '<circle cx="'+xp+'" cy="'+y+'" r="2.6" fill="'+col+'"/></svg>';
+}
+// ---------- density toggle ----------
+const DENSITY_KEY = "pk-density";
+function applyDensity(mode){
+const compact = mode==="compact";
+document.documentElement.classList.toggle("compact", compact);
+const btn = document.getElementById("density-toggle");
+if(!btn) return;
+btn.textContent = compact ? "Full view" : "Compact";
+btn.setAttribute("aria-pressed", compact ? "true" : "false");
+}
+function initDensity(){
+const params = new URLSearchParams(location.search);
+let mode = params.get("density");
+if(mode!=="compact" && mode!=="full"){
+try { mode = localStorage.getItem(DENSITY_KEY) || "full"; } catch(e){ mode = "full"; }
+}
+applyDensity(mode);
+try { localStorage.setItem(DENSITY_KEY, mode); } catch(e){}
+const btn = document.getElementById("density-toggle");
+if(btn) btn.addEventListener("click", ()=>{
+const next = document.documentElement.classList.contains("compact") ? "full" : "compact";
+applyDensity(next);
+try { localStorage.setItem(DENSITY_KEY, next); } catch(e){}
+});
+}
+// ---------- plain / full wording ----------
+// The stats prose is written for someone who already knows what an IC is. The
+// plain variant says the same thing without the vocabulary. Neither is a
+// summary of the other: both state the caveat, because dropping the caveat is
+// what makes plain language dishonest.
+const COPY_KEY = "pk-copy";
+function applyCopy(mode){
+const plain = mode === "plain";
+document.documentElement.classList.toggle("plain", plain);
+const btn = document.getElementById("copy-toggle");
+if(!btn) return;
+btn.textContent = plain ? "Full" : "Plain";
+btn.setAttribute("aria-pressed", plain ? "true" : "false");
+btn.setAttribute("aria-label", plain
+? "Plain wording is on. Switch to full technical wording."
+: "Full technical wording is on. Switch to plain wording.");
+}
+function initCopy(){
+// Plain is the default for a first-time visitor (no stored choice yet): the
+// jargon-heavy full wording used to win by default, so a reader had to
+// discover the toggle just to get the jargon-free copy. Anyone who has
+// already chosen either wording keeps that stored choice untouched.
+let mode = "plain";
+try { mode = localStorage.getItem(COPY_KEY) || "plain"; } catch(e){}
+applyCopy(mode);
+const btn = document.getElementById("copy-toggle");
+if(btn) btn.addEventListener("click", ()=>{
+// Armed on first use only, so the load paint is never animated.
+document.documentElement.classList.add("copy-anim");
+const next = document.documentElement.classList.contains("plain") ? "full" : "plain";
+applyCopy(next);
+try { localStorage.setItem(COPY_KEY, next); } catch(e){}
+});
+window.addEventListener("storage", e=>{ if(e.key===COPY_KEY && e.newValue) applyCopy(e.newValue); });
+}
+// ---------- theme toggle ----------
+const THEME_KEY = "pk-theme";
+// Three themes now, so the control is a cycle rather than a binary switch.
+// "pastel" is opt-in only: prefers-color-scheme has no value that means pastel,
+// so it is never reached by OS preference, only by an explicit stored choice.
+const THEMES = ["light","dark","pastel"];
+function currentTheme(){
+const a = document.documentElement.getAttribute("data-theme");
+if(a && THEMES.indexOf(a) >= 0) return a;
+return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+}
+function applyTheme(mode){
+document.documentElement.setAttribute("data-theme", mode);
+// Each segment is genuinely two-state, so aria-pressed is the right thing to
+// put on it; the group element carries the label.
+document.querySelectorAll("[data-theme-opt]").forEach(b=>{
+b.setAttribute("aria-pressed", b.getAttribute("data-theme-opt")===mode ? "true":"false");
+});
+}
+function initTheme(){
+applyTheme(currentTheme());
+document.querySelectorAll("[data-theme-opt]").forEach(b=>{
+b.addEventListener("click", ()=>{
+const next = b.getAttribute("data-theme-opt");
+applyTheme(next);
+try{ localStorage.setItem(THEME_KEY, next); }catch(e){}
+});
+});
+// live cross-tab / cross-page sync
+window.addEventListener("storage", e=>{ if(e.key===THEME_KEY && e.newValue) applyTheme(e.newValue); });
+}
+// ---------- floating page nav (jump list + back to top) ----------
+// Built from the DOM: every section already carries a stable id, so nothing is
+// emitted server-side for this. Sections without a heading, and sections a page
+// script has left hidden, are skipped. Below MIN_SECTIONS the control would be
+// noise, so short pages never get one.
+const MIN_SECTIONS = 3;
+function sectionHeading(sec){
+const h = sec.querySelector("h2, h3");
+if(!h) return "";
+return (h.textContent || "").trim();
+}
+function initPageNav(){
+const page = document.querySelector(".page");
+if(!page) return;
+const secs = Array.prototype.slice.call(page.querySelectorAll("section[id]"))
+.filter(function(sec){
+if(sec.offsetParent === null) return false;   // page script left it hidden
+return sectionHeading(sec).length > 0;
+});
+if(secs.length < MIN_SECTIONS) return;
+const wrap = document.createElement("div");
+wrap.className = "pagenav";
+const list = document.createElement("nav");
+list.className = "pn-list";
+list.id = "pn-list";
+list.hidden = true;
+list.setAttribute("aria-label", "Sections on this page");
+const byId = {};
+secs.forEach(function(sec){
+const a = document.createElement("a");
+a.href = "#" + sec.id;
+a.textContent = sectionHeading(sec);
+list.appendChild(a);
+byId[sec.id] = a;
+});
+const row = document.createElement("div");
+row.className = "pn-row";
+const secBtn = document.createElement("button");
+secBtn.type = "button";
+secBtn.id = "pn-sections";
+secBtn.textContent = "Sections";
+secBtn.setAttribute("aria-expanded", "false");
+secBtn.setAttribute("aria-controls", "pn-list");
+const topBtn = document.createElement("button");
+topBtn.type = "button";
+topBtn.id = "pn-top";
+topBtn.textContent = "Top";
+topBtn.setAttribute("aria-label", "Back to top");
+row.appendChild(secBtn);
+row.appendChild(topBtn);
+wrap.appendChild(list);
+wrap.appendChild(row);
+document.body.appendChild(wrap);
+function closeList(){
+// Hiding the element that currently holds focus drops focus to <body> and
+// the keyboard user loses their place, so hand it back to the trigger.
+if(list.contains(document.activeElement)) secBtn.focus();
+list.hidden = true;
+secBtn.setAttribute("aria-expanded","false");
+}
+secBtn.addEventListener("click", function(){
+const open = list.hidden;
+list.hidden = !open;
+secBtn.setAttribute("aria-expanded", open ? "true" : "false");
+});
+list.addEventListener("click", function(e){ if(e.target.tagName === "A") closeList(); });
+document.addEventListener("keydown", function(e){ if(e.key === "Escape") closeList(); });
+document.addEventListener("click", function(e){
+if(!wrap.contains(e.target)) closeList();
+});
+topBtn.addEventListener("click", function(){
+closeList();
+const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+window.scrollTo({top:0, behavior: reduce ? "auto" : "smooth"});
+});
+// The cluster stays visible rather than appearing on scroll. Gating it on the
+// masthead leaving the viewport read better on the first screen, but it made
+// the control's existence depend on an IntersectionObserver callback, so a
+// browser that never delivered one would hide the feature outright. A small
+// corner cluster costs little; being reliably there is worth more than being
+// clever. Active-section highlighting below stays a pure enhancement: if the
+// observer never fires, the jump list simply has no highlight.
+// Mark the section currently occupying the upper part of the viewport.
+if("IntersectionObserver" in window){
+const spy = new IntersectionObserver(function(entries){
+entries.forEach(function(en){
+const a = byId[en.target.id];
+if(!a) return;
+if(en.isIntersecting){
+for(const k in byId){ byId[k].classList.remove("active"); }
+a.classList.add("active");
+}
+});
+}, {rootMargin:"-15% 0px -70% 0px", threshold:0});
+secs.forEach(function(sec){ spy.observe(sec); });
+}
+}
+// ---------- reveal motion (no scroll-spy: pages are separate documents) ----------
+// --rv is the stagger index the CSS multiplies by --rv-step. It is assigned
+// per batch (per observer callback, or per above-the-fold sweep) rather than
+// per document, so a section entering the viewport resolves in reading order
+// while a section further down still starts from zero. RV_MAX caps the delay
+// so a batch of twenty rows never ends on a half-second lag.
+const RV_MAX = 6;
+function revealBatch(list){
+let i = 0;
+for(let k=0;k<list.length;k++){
+const t = list[k];
+if(t.classList.contains("in-view")) continue;
+const r = t.getBoundingClientRect();
+if(r.top < window.innerHeight && r.bottom > 0){
+t.style.setProperty("--rv", String(i < RV_MAX ? i : RV_MAX));
+i++;
+t.classList.add("in-view");
+}
+}
+}
+function initReveal(){
+const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const targets = Array.prototype.slice.call(document.querySelectorAll("[data-reveal]"));
+if(reduce || !("IntersectionObserver" in window) || location.hash) return;
+document.documentElement.classList.add("motion");
+const reveal = new IntersectionObserver((entries)=>{
+let i = 0;
+entries.forEach(e=>{
+if(e.isIntersecting){
+e.target.style.setProperty("--rv", String(i < RV_MAX ? i : RV_MAX));
+i++;
+e.target.classList.add("in-view");
+reveal.unobserve(e.target);
+}
+});
+}, {rootMargin:"0px 0px -5% 0px", threshold:0});
+targets.forEach(t=>reveal.observe(t));
+revealBatch(targets);
+setTimeout(()=>{ revealBatch(targets); }, 1200);
+}
+// ---------- active nav visibility ----------
+// The link strip scrolls horizontally on narrow viewports; bring the active
+// page's link into view on load so the highlighted item is visible at first
+// paint (keyboard Tab already auto-scrolls a focused link, but no focus exists
+// on load). block:"nearest" keeps the page from scrolling vertically.
+function initActiveNav(){
+const a = document.querySelector(".nav-links a.active");
+if(a && a.scrollIntoView){
+try{ a.scrollIntoView({inline:"center", block:"nearest"}); }catch(e){}
+}
+}
+document.addEventListener("mousemove", e=>{ if(tip && tip.classList.contains("show")) moveTip(e); });
+initTheme();
+initCopy();
+initDensity();
+initReveal();
+initActiveNav();
+initMarkTips();
+// Deferred by one task: page-specific extra_js is appended AFTER JS_CORE inside
+// the same script tag, and two pages (models #within-era, momentum #stratified)
+// un-hide a section from there. Running inline would measure those sections
+// while they are still display:none and drop them from the jump list forever.
+setTimeout(initPageNav, 0);
+// ---------- one site-wide card cell ----------
+// OBYID (Map id->{name,set,rarity,...}) and CARDLINKS (object id->{set_id,number,
+// tcg_pid,cm_pid}) are defined per page in EXTRA_JS before any cardCell() call.
+function ccFallback(img){ img.classList.add('cc-thumb--fallback'); img.removeAttribute('src'); }
+function cardCell(id, opts){
+opts = opts || {};
+const wantThumb = opts.thumb !== false;
+const compact = !!opts.compact;
+const o = (typeof OBYID !== "undefined" && OBYID.get) ? (OBYID.get(id) || {}) : {};
+const cl = (typeof CARDLINKS !== "undefined" && CARDLINKS) ? (CARDLINKS[id] || {}) : {};
+const name = o.name != null ? o.name : id;
+const setName = o.set != null ? o.set : "";
+const number = (cl.number != null) ? cl.number : (o.number != null ? o.number : null);
+const rarity = shortRarity(o.rarity != null ? o.rarity : "");
+const metaParts = [];
+if(setName) metaParts.push(esc(setName));
+if(number != null && number !== "") metaParts.push("#" + esc(number));
+if(rarity) metaParts.push(esc(rarity));
+const meta = metaParts.join(" · ");
+let thumbHtml = "";
+if(wantThumb){
+if(cl.set_id && number != null && number !== ""){
+const src = "https://images.pokemontcg.io/" + cl.set_id + "/" + number + ".png";
+thumbHtml = '<img class="cc-thumb" loading="lazy" decoding="async" src="' + src
++ '" alt="" width="40" height="56" onerror="ccFallback(this)">';
+} else {
+thumbHtml = '<span class="cc-thumb cc-thumb--fallback" aria-hidden="true"></span>';
+}
+}
+let links = "";
+if(cl.tcg_pid != null){
+links += '<a class="chip" href="https://www.tcgplayer.com/product/' + cl.tcg_pid
++ '" target="_blank" rel="noopener noreferrer nofollow">TCGplayer</a>';
+}
+if(cl.cm_pid != null){
+links += '<a class="chip" href="https://www.cardmarket.com/en/Pokemon/Products/Singles?idProduct='
++ cl.cm_pid + '" target="_blank" rel="noopener noreferrer nofollow">Cardmarket</a>';
+}
+const priceHtml = opts.price ? '<span class="cc-price">' + fmtMoney(o.market) + '</span>' : "";
+return '<div class="cardcell' + (compact ? ' cc-compact' : '') + '">'
++ thumbHtml
++ '<div class="cc-body">'
++   '<span class="cc-name">' + esc(name) + '</span>'
++   '<span class="cc-meta">' + meta + '</span>'
++   priceHtml
++   (links ? '<span class="cc-links">' + links + '</span>' : '')
++ '</div></div>';
+}
+// ---------- card-link map expansion (see sitegen/packing.py) ----------
+// Rebuilds the {id:{set_id,number,tcg_pid,cm_pid}} object the shared cardCell
+// reads. set_id/number come from splitting the id at its first "-" -- the build
+// verified that reproduces the stored pair for every id it did not list in x.
+// ids is the id column the page already ships; blocks that carry their own
+// ids ignore it.
+function unpackCardlinks(p, ids){
+if(!p || !p._l) return p;
+const keys=p.i||ids||[], x=p.x||{}, out={};
+for(let i=0;i<keys.length;i++){
+const id=keys[i], o=x[i], c=id.indexOf("-");
+out[id]={ set_id: o?o[0]:id.slice(0,c), number: o?o[1]:id.slice(c+1),
+tcg_pid: p.t[i], cm_pid: p.m[i] };
+}
+return out;
+}
+
+const PAGE = {"meta":{"cmCurrency":"USD","cmSym":"$"},"reversionWatch":{"howToRead":"NOT A SIGNAL. Pooled over the whole modeled universe the study measures a 1-month formation spread of -3.0 pts (t_eff -1.77, verdict null) and a 3-month spread of -6.4 pts (t_eff -1.67, verdict null); spread = past winners minus past losers over the next 3 months. Neither is distinguishable from zero once the overlapping 3-month holds are deflated, so the pooled study supports NO tradeable momentum and NO reliable reversion. What follows is simply today's biggest realized movers: there is no measured cross-sectional tendency behind the ordering, and nothing here is a forecast. The only forecast on the row is the model's own predicted 3m. A stratified re-run (see momentum_summary.md) does find reversion inside individual strata, but that is a post-hoc subgroup result with no trading costs applied and it does not license reading this list as a signal.","direction":"null","directionLabel":"no reliable effect","directionSub":"spread within noise at every horizon","stats":{"spread1m":-3.0,"tEff1m":-1.769,"spread3m":-6.4,"tEff3m":-1.673},"spikers":[{"id":"swsh7-193","price":89.95,"ret1mPct":31.8,"ret3mPct":98.1,"predPct":-23.3,"flag":"candidate_down"},{"id":"sv7-167","price":40.27,"ret1mPct":-0.3,"ret3mPct":63.9,"predPct":-20.5,"flag":"candidate_down"},{"id":"swsh7-178","price":5.92,"ret1mPct":-20.1,"ret3mPct":63.1,"predPct":-29.9,"flag":"candidate_down"},{"id":"sv5-187","price":3.5,"ret1mPct":19.2,"ret3mPct":61.6,"predPct":-19.9,"flag":"candidate_down"},{"id":"swsh12-179","price":5.97,"ret1mPct":13.4,"ret3mPct":56.6,"predPct":-15.7,"flag":"none"},{"id":"sv7-156","price":3.48,"ret1mPct":-1.7,"ret3mPct":56.4,"predPct":-22.3,"flag":"candidate_down"},{"id":"sv5-204","price":57.41,"ret1mPct":-1.4,"ret3mPct":52.9,"predPct":-16.0,"flag":"none"},{"id":"swsh7-194","price":515.4,"ret1mPct":2.4,"ret3mPct":48.5,"predPct":-12.1,"flag":"none"},{"id":"swsh7-218","price":1249.92,"ret1mPct":12.4,"ret3mPct":46.1,"predPct":-11.7,"flag":"none"},{"id":"sv5-207","price":26.29,"ret1mPct":-9.0,"ret3mPct":44.1,"predPct":-16.4,"flag":"none"},{"id":"sv7-160","price":4.45,"ret1mPct":5.1,"ret3mPct":41.1,"predPct":-8.6,"flag":"none"},{"id":"swsh11-173","price":3.6,"ret1mPct":-3.5,"ret3mPct":41.0,"predPct":-9.5,"flag":"none"},{"id":"sv5-206","price":55.43,"ret1mPct":-6.0,"ret3mPct":40.8,"predPct":-9.1,"flag":"none"},{"id":"sv5-203","price":36.63,"ret1mPct":-10.7,"ret3mPct":40.8,"predPct":-13.4,"flag":"none"},{"id":"sv4-252","price":35.47,"ret1mPct":-11.2,"ret3mPct":39.0,"predPct":-3.8,"flag":"none"}],"droppers":[{"id":"sv10-207","price":2.1,"ret1mPct":-24.4,"ret3mPct":-65.2,"predPct":2.6,"flag":"none"},{"id":"me2pt5-253","price":1.51,"ret1mPct":-8.3,"ret3mPct":-48.0,"predPct":3.0,"flag":"none"},{"id":"sv9-172","price":1.74,"ret1mPct":-2.8,"ret3mPct":-41.3,"predPct":4.1,"flag":"none"},{"id":"sv6-199","price":3.19,"ret1mPct":-14.0,"ret3mPct":-40.4,"predPct":4.6,"flag":"none"},{"id":"me2-114","price":1.35,"ret1mPct":-35.2,"ret3mPct":-37.8,"predPct":4.2,"flag":"none"},{"id":"sv6-202","price":2.35,"ret1mPct":-12.8,"ret3mPct":-36.6,"predPct":4.3,"flag":"none"},{"id":"me2pt5-294","price":445.06,"ret1mPct":-32.2,"ret3mPct":-35.3,"predPct":0.6,"flag":"none"},{"id":"sv9-174","price":0.84,"ret1mPct":11.3,"ret3mPct":-33.1,"predPct":2.7,"flag":"none"},{"id":"sv3pt5-184","price":20.69,"ret1mPct":-25.9,"ret3mPct":-30.6,"predPct":9.4,"flag":"none"},{"id":"sv9-177","price":1.98,"ret1mPct":-20.5,"ret3mPct":-28.8,"predPct":3.8,"flag":"none"}]},"setPulse":{"howToRead":"Each row aggregates a set's modeled chase cards: the median model-predicted 3-month return, how many carry an up-flag (interval / percentile presets), and the median return those cards have actually realized over the past 3 months. Sets are ordered by median predicted return; predicted and realized columns need not agree.","rows":[{"set":"Crown Zenith","n":1,"medPredPct":9.0,"upFlagsInterval":0,"upFlagsPercentile":1,"medRet3mPct":-8.7,"ageMonths":43},{"set":"Obsidian Flames","n":13,"medPredPct":5.8,"upFlagsInterval":0,"upFlagsPercentile":7,"medRet3mPct":2.8,"ageMonths":36},{"set":"151","n":17,"medPredPct":5.3,"upFlagsInterval":0,"upFlagsPercentile":6,"medRet3mPct":-14.0,"ageMonths":35},{"set":"Scarlet & Violet","n":20,"medPredPct":4.7,"upFlagsInterval":0,"upFlagsPercentile":4,"medRet3mPct":5.0,"ageMonths":41},{"set":"Brilliant Stars","n":23,"medPredPct":2.9,"upFlagsInterval":0,"upFlagsPercentile":5,"medRet3mPct":6.4,"ageMonths":54},{"set":"Lost Origin","n":26,"medPredPct":2.2,"upFlagsInterval":0,"upFlagsPercentile":3,"medRet3mPct":11.8,"ageMonths":47},{"set":"Paradox Rift","n":30,"medPredPct":2.0,"upFlagsInterval":0,"upFlagsPercentile":3,"medRet3mPct":9.2,"ageMonths":33},{"set":"Evolving Skies","n":53,"medPredPct":2.0,"upFlagsInterval":0,"upFlagsPercentile":7,"medRet3mPct":12.9,"ageMonths":60},{"set":"Silver Tempest","n":27,"medPredPct":1.7,"upFlagsInterval":0,"upFlagsPercentile":2,"medRet3mPct":13.3,"ageMonths":45},{"set":"Surging Sparks","n":23,"medPredPct":1.5,"upFlagsInterval":0,"upFlagsPercentile":0,"medRet3mPct":2.3,"ageMonths":21},{"set":"Journey Together","n":16,"medPredPct":1.3,"upFlagsInterval":0,"upFlagsPercentile":0,"medRet3mPct":-10.7,"ageMonths":17},{"set":"Destined Rivals","n":26,"medPredPct":1.2,"upFlagsInterval":0,"upFlagsPercentile":0,"medRet3mPct":-7.1,"ageMonths":15},{"set":"Temporal Forces","n":24,"medPredPct":1.1,"upFlagsInterval":0,"upFlagsPercentile":6,"medRet3mPct":10.1,"ageMonths":29},{"set":"Paldean Fates","n":9,"medPredPct":0.9,"upFlagsInterval":0,"upFlagsPercentile":1,"medRet3mPct":12.0,"ageMonths":31},{"set":"Astral Radiance","n":33,"medPredPct":0.9,"upFlagsInterval":0,"upFlagsPercentile":0,"medRet3mPct":14.6,"ageMonths":51},{"set":"Twilight Masquerade","n":23,"medPredPct":0.5,"upFlagsInterval":0,"upFlagsPercentile":1,"medRet3mPct":1.6,"ageMonths":27},{"set":"Prismatic Evolutions","n":23,"medPredPct":-0.1,"upFlagsInterval":0,"upFlagsPercentile":1,"medRet3mPct":3.8,"ageMonths":19},{"set":"Stellar Crown","n":12,"medPredPct":-0.8,"upFlagsInterval":0,"upFlagsPercentile":0,"medRet3mPct":6.5,"ageMonths":23},{"set":"Phantasmal Flames","n":13,"medPredPct":-2.1,"upFlagsInterval":0,"upFlagsPercentile":0,"medRet3mPct":-9.7,"ageMonths":9},{"set":"Shrouded Fable","n":11,"medPredPct":-2.4,"upFlagsInterval":0,"upFlagsPercentile":0,"medRet3mPct":5.3,"ageMonths":24},{"set":"Mega Evolution","n":18,"medPredPct":-3.1,"upFlagsInterval":0,"upFlagsPercentile":0,"medRet3mPct":-0.8,"ageMonths":11},{"set":"Ascended Heroes","n":24,"medPredPct":-5.3,"upFlagsInterval":0,"upFlagsPercentile":0,"medRet3mPct":-15.6,"ageMonths":7}]},"tierLens":{"howToRead":"Within each rarity tier: the typical (median) USD price and model-predicted 3-month return, the spread of those predictions (interquartile range, Q3-Q1), and how many cards are flagged up or down. A higher tier is not automatically a higher predicted return.","rows":[{"rarity":"Ultra Rare","n":146,"medPriceUsd":2.44,"medPredPct":3.0,"iqrPredPct":4.1,"nUpFlags":0,"nDownFlags":2},{"rarity":"Rare Ultra","n":104,"medPriceUsd":6.69,"medPredPct":1.2,"iqrPredPct":4.5,"nUpFlags":0,"nDownFlags":2},{"rarity":"Special Illustration Rare","n":118,"medPriceUsd":58.7,"medPredPct":-1.4,"iqrPredPct":4.5,"nUpFlags":0,"nDownFlags":1},{"rarity":"Rare Rainbow","n":44,"medPriceUsd":12.26,"medPredPct":1.6,"iqrPredPct":2.8,"nUpFlags":0,"nDownFlags":0},{"rarity":"Hyper Rare","n":33,"medPriceUsd":11.8,"medPredPct":0.8,"iqrPredPct":6.5,"nUpFlags":0,"nDownFlags":0},{"rarity":"Rare Secret","n":15,"medPriceUsd":12.51,"medPredPct":3.2,"iqrPredPct":3.8,"nUpFlags":0,"nDownFlags":0},{"rarity":"Mega Hyper Rare","n":5,"medPriceUsd":283.13,"medPredPct":-3.3,"iqrPredPct":3.1,"nUpFlags":0,"nDownFlags":0}]},"divergenceWatch":{"howToRead":"Cards where the Cardmarket trend price (EUR, converted to $ at the ECB reference rate) diverges most from the US market price, measured as a z-score. A positive gap means Cardmarket sits above the US market. This is a single-snapshot mispricing watch that can also reflect data-vintage differences between the two markets, not a guaranteed arbitrage.","rows":[{"id":"me1-156","divZ":7.16,"marketUsd":1.63,"cmTrendUsd":5.38,"gapPct":230.1},{"id":"swsh9-152","divZ":3.56,"marketUsd":2.31,"cmTrendUsd":5.03,"gapPct":117.7},{"id":"swsh11-201","divZ":-3.23,"marketUsd":27.92,"cmTrendUsd":1.63,"gapPct":-94.2},{"id":"swsh12-182","divZ":3.05,"marketUsd":1.73,"cmTrendUsd":3.49,"gapPct":101.7},{"id":"swsh12-187","divZ":2.91,"marketUsd":8.21,"cmTrendUsd":16.21,"gapPct":97.4},{"id":"swsh7-185","divZ":2.83,"marketUsd":2.16,"cmTrendUsd":4.21,"gapPct":94.9},{"id":"swsh12-180","divZ":2.67,"marketUsd":1.4,"cmTrendUsd":2.66,"gapPct":90.0},{"id":"sv8pt5-151","divZ":2.61,"marketUsd":45.87,"cmTrendUsd":86.28,"gapPct":88.1},{"id":"sv3pt5-191","divZ":2.61,"marketUsd":5.85,"cmTrendUsd":10.99,"gapPct":87.9},{"id":"swsh11-179","divZ":2.37,"marketUsd":2.9,"cmTrendUsd":5.24,"gapPct":80.7},{"id":"swsh7-197","divZ":2.36,"marketUsd":2.3,"cmTrendUsd":4.14,"gapPct":80.0},{"id":"sv3pt5-190","divZ":2.25,"marketUsd":6.23,"cmTrendUsd":11.02,"gapPct":76.9}]},"movers":{"howToRead":"The largest realized 3-month price moves among modeled cards, shown purely for context: realized history from price_history, with no model prediction attached.","gainers":[{"id":"swsh7-193","price":89.95,"ret3mPct":98.1},{"id":"sv7-167","price":40.27,"ret3mPct":63.9},{"id":"swsh7-178","price":5.92,"ret3mPct":63.1},{"id":"sv5-187","price":3.5,"ret3mPct":61.6},{"id":"swsh12-179","price":5.97,"ret3mPct":56.6},{"id":"sv7-156","price":3.48,"ret3mPct":56.4},{"id":"sv5-204","price":57.41,"ret3mPct":52.9},{"id":"swsh7-194","price":515.4,"ret3mPct":48.5},{"id":"swsh7-218","price":1249.92,"ret3mPct":46.1},{"id":"sv5-207","price":26.29,"ret3mPct":44.1}],"losers":[{"id":"sv10-207","price":2.1,"ret3mPct":-65.2},{"id":"me2pt5-253","price":1.51,"ret3mPct":-48.0},{"id":"sv9-172","price":1.74,"ret3mPct":-41.3},{"id":"sv6-199","price":3.19,"ret3mPct":-40.4},{"id":"me2-114","price":1.35,"ret3mPct":-37.8},{"id":"sv6-202","price":2.35,"ret3mPct":-36.6},{"id":"me2pt5-294","price":445.06,"ret3mPct":-35.3},{"id":"sv9-174","price":0.84,"ret3mPct":-33.1},{"id":"sv3pt5-184","price":20.69,"ret3mPct":-30.6},{"id":"sv9-177","price":1.98,"ret3mPct":-28.8}]},"obyid":{"swsh7-193":{"name":"Rayquaza V","set":"Evolving Skies","set_id":"swsh7","number":"193","rarity":"Rare Ultra","market":89.95},"sv7-167":{"name":"Hydrapple ex","set":"Stellar Crown","set_id":"sv7","number":"167","rarity":"Special Illustration Rare","market":40.27},"swsh7-178":{"name":"Dracozolt V","set":"Evolving Skies","set_id":"swsh7","number":"178","rarity":"Rare Ultra","market":5.92},"sv5-187":{"name":"Incineroar ex","set":"Temporal Forces","set_id":"sv5","number":"187","rarity":"Ultra Rare","market":3.5},"swsh12-179":{"name":"Hisuian Arcanine V","set":"Silver Tempest","set_id":"swsh12","number":"179","rarity":"Rare Ultra","market":5.97},"sv7-156":{"name":"Hydrapple ex","set":"Stellar Crown","set_id":"sv7","number":"156","rarity":"Ultra Rare","market":3.48},"sv5-204":{"name":"Gouging Fire ex","set":"Temporal Forces","set_id":"sv5","number":"204","rarity":"Special Illustration Rare","market":57.41},"swsh7-194":{"name":"Rayquaza V","set":"Evolving Skies","set_id":"swsh7","number":"194","rarity":"Rare Ultra","market":515.4},"swsh7-218":{"name":"Rayquaza VMAX","set":"Evolving Skies","set_id":"swsh7","number":"218","rarity":"Rare Rainbow","market":1249.92},"sv5-207":{"name":"Iron Boulder ex","set":"Temporal Forces","set_id":"sv5","number":"207","rarity":"Special Illustration Rare","market":26.29},"sv7-160":{"name":"Dachsbun ex","set":"Stellar Crown","set_id":"sv7","number":"160","rarity":"Ultra Rare","market":4.45},"swsh11-173":{"name":"Delphox V","set":"Lost Origin","set_id":"swsh11","number":"173","rarity":"Rare Ultra","market":3.6},"sv5-206":{"name":"Iron Crown ex","set":"Temporal Forces","set_id":"sv5","number":"206","rarity":"Special Illustration Rare","market":55.43},"sv5-203":{"name":"Iron Leaves ex","set":"Temporal Forces","set_id":"sv5","number":"203","rarity":"Special Illustration Rare","market":36.63},"sv4-252":{"name":"Gholdengo ex","set":"Paradox Rift","set_id":"sv4","number":"252","rarity":"Special Illustration Rare","market":35.47},"sv10-207":{"name":"Arboliva ex","set":"Destined Rivals","set_id":"sv10","number":"207","rarity":"Ultra Rare","market":2.1},"me2pt5-253":{"name":"Mega Audino ex","set":"Ascended Heroes","set_id":"me2pt5","number":"253","rarity":"Ultra Rare","market":1.51},"sv9-172":{"name":"Iono's Bellibolt ex","set":"Journey Together","set_id":"sv9","number":"172","rarity":"Ultra Rare","market":1.74},"sv6-199":{"name":"Cornerstone Mask Ogerpon ex","set":"Twilight Masquerade","set_id":"sv6","number":"199","rarity":"Ultra Rare","market":3.19},"me2-114":{"name":"Empoleon ex","set":"Phantasmal Flames","set_id":"me2","number":"114","rarity":"Ultra Rare","market":1.35},"sv6-202":{"name":"Bloodmoon Ursaluna ex","set":"Twilight Masquerade","set_id":"sv6","number":"202","rarity":"Ultra Rare","market":2.35},"me2pt5-294":{"name":"Mega Charizard Y ex","set":"Ascended Heroes","set_id":"me2pt5","number":"294","rarity":"Mega Hyper Rare","market":445.06},"sv9-174":{"name":"Mamoswine ex","set":"Journey Together","set_id":"sv9","number":"174","rarity":"Ultra Rare","market":0.84},"sv3pt5-184":{"name":"Blastoise ex","set":"151","set_id":"sv3pt5","number":"184","rarity":"Ultra Rare","market":20.69},"sv9-177":{"name":"Salamence ex","set":"Journey Together","set_id":"sv9","number":"177","rarity":"Ultra Rare","market":1.98},"me1-156":{"name":"Mega Camerupt ex","set":"Mega Evolution","set_id":"me1","number":"156","rarity":"Ultra Rare","market":1.63},"swsh9-152":{"name":"Shaymin V","set":"Brilliant Stars","set_id":"swsh9","number":"152","rarity":"Rare Ultra","market":2.31},"swsh11-201":{"name":"Giratina VSTAR","set":"Lost Origin","set_id":"swsh11","number":"201","rarity":"Rare Rainbow","market":27.92},"swsh12-182":{"name":"Magearna V","set":"Silver Tempest","set_id":"swsh12","number":"182","rarity":"Rare Ultra","market":1.73},"swsh12-187":{"name":"Ho-Oh V","set":"Silver Tempest","set_id":"swsh12","number":"187","rarity":"Rare Ultra","market":8.21},"swsh7-185":{"name":"Medicham V","set":"Evolving Skies","set_id":"swsh7","number":"185","rarity":"Rare Ultra","market":2.16},"swsh12-180":{"name":"Skuntank V","set":"Silver Tempest","set_id":"swsh12","number":"180","rarity":"Rare Ultra","market":1.4},"sv8pt5-151":{"name":"Palafin ex","set":"Prismatic Evolutions","set_id":"sv8pt5","number":"151","rarity":"Special Illustration Rare","market":45.87},"sv3pt5-191":{"name":"Jynx ex","set":"151","set_id":"sv3pt5","number":"191","rarity":"Ultra Rare","market":5.85},"swsh11-179":{"name":"Aerodactyl V","set":"Lost Origin","set_id":"swsh11","number":"179","rarity":"Rare Ultra","market":2.9},"swsh7-197":{"name":"Duraludon V","set":"Evolving Skies","set_id":"swsh7","number":"197","rarity":"Rare Ultra","market":2.3},"sv3pt5-190":{"name":"Kangaskhan ex","set":"151","set_id":"sv3pt5","number":"190","rarity":"Ultra Rare","market":6.23}},"cardlinks":{"_l":1,"t":[246727,567472,246764,542908,451827,567443,542925,246728,246733,542928,567452,284115,542927,542924,523933,633007,676065,623599,550243,662156,550246,676106,623601,517015,623604,654495,263871,284156,451830,451835,246706,451828,610506,517023,284123,246749,517024],"m":[574251,786021,574236,760817,682226,786010,760834,574252,574276,760837,786014,674179,760836,760833,740795,826081,869864,817325,769373,857689,769376,869905,817327,733779,817330,851227,608698,670816,682229,682235,574243,682227,805545,733786,674184,574255,733785],"i":["swsh7-193","sv7-167","swsh7-178","sv5-187","swsh12-179","sv7-156","sv5-204","swsh7-194","swsh7-218","sv5-207","sv7-160","swsh11-173","sv5-206","sv5-203","sv4-252","sv10-207","me2pt5-253","sv9-172","sv6-199","me2-114","sv6-202","me2pt5-294","sv9-174","sv3pt5-184","sv9-177","me1-156","swsh9-152","swsh11-201","swsh12-182","swsh12-187","swsh7-185","swsh12-180","sv8pt5-151","sv3pt5-191","swsh11-179","swsh7-197","sv3pt5-190"]}};
+
+const M = PAGE.meta;
+const RW = PAGE.reversionWatch, SPUL = PAGE.setPulse, TL = PAGE.tierLens, DW = PAGE.divergenceWatch, MV = PAGE.movers;
+const CARDLINKS = unpackCardlinks(PAGE.cardlinks) || {};
+const OBYID = new Map(Object.entries(PAGE.obyid || {}));
+function reversionRow(o){
+const p = o.predPct;
+const pc = p==null?"":(p>0?"ret-pos":(p<0?"ret-neg":""));
+let chip = "";
+if(o.flag==="candidate_up") chip=' <span class="flag-chip up">up</span>';
+else if(o.flag==="candidate_down") chip=' <span class="flag-chip down">down</span>';
+return '<tr>'
++ '<td>'+cardCell(o.id,{compact:true})+'</td>'
++ '<td class="num">'+fmtMoney(o.price)+'</td>'
++ ppTd(o.ret1mPct)
++ ppTd(o.ret3mPct)
++ '<td class="num"><span class="'+pc+'">'+pp(p)+'</span>'+chip+'</td>'
++ '</tr>';
+}
+function renderWatchlists(){
+const s = RW.stats;
+// The direction card is whatever the pooled momentum study actually reports.
+// When it is null the block must not present itself as a measured effect, so
+// the sub-heading and the leg captions are driven by RW.direction too.
+const measured = RW.direction === "reversion" || RW.direction === "momentum";
+const sc = [
+{k:"1m formation spread", v:pp(s.spread1m)+" pts", sub:"t_eff "+fmtSigned(s.tEff1m,1)},
+{k:"3m formation spread", v:pp(s.spread3m)+" pts", sub:"t_eff "+fmtSigned(s.tEff3m,1)},
+{k:"Direction", v:RW.directionLabel, sub:RW.directionSub},
+];
+document.getElementById("reversion-stats").innerHTML = sc.map(c=>
+'<div class="stat-card"><p class="k">'+esc(c.k)+'</p><p class="v num ret-neg">'+esc(c.v)
++'<small>'+esc(c.sub)+'</small></p></div>').join("");
+document.getElementById("reversion-sub").textContent = measured
+? ("The momentum study currently measures "+RW.directionLabel+" ("+RW.directionSub
++"). These are today's biggest movers, paired with the model's own view.")
+: ("The momentum study finds no reliable cross-sectional effect at any formation "
++"horizon, so this is a list of today's biggest realized movers and NOT a signal. "
++"The only forecast on each row is the model's own predicted 3m.");
+if (measured) {
+const down = RW.direction === "reversion";
+document.getElementById("spikers-head").textContent =
+"Spikers (largest recent gainers, "+RW.directionLabel+" leans "+(down?"down":"up")+")";
+document.getElementById("droppers-head").textContent =
+"Droppers (largest recent losers, "+RW.directionLabel+" leans "+(down?"up":"down")+")";
+}
+document.getElementById("spikers-body").innerHTML = RW.spikers.map(reversionRow).join("");
+document.getElementById("droppers-body").innerHTML = RW.droppers.map(reversionRow).join("");
+document.getElementById("setpulse-body").innerHTML = SPUL.rows.map(r=>'<tr>'
++'<td><span class="card-name">'+esc(r.set)+'</span></td>'
++'<td class="num">'+r.n+'</td>'
++ppTd(r.medPredPct)
++'<td class="num">'+r.upFlagsInterval+'</td>'
++'<td class="num">'+r.upFlagsPercentile+'</td>'
++ppTd(r.medRet3mPct)
++'<td class="num">'+(r.ageMonths==null?"n/a":r.ageMonths)+'</td>'
++'</tr>').join("");
+document.getElementById("tier-body").innerHTML = TL.rows.map(r=>'<tr>'
++'<td><span class="card-name">'+esc(r.rarity)+'</span></td>'
++'<td class="num">'+r.n+'</td>'
++'<td class="num">'+(r.medPriceUsd==null?"n/a":fmtMoney(r.medPriceUsd))+'</td>'
++ppTd(r.medPredPct)
++'<td class="num">'+(r.iqrPredPct==null?"n/a":r.iqrPredPct.toFixed(1))+'</td>'
++'<td class="num">'+r.nUpFlags+'</td>'
++'<td class="num">'+r.nDownFlags+'</td>'
++'</tr>').join("");
+document.getElementById("div-cm-head").textContent = "Cardmarket ("+M.cmCurrency+")";
+document.getElementById("divergence-body").innerHTML = DW.rows.map(r=>'<tr>'
++'<td>'+cardCell(r.id,{compact:true})+'</td>'
++'<td class="num">'+fmtMoney(r.marketUsd)+'</td>'
++'<td class="num">'+M.cmSym+r.cmTrendUsd.toFixed(2)+'</td>'
++ppTd(r.gapPct)
++'<td class="num '+(r.divZ>0?"ret-pos":"ret-neg")+'">'+fmtSigned(r.divZ,2)+'</td>'
++'</tr>').join("");
+const moverRow = r=>'<tr>'
++'<td>'+cardCell(r.id,{compact:true})+'</td>'
++'<td class="num">'+fmtMoney(r.price)+'</td>'
++ppTd(r.ret3mPct)
++'</tr>';
+document.getElementById("gainers-body").innerHTML = MV.gainers.map(moverRow).join("");
+document.getElementById("losers-body").innerHTML = MV.losers.map(moverRow).join("");
+}
+renderWatchlists();
+
+</script>
+</body>
+</html>

@@ -1,0 +1,1206 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Methods, sources, and caveats</title>
+<link rel="icon" href="data:," />
+<script>(function(){try{var t=localStorage.getItem('pk-theme');if(t==='dark'||t==='light'||t==='pastel')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+
+:root{
+--surface:#faf9f7;
+--panel:#ffffff;
+--panel-alt:#f4f2ee;
+--ink:#27272a;
+--ink-muted:#52525b;
+--ink-subtle:#6b6b73;
+--border:#e4e4e7;
+--border-strong:#d4d4d8;
+--accent:#3d5a80;
+--accent-ink:#2c4360;
+--up:#0d9488;
+--up-text:#0a6d64;
+--down:#c0392b;
+--down-text:#992b20;
+--neutral:#a1a1aa;
+--accent-rgb:61,90,128;
+--up-rgb:13,148,136;
+--down-rgb:192,57,43;
+--on-accent:#ffffff;
+--warn-ink:#8a5a12;
+--warn-bg:#fbf3e2;
+--warn-border:#ead9b6;
+--warn-ink-hover:#6f480d;
+--warn-bg-hover:#f8ebd2;
+--warn-border-hover:#d9bd7f;
+--warn-dot:#c58a2a;
+--shadow-tint:39,39,42;
+--radius:3px;
+--ease:cubic-bezier(.16,1,.3,1);
+--t-fast:.15s;
+--t-mid:.24s;
+--rv-step:42ms;
+--nav-h:52px;
+--tbl-pad-y:6px;
+--tbl-pad-x:12px;
+--tbl-fs:0.85rem;
+--section-gap:30px;
+--spark-w:84px;
+--spark-h:22px;
+--band-w:150px;
+}
+@media (prefers-color-scheme: dark){
+:root:not([data-theme="light"]):not([data-theme="pastel"]){
+--surface:#1a1917;
+--panel:#221f1d;
+--panel-alt:#2a2724;
+--ink:#ece8e1;
+--ink-muted:#b2aca1;
+--ink-subtle:#959083;
+--border:#37332e;
+--border-strong:#48433c;
+--accent:#8fb0d4;
+--accent-ink:#9dbbdd;
+--up:#2dd4bf;
+--up-text:#5ad6c6;
+--down:#f0705c;
+--down-text:#f2897a;
+--neutral:#7a756d;
+--accent-rgb:143,176,212;
+--up-rgb:45,212,191;
+--down-rgb:240,112,92;
+--on-accent:#1a1917;
+--warn-ink:#e8b877;
+--warn-bg:#3a2f1c;
+--warn-border:#5a4826;
+--warn-ink-hover:#f0c88a;
+--warn-bg-hover:#463722;
+--warn-border-hover:#6b5730;
+--warn-dot:#d8a24e;
+--shadow-tint:0,0,0;
+}
+}
+:root[data-theme="dark"]{
+--surface:#1a1917;
+--panel:#221f1d;
+--panel-alt:#2a2724;
+--ink:#ece8e1;
+--ink-muted:#b2aca1;
+--ink-subtle:#959083;
+--border:#37332e;
+--border-strong:#48433c;
+--accent:#8fb0d4;
+--accent-ink:#9dbbdd;
+--up:#2dd4bf;
+--up-text:#5ad6c6;
+--down:#f0705c;
+--down-text:#f2897a;
+--neutral:#7a756d;
+--accent-rgb:143,176,212;
+--up-rgb:45,212,191;
+--down-rgb:240,112,92;
+--on-accent:#1a1917;
+--warn-ink:#e8b877;
+--warn-bg:#3a2f1c;
+--warn-border:#5a4826;
+--warn-ink-hover:#f0c88a;
+--warn-bg-hover:#463722;
+--warn-border-hover:#6b5730;
+--warn-dot:#d8a24e;
+--shadow-tint:0,0,0;
+}
+:root[data-theme="pastel"]{
+--surface:#f3e1d7;
+--panel:#fffcfa;
+--panel-alt:#e8cabb;
+--ink:#2b201d;
+--ink-muted:#63483f;
+--ink-subtle:#684f47;
+--border:#e8d3c8;
+--border-strong:#a8695d;
+--accent:#bf5b4f;
+--accent-ink:#7c342b;
+--up:#217c6a;
+--up-text:#1c6255;
+--down:#712318;
+--down-text:#5c1c12;
+--neutral:#a89287;
+--accent-rgb:191,91,79;
+--up-rgb:33,124,106;
+--down-rgb:113,35,24;
+--on-accent:#0d0908;
+--warn-ink:#8a5a12;
+--warn-bg:#faf0dd;
+--warn-border:#e8d0a0;
+--warn-ink-hover:#6f480d;
+--warn-bg-hover:#f6e7c8;
+--warn-border-hover:#d8b978;
+--warn-dot:#c58a2a;
+--shadow-tint:43,32,29;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+@media (prefers-reduced-motion:no-preference){ html{scroll-behavior:smooth;} }
+body{
+background:var(--surface);
+color:var(--ink);
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+font-size:15px;
+line-height:1.55;
+-webkit-font-smoothing:antialiased;
+}
+@media (prefers-reduced-motion:no-preference){ body{transition:background-color .2s,color .2s;} }
+.num,td.num,th.num,.stat-value,.tick-label{
+font-variant-numeric:tabular-nums;
+font-feature-settings:"tnum" 1,"lnum" 1;
+}
+a{color:var(--accent-ink);}
+a:hover{color:var(--accent);}
+.page{max-width:1360px;margin:0 auto;padding:20px 20px 44px;}
+.prose{max-width:66ch;}
+.ret-pos{color:var(--up-text);}
+.ret-neg{color:var(--down);}
+.topnav{
+position:sticky;top:0;z-index:40;
+background:var(--surface);border-bottom:1px solid var(--border);
+}
+.nav-inner{
+max-width:1240px;margin:0 auto;padding:0 20px;
+height:var(--nav-h);display:flex;align-items:center;gap:10px;
+}
+.brand{
+font-weight:700;letter-spacing:-0.01em;color:var(--ink);
+text-decoration:none;font-size:0.98rem;flex:none;
+position:relative;display:inline-block;
+}
+.brand:hover{color:var(--accent-ink);}
+.brand::after{
+content:"";position:absolute;left:0;right:0;bottom:-3px;height:1.5px;
+background:var(--accent);opacity:0.34;
+}
+@media (prefers-reduced-motion:no-preference){
+.brand::after{animation:pk-breathe 5.5s ease-in-out infinite;
+transition:opacity var(--t-mid) var(--ease);}
+.brand:hover::after,.brand:focus-visible::after{animation:none;opacity:1;}
+@keyframes pk-breathe{
+0%,100%{opacity:0.22;}
+50%{opacity:0.6;}
+}
+html.motion .brand{animation:pk-brand .5s var(--ease) both;}
+@keyframes pk-brand{
+from{opacity:0;letter-spacing:.08em;}
+to{opacity:1;letter-spacing:-0.01em;}
+}
+}
+.nav-links{
+display:flex;gap:2px;flex:1;overflow-x:auto;overflow-y:hidden;
+scrollbar-width:none;-ms-overflow-style:none;
+}
+.nav-links::-webkit-scrollbar{display:none;}
+.nav-links a{
+font-size:0.83rem;color:var(--ink-muted);text-decoration:none;
+padding:6px 7px;border-radius:var(--radius);white-space:nowrap;
+transition:background-color .15s ease-out,color .15s ease-out;
+}
+.nav-links a:hover{background:var(--panel-alt);color:var(--ink);}
+.nav-links a.active{color:var(--accent-ink);background:rgba(var(--accent-rgb),0.10);font-weight:600;}
+.density-toggle{flex:none;white-space:nowrap;font-size:0.78rem;padding:6px 10px;}
+.copy-toggle{flex:none;white-space:nowrap;font-size:0.78rem;padding:6px 10px;}
+html:not(.plain) [data-copy="plain"]{display:none;}
+html.plain [data-copy="full"]{display:none;}
+@media (prefers-reduced-motion:no-preference){
+html.copy-anim.plain [data-copy="plain"],
+html.copy-anim:not(.plain) [data-copy="full"]{
+animation:pk-copyswap var(--t-mid) var(--ease);
+}
+@keyframes pk-copyswap{from{opacity:0;transform:translateY(-3px);}to{opacity:1;transform:none;}}
+.depth-in > *{animation:pk-rowin var(--t-mid) var(--ease) both;}
+.depth-in > *:nth-child(n+6){animation-delay:calc((var(--rowi,0)) * 1ms);}
+.depth-in > *:nth-child(6){--rowi:0;}
+.depth-in > *:nth-child(7){--rowi:45;}
+.depth-in > *:nth-child(8){--rowi:90;}
+.depth-in > *:nth-child(9){--rowi:135;}
+.depth-in > *:nth-child(10){--rowi:180;}
+@keyframes pk-rowin{from{opacity:0;transform:translateY(-4px);}to{opacity:1;transform:none;}}
+}
+.theme-group{flex:none;}
+.theme-group button{font-size:0.74rem;padding:5px 8px;white-space:nowrap;}
+.theme-opt[aria-pressed="true"]{background:var(--accent);color:var(--on-accent);}
+@media (max-width:720px){
+.nav-links{
+-webkit-mask-image:linear-gradient(to right,#000 calc(100% - 22px),transparent);
+mask-image:linear-gradient(to right,#000 calc(100% - 22px),transparent);
+}
+}
+@media (max-width:560px){
+.nav-inner{
+flex-wrap:wrap;height:auto;row-gap:2px;padding-top:6px;padding-bottom:8px;
+}
+.nav-links{order:3;flex:0 0 100%;width:100%;}
+.brand{margin-right:auto;}
+.nav-inner{gap:8px;padding-left:12px;padding-right:12px;}
+.theme-group button{font-size:0.7rem;padding:4px 7px;}
+.density-toggle{font-size:0.72rem;padding:5px 8px;}
+}
+header.masthead{border-bottom:1px solid var(--border);padding-bottom:14px;margin-bottom:18px;text-align:center;scroll-margin-top:calc(var(--nav-h) + 14px);}
+header.masthead h1{font-size:1.4rem;font-weight:650;margin:0 0 5px;letter-spacing:-0.01em;}
+header.masthead p.lede{margin:0 auto 8px;max-width:80ch;color:var(--ink-muted);font-size:0.92rem;}
+.summary-strip{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+gap:1px;
+background:var(--border);
+border:1px solid var(--border);
+border-radius:var(--radius);
+overflow:hidden;
+}
+.summary-cell{background:var(--panel);padding:9px 12px;text-align:center;}
+.summary-cell .k{font-size:0.72rem;text-transform:uppercase;letter-spacing:0.04em;color:var(--ink-subtle);margin:0 0 4px;}
+.summary-cell .v{font-size:1.15rem;font-weight:650;margin:0;line-height:1.25;}
+.summary-cell .v small{
+font-weight:500;color:var(--ink-muted);font-size:0.7rem;display:-webkit-box;
+-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.3;
+}
+.verdict-cell{background:var(--panel-alt);}
+.verdict-chip{
+display:inline-flex;align-items:center;gap:7px;
+font-size:0.82rem;font-weight:650;color:var(--warn-ink);
+background:var(--warn-bg);border:1px solid var(--warn-border);border-radius:999px;
+padding:4px 12px;text-decoration:none;
+transition:background-color .15s ease-out,border-color .15s ease-out;
+}
+.verdict-chip:hover{border-color:var(--warn-border-hover);color:var(--warn-ink-hover);background:var(--warn-bg-hover);}
+.verdict-chip .dot{width:7px;height:7px;border-radius:50%;background:var(--warn-dot);}
+section{margin-bottom:var(--section-gap);scroll-margin-top:calc(var(--nav-h) + 14px);}
+section > h2{font-size:1.08rem;font-weight:650;margin:0 0 4px;letter-spacing:-0.005em;text-align:center;}
+section > p.section-note{margin:0 auto 10px;color:var(--ink-muted);font-size:0.88rem;max-width:78ch;text-align:center;}
+details.explain{
+max-width:78ch;margin:0 auto 12px;border:1px solid var(--border);
+border-radius:var(--radius);background:var(--panel);
+}
+details.explain > summary{
+cursor:pointer;list-style:none;padding:9px 14px;
+font-size:0.82rem;font-weight:600;color:var(--accent-ink);
+display:flex;align-items:center;gap:8px;user-select:none;
+transition:background-color .15s ease-out;border-radius:var(--radius);
+}
+details.explain > summary:hover{background:var(--panel-alt);}
+details.explain > summary::-webkit-details-marker{display:none;}
+details.explain > summary::before{
+content:"";width:6px;height:6px;border-right:1.5px solid var(--accent);
+border-bottom:1.5px solid var(--accent);transform:rotate(-45deg);
+transition:transform .15s ease-out;flex:none;margin-left:2px;
+}
+details.explain[open] > summary::before{transform:rotate(45deg);}
+details.explain > summary::after{content:"How to read this";}
+details.explain > summary span.custom{display:none;}
+@media (prefers-reduced-motion:no-preference){
+details.explain[open] .explain-body{animation:pk-explain var(--t-mid) var(--ease);}
+@keyframes pk-explain{from{opacity:0;transform:translateY(-4px);}to{opacity:1;transform:none;}}
+}
+ul.kpi-key{margin:4px 0 12px;padding-left:18px;}
+ul.kpi-key li{margin-bottom:5px;}
+ul.kpi-key li strong{color:var(--ink);}
+details.explain .explain-body{
+padding:2px 16px 14px 30px;font-size:0.86rem;color:var(--ink-muted);
+line-height:1.6;border-top:1px solid var(--border);margin-top:0;padding-top:12px;
+}
+details.explain .explain-body p{margin:0 0 9px;}
+details.explain .explain-body p:last-child{margin-bottom:0;}
+details.explain .explain-body strong{color:var(--ink);}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:center;margin-bottom:16px;}
+input[type="search"],select{
+font-family:inherit;font-size:0.88rem;padding:7px 10px;
+border:1px solid var(--border-strong);border-radius:var(--radius);
+background:var(--panel);color:var(--ink);
+}
+input[type="search"]{min-width:220px;}
+input[type="search"]:focus,select:focus,button:focus{outline:2px solid var(--accent);outline-offset:1px;}
+a:focus-visible,summary:focus-visible,.hub-card:focus-visible,.verdict-chip:focus-visible{
+outline:2px solid var(--accent);outline-offset:2px;border-radius:var(--radius);
+}
+.preset-group{display:flex;gap:0;border:1px solid var(--border-strong);border-radius:var(--radius);overflow:hidden;}
+.preset-group button{border:none;border-right:1px solid var(--border-strong);border-radius:0;background:var(--panel);}
+.preset-group button:last-child{border-right:none;}
+.depth-group{margin:0 0 10px auto;width:max-content;}
+.depth-group button{font-size:0.76rem;padding:4px 11px;}
+button{
+font-family:inherit;font-size:0.85rem;padding:7px 12px;
+border:1px solid var(--border-strong);border-radius:var(--radius);
+background:var(--panel);color:var(--ink);cursor:pointer;
+transition:background-color var(--t-fast) ease-out,border-color var(--t-fast) ease-out,
+color var(--t-fast) ease-out;
+}
+button:hover{border-color:var(--accent);}
+@media (prefers-reduced-motion:no-preference){
+button{transition:background-color var(--t-fast) ease-out,border-color var(--t-fast) ease-out,
+color var(--t-fast) ease-out,transform var(--t-fast) var(--ease);}
+button:active{transform:translateY(1px);}
+}
+button.active{background:var(--accent);border-color:var(--accent);color:var(--on-accent);}
+.preset-group button.active{background:var(--accent);color:var(--on-accent);}
+.table-wrap{border:1px solid var(--border);border-radius:var(--radius);overflow-x:auto;}
+table{border-collapse:collapse;width:100%;font-size:var(--tbl-fs);}
+thead th{
+text-align:left;padding:calc(var(--tbl-pad-y) + 1px) var(--tbl-pad-x);
+border-bottom:1px solid var(--border-strong);
+background:var(--panel-alt);font-weight:600;white-space:nowrap;
+position:sticky;top:0;
+}
+thead th.sortable{cursor:pointer;user-select:none;}
+thead th.num{text-align:right;}
+thead th[title]{text-decoration:underline dotted var(--border-strong);text-underline-offset:3px;}
+thead th.sortable:hover{color:var(--accent-ink);}
+thead th .arrow{color:var(--accent);margin-left:3px;font-size:0.75em;}
+tbody td{padding:var(--tbl-pad-y) var(--tbl-pad-x);border-bottom:1px solid var(--border);vertical-align:middle;}
+tbody tr:last-child td{border-bottom:none;}
+tbody tr{transition:background-color .13s ease-out;}
+tbody tr:hover{background:var(--panel-alt);}
+tbody tr:hover td:first-child{box-shadow:inset 2px 0 0 var(--accent);}
+td.num{text-align:right;}
+.card-name{font-weight:600;}
+.card-set{color:var(--ink-subtle);font-size:0.8rem;}
+.rarity-tag{font-size:0.74rem;color:var(--ink-muted);white-space:nowrap;}
+.band-cell{min-width:170px;}
+.band-val{font-weight:700;font-size:0.95rem;font-variant-numeric:tabular-nums;}
+.band-val.up{color:var(--up-text);}
+.band-val.down{color:var(--down);}
+svg.band{display:block;margin-top:3px;overflow:visible;width:var(--band-w);height:14px;}
+svg.spark{display:block;width:var(--spark-w);height:var(--spark-h);}
+.flag-badge{
+display:inline-block;font-size:0.72rem;font-weight:700;padding:2px 8px;
+border-radius:999px;white-space:nowrap;letter-spacing:0.01em;
+}
+.flag-badge.up{background:rgba(var(--up-rgb),0.13);color:var(--up-text);}
+.flag-badge.down{background:rgba(var(--down-rgb),0.13);color:var(--down-text);}
+.flag-badge.none{background:var(--panel-alt);color:var(--ink-subtle);font-weight:600;}
+.flag-chip{
+display:inline-block;font-size:0.68rem;font-weight:600;padding:1px 7px;margin-top:3px;
+border-radius:999px;border:1px solid var(--border-strong);white-space:nowrap;color:var(--ink-subtle);
+}
+.flag-chip.up{border-color:rgba(var(--up-rgb),0.5);color:var(--up-text);}
+.flag-chip.down{border-color:rgba(var(--down-rgb),0.5);color:var(--down-text);}
+.flag-stack{display:flex;flex-direction:column;align-items:flex-start;gap:0;}
+.drivers{font-size:0.74rem;color:var(--ink-muted);white-space:normal;max-width:210px;line-height:1.4;}
+.drivers .dw{display:inline-block;margin-right:8px;white-space:nowrap;}
+.eur-cell{font-size:0.78rem;color:var(--ink-muted);white-space:nowrap;}
+.eur-cell .z{font-weight:650;}
+.eur-cell .z.pos{color:var(--up-text);}
+.eur-cell .z.neg{color:var(--down);}
+.table-footer{display:flex;justify-content:space-between;align-items:center;margin-top:12px;font-size:0.82rem;color:var(--ink-subtle);gap:12px;flex-wrap:wrap;}
+.wl-block{margin-bottom:38px;}
+.wl-block:last-child{margin-bottom:0;}
+.wl-block h3{font-size:0.98rem;font-weight:650;margin:0 0 3px;text-align:center;letter-spacing:-0.005em;}
+.wl-sub{text-align:center;color:var(--ink-muted);font-size:0.86rem;margin:0 auto 10px;max-width:78ch;}
+.wl-duo{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start;}
+.wl-duo > *{min-width:0;}
+@media (max-width:820px){.wl-duo{grid-template-columns:1fr;}}
+.duo-head{font-size:0.78rem;font-weight:650;color:var(--ink-muted);text-align:center;margin:0 0 5px;text-transform:uppercase;letter-spacing:0.04em;}
+.stat-cards{
+display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;
+background:var(--border);border:1px solid var(--border);border-radius:var(--radius);
+overflow:hidden;margin:0 auto 16px;max-width:760px;
+}
+.stat-card{background:var(--panel);padding:12px 14px;text-align:center;}
+.stat-card .k{font-size:0.7rem;text-transform:uppercase;letter-spacing:0.04em;color:var(--ink-subtle);margin:0 0 4px;}
+.stat-card .v{font-size:1.1rem;font-weight:650;margin:0;line-height:1.2;}
+.stat-card .v small{font-weight:500;color:var(--ink-muted);font-size:0.7rem;display:block;margin-top:2px;}
+#leaderboard tbody tr.selected{background:rgba(var(--accent-rgb),0.08);}
+#leaderboard tbody tr.selected td:first-child{box-shadow:inset 3px 0 0 var(--accent);}
+#leaderboard tbody tr.baseline td{color:var(--ink-subtle);}
+.sel-tag{font-size:0.68rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:0.04em;margin-left:6px;}
+.attr-note{margin-top:14px;}
+.verdict-word{font-weight:700;}
+.verdict-word.reversion{color:var(--down);}
+.verdict-word.momentum{color:var(--up-text);}
+.verdict-word.null{color:var(--ink-subtle);}
+.verdict-word.insufficient{color:var(--warn-ink);font-weight:650;}
+tr.slice-anchor{background:var(--panel-alt);}
+tr.slice-anchor td{font-weight:650;}
+tr.slice-total td:first-child{box-shadow:inset 3px 0 0 var(--accent);}
+.thin-tag{
+display:inline-block;font-size:0.64rem;font-weight:700;letter-spacing:0.04em;
+text-transform:uppercase;padding:1px 6px;margin-left:6px;border-radius:999px;
+color:var(--warn-ink);background:var(--warn-bg);border:1px solid var(--warn-border);
+white-space:nowrap;vertical-align:1px;
+}
+.call-word{font-weight:650;font-size:0.82em;white-space:nowrap;}
+.call-word.clears{color:var(--up-text);}
+.call-word.negative{color:var(--down);}
+.call-word.flat{color:var(--ink-subtle);}
+.call-word.skipped{color:var(--ink-subtle);}
+.slice-legend{
+font-size:0.8rem;color:var(--ink-subtle);margin:10px auto 0;max-width:80ch;line-height:1.5;
+}
+html.compact .slice-legend{display:none;}
+.callout{
+border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:var(--radius);
+padding:14px 18px;background:var(--panel);font-size:0.9rem;color:var(--ink-muted);margin-bottom:18px;
+}
+.callout strong{color:var(--ink);}
+.split{display:grid;grid-template-columns:1.15fr 1fr;gap:24px;align-items:start;}
+.split > *{min-width:0;}
+@media (max-width:900px){.split{grid-template-columns:1fr;}}
+.caveats{
+border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:var(--radius);
+padding:18px 20px;background:var(--panel);font-size:0.86rem;color:var(--ink-muted);
+}
+.caveats h4{margin:0 0 10px;color:var(--ink);font-size:0.9rem;font-weight:650;}
+.caveats ul{margin:0;padding-left:1.15em;}
+.caveats li{margin-bottom:11px;}
+.caveats li:last-child{margin-bottom:0;}
+.caveats strong{color:var(--ink);}
+.methods-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px;}
+.methods-grid > *{min-width:0;}
+@media (max-width:760px){.methods-grid{grid-template-columns:1fr;}}
+.method-card{border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;background:var(--panel);font-size:0.86rem;color:var(--ink-muted);}
+.method-card h4{margin:0 0 8px;color:var(--ink);font-size:0.9rem;font-weight:650;}
+.method-card ul{margin:0;padding-left:1.1em;}
+.method-card li{margin-bottom:6px;}
+.method-card p{margin:0 0 8px;}
+.method-card p:last-child{margin-bottom:0;}
+.hub-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin:0 0 8px;}
+.hub-card{
+display:block;border:1px solid var(--border);border-radius:var(--radius);
+padding:15px 17px;background:var(--panel);text-decoration:none;color:inherit;
+transition:border-color .15s ease-out,transform .15s ease-out;
+}
+.hub-card:hover{border-color:var(--accent);transform:translateY(-1px);}
+.hub-card .hc-title{font-weight:650;color:var(--ink);font-size:0.95rem;margin:0 0 4px;}
+.hub-card .hc-desc{color:var(--ink-muted);font-size:0.83rem;margin:0;line-height:1.45;}
+.stub{
+border:1px dashed var(--border-strong);border-radius:var(--radius);
+padding:34px 26px;background:var(--panel);text-align:center;color:var(--ink-muted);
+max-width:72ch;margin:0 auto;
+}
+.stub h3{margin:0 0 8px;color:var(--ink);font-size:1.02rem;}
+.stub p{margin:0 auto;max-width:60ch;}
+#tooltip{
+position:fixed;pointer-events:none;background:var(--ink);color:var(--surface);
+border-radius:var(--radius);padding:8px 10px;font-size:12px;line-height:1.45;max-width:250px;
+opacity:0;transition:opacity 60ms linear;z-index:50;box-shadow:0 2px 10px rgba(var(--shadow-tint),0.22);
+}
+#tooltip.show{opacity:1;}
+#tooltip .tt-name{font-weight:650;display:block;margin-bottom:2px;}
+.mark{cursor:pointer;}
+.mark:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+.mark-dot{fill-opacity:0;transition:fill-opacity var(--t-fast) ease-out;}
+.mark-dot:hover,.mark-dot:focus-visible{fill-opacity:1;}
+footer{border-top:1px solid var(--border);padding-top:18px;margin-top:8px;font-size:0.82rem;color:var(--ink-subtle);}
+footer code{background:var(--panel-alt);padding:1px 5px;border-radius:2px;font-size:0.92em;}
+html.motion [data-reveal]{opacity:0;transform:translateY(10px);
+transition:opacity var(--t-mid) var(--ease),transform var(--t-mid) var(--ease);
+transition-delay:calc(var(--rv,0) * var(--rv-step));}
+html.motion [data-reveal].in-view{opacity:1;transform:none;}
+.pagenav{
+position:fixed;right:18px;bottom:18px;z-index:44;
+display:flex;flex-direction:column;align-items:flex-end;gap:8px;
+}
+.pagenav[hidden]{display:none;}
+.pn-row{display:flex;gap:6px;}
+.pagenav button{
+font-size:0.78rem;padding:6px 11px;background:var(--panel);
+border:1px solid var(--border-strong);border-radius:var(--radius);
+color:var(--ink-muted);box-shadow:0 2px 10px rgba(var(--shadow-tint),0.18);
+}
+.pagenav button:hover{color:var(--ink);border-color:var(--accent);}
+.pn-list{
+display:flex;flex-direction:column;max-height:min(58vh,420px);overflow-y:auto;
+width:250px;background:var(--panel);border:1px solid var(--border-strong);
+border-radius:var(--radius);box-shadow:0 4px 18px rgba(var(--shadow-tint),0.22);
+}
+.pn-list[hidden]{display:none;}
+.pn-list a{
+padding:7px 12px;font-size:0.79rem;line-height:1.35;color:var(--ink-muted);
+text-decoration:none;border-left:2px solid transparent;
+}
+.pn-list a + a{border-top:1px solid var(--border);}
+.pn-list a:hover{background:var(--panel-alt);color:var(--ink);}
+.pn-list a.active{color:var(--accent-ink);border-left-color:var(--accent);font-weight:600;}
+@media (prefers-reduced-motion:no-preference){
+.pagenav button{transition:color var(--t-fast) ease-out,border-color var(--t-fast) ease-out,
+transform var(--t-fast) var(--ease);}
+.pn-list a{transition:background-color var(--t-fast) ease-out,color var(--t-fast) ease-out;}
+.pn-list{animation:pk-pn var(--t-mid) var(--ease);}
+@keyframes pk-pn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+}
+@media (max-width:560px){
+.pagenav{right:10px;bottom:10px;}
+.pn-list{width:min(74vw,250px);}
+}
+@media (prefers-reduced-motion:no-preference){
+@supports (animation-timeline:scroll()){
+body::after{
+content:"";position:fixed;top:0;left:0;height:2px;width:100%;
+transform-origin:0 50%;transform:scaleX(0);
+background:var(--accent);z-index:45;pointer-events:none;
+animation:pk-progress linear;animation-timeline:scroll(root);
+}
+@keyframes pk-progress{from{transform:scaleX(0);}to{transform:scaleX(1);}}
+}
+}
+html.compact{
+font-size:14px;
+--nav-h:46px;
+--tbl-pad-y:4px;
+--tbl-pad-x:9px;
+--tbl-fs:0.79rem;
+--section-gap:20px;
+--spark-w:66px;
+--spark-h:18px;
+--band-w:120px;
+}
+@media (max-width:560px){
+:root{--nav-h:82px;}
+html.compact{--nav-h:78px;}
+}
+html.compact .page{padding-top:22px;}
+html.compact header.masthead{padding-bottom:10px;margin-bottom:12px;}
+html.compact header.masthead h1{font-size:1.34rem;margin-bottom:6px;}
+html.compact .lede{display:none;}
+html.compact .section-note{display:none;}
+html.compact .wl-sub{display:none;}
+html.compact section > h2{font-size:1.02rem;margin-bottom:10px;}
+html.compact .summary-cell{padding:8px 11px;}
+html.compact .summary-cell .v{font-size:1rem;}
+html.compact .stat-card{padding:8px 11px;}
+html.compact .stat-card .v{font-size:0.98rem;}
+html.compact .band-cell{min-width:132px;}
+html.compact .band-val{font-size:0.85rem;}
+html.compact .drivers{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:150px;}
+html.compact .toolbar{margin-bottom:10px;}
+html.compact details.explain{margin-bottom:12px;}
+html.compact .wl-block{margin-bottom:24px;}
+html.compact .callout{padding:10px 14px;margin-bottom:12px;}
+html.compact .caveats{padding:13px 15px;}
+.cardcell{display:flex;gap:9px;align-items:flex-start;min-width:0;}
+.cc-thumb,.cc-thumb--fallback{
+flex:none;width:40px;height:56px;border-radius:var(--radius);
+background:var(--panel-alt);border:1px solid var(--border);
+}
+img.cc-thumb{object-fit:cover;display:block;}
+.cc-thumb--fallback{position:relative;display:inline-block;}
+.cc-thumb--fallback::after{
+content:"";position:absolute;inset:7px;border:1px solid var(--border-strong);
+border-radius:2px;opacity:0.55;
+background:
+linear-gradient(var(--border-strong),var(--border-strong)) no-repeat center/60% 1px;
+}
+.cc-body{display:flex;flex-direction:column;min-width:0;gap:1px;}
+.cc-name{font-weight:600;font-size:0.85rem;line-height:1.28;color:var(--ink);}
+.cc-meta{color:var(--ink-subtle);font-size:0.74rem;line-height:1.3;}
+.cc-price{font-weight:600;font-size:0.8rem;font-variant-numeric:tabular-nums;color:var(--ink);}
+.cc-links{display:flex;gap:5px;margin-top:2px;flex-wrap:wrap;}
+.cc-links .chip{
+display:inline-block;font-size:0.68rem;font-weight:600;padding:1px 7px;
+border-radius:999px;border:1px solid var(--border-strong);white-space:nowrap;
+color:var(--ink-subtle);text-decoration:none;
+transition:border-color .15s ease-out,color .15s ease-out;
+}
+.cc-links .chip:hover{border-color:var(--accent);color:var(--accent-ink);}
+.cardcell.cc-compact{gap:7px;}
+.cardcell.cc-compact .cc-thumb,.cardcell.cc-compact .cc-thumb--fallback{width:28px;height:39px;}
+.cardcell.cc-compact .cc-name{font-size:0.82rem;}
+.cardcell.cc-compact .cc-meta{
+white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:220px;
+}
+html.compact .cardcell .cc-thumb,html.compact .cardcell .cc-thumb--fallback{width:28px;height:39px;}
+html.compact .cardcell .cc-meta{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:200px;}
+
+</style>
+</head>
+<body>
+
+<nav class="topnav" aria-label="Site navigation">
+  <div class="nav-inner">
+    <a class="brand" href="dashboard.html">pokestat</a>
+    <div class="nav-links" id="nav-links">
+      <a href="dashboard.html">Summary</a>
+      <a href="outlook.html">Outlook</a>
+      <a href="watchlists.html">Watchlists</a>
+      <a href="valuation.html">Valuation</a>
+      <a href="market.html">Market</a>
+      <a href="etb.html">Trainer boxes</a>
+      <a href="models.html">Models</a>
+      <a href="momentum.html">Momentum</a>
+      <a href="backtest.html">Backtest</a>
+      <a href="how-it-works.html">How it works</a>
+      <a href="methods.html" class="active" aria-current="page">Methods</a>
+    </div>
+    <button class="density-toggle" id="density-toggle" aria-pressed="false" title="Toggle information density">Compact</button>
+    <button class="copy-toggle" id="copy-toggle" title="Switch between plain-language and full technical wording">Plain</button>
+    <div class="preset-group theme-group" role="group" aria-label="Colour theme">
+      <button type="button" class="theme-opt" data-theme-opt="light" aria-pressed="false">Light</button>
+      <button type="button" class="theme-opt" data-theme-opt="dark" aria-pressed="false">Dark</button>
+      <button type="button" class="theme-opt" data-theme-opt="pastel" aria-pressed="false">Rose</button>
+    </div>
+  </div>
+</nav>
+
+<div class="page">
+
+  <header class="masthead" data-reveal>
+    <h1>Methods, sources, and caveats</h1>
+    <p class="lede prose">Where every number comes from, how the pages are built, which sources are in and out of scope, and the caveats to read before trusting any figure on this site.</p>
+  </header>
+
+
+  <section id="sources" data-reveal>
+    <h2>Data sources and coverage</h2>
+    <div class="methods-grid">
+      <div class="method-card">
+        <h4>Data sources</h4>
+        <ul>
+          <li>TCGplayer USD prices via the tcgcsv.com daily archive (market model, backtest).</li>
+          <li>TCGplayer USD prices via a live TCGdex snapshot (second independent USD source, shown
+            as the outlook "2nd source" cross-check column; display-only, never a model input). Its
+            gap from the model market price blends true source disagreement with genuine price drift,
+            since the model price is frozen at its snapshot date while this one is live.</li>
+          <li>Cardmarket EU prices via TCGdex (display-only reference columns).</li>
+          <li>Wikimedia pageviews for the character-appeal feature (as-of-T backfill).</li>
+          <li>Card thumbnails lazy-loaded from images.pokemontcg.io (display only).</li>
+        </ul>
+      </div>
+      <div class="method-card">
+        <h4>Cardmarket EU coverage</h4>
+        <p id="cm-coverage" style="margin:0;"></p>
+      </div>
+    </div>
+  </section>
+
+  <section id="governance" data-reveal>
+    <h2>Model tiering, sourcing, and page doctrine</h2>
+    <div class="methods-grid">
+      <div class="method-card">
+        <h4>Model tiering</h4>
+        <p>Where model-generated content appears, capability is tiered
+          <strong>Fable &gt; Opus &gt; Sonnet/Haiku</strong>: Fable for the deepest reasoning and
+          adversarial verification, Opus for framework and analysis work, and Sonnet/Haiku for
+          high-frequency worker tasks (for example the artwork rater fleet). The forward model
+          selection itself is mechanical and model-agnostic.</p>
+      </div>
+      <div class="method-card">
+        <h4>Trusted reseller sources &amp; ToS discipline</h4>
+        <p>Prices come only from official or free archival APIs (tcgcsv.com for the TCGplayer model
+          series, and TCGdex for both the Cardmarket EU columns and the second TCGplayer USD cross-
+          check). eBay and PriceCharting remain excluded. Marketplace links are user navigation, not
+          scraping, and thumbnails are lazy-loaded read-only assets.</p>
+        <p>Cardmarket product URLs return HTTP 403 to automated agents (Cloudflare bot-blocking on a
+          non-browser user agent) but resolve normally for human navigation; the links are for a
+          person to click, not for the pipeline to fetch.</p>
+      </div>
+    </div>
+
+    <div class="method-card" style="margin-bottom:20px;">
+      <h4>Page doctrine (amended for this build)</h4>
+      <p>Every page is self-contained (inline CSS/JS/SVG) with two amended exceptions: (a) outbound
+        links to TCGplayer and Cardmarket product pages, and (b) lazy-loaded external card
+        thumbnails from <code>images.pokemontcg.io</code> with <code>loading="lazy"</code> and an
+        <code>onerror</code> fallback to a styled placeholder. Everything else stays inline, and
+        every page still renders fully offline minus the thumbnails.</p>
+    </div>
+  </section>
+
+  <section id="caveats" data-reveal>
+    <h2>Caveats</h2>
+    <div class="caveats">
+      <h4>Caveats, read before trusting any number on this site</h4>
+      <ul id="method-caveats"></ul>
+    </div>
+  </section>
+
+  <footer>
+    <p>Every figure across these pages is read from a generated output file by
+      <code>scripts/build_dashboard_data.py</code>. Sources: full per-card outlook
+      <code>data/output/forward_outlook.csv</code>; model validation and signal attribution
+      <code>data/output/forward_validation.md</code>; momentum study
+      <code>data/output/momentum_summary.md</code>; value backtest
+      <code>data/output/backtest_summary.md</code>; price trends
+      <code>data/output/sparklines.json</code>. Rebuild with
+      <code>uv run python scripts/build_dashboard_data.py</code>.</p>
+  </footer>
+
+</div>
+
+<div id="tooltip" role="tooltip"></div>
+
+<script>
+
+// ---------- formatting ----------
+function fmtMoney(v){ return v == null ? "" : "$" + v.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2}); }
+function fmtPct(v, d){ if(v==null) return ""; d = d==null?1:d; const s = v>0?"+":""; return s + (v*100).toFixed(d) + "%"; }
+function fmtSigned(v, d){ if(v==null) return ""; d=d==null?2:d; const s=v>0?"+":""; return s+v.toFixed(d); }
+function esc(s){ return String(s).replace(/[&<>"]/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
+// Generated reports are written in ASCII, where a parenthetical dash is "--".
+// Sentences lifted verbatim from them get that rendered as an en dash so the
+// quote reads as prose without any of its wording being changed.
+function dashes(s){ return String(s).replace(/ -- /g, " \u2013 "); }
+// percent-point value (already scaled, e.g. 57.1) -> "+57.1", null -> "n/a"
+function pp(v){ return v==null?"n/a":(v>0?"+":"")+v.toFixed(1); }
+function ppTd(v){ if(v==null) return '<td class="num">n/a</td>';
+const c=v>0?"ret-pos":(v<0?"ret-neg":""); return '<td class="num '+c+'">'+pp(v)+'</td>'; }
+function shortRarity(r){
+return {"Special Illustration Rare":"SIR","Ultra Rare":"Ultra","Hyper Rare":"Hyper","Mega Hyper Rare":"Mega Hyper"}[r]||r;
+}
+const SVGNS = "http://www.w3.org/2000/svg";
+// ---------- tooltip ----------
+const tip = document.getElementById("tooltip");
+function showTip(evt, html){ tip.innerHTML = html; tip.classList.add("show"); moveTip(evt); }
+function moveTip(evt){ const p=14, r=tip.getBoundingClientRect(); let x=evt.clientX+p, y=evt.clientY+p;
+if(x+r.width>window.innerWidth) x=evt.clientX-r.width-p; if(y+r.height>window.innerHeight) y=evt.clientY-r.height-p;
+tip.style.left=x+"px"; tip.style.top=y+"px"; }
+function hideTip(){ tip.classList.remove("show"); }
+// ---------- chart mark tooltips ----------
+// Wires every [data-tip] mark emitted by charts.py (line_index points, ic_bars
+// bars, the labelled value_scatter outliers) to the tooltip above. Bound once
+// at load, not per chart function, since the marks are all server-rendered
+// static markup already in the DOM by the time this runs (see chart builder
+// docstrings). Focus/blur mirror mouseenter/mouseleave so a keyboard user gets
+// the identical payload a mouse user does -- required for WCAG AA operability
+// on a control that is otherwise mouse-only.
+function initMarkTips(){
+document.querySelectorAll("[data-tip]").forEach(function(el){
+var content = el.getAttribute("data-tip");
+el.addEventListener("mouseenter", function(e){ showTip(e, content); });
+el.addEventListener("mousemove", moveTip);
+el.addEventListener("mouseleave", hideTip);
+el.addEventListener("focus", function(){
+var r = el.getBoundingClientRect();
+showTip({clientX:r.left + r.width / 2, clientY:r.top}, content);
+});
+el.addEventListener("blur", hideTip);
+});
+}
+// ---------- sparkline ----------
+// series is a flat array of y-values [y0,y1,...]; the x-axis is pure array
+// position (the source series always had consecutive integer x-indices), so
+// x = index here.
+function buildSparkline(series){
+const w=84,h=22,padX=2,padY=3;
+if(!series || series.length<2) return '<svg class="spark" width="'+w+'" height="'+h+'"></svg>';
+const n=series.length;
+const minY=Math.min.apply(null,series),maxY=Math.max.apply(null,series);
+const sx=i=>padX+i/(n-1)*(w-2*padX);
+const sy=v=>maxY===minY?h/2:(h-padY)-(v-minY)/(maxY-minY)*(h-2*padY);
+let d="";
+for(let i=0;i<n;i++){ d+=(i?"L":"M")+sx(i).toFixed(1)+" "+sy(series[i]).toFixed(1); }
+const up = series[n-1] >= series[0];
+const col = up ? "var(--up)" : "var(--down)";
+return '<svg class="spark" width="'+w+'" height="'+h+'" viewBox="0 0 '+w+' '+h+'">'
++ '<path d="'+d+'" fill="none" stroke="'+col+'" stroke-width="1.25" stroke-linejoin="round"/>'
++ '<circle cx="'+sx(n-1).toFixed(1)+'" cy="'+sy(series[n-1]).toFixed(1)+'" r="1.6" fill="'+col+'"/></svg>';
+}
+// ---------- interval band ----------
+// BAND_LO/BAND_HI are the drawing bounds; each page that renders bands sets them
+// once from its data via setBandBounds() before rendering, so the same buildBand
+// is shared across the outlook and the how-it-works worked example.
+let BAND_LO = -0.25, BAND_HI = 0.55;
+function setBandBounds(lo, hi){ const pad=(hi-lo)*0.04; BAND_LO=lo-pad; BAND_HI=hi+pad; }
+function bandX(v){ const w=150; return ((v-BAND_LO)/(BAND_HI-BAND_LO))*w; }
+function buildBand(o){
+const w=150,h=14,y=h/2;
+if(o.lo==null||o.hi==null) return '';
+const col = o.flag==="candidate_up" ? "var(--up)" : (o.flag==="candidate_down" ? "var(--down)" : "var(--neutral)");
+const zx = bandX(0).toFixed(1);
+const x0 = bandX(o.lo).toFixed(1), x1 = bandX(o.hi).toFixed(1), xp = bandX(o.pred).toFixed(1);
+return '<svg class="band" width="'+w+'" height="'+h+'" viewBox="0 0 '+w+' '+h+'">'
++ '<line x1="0" y1="'+y+'" x2="'+w+'" y2="'+y+'" stroke="var(--border)" stroke-width="1"/>'
++ '<line x1="'+zx+'" y1="1" x2="'+zx+'" y2="'+(h-1)+'" stroke="var(--border-strong)" stroke-width="1" stroke-dasharray="2 2"/>'
++ '<line x1="'+x0+'" y1="'+y+'" x2="'+x1+'" y2="'+y+'" stroke="'+col+'" stroke-width="3" opacity="0.45" stroke-linecap="round"/>'
++ '<line x1="'+x0+'" y1="'+(y-3)+'" x2="'+x0+'" y2="'+(y+3)+'" stroke="'+col+'" stroke-width="1"/>'
++ '<line x1="'+x1+'" y1="'+(y-3)+'" x2="'+x1+'" y2="'+(y+3)+'" stroke="'+col+'" stroke-width="1"/>'
++ '<circle cx="'+xp+'" cy="'+y+'" r="2.6" fill="'+col+'"/></svg>';
+}
+// ---------- density toggle ----------
+const DENSITY_KEY = "pk-density";
+function applyDensity(mode){
+const compact = mode==="compact";
+document.documentElement.classList.toggle("compact", compact);
+const btn = document.getElementById("density-toggle");
+if(!btn) return;
+btn.textContent = compact ? "Full view" : "Compact";
+btn.setAttribute("aria-pressed", compact ? "true" : "false");
+}
+function initDensity(){
+const params = new URLSearchParams(location.search);
+let mode = params.get("density");
+if(mode!=="compact" && mode!=="full"){
+try { mode = localStorage.getItem(DENSITY_KEY) || "full"; } catch(e){ mode = "full"; }
+}
+applyDensity(mode);
+try { localStorage.setItem(DENSITY_KEY, mode); } catch(e){}
+const btn = document.getElementById("density-toggle");
+if(btn) btn.addEventListener("click", ()=>{
+const next = document.documentElement.classList.contains("compact") ? "full" : "compact";
+applyDensity(next);
+try { localStorage.setItem(DENSITY_KEY, next); } catch(e){}
+});
+}
+// ---------- plain / full wording ----------
+// The stats prose is written for someone who already knows what an IC is. The
+// plain variant says the same thing without the vocabulary. Neither is a
+// summary of the other: both state the caveat, because dropping the caveat is
+// what makes plain language dishonest.
+const COPY_KEY = "pk-copy";
+function applyCopy(mode){
+const plain = mode === "plain";
+document.documentElement.classList.toggle("plain", plain);
+const btn = document.getElementById("copy-toggle");
+if(!btn) return;
+btn.textContent = plain ? "Full" : "Plain";
+btn.setAttribute("aria-pressed", plain ? "true" : "false");
+btn.setAttribute("aria-label", plain
+? "Plain wording is on. Switch to full technical wording."
+: "Full technical wording is on. Switch to plain wording.");
+}
+function initCopy(){
+// Plain is the default for a first-time visitor (no stored choice yet): the
+// jargon-heavy full wording used to win by default, so a reader had to
+// discover the toggle just to get the jargon-free copy. Anyone who has
+// already chosen either wording keeps that stored choice untouched.
+let mode = "plain";
+try { mode = localStorage.getItem(COPY_KEY) || "plain"; } catch(e){}
+applyCopy(mode);
+const btn = document.getElementById("copy-toggle");
+if(btn) btn.addEventListener("click", ()=>{
+// Armed on first use only, so the load paint is never animated.
+document.documentElement.classList.add("copy-anim");
+const next = document.documentElement.classList.contains("plain") ? "full" : "plain";
+applyCopy(next);
+try { localStorage.setItem(COPY_KEY, next); } catch(e){}
+});
+window.addEventListener("storage", e=>{ if(e.key===COPY_KEY && e.newValue) applyCopy(e.newValue); });
+}
+// ---------- theme toggle ----------
+const THEME_KEY = "pk-theme";
+// Three themes now, so the control is a cycle rather than a binary switch.
+// "pastel" is opt-in only: prefers-color-scheme has no value that means pastel,
+// so it is never reached by OS preference, only by an explicit stored choice.
+const THEMES = ["light","dark","pastel"];
+function currentTheme(){
+const a = document.documentElement.getAttribute("data-theme");
+if(a && THEMES.indexOf(a) >= 0) return a;
+return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+}
+function applyTheme(mode){
+document.documentElement.setAttribute("data-theme", mode);
+// Each segment is genuinely two-state, so aria-pressed is the right thing to
+// put on it; the group element carries the label.
+document.querySelectorAll("[data-theme-opt]").forEach(b=>{
+b.setAttribute("aria-pressed", b.getAttribute("data-theme-opt")===mode ? "true":"false");
+});
+}
+function initTheme(){
+applyTheme(currentTheme());
+document.querySelectorAll("[data-theme-opt]").forEach(b=>{
+b.addEventListener("click", ()=>{
+const next = b.getAttribute("data-theme-opt");
+applyTheme(next);
+try{ localStorage.setItem(THEME_KEY, next); }catch(e){}
+});
+});
+// live cross-tab / cross-page sync
+window.addEventListener("storage", e=>{ if(e.key===THEME_KEY && e.newValue) applyTheme(e.newValue); });
+}
+// ---------- floating page nav (jump list + back to top) ----------
+// Built from the DOM: every section already carries a stable id, so nothing is
+// emitted server-side for this. Sections without a heading, and sections a page
+// script has left hidden, are skipped. Below MIN_SECTIONS the control would be
+// noise, so short pages never get one.
+const MIN_SECTIONS = 3;
+function sectionHeading(sec){
+const h = sec.querySelector("h2, h3");
+if(!h) return "";
+return (h.textContent || "").trim();
+}
+function initPageNav(){
+const page = document.querySelector(".page");
+if(!page) return;
+const secs = Array.prototype.slice.call(page.querySelectorAll("section[id]"))
+.filter(function(sec){
+if(sec.offsetParent === null) return false;   // page script left it hidden
+return sectionHeading(sec).length > 0;
+});
+if(secs.length < MIN_SECTIONS) return;
+const wrap = document.createElement("div");
+wrap.className = "pagenav";
+const list = document.createElement("nav");
+list.className = "pn-list";
+list.id = "pn-list";
+list.hidden = true;
+list.setAttribute("aria-label", "Sections on this page");
+const byId = {};
+secs.forEach(function(sec){
+const a = document.createElement("a");
+a.href = "#" + sec.id;
+a.textContent = sectionHeading(sec);
+list.appendChild(a);
+byId[sec.id] = a;
+});
+const row = document.createElement("div");
+row.className = "pn-row";
+const secBtn = document.createElement("button");
+secBtn.type = "button";
+secBtn.id = "pn-sections";
+secBtn.textContent = "Sections";
+secBtn.setAttribute("aria-expanded", "false");
+secBtn.setAttribute("aria-controls", "pn-list");
+const topBtn = document.createElement("button");
+topBtn.type = "button";
+topBtn.id = "pn-top";
+topBtn.textContent = "Top";
+topBtn.setAttribute("aria-label", "Back to top");
+row.appendChild(secBtn);
+row.appendChild(topBtn);
+wrap.appendChild(list);
+wrap.appendChild(row);
+document.body.appendChild(wrap);
+function closeList(){
+// Hiding the element that currently holds focus drops focus to <body> and
+// the keyboard user loses their place, so hand it back to the trigger.
+if(list.contains(document.activeElement)) secBtn.focus();
+list.hidden = true;
+secBtn.setAttribute("aria-expanded","false");
+}
+secBtn.addEventListener("click", function(){
+const open = list.hidden;
+list.hidden = !open;
+secBtn.setAttribute("aria-expanded", open ? "true" : "false");
+});
+list.addEventListener("click", function(e){ if(e.target.tagName === "A") closeList(); });
+document.addEventListener("keydown", function(e){ if(e.key === "Escape") closeList(); });
+document.addEventListener("click", function(e){
+if(!wrap.contains(e.target)) closeList();
+});
+topBtn.addEventListener("click", function(){
+closeList();
+const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+window.scrollTo({top:0, behavior: reduce ? "auto" : "smooth"});
+});
+// The cluster stays visible rather than appearing on scroll. Gating it on the
+// masthead leaving the viewport read better on the first screen, but it made
+// the control's existence depend on an IntersectionObserver callback, so a
+// browser that never delivered one would hide the feature outright. A small
+// corner cluster costs little; being reliably there is worth more than being
+// clever. Active-section highlighting below stays a pure enhancement: if the
+// observer never fires, the jump list simply has no highlight.
+// Mark the section currently occupying the upper part of the viewport.
+if("IntersectionObserver" in window){
+const spy = new IntersectionObserver(function(entries){
+entries.forEach(function(en){
+const a = byId[en.target.id];
+if(!a) return;
+if(en.isIntersecting){
+for(const k in byId){ byId[k].classList.remove("active"); }
+a.classList.add("active");
+}
+});
+}, {rootMargin:"-15% 0px -70% 0px", threshold:0});
+secs.forEach(function(sec){ spy.observe(sec); });
+}
+}
+// ---------- reveal motion (no scroll-spy: pages are separate documents) ----------
+// --rv is the stagger index the CSS multiplies by --rv-step. It is assigned
+// per batch (per observer callback, or per above-the-fold sweep) rather than
+// per document, so a section entering the viewport resolves in reading order
+// while a section further down still starts from zero. RV_MAX caps the delay
+// so a batch of twenty rows never ends on a half-second lag.
+const RV_MAX = 6;
+function revealBatch(list){
+let i = 0;
+for(let k=0;k<list.length;k++){
+const t = list[k];
+if(t.classList.contains("in-view")) continue;
+const r = t.getBoundingClientRect();
+if(r.top < window.innerHeight && r.bottom > 0){
+t.style.setProperty("--rv", String(i < RV_MAX ? i : RV_MAX));
+i++;
+t.classList.add("in-view");
+}
+}
+}
+function initReveal(){
+const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const targets = Array.prototype.slice.call(document.querySelectorAll("[data-reveal]"));
+if(reduce || !("IntersectionObserver" in window) || location.hash) return;
+document.documentElement.classList.add("motion");
+const reveal = new IntersectionObserver((entries)=>{
+let i = 0;
+entries.forEach(e=>{
+if(e.isIntersecting){
+e.target.style.setProperty("--rv", String(i < RV_MAX ? i : RV_MAX));
+i++;
+e.target.classList.add("in-view");
+reveal.unobserve(e.target);
+}
+});
+}, {rootMargin:"0px 0px -5% 0px", threshold:0});
+targets.forEach(t=>reveal.observe(t));
+revealBatch(targets);
+setTimeout(()=>{ revealBatch(targets); }, 1200);
+}
+// ---------- active nav visibility ----------
+// The link strip scrolls horizontally on narrow viewports; bring the active
+// page's link into view on load so the highlighted item is visible at first
+// paint (keyboard Tab already auto-scrolls a focused link, but no focus exists
+// on load). block:"nearest" keeps the page from scrolling vertically.
+function initActiveNav(){
+const a = document.querySelector(".nav-links a.active");
+if(a && a.scrollIntoView){
+try{ a.scrollIntoView({inline:"center", block:"nearest"}); }catch(e){}
+}
+}
+document.addEventListener("mousemove", e=>{ if(tip && tip.classList.contains("show")) moveTip(e); });
+initTheme();
+initCopy();
+initDensity();
+initReveal();
+initActiveNav();
+initMarkTips();
+// Deferred by one task: page-specific extra_js is appended AFTER JS_CORE inside
+// the same script tag, and two pages (models #within-era, momentum #stratified)
+// un-hide a section from there. Running inline would measure those sections
+// while they are still display:none and drop them from the jump list forever.
+setTimeout(initPageNav, 0);
+// ---------- one site-wide card cell ----------
+// OBYID (Map id->{name,set,rarity,...}) and CARDLINKS (object id->{set_id,number,
+// tcg_pid,cm_pid}) are defined per page in EXTRA_JS before any cardCell() call.
+function ccFallback(img){ img.classList.add('cc-thumb--fallback'); img.removeAttribute('src'); }
+function cardCell(id, opts){
+opts = opts || {};
+const wantThumb = opts.thumb !== false;
+const compact = !!opts.compact;
+const o = (typeof OBYID !== "undefined" && OBYID.get) ? (OBYID.get(id) || {}) : {};
+const cl = (typeof CARDLINKS !== "undefined" && CARDLINKS) ? (CARDLINKS[id] || {}) : {};
+const name = o.name != null ? o.name : id;
+const setName = o.set != null ? o.set : "";
+const number = (cl.number != null) ? cl.number : (o.number != null ? o.number : null);
+const rarity = shortRarity(o.rarity != null ? o.rarity : "");
+const metaParts = [];
+if(setName) metaParts.push(esc(setName));
+if(number != null && number !== "") metaParts.push("#" + esc(number));
+if(rarity) metaParts.push(esc(rarity));
+const meta = metaParts.join(" · ");
+let thumbHtml = "";
+if(wantThumb){
+if(cl.set_id && number != null && number !== ""){
+const src = "https://images.pokemontcg.io/" + cl.set_id + "/" + number + ".png";
+thumbHtml = '<img class="cc-thumb" loading="lazy" decoding="async" src="' + src
++ '" alt="" width="40" height="56" onerror="ccFallback(this)">';
+} else {
+thumbHtml = '<span class="cc-thumb cc-thumb--fallback" aria-hidden="true"></span>';
+}
+}
+let links = "";
+if(cl.tcg_pid != null){
+links += '<a class="chip" href="https://www.tcgplayer.com/product/' + cl.tcg_pid
++ '" target="_blank" rel="noopener noreferrer nofollow">TCGplayer</a>';
+}
+if(cl.cm_pid != null){
+links += '<a class="chip" href="https://www.cardmarket.com/en/Pokemon/Products/Singles?idProduct='
++ cl.cm_pid + '" target="_blank" rel="noopener noreferrer nofollow">Cardmarket</a>';
+}
+const priceHtml = opts.price ? '<span class="cc-price">' + fmtMoney(o.market) + '</span>' : "";
+return '<div class="cardcell' + (compact ? ' cc-compact' : '') + '">'
++ thumbHtml
++ '<div class="cc-body">'
++   '<span class="cc-name">' + esc(name) + '</span>'
++   '<span class="cc-meta">' + meta + '</span>'
++   priceHtml
++   (links ? '<span class="cc-links">' + links + '</span>' : '')
++ '</div></div>';
+}
+
+const PAGE = {"meta":{"universe":465,"band":{"lo":-0.178,"hi":0.206,"width":0.384,"n":3424,"coverage":80.0,"nominal":80.0},"cmCards":4871,"cmDates":1,"cmUniverse":464,"cmCurrency":"USD","eurusd":1.1669,"eurusdDate":"2026-08-26","eraSkill":{"finding":"the held-out edge is WITHIN-era skill, not cross-era contrast.","minNeff":4.0,"pooledIC":0.368,"pooledSE":0.036,"neutralIC":0.355,"neutralSE":0.018,"neutralNEff":8.0,"neutralThin":false,"contrastIC":0.144,"contrastSE":0.49},"strataHeadline":"STRATIFIED RE-EXAMINATION (read this with the line above): the pooled null is partly a COMPOSITION artifact. Ranking the same cards inside their own era instead of across the whole cross-section turns 4 pooled horizon(s) directional, and reversion clears the sample-size gates in 2 of 3 eras. After the shared-endpoint (bid-ask-bounce) control, the era-level reversion that survives is Sword & Shield only; momentum survives nowhere (0 momentum cells). This is a POST-HOC subgroup finding on one calendar window with no trading costs applied -- it is not a tradeable signal and does not overturn the pooled null. Full tables, sample sizes and caveats below."},"validation":{"bestModel":"rf","heldoutIC":0.368,"heldoutIR":10.211,"heldoutNeff":5.673,"selIC":0.283,"verdict":"strong","ablFrom":0.328,"ablTo":0.26,"setageCorr":0.37,"flagsUp":0,"flagsDown":5,"roster":[{"model":"ridge","meanIC":0.318,"meanIC_raw":0.318,"icIR":4.622,"quintile":17.2,"upPrec":37.0,"upRec":18.1,"dnPrec":27.3,"dnRec":24.3,"baseline":false,"coverage":80.0,"selected":false},{"model":"elasticnet","meanIC":0.292,"meanIC_raw":0.292,"icIR":4.631,"quintile":14.9,"upPrec":34.5,"upRec":16.9,"dnPrec":27.5,"dnRec":24.5,"baseline":false,"coverage":80.0,"selected":false},{"model":"gbm","meanIC":0.316,"meanIC_raw":0.316,"icIR":3.023,"quintile":17.3,"upPrec":38.9,"upRec":19.1,"dnPrec":27.5,"dnRec":24.5,"baseline":false,"coverage":80.0,"selected":false},{"model":"ensemble","meanIC":0.34,"meanIC_raw":0.34,"icIR":3.875,"quintile":17.9,"upPrec":36.6,"upRec":18.0,"dnPrec":28.3,"dnRec":25.2,"baseline":false,"coverage":80.0,"selected":false},{"model":"rank_linear","meanIC":0.321,"meanIC_raw":0.321,"icIR":5.304,"quintile":17.3,"upPrec":37.8,"upRec":18.5,"dnPrec":28.3,"dnRec":25.2,"baseline":false,"coverage":80.0,"selected":false},{"model":"huber","meanIC":0.322,"meanIC_raw":0.322,"icIR":4.527,"quintile":16.7,"upPrec":37.5,"upRec":18.4,"dnPrec":28.1,"dnRec":25.1,"baseline":false,"coverage":80.0,"selected":false},{"model":"pls","meanIC":0.29,"meanIC_raw":0.29,"icIR":5.239,"quintile":15.1,"upPrec":32.8,"upRec":16.1,"dnPrec":28.9,"dnRec":25.8,"baseline":false,"coverage":80.0,"selected":false},{"model":"rf","meanIC":0.328,"meanIC_raw":0.328,"icIR":6.854,"quintile":17.0,"upPrec":34.2,"upRec":16.8,"dnPrec":31.2,"dnRec":27.9,"baseline":false,"coverage":80.0,"selected":true},{"model":"zero","meanIC":null,"meanIC_raw":0.0,"icIR":null,"quintile":7.6,"upPrec":19.6,"upRec":9.6,"dnPrec":19.9,"dnRec":17.7,"baseline":true,"coverage":null,"selected":false},{"model":"momentum","meanIC":-0.061,"meanIC_raw":-0.061,"icIR":-1.423,"quintile":-3.0,"upPrec":14.7,"upRec":7.2,"dnPrec":18.1,"dnRec":16.1,"baseline":true,"coverage":null,"selected":false},{"model":"reversion","meanIC":0.137,"meanIC_raw":0.137,"icIR":1.089,"quintile":6.6,"upPrec":22.3,"upRec":10.9,"dnPrec":15.8,"dnRec":14.1,"baseline":true,"coverage":null,"selected":false}],"band":{"lo":-0.178,"hi":0.206,"width":0.384,"n":3424,"coverage":80.0,"nominal":80.0},"attribution":[{"diagnostic":"rf full features (all folds)","meanIC":0.328,"meanICSE":null,"note":"the reported number"},{"diagnostic":"rf STATIC features ablated (all folds)","meanIC":0.26,"meanICSE":null,"note":"21% of the signal gone"},{"diagnostic":"rf STATIC features ablated (eval folds)","meanIC":0.285,"meanICSE":0.018,"note":"held-out, clears the 0.05 floor by more than 1 SE"},{"diagnostic":"univariate set_age_months ranking","meanIC":0.296,"meanICSE":null,"note":"one feature, no model"},{"diagnostic":"rf momentum-only features","meanIC":0.13,"meanICSE":null,"note":"some signal on its own (40% of the full-feature IC), well short of the full feature set"}],"breakdown":{"minNeff":4.0,"eraFinding":"the held-out edge is WITHIN-era skill, not cross-era contrast.","rarityFinding":"within-tier skill survives; the tier ordering on its own does not","era":[{"slice":"pooled (headline)","cards":456,"folds":8,"ic":0.368,"se":0.036,"nEff":5.673,"ablIC":0.285,"ablSE":0.018,"call":{"text":"clears 0 by > 1 SE","thin":false,"kind":"clears"}},{"slice":"ME","cards":46,"folds":5,"ic":0.197,"se":0.162,"nEff":4.155,"ablIC":0.211,"ablSE":0.045,"call":{"text":"clears 0 by > 1 SE","thin":false,"kind":"clears"}},{"slice":"SV","cards":247,"folds":8,"ic":0.367,"se":0.027,"nEff":8.0,"ablIC":0.271,"ablSE":0.022,"call":{"text":"clears 0 by > 1 SE","thin":false,"kind":"clears"}},{"slice":"SWSH","cards":163,"folds":8,"ic":0.346,"se":0.016,"nEff":8.0,"ablIC":0.318,"ablSE":0.022,"call":{"text":"clears 0 by > 1 SE","thin":false,"kind":"clears"}},{"slice":"within-era neutralized","cards":456,"folds":8,"ic":0.355,"se":0.018,"nEff":8.0,"ablIC":0.287,"ablSE":0.017,"call":{"text":"clears 0 by > 1 SE","thin":false,"kind":"clears"}},{"slice":"between-era contrast only","cards":456,"folds":8,"ic":0.144,"se":0.49,"nEff":3.567,"ablIC":0.232,"ablSE":0.442,"call":{"text":"within 1 SE of 0","thin":false,"kind":"flat"}}],"rarity":[{"slice":"pooled (headline)","cards":456,"folds":8,"ic":0.368,"se":0.036,"nEff":5.673,"ablIC":0.285,"ablSE":0.018,"call":{"text":"clears 0 by > 1 SE","thin":false,"kind":"clears"}},{"slice":"Hyper Rare","cards":33,"folds":8,"ic":0.392,"se":0.17,"nEff":2.354,"ablIC":0.175,"ablSE":0.173,"call":{"text":"clears 0 by > 1 SE","thin":true,"kind":"clears"}},{"slice":"Mega Hyper Rare","cards":4,"folds":0,"ic":null,"se":null,"nEff":0.0,"ablIC":null,"ablSE":null,"call":{"text":"skipped (never >= 8 cards in a fold)","thin":false,"kind":"skipped"}},{"slice":"Rare Rainbow","cards":44,"folds":8,"ic":0.339,"se":0.112,"nEff":2.42,"ablIC":0.438,"ablSE":0.068,"call":{"text":"clears 0 by > 1 SE","thin":true,"kind":"clears"}},{"slice":"Rare Secret","cards":15,"folds":8,"ic":0.253,"se":0.094,"nEff":8.0,"ablIC":0.175,"ablSE":0.101,"call":{"text":"clears 0 by > 1 SE","thin":false,"kind":"clears"}},{"slice":"Rare Ultra","cards":104,"folds":8,"ic":0.366,"se":0.031,"nEff":8.0,"ablIC":0.328,"ablSE":0.036,"call":{"text":"clears 0 by > 1 SE","thin":false,"kind":"clears"}},{"slice":"Special Illustration Rare","cards":110,"folds":8,"ic":0.435,"se":0.047,"nEff":8.0,"ablIC":0.257,"ablSE":0.032,"call":{"text":"clears 0 by > 1 SE","thin":false,"kind":"clears"}},{"slice":"Ultra Rare","cards":146,"folds":8,"ic":0.37,"se":0.028,"nEff":8.0,"ablIC":0.223,"ablSE":0.023,"call":{"text":"clears 0 by > 1 SE","thin":false,"kind":"clears"}},{"slice":"within-rarity neutralized","cards":456,"folds":8,"ic":0.379,"se":0.016,"nEff":8.0,"ablIC":0.274,"ablSE":0.014,"call":{"text":"clears 0 by > 1 SE","thin":false,"kind":"clears"}},{"slice":"between-rarity contrast only","cards":456,"folds":8,"ic":0.106,"se":0.435,"nEff":2.494,"ablIC":0.267,"ablSE":0.309,"call":{"text":"within 1 SE of 0","thin":false,"kind":"flat"}}]},"listingBook":{"arms":[{"arm":"before (market only)","features":"12 numeric + 9 ind.","winner":"rf","selIC":0.289,"evalIC":0.313,"evalSE":0.083,"ir":3.771,"ablIC":0.233,"after":false},{"arm":"after (+ listing book)","features":"18 numeric + 10 ind.","winner":"rf","selIC":0.283,"evalIC":0.368,"evalSE":0.036,"ir":10.211,"ablIC":0.285,"after":true}],"before":{"arm":"before (market only)","features":"12 numeric + 9 ind.","winner":"rf","selIC":0.289,"evalIC":0.313,"evalSE":0.083,"ir":3.771,"ablIC":0.233,"after":false},"after":{"arm":"after (+ listing book)","features":"18 numeric + 10 ind.","winner":"rf","selIC":0.283,"evalIC":0.368,"evalSE":0.036,"ir":10.211,"ablIC":0.285,"after":true},"deltaIC":0.055,"deltaAbl":0.053,"features":[{"feature":"mid_skew","selIC":0.181,"heldIC":0.19,"se":0.036},{"feature":"d_market_pos_3m","selIC":-0.117,"heldIC":-0.087,"se":0.031},{"feature":"rel_spread","selIC":0.055,"heldIC":-0.028,"se":0.208},{"feature":"direct_discount","selIC":0.04,"heldIC":0.021,"se":0.053},{"feature":"market_pos","selIC":-0.124,"heldIC":0.012,"se":0.067},{"feature":"d_rel_spread_3m","selIC":0.003,"heldIC":0.001,"se":0.041}],"featureNames":["rel_spread","market_pos","mid_skew","direct_discount","d_rel_spread_3m","d_market_pos_3m"],"populated":{"low":100,"mid":100,"high":100,"direct_low":42},"driver":"mid_skew","decay":[{"horizon":1,"ic":0.277},{"horizon":2,"ic":0.24},{"horizon":3,"ic":0.19},{"horizon":6,"ic":0.076}],"driverAloneIC":0.364,"withoutIC":0.313,"allSixIC":0.368,"noiseCaveat":"State it plainly: the move (+0.055) is SMALLER than the 'before' arm's own one-SE band (0.083). On these error bars a reader cannot conclude that the improvement clears sampling noise, and no joint significance test of the two arms is claimed anywhere in this section.","artifactCaveat":"That is the signature of a mechanical catch-up, not of demand forecasting: TCGplayer's `market` is a trailing transaction-weighted average, while `mid` is the CURRENT listing midpoint, so `mid` carries fresher information than `market` at the same instant. A large part of this feature's edge is therefore the stale average converging on a book that was already visible at T -- honest as-of-T signal, but substantially a measurement-lag artifact of how the price series is constructed rather than a forecast of future demand. A buyer paying live listing prices would capture less of it than the IC suggests."},"sliceProbe":{"era":"ME","finding":"the ME cell is NOT statistically separated from zero.","ic":0.197,"se":0.162,"folds":5,"cards":46,"ablIC":0.211,"nEff":null,"permP":0.114,"permDraws":20000,"nullSD":0.125,"ci":[-0.013,0.394],"flipPct":3.3,"candidates":[{"candidate":"gbm","ic":0.468},{"candidate":"ensemble","ic":0.417},{"candidate":"pls","ic":0.356},{"candidate":"elasticnet","ic":0.321},{"candidate":"ridge","ic":0.295},{"candidate":"rank_linear","ic":0.253},{"candidate":"huber","ic":0.235},{"candidate":"rf","ic":0.197}],"sameSign":8,"nCandidates":8,"rosterMedian":0.308,"separated":false},"ablation":{"ablFrom":0.328,"ablTo":0.26,"survives":0.7927,"removed":0.2073,"removedPct":21,"survivesPct":79,"removedWords":"a substantial minority of","survivesWords":"most of","isMajorityStatic":false,"univariateSetage":0.296,"univariateShare":0.9024,"setageCorr":0.37,"sentence":"Ablating the static set-age and rarity features moves all-fold mean IC from 0.328 to 0.260, removing a substantial minority of the signal (21%), so the ranking does not collapse without them. It is still substantially a lifecycle ordering, though: ranking on set age alone with no model at all already scores 0.296, 90% of the full-feature IC, and the model's out-of-fold ranking correlates 0.370 (Spearman) with set age."}}};
+
+const M = PAGE.meta, V = PAGE.validation;
+// Two caveats that only exist when the artifacts that measure them exist. Each is
+// written from the live numbers, including the evidence gate the repo applies
+// before a slice may claim a direction, so neither can outlive its result.
+function eraCaveat(){
+const es = M.eraSkill;
+if(!es) return "";
+let s = '<li><strong>Within-era, not cross-era contrast.</strong> Widening the universe to a '
++'second era could have bought a mechanical old-era/new-era ordering rather than skill. Measured '
++'on the same held-out folds it did not: ranking cards only against same-era peers scores '
++fmtSigned(es.neutralIC,3)+' &plusmn;'+es.neutralSE.toFixed(3)+' against a pooled '
++fmtSigned(es.pooledIC,3)+', while the era ordering alone scores '+fmtSigned(es.contrastIC,3)
++' &plusmn;'+es.contrastSE.toFixed(3)+', inside its own error bar. ';
+s += es.neutralThin
+? 'Read it as directional, not established: the neutralized row rests on n_eff '
++es.neutralNEff.toFixed(2)+', below the '+(es.minNeff==null?"claim":es.minNeff.toFixed(1))
++' effective-fold bar this repo requires before a cell may claim a direction. '
+: '';
+return s + 'The per-era table is on the <a href="models.html#within-era">models page</a>, and it '
++'is not uniform across eras.</li>';
+}
+function strataCaveat(){
+const sh = M.strataHeadline;
+if(!sh) return "";
+// The quoted headline opens with "read this with the line above", so the
+// pooled null it refers to is stated first here rather than left dangling.
+return '<li><strong>The stratified momentum result is post-hoc.</strong> The pooled momentum study '
++ 'is null at every formation horizon. Its own stratified headline then reads: <em>'
++ dashes(esc(sh)) + '</em> '
++ 'It was run after the pooled result came back null, every stratum is cut from one panel over '
++ 'one calendar window, many overlapping cells were read for significance, and nothing is net of '
++ 'fees or spread. See the <a href="momentum.html#stratified">momentum page</a>.</li>';
+}
+function renderMethods(){
+const cmCurrencyNote = M.cmCurrency==="USD"
+? 'shown in USD, converted from EUR at the ECB reference rate '+M.eurusd.toFixed(4)
++' ('+M.eurusdDate+')'
+: 'shown in EUR (the ECB conversion rate was unavailable at build time)';
+// State EU coverage against the MODELED universe, not just the raw catalog
+// count, and never imply full coverage: cards TCGdex returns with no
+// pricing.cardmarket block stay uncovered and are named as a shortfall.
+const cmGap = M.universe - M.cmUniverse;
+const cmSnap = M.cmDates===1
+? 'a single snapshot (1 distinct date)'
+: M.cmDates+' dated snapshots';
+document.getElementById("cm-coverage").innerHTML =
+'Cardmarket EU prices cover <strong>'+M.cmUniverse.toLocaleString("en-US")+' of the '
++M.universe.toLocaleString("en-US")+'</strong> modeled cards'
++(cmGap>0 ? ' (<strong>'+cmGap+'</strong> not priced upstream)' : '')
++', drawn from '+cmSnap+' across '+M.cmCards.toLocaleString("en-US")+' catalog cards, '
++cmCurrencyNote+'. The snapshots are days apart and their depth is uneven across sets, '
++'so this is not usable EU price history: these columns are display-only reference and are '
++'never model training features; the divergence z-score is a cross-sectional EUR-trend '
++'versus USD-market proxy.';
+document.getElementById("method-caveats").innerHTML =
+'<li><strong>'+(V.ablation && V.ablation.isMajorityStatic ? "Mostly a set-age effect"
+: (V.verdict==="strong" ? "Substantially a set-age effect" : "Static-effect verdict"))+'.</strong> '
++'The headline cross-sectional IC is heavily entangled with a mechanical "older high-rarity cards '
++'drift up, recent cards drift down" set-age lifecycle pattern. '
+// Wording computed at build time from the live attribution table, because how
+// much ablation removes is a result that has already moved once between runs.
++(V.ablation ? esc(V.ablation.sentence)+' ' : '')
++(V.verdict==="strong"
+? 'The held-out ablated signal still clears the noise floor, so a non-static edge survives '
++'(the strong verdict) \u2014 but a ranking this reproducible from one variable may not persist. '
+: '')
++'Treat the outlook as a map of where each card sits in its set\u2019s aging cycle more than a live '
++'trading signal.</li>'
++eraCaveat()
++strataCaveat()
++'<li><strong>Conformal-interval exchangeability.</strong> The 80% bands come from split-conformal '
++'quantiles of '+M.band.n+' eval-fold residuals (band ['+M.band.lo.toFixed(3)+', '+M.band.hi.toFixed(3)
++'], width '+M.band.width.toFixed(3)+'). Coverage of '+M.band.coverage.toFixed(1)+'% is measured on '
++'the same residual pool, a consistency check, not out-of-sample proof; monthly folds are '
++'autocorrelated, so realized forward coverage can drift from nominal, and one global band is '
++'applied to every card.</li>'
++'<li><strong>Artwork calibration.</strong> Artwork-rarity scores come from a fleet of Haiku '
++'raters. The SV/ME batches share a blind anchor set; the SWSH batch, whose anchor raw scores were '
++'not preserved by the fleet run, is instead per-tier moment-matched so each SWSH chase tier\u2019s '
++'score distribution aligns with its established SV/ME analogue tier (alt-art, full-art, gold). '
++'Raters that scored none of the anchors are flagged as a calibration-drift risk.</li>'
++'<li><strong>Look-ahead elimination.</strong> Both the pageview appeal and character-premium '
++'inputs are reconstructed as of each date T; the static 2026 snapshot values are barred from the '
++'feature list. Predicted returns are gross of transaction costs and liquidity beyond a $5 filter.</li>';
+}
+renderMethods();
+
+</script>
+</body>
+</html>
