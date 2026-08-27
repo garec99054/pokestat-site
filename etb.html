@@ -801,6 +801,7 @@ svg.mchart .k0{opacity:0.55;stroke:var(--neutral)}svg.mchart .k1{fill:var(--up);
       <a href="watchlists.html">Watchlists</a>
       <a href="valuation.html">Valuation</a>
       <a href="market.html">Market</a>
+      <a href="compendium.html">Compendium</a>
       <a href="etb.html" class="active" aria-current="page">Trainer boxes</a>
       <a href="models.html">Models</a>
       <a href="momentum.html">Momentum</a>
@@ -1394,9 +1395,14 @@ if(rarity) metaParts.push(esc(rarity));
 const meta = metaParts.join(" · ");
 let thumbHtml = "";
 if(wantThumb){
-if(cl.set_id && number != null && number !== ""){
-const src = "https://images.pokemontcg.io/" + cl.set_id + "/" + number + ".png";
-thumbHtml = '<img class="cc-thumb" loading="lazy" decoding="async" src="' + src
+// opts.src wins when the caller knows the real artwork URL. The derived
+// images.pokemontcg.io path below is a convention, not a fact: the newest
+// sets are catalogued on a second CDN, so deriving there yields a 404 and
+// a grey placeholder. A caller holding cards.image_url passes it in.
+const src = opts.src || ((cl.set_id && number != null && number !== "")
+? ("https://images.pokemontcg.io/" + cl.set_id + "/" + number + ".png") : null);
+if(src){
+thumbHtml = '<img class="cc-thumb" loading="lazy" decoding="async" src="' + esc(src)
 + '" alt="" width="40" height="56" onerror="ccFallback(this)">';
 } else {
 thumbHtml = '<span class="cc-thumb cc-thumb--fallback" aria-hidden="true"></span>';

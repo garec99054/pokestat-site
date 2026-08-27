@@ -694,6 +694,7 @@ svg.mchart .k0{fill:none;stroke:var(--neutral);stroke-width:1.3}svg.mchart .k1{f
       <a href="watchlists.html">Watchlists</a>
       <a href="valuation.html">Valuation</a>
       <a href="market.html">Market</a>
+      <a href="compendium.html">Compendium</a>
       <a href="etb.html">Trainer boxes</a>
       <a href="models.html">Models</a>
       <a href="momentum.html">Momentum</a>
@@ -1178,9 +1179,14 @@ if(rarity) metaParts.push(esc(rarity));
 const meta = metaParts.join(" · ");
 let thumbHtml = "";
 if(wantThumb){
-if(cl.set_id && number != null && number !== ""){
-const src = "https://images.pokemontcg.io/" + cl.set_id + "/" + number + ".png";
-thumbHtml = '<img class="cc-thumb" loading="lazy" decoding="async" src="' + src
+// opts.src wins when the caller knows the real artwork URL. The derived
+// images.pokemontcg.io path below is a convention, not a fact: the newest
+// sets are catalogued on a second CDN, so deriving there yields a 404 and
+// a grey placeholder. A caller holding cards.image_url passes it in.
+const src = opts.src || ((cl.set_id && number != null && number !== "")
+? ("https://images.pokemontcg.io/" + cl.set_id + "/" + number + ".png") : null);
+if(src){
+thumbHtml = '<img class="cc-thumb" loading="lazy" decoding="async" src="' + esc(src)
 + '" alt="" width="40" height="56" onerror="ccFallback(this)">';
 } else {
 thumbHtml = '<span class="cc-thumb cc-thumb--fallback" aria-hidden="true"></span>';
@@ -1206,7 +1212,7 @@ return '<div class="cardcell' + (compact ? ' cc-compact' : '') + '">'
 + '</div></div>';
 }
 
-const PAGE = {"worked":{"id":"sv3-223","market":112.94,"drivers":["log_price -0.14","premium_asof +0.12","mispricing +0.07"],"pred":0.019907,"lo":-0.152401,"hi":0.270567,"flag":"none","eur30":118.3,"eurTrend":92.17,"divZ":-0.78374,"qlo":-0.17230800000000002,"qhi":0.25066,"poolWidth":0.384,"verdict":"strong","bestModel":"rf","caveat":"ablation removes only 21% of the all-fold IC, but set age alone scores 0.296 of 0.329 \u2014 read it as a lifecycle map first"},"obyid":{"sv3-223":{"name":"Charizard ex","set":"Obsidian Flames","set_id":"sv3","number":"223","rarity":"Special Illustration Rare","market":112.94}},"cardlinks":{"sv3-223":{"set_id":"sv3","number":"223","tcg_pid":509980,"cm_pid":725303}},"cmSym":"$","cmCurrency":"USD","eurusd":1.1669};
+const PAGE = {"worked":{"id":"sv3-223","market":112.94,"drivers":["log_price -0.14","premium_asof +0.12","mispricing +0.07"],"pred":0.019907,"lo":-0.152401,"hi":0.270567,"flag":"none","eur30":118.06,"eurTrend":91.98,"divZ":-0.78374,"qlo":-0.17230800000000002,"qhi":0.25066,"poolWidth":0.384,"verdict":"strong","bestModel":"rf","caveat":"ablation removes only 21% of the all-fold IC, but set age alone scores 0.296 of 0.329 \u2014 read it as a lifecycle map first"},"obyid":{"sv3-223":{"name":"Charizard ex","set":"Obsidian Flames","set_id":"sv3","number":"223","rarity":"Special Illustration Rare","market":112.94}},"cardlinks":{"sv3-223":{"set_id":"sv3","number":"223","tcg_pid":509980,"cm_pid":725303}},"cmSym":"$","cmCurrency":"USD","eurusd":1.1645};
 
 const W = PAGE.worked;
 const OBYID = new Map(Object.entries(PAGE.obyid || {}));
