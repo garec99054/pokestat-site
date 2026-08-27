@@ -1856,19 +1856,16 @@ if(CRSL_RAF) return;
 CRSL_RAF = requestAnimationFrame(() => { CRSL_RAF = 0; crslSyncArrows(); });
 }, {passive:true});
 window.addEventListener("resize", crslSyncArrows);
-// Hover and focus merely hold it still. Someone reading a tile has not asked
-// to drive, so the drift resumes when they move away.
+// Keyboard focus merely holds it still. A keyboard user reading a tile has
+// not asked to drive, so the drift resumes once focus moves elsewhere.
+// Mouse hover does NOT hold it: the drift keeps animating under the pointer,
+// and only a real interaction (a click inside the rail, or the pause
+// button) stops it for good -- see crslAutoStop() callers below.
 const root = rail.closest(".crsl") || rail;
-// Hover and focus are two independent holds, so resuming has to check both.
-// Otherwise moving the mouse off the rail restarts the drift underneath a
-// keyboard user whose focus is still sitting on a card they are reading.
 function crslAutoResume(){
 if(root.contains(document.activeElement)) return;
-try{ if(root.matches(":hover")) return; }catch(e){}
 crslAutoStart();
 }
-root.addEventListener("mouseenter", crslAutoPause);
-root.addEventListener("mouseleave", crslAutoResume);
 root.addEventListener("focusin", crslAutoPause);
 root.addEventListener("focusout", crslAutoResume);
 rail.addEventListener("click", e => {
