@@ -156,7 +156,7 @@ font-variant-numeric:tabular-nums;
 font-feature-settings:"tnum" 1,"lnum" 1;
 }
 a{color:var(--accent-ink);}
-a:hover{color:var(--accent);}
+a:hover{color:var(--accent-ink);text-decoration-thickness:2px;}
 .page{max-width:1360px;margin:0 auto;padding:20px 20px 44px;}
 .prose{max-width:66ch;}
 .ret-pos{color:var(--up-text);}
@@ -352,7 +352,7 @@ thead th.sortable{cursor:pointer;user-select:none;}
 thead th.num{text-align:right;}
 thead th[title]{text-decoration:underline dotted var(--border-strong);text-underline-offset:3px;}
 thead th.sortable:hover{color:var(--accent-ink);}
-thead th .arrow{color:var(--accent);margin-left:3px;font-size:0.75em;}
+thead th .arrow{color:var(--accent-ink);margin-left:3px;font-size:0.75em;}
 tbody td{padding:var(--tbl-pad-y) var(--tbl-pad-x);border-bottom:1px solid var(--border);vertical-align:middle;}
 tbody tr:last-child td{border-bottom:none;}
 tbody tr{transition:background-color .13s ease-out;}
@@ -409,7 +409,7 @@ overflow:hidden;margin:0 auto 16px;max-width:760px;
 #leaderboard tbody tr.selected{background:rgba(var(--accent-rgb),0.08);}
 #leaderboard tbody tr.selected td:first-child{box-shadow:inset 3px 0 0 var(--accent);}
 #leaderboard tbody tr.baseline td{color:var(--ink-subtle);}
-.sel-tag{font-size:0.68rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:0.04em;margin-left:6px;}
+.sel-tag{font-size:0.68rem;font-weight:700;color:var(--accent-ink);text-transform:uppercase;letter-spacing:0.04em;margin-left:6px;}
 .attr-note{margin-top:14px;}
 .verdict-word{font-weight:700;}
 .verdict-word.reversion{color:var(--down);}
@@ -1143,7 +1143,8 @@ document.getElementById("backtest-note").innerHTML =
 +' card-date observations), cards flagged undervalued, overvalued, or fair are tracked forward '
 +'about 90 days, after both the pageview and character-premium look-aheads were removed. Pooled '
 +'across all dates the undervalued-minus-overvalued mean-return spread is <strong>'
-+BT.spread.toFixed(1)+' points</strong>.';
++(BT.spread==null ? 'not computable: a value-flag group was empty'
+: BT.spread.toFixed(1)+' points')+'</strong>.';
 const pb=document.getElementById("pooled-body");
 const order={undervalued:0,fair:1,overvalued:2};
 const pooled=BT.pooled.slice().sort((a,b)=>order[a.flag]-order[b.flag]);

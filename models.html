@@ -156,7 +156,7 @@ font-variant-numeric:tabular-nums;
 font-feature-settings:"tnum" 1,"lnum" 1;
 }
 a{color:var(--accent-ink);}
-a:hover{color:var(--accent);}
+a:hover{color:var(--accent-ink);text-decoration-thickness:2px;}
 .page{max-width:1360px;margin:0 auto;padding:20px 20px 44px;}
 .prose{max-width:66ch;}
 .ret-pos{color:var(--up-text);}
@@ -352,7 +352,7 @@ thead th.sortable{cursor:pointer;user-select:none;}
 thead th.num{text-align:right;}
 thead th[title]{text-decoration:underline dotted var(--border-strong);text-underline-offset:3px;}
 thead th.sortable:hover{color:var(--accent-ink);}
-thead th .arrow{color:var(--accent);margin-left:3px;font-size:0.75em;}
+thead th .arrow{color:var(--accent-ink);margin-left:3px;font-size:0.75em;}
 tbody td{padding:var(--tbl-pad-y) var(--tbl-pad-x);border-bottom:1px solid var(--border);vertical-align:middle;}
 tbody tr:last-child td{border-bottom:none;}
 tbody tr{transition:background-color .13s ease-out;}
@@ -409,7 +409,7 @@ overflow:hidden;margin:0 auto 16px;max-width:760px;
 #leaderboard tbody tr.selected{background:rgba(var(--accent-rgb),0.08);}
 #leaderboard tbody tr.selected td:first-child{box-shadow:inset 3px 0 0 var(--accent);}
 #leaderboard tbody tr.baseline td{color:var(--ink-subtle);}
-.sel-tag{font-size:0.68rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:0.04em;margin-left:6px;}
+.sel-tag{font-size:0.68rem;font-weight:700;color:var(--accent-ink);text-transform:uppercase;letter-spacing:0.04em;margin-left:6px;}
 .attr-note{margin-top:14px;}
 .verdict-word{font-weight:700;}
 .verdict-word.reversion{color:var(--down);}
@@ -1405,13 +1405,23 @@ let html = '<strong>Finding: ' + esc(P.finding) + '</strong> ';
 html += 'Inside ' + esc(P.era) + ' the selected model scores held-out IC <strong>'
 + fmtSigned(P.ic,3) + '</strong> &plusmn;' + P.se.toFixed(3) + ' over ' + P.folds
 + ' folds and ' + P.cards + ' cards. ';
+// permP is null whenever the report printed n/a for a non-finite p-value. The
+// adjudication itself is read off the report's own finding sentence and still
+// holds, so the verdict is kept and only the quoted number is withdrawn: a
+// p-value that was never computed is named as absent, never rendered as null.
+const pQuoted = P.permP != null ? P.permP.toFixed(3) : null;
 if(!P.separated){
-html += 'The permutation test returns p = <strong>' + P.permP.toFixed(3) + '</strong> and the '
+html += (pQuoted != null
+? 'The permutation test returns p = <strong>' + pQuoted + '</strong> and the '
+: 'The report states <strong>no permutation p-value</strong> for this slice, and the ')
 + 'bootstrap interval spans zero, so this cell supports <strong>no directional claim</strong> '
 + '\u2014 neither the ' + sign + ' one its point estimate suggests nor its opposite. ';
 } else {
-html += 'The permutation test separates it from zero at the 0.05 level (p = '
-+ P.permP.toFixed(3) + '), so the ' + sign + ' direction is an established property of this '
+html += (pQuoted != null
+? 'The permutation test separates it from zero at the 0.05 level (p = ' + pQuoted + ')'
+: 'The report separates it from zero at the 0.05 level but states '
++ '<strong>no permutation p-value</strong> for this slice')
++ ', so the ' + sign + ' direction is an established property of this '
 + 'slice and not sampling noise. ';
 }
 if(P.nEff != null){
