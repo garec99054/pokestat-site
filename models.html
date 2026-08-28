@@ -849,6 +849,13 @@ svg.mchart .k0{fill:var(--ink-subtle);font-size:11px;text-anchor:middle}svg.mcha
 function fmtMoney(v){ return v == null ? "" : "$" + v.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2}); }
 function fmtPct(v, d){ if(v==null) return ""; d = d==null?1:d; const s = v>0?"+":""; return s + (v*100).toFixed(d) + "%"; }
 function fmtSigned(v, d){ if(v==null) return ""; d=d==null?2:d; const s=v>0?"+":""; return s+v.toFixed(d); }
+// An error bar and an effective-fold count are values a generated report is
+// entitled NOT to have: _bd_num loads its own "n/a" cell as null, which a slice
+// gets whenever its SE or n_eff was non-finite (under two scored folds). A
+// toFixed on that null throws and takes the whole page's JS down, so the
+// estimate is still printed and only the missing half is named as unstated.
+function fmtPM(v, d){ d=d==null?3:d; return v==null ? " (error bar not stated)" : " &plusmn;"+v.toFixed(d); }
+function fmtNEff(v){ return v==null ? "an effective-fold count the report leaves unstated" : "n_eff "+v.toFixed(2); }
 function esc(s){ return String(s).replace(/[&<>"]/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
 // Generated reports are written in ASCII, where a parenthetical dash is "--".
 // Sentences lifted verbatim from them get that rendered as an en dash so the
@@ -1332,14 +1339,14 @@ const bar = BD.minNeff==null ? "the effective-fold bar" : BD.minNeff.toFixed(1)+
 // branches it picks from its one-SE gates), quoted rather than restated.
 let html = '<strong>Finding: '+esc(BD.eraFinding)+'</strong> '
 + 'Ranking every card only against same-era cards gives held-out IC <strong>'
-+ fmtSigned(neutral.ic,3)+'</strong> &plusmn;'+neutral.se.toFixed(3)+', against a pooled headline '
-+ fmtSigned(pooled.ic,3)+' &plusmn;'+pooled.se.toFixed(3)+'. Destroying all within-era information '
-+ 'and keeping only the era ordering leaves '+fmtSigned(contrast.ic,3)+' &plusmn;'
-+ contrast.se.toFixed(3)+', which is inside its own error bar. So the headline is reproduced by '
++ fmtSigned(neutral.ic,3)+'</strong>'+fmtPM(neutral.se)+', against a pooled headline '
++ fmtSigned(pooled.ic,3)+fmtPM(pooled.se)+'. Destroying all within-era information '
++ 'and keeping only the era ordering leaves '+fmtSigned(contrast.ic,3)
++ fmtPM(contrast.se)+', which is inside its own error bar. So the headline is reproduced by '
 + 'within-era ranking and the era ordering alone carries nothing distinguishable from zero.';
 if(neutral.call.thin){
 html += ' <strong>Read with the stated limit:</strong> the neutralized row clears its noise bar on '
-+ 'n_eff '+neutral.nEff.toFixed(2)+', below the '+bar+' this repo requires before a cell may '
++ fmtNEff(neutral.nEff)+', below the '+bar+' this repo requires before a cell may '
 + 'claim a direction, so that half of the finding rests on roughly one independent draw and is '
 + 'directional, not established.';
 }
@@ -1353,7 +1360,7 @@ const adjudicated = new Set(PR && !PR.separated ? [PR.era] : []);
 const established = wrong.filter(r=>!adjudicated.has(r.slice));
 if(established.length){
 html += ' It is also not uniform: inside '
-+ established.map(r=>esc(r.slice)+' ('+fmtSigned(r.ic,3)+' &plusmn;'+r.se.toFixed(3)+')').join(", ")
++ established.map(r=>esc(r.slice)+' ('+fmtSigned(r.ic,3)+fmtPM(r.se)+')').join(", ")
 + ' the model ranks cards backwards on the held-out folds, so the claim rests on the eras that '
 + 'do clear, not on all of them.';
 }
@@ -1361,7 +1368,7 @@ const open = BD.era.filter(r=>adjudicated.has(r.slice));
 if(open.length){
 html += ' It is also not uniform, though the weakest slice is an open question rather than a '
 + 'known defect: '
-+ open.map(r=>esc(r.slice)+' ('+fmtSigned(r.ic,3)+' &plusmn;'+r.se.toFixed(3)+')').join(", ")
++ open.map(r=>esc(r.slice)+' ('+fmtSigned(r.ic,3)+fmtPM(r.se)+')').join(", ")
 + ' sits inside its own error bar, and the resampling probe below cannot separate it from '
 + 'zero in either direction.';
 }
@@ -1376,9 +1383,9 @@ const rby = Object.fromEntries(BD.rarity.map(r=>[r.slice, r]));
 const rn = rby["within-rarity neutralized"], rc = rby["between-rarity contrast only"];
 document.getElementById("rarity-sub").innerHTML = BD.rarityFinding
 ? ('By rarity tier the same test says: '+esc(BD.rarityFinding)+' (neutralized '
-+fmtSigned(rn.ic,3)+' &plusmn;'+rn.se.toFixed(3)+', n_eff '+rn.nEff.toFixed(2)
-+'; contrast-only '+fmtSigned(rc.ic,3)+' &plusmn;'+rc.se.toFixed(3)+', n_eff '
-+rc.nEff.toFixed(2)+').')
++fmtSigned(rn.ic,3)+fmtPM(rn.se)+', '+fmtNEff(rn.nEff)
++'; contrast-only '+fmtSigned(rc.ic,3)+fmtPM(rc.se)+', '
++fmtNEff(rc.nEff)+').')
 : 'The same neutralized-versus-contrast test, cut by rarity tier instead of era.';
 }
 // ---------------------------------------------------------------------------
@@ -1403,7 +1410,7 @@ document.getElementById("probe-sub").innerHTML =
 const sign = P.ic < 0 ? "negative" : "positive";
 let html = '<strong>Finding: ' + esc(P.finding) + '</strong> ';
 html += 'Inside ' + esc(P.era) + ' the selected model scores held-out IC <strong>'
-+ fmtSigned(P.ic,3) + '</strong> &plusmn;' + P.se.toFixed(3) + ' over ' + P.folds
++ fmtSigned(P.ic,3) + '</strong>' + fmtPM(P.se) + ' over ' + P.folds
 + ' folds and ' + P.cards + ' cards. ';
 // permP is null whenever the report printed n/a for a non-finite p-value. The
 // adjudication itself is read off the report's own finding sentence and still

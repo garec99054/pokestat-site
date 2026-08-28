@@ -852,6 +852,13 @@ svg.mchart .k0{fill:none;stroke:var(--neutral);stroke-width:1.3}svg.mchart .k1{f
 function fmtMoney(v){ return v == null ? "" : "$" + v.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2}); }
 function fmtPct(v, d){ if(v==null) return ""; d = d==null?1:d; const s = v>0?"+":""; return s + (v*100).toFixed(d) + "%"; }
 function fmtSigned(v, d){ if(v==null) return ""; d=d==null?2:d; const s=v>0?"+":""; return s+v.toFixed(d); }
+// An error bar and an effective-fold count are values a generated report is
+// entitled NOT to have: _bd_num loads its own "n/a" cell as null, which a slice
+// gets whenever its SE or n_eff was non-finite (under two scored folds). A
+// toFixed on that null throws and takes the whole page's JS down, so the
+// estimate is still printed and only the missing half is named as unstated.
+function fmtPM(v, d){ d=d==null?3:d; return v==null ? " (error bar not stated)" : " &plusmn;"+v.toFixed(d); }
+function fmtNEff(v){ return v==null ? "an effective-fold count the report leaves unstated" : "n_eff "+v.toFixed(2); }
 function esc(s){ return String(s).replace(/[&<>"]/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
 // Generated reports are written in ASCII, where a parenthetical dash is "--".
 // Sentences lifted verbatim from them get that rendered as an en dash so the
@@ -1244,7 +1251,7 @@ return '<div class="cardcell' + (compact ? ' cc-compact' : '') + '">'
 + '</div></div>';
 }
 
-const PAGE = {"worked":{"id":"sv3-223","market":112.94,"drivers":["log_price -0.14","premium_asof +0.12","mispricing +0.07"],"pred":0.019907,"lo":-0.152401,"hi":0.270567,"flag":"none","eur30":118.06,"eurTrend":91.98,"divZ":-0.78374,"qlo":-0.17230800000000002,"qhi":0.25066,"poolWidth":0.384,"verdict":"strong","bestModel":"rf","caveat":"ablation removes only 21% of the all-fold IC, but set age alone scores 0.296 of 0.329 \u2014 read it as a lifecycle map first"},"obyid":{"sv3-223":{"name":"Charizard ex","set":"Obsidian Flames","set_id":"sv3","number":"223","rarity":"Special Illustration Rare","market":112.94}},"cardlinks":{"sv3-223":{"set_id":"sv3","number":"223","tcg_pid":509980,"cm_pid":725303}},"cmSym":"$","cmCurrency":"USD","eurusd":1.1645};
+const PAGE = {"worked":{"id":"sv3-223","market":112.94,"drivers":["log_price -0.14","premium_asof +0.12","mispricing +0.07"],"pred":0.019907,"lo":-0.152401,"hi":0.270567,"flag":"none","eur30":118.04,"eurTrend":91.97,"divZ":-0.78374,"qlo":-0.17230800000000002,"qhi":0.25066,"poolWidth":0.384,"verdict":"strong","bestModel":"rf","caveat":"ablation removes only 21% of the all-fold IC, but set age alone scores 0.296 of 0.329 \u2014 read it as a lifecycle map first"},"obyid":{"sv3-223":{"name":"Charizard ex","set":"Obsidian Flames","set_id":"sv3","number":"223","rarity":"Special Illustration Rare","market":112.94}},"cardlinks":{"sv3-223":{"set_id":"sv3","number":"223","tcg_pid":509980,"cm_pid":725303}},"cmSym":"$","cmCurrency":"USD","eurusd":1.1643};
 
 const W = PAGE.worked;
 const OBYID = new Map(Object.entries(PAGE.obyid || {}));
@@ -1265,11 +1272,20 @@ const cmNote = cmConv
 ? ' <span style="color:var(--ink-subtle);">(Cardmarket EUR trend, converted to USD at the ECB rate '+FXRATE.toFixed(4)+')</span>'
 : '';
 const cmSrc = cmConv ? "cardmarket_eur_trend × ECB FX" : "cardmarket_eur_trend";
+// The two offsets are null whenever this card's own band bounds are (the
+// payload builds them as lo minus pred only where the bound is not None), and
+// the pooled-width clause on the same row was already written with that in
+// mind. Formatting them anyway threw on null.toFixed and took the whole worked
+// example down, so the row now says the band was not calibrated for this card
+// rather than printing an offset nobody computed.
+const offsets = (W.qlo!=null && W.qhi!=null)
+? 'q_lo '+W.qlo.toFixed(3)+", q_hi "+W.qhi.toFixed(3)
+: 'no calibrated band for this card';
 const rows = [
 ["Market price at T", '<span class="mono">'+fmtMoney(W.market)+'</span>', "market_price"],
 ["Top drivers (signed z·coef)", '<span class="mono">'+esc(W.drivers.join("; "))+'</span>', "top3_drivers"],
 ["Point prediction (rel. 90d)", '<span class="mono">'+fmtPct(W.pred)+'</span>', "predicted_relative_return"],
-["Conformal offsets ("+esc(W.bestModel||"selected model")+", this card\u2019s rarity tier)", '<span class="mono">q_lo '+W.qlo.toFixed(3)+", q_hi "+W.qhi.toFixed(3)+'</span>'+(W.poolWidth!=null?' <span style="color:var(--ink-subtle);">(pooled band width '+W.poolWidth.toFixed(3)+')</span>':''), "per-tier validation band"],
+["Conformal offsets ("+esc(W.bestModel||"selected model")+", this card\u2019s rarity tier)", '<span class="mono">'+offsets+'</span>'+(W.poolWidth!=null?' <span style="color:var(--ink-subtle);">(pooled band width '+W.poolWidth.toFixed(3)+')</span>':''), "per-tier validation band"],
 ["80% band", '<span class="mono">'+fmtPct(W.lo)+" … "+fmtPct(W.hi)+'</span>'+bandSvg, "pred_lo90 / pred_hi90"],
 ["Interval test", 'pred '+(W.pred>0?"&gt; 0 ✓":"&lt; 0 ✗")+' and lo90 <span class="mono">'+fmtPct(W.lo)+'</span> '+(l0ok?"&gt; −0.02 ✓":"≤ −0.02 ✗"), "flag rule (±0.02)"],
 ["Flag", '<span class="flag-badge '+flagCls(W.flag)+'">'+esc(W.flag)+'</span>', "direction_flag"],

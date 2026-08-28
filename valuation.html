@@ -916,6 +916,13 @@ svg.mchart .k0{fill:rgba(var(--down-rgb),0.89)}svg.mchart .k1{stroke:var(--borde
 function fmtMoney(v){ return v == null ? "" : "$" + v.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2}); }
 function fmtPct(v, d){ if(v==null) return ""; d = d==null?1:d; const s = v>0?"+":""; return s + (v*100).toFixed(d) + "%"; }
 function fmtSigned(v, d){ if(v==null) return ""; d=d==null?2:d; const s=v>0?"+":""; return s+v.toFixed(d); }
+// An error bar and an effective-fold count are values a generated report is
+// entitled NOT to have: _bd_num loads its own "n/a" cell as null, which a slice
+// gets whenever its SE or n_eff was non-finite (under two scored folds). A
+// toFixed on that null throws and takes the whole page's JS down, so the
+// estimate is still printed and only the missing half is named as unstated.
+function fmtPM(v, d){ d=d==null?3:d; return v==null ? " (error bar not stated)" : " &plusmn;"+v.toFixed(d); }
+function fmtNEff(v){ return v==null ? "an effective-fold count the report leaves unstated" : "n_eff "+v.toFixed(2); }
 function esc(s){ return String(s).replace(/[&<>"]/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
 // Generated reports are written in ASCII, where a parenthetical dash is "--".
 // Sentences lifted verbatim from them get that rendered as an en dash so the

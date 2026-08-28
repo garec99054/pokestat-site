@@ -924,6 +924,13 @@ html.compact .crsl-detail svg.band{width:224px;height:21px;}
 function fmtMoney(v){ return v == null ? "" : "$" + v.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2}); }
 function fmtPct(v, d){ if(v==null) return ""; d = d==null?1:d; const s = v>0?"+":""; return s + (v*100).toFixed(d) + "%"; }
 function fmtSigned(v, d){ if(v==null) return ""; d=d==null?2:d; const s=v>0?"+":""; return s+v.toFixed(d); }
+// An error bar and an effective-fold count are values a generated report is
+// entitled NOT to have: _bd_num loads its own "n/a" cell as null, which a slice
+// gets whenever its SE or n_eff was non-finite (under two scored folds). A
+// toFixed on that null throws and takes the whole page's JS down, so the
+// estimate is still printed and only the missing half is named as unstated.
+function fmtPM(v, d){ d=d==null?3:d; return v==null ? " (error bar not stated)" : " &plusmn;"+v.toFixed(d); }
+function fmtNEff(v){ return v==null ? "an effective-fold count the report leaves unstated" : "n_eff "+v.toFixed(2); }
 function esc(s){ return String(s).replace(/[&<>"]/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
 // Generated reports are written in ASCII, where a parenthetical dash is "--".
 // Sentences lifted verbatim from them get that rendered as an en dash so the
@@ -1344,7 +1351,11 @@ const cells = [
 {k:"Sets", v:M.nSets+" modern sets", s:"snapshot "+M.snapshot},
 {k:"Best model", v:M.bestModel, s:"selected on held-out folds"},
 {k:"Held-out IC", v:M.heldoutIC.toFixed(3), s:"t = "+M.heldoutIR.toFixed(1)+" on 6.5 eff. folds"},
-{k:"Interval flags", v:M.flagsUp+" up / "+M.flagsDown+" down", s:M.band.coverage.toFixed(1)+"% band coverage"},
+{k:"Interval flags", v:M.flagsUp+" up / "+M.flagsDown+" down",
+// load_validation leaves the band null when the conformal table has no row
+// for the selected model; the flag counts are still measured, so only the
+// coverage sub-label is withdrawn.
+s:M.band ? M.band.coverage.toFixed(1)+"% band coverage" : "no calibrated band this run"},
 ];
 // The one number that says whether the held-out IC is skill inside a release
 // window or just the eras ranked against each other. Omitted entirely when the
@@ -1469,13 +1480,13 @@ html +=
 +'live buy list. See the Methods page for the full caveats.</p>';
 if(es){
 html += '<p>The breakdown that decides how usable that is: ranking cards only against same-era '
-+'peers scores <strong>'+fmtSigned(es.neutralIC,3)+'</strong> &plusmn;'+es.neutralSE.toFixed(3)
++'peers scores <strong>'+fmtSigned(es.neutralIC,3)+'</strong>'+fmtPM(es.neutralSE)
 +', against a pooled '+fmtSigned(es.pooledIC,3)+', while the era ordering on its own scores '
-+fmtSigned(es.contrastIC,3)+' &plusmn;'+es.contrastSE.toFixed(3)+' and is inside its own error '
++fmtSigned(es.contrastIC,3)+fmtPM(es.contrastSE)+' and is inside its own error '
 +'bar. So '+esc(es.finding)
 +(es.neutralThin
-? ' It is directional rather than established: the neutralized row rests on n_eff '
-+es.neutralNEff.toFixed(2)+', below the '
+? ' It is directional rather than established: the neutralized row rests on '
++fmtNEff(es.neutralNEff)+', below the '
 +(es.minNeff==null?"claim":es.minNeff.toFixed(1))+' effective-fold bar this repo requires. '
 : ' ')
 +'<a href="models.html#within-era">See the full breakdown.</a></p>';
