@@ -489,6 +489,22 @@ opacity:0;transition:opacity 60ms linear;z-index:50;box-shadow:0 2px 10px rgba(v
 .mark-dot:hover,.mark-dot:focus-visible{fill-opacity:1;}
 footer{border-top:1px solid var(--border);padding-top:18px;margin-top:8px;font-size:0.82rem;color:var(--ink-subtle);}
 footer code{background:var(--panel-alt);padding:1px 5px;border-radius:2px;font-size:0.92em;}
+.related{border-top:1px solid var(--border);margin-top:var(--section-gap);padding-top:16px;}
+.rel-head{
+margin:0 0 10px;font-size:0.72rem;font-weight:650;color:var(--ink-muted);
+text-transform:uppercase;letter-spacing:0.06em;
+}
+.rel-list{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px 10px;}
+.rel-list a{
+display:inline-block;padding:7px 13px;font-size:0.83rem;
+border:1px solid var(--border-strong);border-radius:var(--radius);
+background:var(--panel);color:var(--accent-ink);text-decoration:none;
+transition:border-color var(--t-fast) ease-out,background-color var(--t-fast) ease-out;
+}
+.rel-list a:hover{border-color:var(--accent);background:var(--panel-alt);}
+.rel-list a:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+.gloss{border-bottom:1px dotted var(--accent-ink);cursor:help;}
+.gloss:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:2px;}
 html.motion [data-reveal]{opacity:0;transform:translateY(10px);
 transition:opacity var(--t-mid) var(--ease),transform var(--t-mid) var(--ease);
 transition-delay:calc(var(--rv,0) * var(--rv-step));}
@@ -804,7 +820,7 @@ html.compact .crsl-detail svg.band{width:224px;height:21px;}
 
   <section id="card-carousel" data-reveal>
     <h2>Browse the cards</h2>
-    <p class="section-note" data-copy="full">The same measurements the tables carry, on the artwork. Each tile shows the card's market price on the same snapshot its headline metric is measured against, the model's predicted 90-day market-relative move with its 80 percent conformal band, where the price sits against hedonic fair value, and the trailing price path. Switch tracks to change what the rail is ranked by, and open any card for its signed driver breakdown and marketplace links.</p>
+    <p class="section-note" data-copy="full">The same measurements the tables carry, on the artwork. Each tile shows the card's market price on the same snapshot its headline metric is measured against, the model's predicted 90-day <span class="gloss" tabindex="0" data-tip="Measured against the whole market instead of on its own. A card up 3% in a month when the market is up 5% counts as 2% down, because holding it beat nothing." aria-label="market-relative: Measured against the whole market instead of on its own. A card up 3% in a month when the market is up 5% counts as 2% down, because holding it beat nothing.">market-relative</span> move with its 80 percent <span class="gloss" tabindex="0" data-tip="A price range whose width comes from how far past estimates actually missed, not from an assumed bell curve. An 80% range is one that held 80% of the time on months the fit had never seen." aria-label="conformal: A price range whose width comes from how far past estimates actually missed, not from an assumed bell curve. An 80% range is one that held 80% of the time on months the fit had never seen.">conformal</span> band, where the price sits against <span class="gloss" tabindex="0" data-tip="Pricing a card from its parts. The fit learns what buyers pay for each feature (set, rarity, artwork, age) and adds them up, the way a house is priced from its size, rooms and location." aria-label="hedonic: Pricing a card from its parts. The fit learns what buyers pay for each feature (set, rarity, artwork, age) and adds them up, the way a house is priced from its size, rooms and location.">hedonic</span> fair value, and the trailing price path. Switch tracks to change what the rail is ranked by, and open any card for its signed driver breakdown and marketplace links.</p>
     <p class="section-note" data-copy="plain">Click any card to see why the model ranked it there. The buttons above change what the row is sorted by. Each tile shows today's price, the predicted 90-day move with its range, whether the card looks cheap or expensive for what it is, and the price path so far.</p>
     <div class="crsl" role="group" aria-roledescription="carousel" aria-label="Browse the cards">
       <div class="crsl-bar">
@@ -854,11 +870,11 @@ html.compact .crsl-detail svg.band{width:224px;height:21px;}
   <section id="value-teaser" data-reveal>
     <h2>Most over- and under-valued right now</h2>
     <p class="section-note" data-copy="full">The cards whose market price sits furthest
-      above and below their hedonic fair value, by signed residual. The full analysis
+      above and below their hedonic fair value, by signed <span class="gloss" tabindex="0" data-tip="What is left over: the price a card actually fetches minus the price its features say it should. Positive means it sells for more than the features explain, negative means less." aria-label="residual: What is left over: the price a card actually fetches minus the price its features say it should. Positive means it sells for more than the features explain, negative means less.">residual</span>. The full analysis
       (interval bands, hierarchical cross-check, persistence and combined signals) lives on
       the Valuation page. These flags describe mispricing versus fundamentals, not future
       returns (pooled forward spread about <span class="vt-spread num"></span>,
-      regime-dependent).</p>
+      <span class="gloss" tabindex="0" data-tip="A stretch of months over which the market behaved one way, such as a long climb or a long slide. What works in one stretch often stops working in the next." aria-label="regime: A stretch of months over which the market behaved one way, such as a long climb or a long slide. What works in one stretch often stops working in the next.">regime</span>-dependent).</p>
     <p class="section-note" data-copy="plain">Cards priced furthest from what their
       attributes say they should cost. This is about being mispriced today, not about what
       happens next: the cards flagged cheap did not go on to beat the expensive ones here
@@ -885,8 +901,18 @@ html.compact .crsl-detail svg.band{width:224px;height:21px;}
   <section id="explore" data-reveal>
     <h2>Explore the analysis</h2>
     <p class="section-note">Each part of the study is now its own page.</p>
-    <div class="hub-grid" id="hub-grid"><a class="hub-card" href="outlook.html"><p class="hc-title">Full outlook</p><p class="hc-desc">All modeled chase cards ranked by predicted 90-day move, with conformal bands, flags, sparklines and marketplace links.</p></a><a class="hub-card" href="watchlists.html"><p class="hc-title">Watchlists</p><p class="hc-desc">Reversion watch, set pulse, tier lens, divergence watch and realized movers.</p></a><a class="hub-card" href="market.html"><p class="hc-title">Whole-market stats</p><p class="hc-desc">Charts on the broader singles and sealed market across 30 months.</p></a><a class="hub-card" href="etb.html"><p class="hc-title">Elite Trainer Boxes</p><p class="hc-desc">Every ETB in the archive: prices rose about 62%/yr, they did not beat booster boxes, ageing cannot be identified at all, and the frictions decide how long a hold has to run.</p></a><a class="hub-card" href="models.html"><p class="hc-title">Model leaderboard</p><p class="hc-desc">Which model was selected over the walk-forward folds, how much of its edge survives ablating the set-age features, and whether that edge is within-era skill or just the eras ranked against each other.</p></a><a class="hub-card" href="momentum.html"><p class="hc-title">Momentum & reversion</p><p class="hc-desc">No tradeable momentum. Pooled, no reliable reversion either. Ranking the same cards inside their own era changes part of that picture, and the page shows exactly how much.</p></a><a class="hub-card" href="backtest.html"><p class="hc-title">Value-flag backtest</p><p class="hc-desc">Whether undervalued flags predict forward returns out of sample (they do not).</p></a><a class="hub-card" href="how-it-works.html"><p class="hc-title">How it works</p><p class="hc-desc">Diagrams of the pipeline, the model, the conformal band and the flag rule, with a worked example.</p></a><a class="hub-card" href="methods.html"><p class="hc-title">Methods & caveats</p><p class="hc-desc">Data sources, Cardmarket coverage, model tiering, page doctrine and the honest caveats.</p></a></div>
+    <div class="hub-grid" id="hub-grid"><a class="hub-card" href="outlook.html"><p class="hc-title">Full outlook</p><p class="hc-desc">All modeled chase cards ranked by predicted 90-day move, with conformal bands, flags, sparklines and marketplace links.</p></a><a class="hub-card" href="watchlists.html"><p class="hc-title">Watchlists</p><p class="hc-desc">Reversion watch, set pulse, tier lens, divergence watch and realized movers.</p></a><a class="hub-card" href="valuation.html"><p class="hc-title">Fair value</p><p class="hc-desc">What each modeled chase card looks worth against what it costs: a hedonic fair value from pull cost and desirability, an 80 percent interval, and an interval-aware over/under-valued verdict. A verdict on mispricing, not a return forecast.</p></a><a class="hub-card" href="market.html"><p class="hc-title">Whole-market stats</p><p class="hc-desc">Charts on the broader singles and sealed market across 30 months.</p></a><a class="hub-card" href="compendium.html"><p class="hc-title">Set compendium</p><p class="hc-desc">Every chase-rarity card from the sets released in the trailing two-year window, with its monthly price panel, trailing moves, artwork and a cross-check against two other marketplaces. Realized prices only, no predictions.</p></a><a class="hub-card" href="etb.html"><p class="hc-title">Elite Trainer Boxes</p><p class="hc-desc">Every ETB in the archive: prices rose about 62%/yr, they did not beat booster boxes, ageing cannot be identified at all, and the frictions decide how long a hold has to run.</p></a><a class="hub-card" href="models.html"><p class="hc-title">Model leaderboard</p><p class="hc-desc">Which model was selected over the <span class="gloss" tabindex="0" data-tip="Testing only forwards in time. Fit on everything up to a date, predict the month after it, step the date on, repeat. Nothing being scored was known to the fit that produced it." aria-label="walk-forward: Testing only forwards in time. Fit on everything up to a date, predict the month after it, step the date on, repeat. Nothing being scored was known to the fit that produced it.">walk-forward</span> <span class="gloss" tabindex="0" data-tip="One slice of the test: fit on everything up to a date, then score the single month that follows. There is one such slice per month tested, and the scores are averaged into the headline number." aria-label="folds: One slice of the test: fit on everything up to a date, then score the single month that follows. There is one such slice per month tested, and the scores are averaged into the headline number.">folds</span>, how much of its edge survives ablating the set-age features, and whether that edge is within-era skill or just the eras ranked against each other.</p></a><a class="hub-card" href="momentum.html"><p class="hc-title">Momentum & reversion</p><p class="hc-desc">No tradeable momentum. Pooled, no reliable reversion either. Ranking the same cards inside their own era changes part of that picture, and the page shows exactly how much.</p></a><a class="hub-card" href="backtest.html"><p class="hc-title">Value-flag backtest</p><p class="hc-desc">Whether undervalued flags predict forward returns out of sample (they do not).</p></a><a class="hub-card" href="how-it-works.html"><p class="hc-title">How it works</p><p class="hc-desc">Diagrams of the pipeline, the model, the conformal band and the flag rule, with a worked example.</p></a><a class="hub-card" href="methods.html"><p class="hc-title">Methods & caveats</p><p class="hc-desc">Data sources, Cardmarket coverage, model tiering, page doctrine and the honest caveats.</p></a></div>
   </section>
+
+  <nav class="related" aria-label="Related pages" data-reveal>
+    <p class="rel-head">Where to go next</p>
+    <ul class="rel-list">
+      <li><a href="outlook.html">The full ranked outlook</a></li>
+      <li><a href="valuation.html">What each card is worth</a></li>
+      <li><a href="how-it-works.html">How the models work</a></li>
+      <li><a href="methods.html">Methods and caveats</a></li>
+    </ul>
+  </nav>
 
 </div>
 
@@ -1219,6 +1245,12 @@ try{ a.scrollIntoView({inline:"center", block:"nearest"}); }catch(e){}
 }
 }
 document.addEventListener("mousemove", e=>{ if(tip && tip.classList.contains("show")) moveTip(e); });
+// Escape dismisses the tip (WCAG 2.1 SC 1.4.13 "Dismissable"), for the glossary
+// terms above all: their tip can cover the sentence being read. PARTIAL and
+// knowingly so -- "Hoverable" still fails site-wide, since #tooltip is
+// pointer-events:none and the mousemove above re-pegs it to the cursor. See
+// sitegen/glossary.py for why that is left alone.
+document.addEventListener("keydown", e=>{ if(e.key==="Escape") hideTip(); });
 initTheme();
 initCopy();
 initDensity();

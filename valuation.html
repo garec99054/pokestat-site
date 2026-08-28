@@ -489,6 +489,22 @@ opacity:0;transition:opacity 60ms linear;z-index:50;box-shadow:0 2px 10px rgba(v
 .mark-dot:hover,.mark-dot:focus-visible{fill-opacity:1;}
 footer{border-top:1px solid var(--border);padding-top:18px;margin-top:8px;font-size:0.82rem;color:var(--ink-subtle);}
 footer code{background:var(--panel-alt);padding:1px 5px;border-radius:2px;font-size:0.92em;}
+.related{border-top:1px solid var(--border);margin-top:var(--section-gap);padding-top:16px;}
+.rel-head{
+margin:0 0 10px;font-size:0.72rem;font-weight:650;color:var(--ink-muted);
+text-transform:uppercase;letter-spacing:0.06em;
+}
+.rel-list{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px 10px;}
+.rel-list a{
+display:inline-block;padding:7px 13px;font-size:0.83rem;
+border:1px solid var(--border-strong);border-radius:var(--radius);
+background:var(--panel);color:var(--accent-ink);text-decoration:none;
+transition:border-color var(--t-fast) ease-out,background-color var(--t-fast) ease-out;
+}
+.rel-list a:hover{border-color:var(--accent);background:var(--panel-alt);}
+.rel-list a:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+.gloss{border-bottom:1px dotted var(--accent-ink);cursor:help;}
+.gloss:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:2px;}
 html.motion [data-reveal]{opacity:0;transform:translateY(10px);
 transition:opacity var(--t-mid) var(--ease),transform var(--t-mid) var(--ease);
 transition-delay:calc(var(--rv,0) * var(--rv-step));}
@@ -726,7 +742,7 @@ svg.mchart .k0{fill:rgba(var(--down-rgb),0.89)}svg.mchart .k1{stroke:var(--borde
     <div class="summary-strip" id="val-strip"></div>
     <details class="explain" style="margin-top:18px;">
       <summary><span class="custom"></span></summary>
-      <div class="explain-body" id="explain-valuation"><p>Fair value comes from a hedonic regression — <strong>log(price) ~ log(pull_cost) + desirability</strong> (45/45/10 premium/artwork/appeal), leave-one-out R² <strong>0.628</strong>. The residual is how far the market sits from that fair value.</p><p>The 80% interval mirrors the forward model’s conformal band; a card is flagged only when its price clears the whole band. Honest coverage (jackknifed) is <strong>79.6%</strong>.</p><p><strong>This is a mispricing map, not a buy list.</strong> The flags describe value versus fundamentals; backtested out of sample the undervalued-minus-overvalued forward spread is only +0.2pt and regime-dependent.</p></div>
+      <div class="explain-body" id="explain-valuation"><p>Fair value comes from a <span class="gloss" tabindex="0" data-tip="Pricing a card from its parts. The fit learns what buyers pay for each feature (set, rarity, artwork, age) and adds them up, the way a house is priced from its size, rooms and location." aria-label="hedonic: Pricing a card from its parts. The fit learns what buyers pay for each feature (set, rarity, artwork, age) and adds them up, the way a house is priced from its size, rooms and location.">hedonic</span> regression — <strong>log(price) ~ log(pull_cost) + desirability</strong> (45/45/10 premium/artwork/appeal), leave-one-out R² <strong>0.628</strong>. The <span class="gloss" tabindex="0" data-tip="What is left over: the price a card actually fetches minus the price its features say it should. Positive means it sells for more than the features explain, negative means less." aria-label="residual: What is left over: the price a card actually fetches minus the price its features say it should. Positive means it sells for more than the features explain, negative means less.">residual</span> is how far the market sits from that fair value.</p><p>The 80% interval mirrors the forward model’s <span class="gloss" tabindex="0" data-tip="A price range whose width comes from how far past estimates actually missed, not from an assumed bell curve. An 80% range is one that held 80% of the time on months the fit had never seen." aria-label="conformal: A price range whose width comes from how far past estimates actually missed, not from an assumed bell curve. An 80% range is one that held 80% of the time on months the fit had never seen.">conformal</span> band; a card is flagged only when its price clears the whole band. Honest coverage (jackknifed) is <strong>79.6%</strong>.</p><p><strong>This is a mispricing map, not a buy list.</strong> The flags describe value versus fundamentals; backtested out of sample the undervalued-minus-overvalued forward spread is only +0.2pt and <span class="gloss" tabindex="0" data-tip="A stretch of months over which the market behaved one way, such as a long climb or a long slide. What works in one stretch often stops working in the next." aria-label="regime: A stretch of months over which the market behaved one way, such as a long climb or a long slide. What works in one stretch often stops working in the next.">regime</span>-dependent.</p></div>
     </details>
   </section>
 
@@ -879,6 +895,16 @@ svg.mchart .k0{fill:rgba(var(--down-rgb),0.89)}svg.mchart .k1{stroke:var(--borde
       </ul>
     </div>
   </section>
+
+  <nav class="related" aria-label="Related pages" data-reveal>
+    <p class="rel-head">Where to go next</p>
+    <ul class="rel-list">
+      <li><a href="outlook.html">The 90-day outlook for these cards</a></li>
+      <li><a href="backtest.html">Do the value flags actually pay?</a></li>
+      <li><a href="compendium.html">Every chase card, set by set</a></li>
+      <li><a href="methods.html">How fair value is defined</a></li>
+    </ul>
+  </nav>
 
 </div>
 
@@ -1211,6 +1237,12 @@ try{ a.scrollIntoView({inline:"center", block:"nearest"}); }catch(e){}
 }
 }
 document.addEventListener("mousemove", e=>{ if(tip && tip.classList.contains("show")) moveTip(e); });
+// Escape dismisses the tip (WCAG 2.1 SC 1.4.13 "Dismissable"), for the glossary
+// terms above all: their tip can cover the sentence being read. PARTIAL and
+// knowingly so -- "Hoverable" still fails site-wide, since #tooltip is
+// pointer-events:none and the mousemove above re-pegs it to the cursor. See
+// sitegen/glossary.py for why that is left alone.
+document.addEventListener("keydown", e=>{ if(e.key==="Escape") hideTip(); });
 initTheme();
 initCopy();
 initDensity();
