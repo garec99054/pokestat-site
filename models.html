@@ -661,7 +661,8 @@ svg.mchart .k0{fill:var(--ink-subtle);font-size:11px;text-anchor:middle}svg.mcha
 
   <header class="masthead" data-reveal>
     <h1>Which model was selected, and why</h1>
-    <p class="lede prose">Candidate models and the three baselines that must be beaten (a zero prediction, a momentum-only score, and a reversion-only score) over the walk-forward folds. The selected model is graded honestly on disjoint held-out evaluation folds, then broken down to show whether its edge is skill inside one release window or merely the eras ranked against each other.</p>
+    <p class="lede prose" data-copy="full">Candidate models and the three baselines that must be beaten (a zero prediction, a momentum-only score, and a reversion-only score) over the walk-forward folds. The selected model is graded honestly on disjoint held-out evaluation folds, then broken down to show whether its edge is skill inside one release window or merely the eras ranked against each other.</p>
+    <p class="lede prose" data-copy="plain">The models that were tried, and the three simple rules each one had to beat: predict no change, follow the recent winners, or bet against them. Every model was trained only on months before the ones it was scored on, and scored on months it had never seen. The winner is then pulled apart to show how much of its edge is telling cards apart inside a single release window, and how much is just older sets ranked against newer ones.</p>
   </header>
 
 
