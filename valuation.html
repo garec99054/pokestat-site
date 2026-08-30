@@ -1667,9 +1667,23 @@ document.getElementById("persistence-callout").innerHTML =
 // The node, its text and its position in the DOM are identical to before: the
 // native hover tooltip and the accessible name both behave exactly as they did.
 // data-pts on the <svg> gives each dot's VAL row index, in document order.
+function pyRound0(x){
+/* Python's format(x, '.0f') rounds HALF TO EVEN; JS toFixed/Math.round round
+half AWAY FROM ZERO. They disagree only when x lands exactly on .5, which
+is rare enough to hide for months and real enough to ship a wrong number:
+-76.5 formatted "-76" server-side and "-77" here, so the hover tooltip
+contradicted the page prose it is supposed to reproduce byte-for-byte. */
+const f = Math.floor(x), d = x - f;
+if (d > 0.5) return f + 1;
+if (d < 0.5) return f;
+return (f % 2 === 0) ? f : f + 1;
+}
 function scatterTitle(o){
 const r = o.residual_pct;
-const resid = (r==null) ? "n/a" : (r>=0?"+":"")+r.toFixed(0)+"%";
+/* Sign comes from the VALUE, magnitude from the rounded number, so -0.4 reads
+"-0%" exactly as Python's '+.0f' does, rather than flipping to "+0%". */
+const resid = (r==null) ? "n/a"
+: ((r < 0 || Object.is(r, -0)) ? "-" : "+") + Math.abs(pyRound0(r)) + "%";
 return o.name+" \u2014 market $"+o.market.toFixed(2)+", fair $"+o.fair_value.toFixed(2)
 +", residual "+resid+", "+o.verdict;
 }
