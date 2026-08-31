@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<title>Which model was selected, and why</title>
+<title>The findings, and what they imply</title>
 <link rel="icon" href="data:," />
 <script>(function(){try{var t=localStorage.getItem('pk-theme');if(t==='dark'||t==='light'||t==='pastel')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -623,25 +623,62 @@ white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:220px;
 }
 html.compact .cardcell .cc-thumb,html.compact .cardcell .cc-thumb--fallback{width:28px;height:39px;}
 html.compact .cardcell .cc-meta{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:200px;}
-figure.chartfig{
-margin:0 0 10px;border:1px solid var(--border);border-radius:var(--radius);
-background:var(--panel);padding:16px 18px 12px;overflow-x:auto;
+.finding{margin-bottom:var(--section-gap);}
+.finding > h2{text-align:left;font-size:1.06rem;font-weight:650;margin:0 0 12px;letter-spacing:-0.005em;}
+.fnd-split{display:grid;grid-template-columns:minmax(210px,300px) 1fr;gap:28px;align-items:start;}
+.fnd-split.fnd-reverse{grid-template-columns:1fr minmax(210px,300px);}
+.fnd-split.fnd-reverse .fnd-chartwrap{order:-1;}
+@media (max-width:760px){
+.fnd-split,.fnd-split.fnd-reverse{grid-template-columns:1fr;}
+.fnd-split.fnd-reverse .fnd-chartwrap{order:0;}
 }
-figure.chartfig figcaption.chart-cap{
-font-size:0.78rem;color:var(--ink-subtle);margin-top:10px;text-align:center;
-line-height:1.5;
-}
+.fnd-stat{font-size:2.5rem;font-weight:700;line-height:1.05;margin:0 0 4px;
+font-variant-numeric:tabular-nums;color:var(--ink);}
+.fnd-stat .fnd-unit{font-size:1.1rem;font-weight:600;color:var(--ink-muted);margin-left:2px;}
+.fnd-stat-sub{margin:0 0 12px;font-size:0.82rem;color:var(--ink-subtle);
+font-variant-numeric:tabular-nums;line-height:1.5;}
+.fnd-prose{max-width:65ch;color:var(--ink-muted);font-size:0.9rem;line-height:1.64;}
+.fnd-prose p{margin:0 0 10px;}
+.fnd-prose p:last-child{margin-bottom:0;}
+.fnd-prose strong{color:var(--ink);}
+.fnd-chartwrap{border:1px solid var(--border);border-radius:var(--radius);
+background:var(--panel);padding:16px 18px 12px;overflow-x:auto;}
+.fnd-chartwrap figcaption{font-size:0.78rem;color:var(--ink-subtle);margin-top:10px;
+line-height:1.5;text-align:center;}
+.fnd-full .fnd-chartwrap{max-width:740px;margin:0 auto 14px;}
+.fnd-full .fnd-prose{max-width:70ch;margin:0 auto;text-align:center;}
+.fnd-quotes{display:grid;gap:16px;margin-top:6px;}
+.fnd-quote{border:1px solid var(--border);border-left:3px solid var(--accent);
+border-radius:var(--radius);background:var(--panel);padding:14px 20px;}
+.fnd-quote h3{margin:0 0 6px;font-size:0.96rem;color:var(--ink);}
+.fnd-quote p{margin:0 0 8px;font-size:0.87rem;color:var(--ink-muted);line-height:1.6;}
+.fnd-quote p:last-child{margin-bottom:0;}
+.fnd-quote .fnd-src{font-size:0.76rem;color:var(--ink-subtle);}
+.fnd-quote .fnd-src code{background:var(--panel-alt);padding:1px 5px;border-radius:2px;}
+.fnd-trio{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+gap:1px;background:var(--border);border:1px solid var(--border);
+border-radius:var(--radius);overflow:hidden;margin-top:6px;}
+.fnd-trio-cell{background:var(--panel);padding:14px 16px;text-align:center;}
+.fnd-trio-cell .fk{margin:0 0 6px;font-size:0.78rem;color:var(--ink-subtle);}
+.fnd-trio-cell .fv{margin:0;font-size:1.4rem;font-weight:700;color:var(--ink);
+font-variant-numeric:tabular-nums;}
+.fnd-trio-cell .fv small{display:block;font-weight:500;font-size:0.72rem;
+color:var(--ink-muted);margin-top:5px;line-height:1.4;}
+.fnd-pair{display:flex;gap:22px;flex-wrap:wrap;margin-top:6px;}
+.fnd-pair-cell{flex:1 1 220px;border:1px solid var(--border);border-radius:var(--radius);
+background:var(--panel);padding:14px 18px;}
+.fnd-pair-cell .fk{margin:0 0 5px;font-size:0.78rem;color:var(--ink-subtle);}
+.fnd-pair-cell .fv{margin:0;font-size:1.3rem;font-weight:700;color:var(--ink);
+font-variant-numeric:tabular-nums;}
+.fnd-solo{max-width:640px;}
+.fnd-absent{color:var(--ink-subtle);font-size:0.86rem;font-style:italic;margin:0;}
+.fnd-sources ul{margin:8px auto 0;padding-left:18px;max-width:70ch;}
+.fnd-sources li{margin-bottom:7px;font-size:0.88rem;color:var(--ink-muted);line-height:1.55;}
 .mchart{max-width:100%;}
-.takeaway{
-border:1px solid var(--border);border-left:3px solid var(--accent);
-border-radius:var(--radius);padding:11px 15px;background:var(--panel);
-font-size:0.88rem;color:var(--ink-muted);
-}
-.takeaway strong{color:var(--ink);}
-html.compact figure.chartfig{padding:11px 12px 9px;}
-html.compact .takeaway{padding:8px 12px;font-size:0.84rem;}
+html.compact .fnd-chartwrap{padding:11px 12px 9px;}
+html.compact .fnd-stat{font-size:2.1rem;}
 
-svg.mchart .k0{fill:var(--ink-subtle);font-size:11px;text-anchor:middle}svg.mchart .k1{opacity:0.7;stroke:var(--border)}svg.mchart .k2{stroke:var(--ink);stroke-width:1.4}svg.mchart .k3{fill:var(--accent);opacity:0.75}svg.mchart .k4{fill:var(--ink);font-size:10px;font-weight:600;text-anchor:middle}svg.mchart .k5{stroke:var(--border-strong)}svg.mchart .k6{fill:var(--ink-subtle);font-size:11px;text-anchor:end}svg.mchart .k7{fill:var(--ink);font-size:11px;font-weight:600}svg.mchart .k8{fill:var(--ink-muted);font-size:12px;text-anchor:middle}
+svg.mchart .k0{stroke:var(--ink);stroke-width:1.3}svg.mchart .k1{opacity:0.7;stroke:var(--border)}svg.mchart .k2{fill:var(--ink-subtle);font-size:10px;text-anchor:middle}svg.mchart .k3{fill:var(--ink-subtle);font-size:11px;text-anchor:middle}svg.mchart .k4{fill:var(--ink-muted);font-size:11px;font-weight:600;text-anchor:middle}svg.mchart .k5{fill:var(--ink-subtle);font-size:11px;text-anchor:end}svg.mchart .k6{stroke:var(--border-strong)}svg.mchart .k7{fill:var(--ink-muted);font-size:12px;text-anchor:middle}svg.mchart .k8{fill:var(--up-text);font-size:10.5px}svg.mchart .k9{fill:var(--ink);font-size:11px;font-weight:600;text-anchor:end}svg.mchart .k10{fill:var(--ink);font-size:11px;text-anchor:end}
 </style>
 </head>
 <body>
@@ -657,12 +694,12 @@ svg.mchart .k0{fill:var(--ink-subtle);font-size:11px;text-anchor:middle}svg.mcha
       <a href="market.html">Market</a>
       <a href="compendium.html">Compendium</a>
       <a href="etb.html">Trainer boxes</a>
-      <a href="models.html" class="active" aria-current="page">Models</a>
+      <a href="models.html">Models</a>
       <a href="momentum.html">Momentum</a>
       <a href="backtest.html">Backtest</a>
       <a href="how-it-works.html">How it works</a>
       <a href="methods.html">Methods</a>
-      <a href="findings.html">Findings</a>
+      <a href="findings.html" class="active" aria-current="page">Findings</a>
     </div>
     <button class="density-toggle" id="density-toggle" aria-pressed="false" title="Toggle information density">Compact</button>
     <button class="copy-toggle" id="copy-toggle" title="Switch between plain-language and full technical wording">Plain</button>
@@ -677,166 +714,41 @@ svg.mchart .k0{fill:var(--ink-subtle);font-size:11px;text-anchor:middle}svg.mcha
 <div class="page">
 
   <header class="masthead" data-reveal>
-    <h1>Which model was selected, and why</h1>
-    <p class="lede prose" data-copy="full">Candidate models and the three baselines that must be beaten (a zero prediction, a momentum-only score, and a reversion-only score) over the walk-forward folds. The selected model is graded honestly on disjoint held-out evaluation folds, then broken down to show whether its edge is skill inside one release window or merely the eras ranked against each other.</p>
-    <p class="lede prose" data-copy="plain">The models that were tried, and the three simple rules each one had to beat: predict no change, follow the recent winners, or bet against them. Every model was trained only on months before the ones it was scored on, and scored on months it had never seen. The winner is then pulled apart to show how much of its edge is telling cards apart inside a single release window, and how much is just older sets ranked against newer ones.</p>
+    <h1>The findings, and what they imply</h1>
+    <p class="lede prose" data-copy="full">Seven results this project's own measurements support, each with the number that carries it, the chart that shows it, and the page where the full study lives. Nothing here is asserted twice: every figure is read from the same artifacts the rest of the site renders from, at build time.</p>
+    <p class="lede prose" data-copy="plain">The most important things this project actually found, in plain terms: what the sealed market does, what the model can and cannot tell you, and what turned out not to be worth building. Every number updates itself when the data does; nothing on this page is typed in by hand.</p>
   </header>
 
-
-  <section id="models" data-reveal>
-    <h2>Model leaderboard</h2>
-    <p class="section-note">The all-<span class="gloss" tabindex="0" data-tip="One slice of the test: fit on everything up to a date, then score the single month that follows. There is one such slice per month tested, and the scores are averaged into the headline number." aria-label="fold: One slice of the test: fit on everything up to a date, then score the single month that follows. There is one such slice per month tested, and the scores are averaged into the headline number.">fold</span> mean <span class="gloss" tabindex="0" data-tip="Information coefficient. How closely the order the fit predicted matches the order that happened, from -1 (exactly backwards) through 0 (no skill at all) to +1 (perfect)." aria-label="IC: Information coefficient. How closely the order the fit predicted matches the order that happened, from -1 (exactly backwards) through 0 (no skill at all) to +1 (perfect).">IC</span> and information ratio are the selection-window
-      statistic; the selected model is graded on the disjoint held-out evaluation folds, called out
-      below the table. Coverage is the split-<span class="gloss" tabindex="0" data-tip="A price range whose width comes from how far past estimates actually missed, not from an assumed bell curve. An 80% range is one that held 80% of the time on months the fit had never seen." aria-label="conformal: A price range whose width comes from how far past estimates actually missed, not from an assumed bell curve. An 80% range is one that held 80% of the time on months the fit had never seen.">conformal</span> 80 percent interval hit rate on the eval
-      <span class="gloss" tabindex="0" data-tip="What is left over: the price a card actually fetches minus the price its features say it should. Positive means it sells for more than the features explain, negative means less." aria-label="residuals: What is left over: the price a card actually fetches minus the price its features say it should. Positive means it sells for more than the features explain, negative means less.">residuals</span>.</p>
-    <details class="explain">
-      <summary><span class="custom"></span></summary>
-      <div class="explain-body" id="explain-models"><p>The <strong>information coefficient</strong> (IC) is the cross-sectional rank correlation between predicted and realized returns each fold; higher is better, and it is deflated for fold autocorrelation via an effective sample size.</p><p>rf was chosen on the selection folds (mean IC 0.283) and graded on disjoint held-out folds, scoring mean IC 0.368 at information ratio 10.21.</p><p>How much of that is the set-age lifecycle? Two different statistics answer that and they point opposite ways, so both are given. Ablating the static set-age and rarity features moves all-fold mean IC from 0.328 to 0.260, removing a substantial minority of the signal (21%), so the ranking does not collapse without them. It is still substantially a lifecycle ordering, though: ranking on set age alone with no model at all already scores 0.296, 90% of the full-feature IC, and the model&#x27;s out-of-fold ranking correlates 0.370 (Spearman) with set age. The ablated residual clears the noise floor on held-out folds, so a non-static edge survives — but a ranking this reproducible from one variable should be read as a lifecycle map first and a trading signal second.</p></div>
-    </details>
-    <div class="table-wrap">
-      <table id="leaderboard">
-        <thead>
-          <tr>
-            <th title="Model name; baselines shown muted.">Model</th>
-            <th class="num" title="Mean information coefficient (cross-sectional rank correlation of predicted vs realized) over the selection folds.">Mean IC (selection)</th>
-            <th class="num" title="IC information ratio using an overlap-deflated effective sample size, not the naive fold count.">IC IR (n_eff)</th>
-            <th class="num" title="Top-minus-bottom quintile realized return spread.">Quintile spread</th>
-            <th class="num" title="Precision of the up-flag calls.">Up precision</th>
-            <th class="num" title="Split-conformal 80 percent interval hit rate, measured OUT of the calibration sample: each held-out fold is scored against bands calibrated on strictly prior folds.">Interval coverage (honest)</th>
-          </tr>
-        </thead>
-        <tbody id="leaderboard-body"></tbody>
-      </table>
-    </div>
-    <div class="callout attr-note" id="attr-note"></div>
-  </section>
-
-  <section id="listing-book" data-reveal>
-    <h2>Recovered listing-book features: what they bought, and what they really are</h2>
-    <p class="section-note">tcgcsv returns five price points for every product &mdash;
-      <code>lowPrice</code>, <code>midPrice</code>, <code>highPrice</code>,
-      <code>marketPrice</code>, <code>directLowPrice</code>. The panel used to keep only
-      <code>marketPrice</code> and discard the rest at aggregation time. They describe the
-      <em>shape</em> of the listing book around the traded price &mdash; width, where trades
-      clear inside it, ask-side overhang, dealer inventory &mdash; which is a liquidity and
-      dealer-pressure proxy.</p>
-    <p class="section-note">Six scale-free features are derived from them, all normalised by
-      <code>market</code> and all read from the date-T snapshot (and the T&minus;3m snapshot for
-      the two deltas), so they are strictly as-of-T: <code>rel_spread</code>, <code>market_pos</code>, <code>mid_skew</code>, <code>direct_discount</code>, <code>d_rel_spread_3m</code>, <code>d_market_pos_3m</code>. They are populated across all 29
-      historical monthly snapshots (low 100%, mid 100%, high 100%, direct_low 42%), which is what makes them usable as training
-      features at all rather than a present-day snapshot leaking backwards.</p>
-    <div class="callout"><strong>Held-out mean rank IC moved 0.313 &rarr; 0.368 (+0.055).</strong> The static-ablated held-out IC moved 0.233 &rarr; 0.285, and the selection folds chose the same model (<code>rf</code>) on both arms, so the comparison is not confounded by a change of learner: same panel, same folds, same selection and evaluation split, only the feature list differs. <strong>But read the size against the error bars.</strong> State it plainly: the move (+0.055) is SMALLER than the 'before' arm's own one-SE band (0.083). On these error bars a reader cannot conclude that the improvement clears sampling noise, and no joint significance test of the two arms is claimed anywhere in this section.</div>
-    <figure class="chartfig" data-reveal><svg class="mchart" viewBox="0 0 560 168" width="560" height="168" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Held-out IC before and after the listing-book features" style="max-width:560px;width:100%;height:auto;display:block;margin:0 auto;"><line x1="150" y1="22" x2="150" y2="128" class="k1"/><text x="150" y="144" class="k0">0</text><line x1="233.2" y1="22" x2="233.2" y2="128" class="k1"/><text x="233.2" y="144" class="k0">0.1</text><line x1="316.3" y1="22" x2="316.3" y2="128" class="k1"/><text x="316.3" y="144" class="k0">0.2</text><line x1="399.5" y1="22" x2="399.5" y2="128" class="k1"/><text x="399.5" y="144" class="k0">0.3</text><line x1="482.7" y1="22" x2="482.7" y2="128" class="k1"/><text x="482.7" y="144" class="k0">0.4</text><line x1="150" y1="22" x2="150" y2="128" class="k5"/><rect x="150" y="40.5" width="260.3" height="16" fill="var(--neutral)" opacity="0.5" rx="2"/><line x1="341.3" y1="48.5" x2="479.3" y2="48.5" class="k2"/><line x1="341.3" y1="43.5" x2="341.3" y2="53.5" class="k2"/><line x1="479.3" y1="43.5" x2="479.3" y2="53.5" class="k2"/><text x="140" y="52" font-size="11" fill="var(--ink)" text-anchor="end">before (market only)</text><text x="492" y="52" class="k7">0.313</text><rect x="150" y="93.5" width="306.1" height="16" fill="var(--accent)" opacity="0.9" rx="2"/><line x1="426.1" y1="101.5" x2="486" y2="101.5" class="k2"/><line x1="426.1" y1="96.5" x2="426.1" y2="106.5" class="k2"/><line x1="486" y1="96.5" x2="486" y2="106.5" class="k2"/><text x="140" y="105" font-size="11" fill="var(--ink)" text-anchor="end" font-weight="600">after (+ listing book)</text><text x="492" y="105" class="k7">0.368</text><text x="318" y="162" class="k8">Held-out mean rank IC (whiskers = ±1 SE)</text></svg><figcaption class="chart-cap">Held-out mean rank IC for the two arms with each arm's own one-standard-error band. The bands overlap: the improvement is real on the held-out folds but is not shown to clear sampling noise, and no joint significance test of the two arms is claimed. Data: forward_validation.</figcaption></figure>
-    <div class="table-wrap">
-      <table><thead><tr><th title="Which feature set the full selection protocol was re-run on.">Arm</th><th title="Feature count: numeric plus indicator.">Features</th><th title="Model the selection folds chose on this arm.">Winner</th><th class="num" title="Mean IC on the selection folds, which pick the model.">Selection IC</th><th class="num" title="Mean rank IC on the disjoint held-out evaluation folds, plus or minus one autocorrelation-aware standard error.">Held-out IC</th><th class="num" title="Information ratio using the overlap-deflated effective sample size.">Held-out IR</th><th class="num" title="Held-out IC after ablating the nine static set-age and rarity features.">Static-ablated</th></tr></thead><tbody><tr><td>before (market only)</td><td>12 numeric + 9 ind.</td><td>rf</td><td class="num">0.289</td><td class="num">0.313 <span style="color:var(--ink-subtle);">&plusmn;0.083</span></td><td class="num">3.77</td><td class="num">0.233</td></tr><tr class="slice-total"><td>after (+ listing book)</td><td>18 numeric + 10 ind.</td><td>rf</td><td class="num">0.283</td><td class="num">0.368 <span style="color:var(--ink-subtle);">&plusmn;0.036</span></td><td class="num">10.21</td><td class="num">0.285</td></tr></tbody></table>
-    </div>
-
-    <div class="wl-block" style="margin-top:30px;">
-      <h3>Where the gain comes from, and what it really is</h3>
-      <p class="wl-sub"><strong>The gain is concentrated, not spread across the six.</strong> Adding <code>mid_skew</code> alone to the pre-spread feature set already reaches held-out <strong>0.364</strong>, against 0.313 without it and 0.368 with all six. The other five contribute the remainder.</p>
-      <figure class="chartfig" data-reveal><svg class="mchart" viewBox="0 0 460 210" width="460" height="210" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Univariate IC of mid_skew by forecast horizon" style="max-width:460px;width:100%;height:auto;display:block;margin:0 auto;"><line x1="46" y1="166" x2="444" y2="166" class="k1"/><text x="39" y="169.5" class="k6">0</text><line x1="46" y1="114" x2="444" y2="114" class="k1"/><text x="39" y="117.5" class="k6">0.1</text><line x1="46" y1="62" x2="444" y2="62" class="k1"/><text x="39" y="65.5" class="k6">0.2</text><line x1="46" y1="22" x2="46" y2="166" class="k5"/><line x1="46" y1="166" x2="444" y2="166" class="k5"/><rect x="68.4" y="22" width="54.7" height="144" rx="2" class="k3"/><text x="95.8" y="16" class="k4">0.277</text><text x="95.8" y="182" class="k0">1m</text><rect x="167.9" y="41.2" width="54.7" height="124.8" rx="2" class="k3"/><text x="195.2" y="35.2" class="k4">0.240</text><text x="195.2" y="182" class="k0">2m</text><rect x="267.4" y="67.2" width="54.7" height="98.8" rx="2" class="k3"/><text x="294.8" y="61.2" class="k4">0.190</text><text x="294.8" y="182" class="k0">3m</text><rect x="366.9" y="126.5" width="54.7" height="39.5" rx="2" class="k3"/><text x="394.2" y="120.5" class="k4">0.076</text><text x="394.2" y="182" class="k0">6m</text><text x="245" y="204" class="k8">Forecast horizon</text><text x="39" y="14" font-size="11" fill="var(--ink-muted)" text-anchor="end">IC</text></svg><figcaption class="chart-cap">Univariate IC of <code>mid_skew</code> against the forecast horizon it is scored at. A feature that forecast demand would not have to decay like this. Data: forward_validation.</figcaption></figure>
-      <p class="takeaway" style="margin-top:12px;"><strong>What that decay means, stated rather than buried.</strong> That is the signature of a mechanical catch-up, not of demand forecasting: TCGplayer's `market` is a trailing transaction-weighted average, while `mid` is the CURRENT listing midpoint, so `mid` carries fresher information than `market` at the same instant. A large part of this feature's edge is therefore the stale average converging on a book that was already visible at T -- honest as-of-T signal, but substantially a measurement-lag artifact of how the price series is constructed rather than a forecast of future demand. A buyer paying live listing prices would capture less of it than the IC suggests.</p>
-      <p class="slice-legend">This is disclosed rather than buried because it changes how the
-        improvement should be read: the recovered fields are legitimate, leakage-free, as-of-T
-        data from an already-approved source, and the IC gain is real on held-out folds &mdash;
-        but it is mostly one feature, and that feature is substantially exploiting a lag inside
-        the price series rather than predicting the market.</p>
-    <div class="table-wrap">
-      <table><thead><tr><th title="Feature derived from the recovered listing-book price points.">Feature</th><th class="num" title="Univariate IC on the SELECTION folds. This column nominated the driver feature; it is disjoint from the held-out folds.">Selection-fold IC</th><th class="num" title="Univariate IC on the held-out evaluation folds. This column is what gets reported.">Held-out IC</th><th class="num" title="One autocorrelation-aware standard error, ic_std over the square root of the effective fold count.">&plusmn; 1 SE</th></tr></thead><tbody><tr class="slice-total"><td><code>mid_skew</code></td><td class="num">+0.181</td><td class="num">+0.190</td><td class="num">&plusmn;0.036</td></tr><tr><td><code>d_market_pos_3m</code></td><td class="num">-0.117</td><td class="num">-0.087</td><td class="num">&plusmn;0.031</td></tr><tr><td><code>rel_spread</code></td><td class="num">+0.055</td><td class="num">-0.028</td><td class="num">&plusmn;0.208</td></tr><tr><td><code>direct_discount</code></td><td class="num">+0.040</td><td class="num">+0.021</td><td class="num">&plusmn;0.053</td></tr><tr><td><code>market_pos</code></td><td class="num">-0.124</td><td class="num">+0.012</td><td class="num">&plusmn;0.067</td></tr><tr><td><code>d_rel_spread_3m</code></td><td class="num">+0.003</td><td class="num">+0.001</td><td class="num">&plusmn;0.041</td></tr></tbody></table>
-      <p class="slice-legend">Both columns are shown so the pick and the score are visibly different statistics, and so the multiple-comparison context stays in view: the driver was nominated by the largest-magnitude SELECTION-fold IC, and only then scored on the disjoint held-out folds. Univariate means the raw feature versus the realized <span class="gloss" tabindex="0" data-tip="Measured against the whole market instead of on its own. A card up 3% in a month when the market is up 5% counts as 2% down, because holding it beat nothing." aria-label="market-relative: Measured against the whole market instead of on its own. A card up 3% in a month when the market is up 5% counts as 2% down, because holding it beat nothing.">market-relative</span> return, with no model involved.</p>
-    </div>
-
-    </div>
-  </section>
-
-  <section id="within-era" data-reveal style="display:none;">
-    <h2>Is that edge within-era skill, or just cross-era contrast?</h2>
-    <p class="section-note">A pooled cross-sectional IC can be earned two ways: by ranking cards
-      correctly inside one release window, which is the decision a buyer actually faces, or merely by
-      ranking the eras against each other. Both tables re-score the same held-out folds and the same
-      out-of-fold predictions as the headline; only which rows enter each correlation changes.</p>
-    <details class="explain">
-      <summary><span class="custom"></span></summary>
-      <div class="explain-body" id="explain-breakdown"><p>Two rows do the work. <strong>Within-era neutralized</strong> re-ranks every card against only its same-era peers, so any skill that comes purely from putting one era above another is removed; it scores +0.355. <strong>Between-era contrast only</strong> does the opposite, destroying every within-era distinction and keeping just the era ordering; it scores +0.144.</p><p>If the pooled number survived neutralization it is skill you could use inside one release window. If instead it lived in the contrast row, the model would be saying little about which card to prefer among cards released together, which is the choice a buyer actually makes.</p><p>A <span class="thin-tag">thin</span> badge means the row clears its noise bar but on too few effectively independent folds to be counted as evidence by this repo’s own gate. It is shown, not hidden, and it is not treated as corroboration.</p></div>
-    </details>
-    <div class="callout" id="breakdown-callout"></div>
-    <div class="table-wrap">
-      <table id="era-slices">
-        <thead>
-          <tr>
-            <th title="Era slice, or one of the three whole-universe reference rows.">Slice</th>
-            <th class="num" title="Cards scored in the slice.">Cards</th>
-            <th class="num" title="Held-out evaluation folds in which the slice had enough cards to score.">Folds</th>
-            <th class="num" title="Mean held-out information coefficient on the evaluation folds, plus or minus one autocorrelation-aware standard error.">Held-out IC</th>
-            <th class="num" title="Overlap-deflated effective fold count. Below the claim bar it is badged thin.">n_eff</th>
-            <th class="num" title="Mean IC after ablating the static set-age and rarity features, plus or minus one standard error.">Ablated IC</th>
-            <th title="The report's own one-standard-error call on the slice.">One-SE call</th>
-          </tr>
-        </thead>
-        <tbody id="era-slices-body"></tbody>
-      </table>
-    </div>
-    <p class="slice-legend" id="era-legend"></p>
-
-    <div class="wl-block" id="probe-block" style="margin-top:32px;display:none;">
-      <h3 id="probe-title"></h3>
-      <p class="wl-sub" id="probe-sub"></p>
-      <div class="callout" id="probe-callout"></div>
-      <div class="table-wrap" style="margin-top:14px;">
-        <table id="probe-tests">
-          <thead>
-            <tr>
-              <th title="The resampling test run on this slice.">Test</th>
-              <th title="What it returned.">Result</th>
-              <th title="How the result should be read.">Reads as</th>
-            </tr>
-          </thead>
-          <tbody id="probe-tests-body"></tbody>
-        </table>
-      </div>
-      <div class="table-wrap" style="margin-top:18px;">
-        <table id="probe-candidates">
-          <thead>
-            <tr>
-              <th title="Candidate model, scored on identical folds, cards and features.">Candidate</th>
-              <th class="num" title="That candidate's held-out mean rank IC inside this slice.">Held-out IC inside slice</th>
-            </tr>
-          </thead>
-          <tbody id="probe-candidates-body"></tbody>
-        </table>
-      </div>
-      <p class="slice-legend" id="probe-legend"></p>
-    </div>
-
-    <div class="wl-block" id="rarity-slices-block" style="margin-top:32px;">
-      <h3>The same test by rarity tier</h3>
-      <p class="wl-sub" id="rarity-sub"></p>
-      <div class="table-wrap">
-        <table id="rarity-slices">
-          <thead>
-            <tr>
-              <th title="Rarity tier, or one of the three whole-universe reference rows.">Slice</th>
-              <th class="num" title="Cards scored in the slice.">Cards</th>
-              <th class="num" title="Held-out folds in which the tier had enough cards to score.">Folds</th>
-              <th class="num" title="Mean held-out information coefficient, plus or minus one autocorrelation-aware standard error.">Held-out IC</th>
-              <th class="num" title="Overlap-deflated effective fold count.">n_eff</th>
-              <th class="num" title="Mean IC after ablating the static set-age and rarity features.">Ablated IC</th>
-              <th title="The report's own one-standard-error call on the slice.">One-SE call</th>
-            </tr>
-          </thead>
-          <tbody id="rarity-slices-body"></tbody>
-        </table>
-      </div>
-    </div>
+<section id="finding-1" class="finding" data-reveal><h2>1. Sealed is a hold, not a flip</h2><div class="fnd-split"><div><p class="fnd-stat">62.3<span class="fnd-unit">%/yr</span></p><p class="fnd-stat-sub">95% CI [24.8%, 111.2%]</p><div class="fnd-prose"><p>Elite Trainer Box prices rose at an annualised <strong>62.3%/yr</strong> over the archive's window, by the chained, geometric construction this site treats as its headline. A different, equally defensible construction, a <strong>constant basket</strong> of only the boxes present at both ends of the window, reports <strong>86.1%/yr</strong> instead, +23.8 points higher. The two disagree because they answer different questions of the same data (does the whole product line's dollar-weighted price level rise, or does a fixed surviving basket rise), not because either measurement is wrong: a construction choice, not a discrepancy.</p><p>Even at that pace, a box bought and later resold needed roughly <strong>8 months</strong> of holding before the price gain cleared the one-time cost of buying and reselling one; below that, a rising price could still lose money after fees. Read together: sealed appreciation in this <span class="gloss" tabindex="0" data-tip="A stretch of months over which the market behaved one way, such as a long climb or a long slide. What works in one stretch often stops working in the next." aria-label="regime: A stretch of months over which the market behaved one way, such as a long climb or a long slide. What works in one stretch often stops working in the next.">regime</span> has been real and large, but it rewards patience, not a quick flip.</p></div></div><div class="fnd-chartwrap"><figure><svg class="mchart" viewBox="0 0 660 142" width="660" height="142" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Elite Trainer Box index, by construction" style="max-width:660px;width:100%;height:auto;display:block;margin:0 auto;"><line x1="210" y1="16" x2="210" y2="108" class="k1"/><text x="210" y="128" class="k3">0%</text><line x1="292.2" y1="16" x2="292.2" y2="108" class="k1"/><text x="292.2" y="128" class="k3">20%</text><line x1="374.4" y1="16" x2="374.4" y2="108" class="k1"/><text x="374.4" y="128" class="k3">40%</text><line x1="456.6" y1="16" x2="456.6" y2="108" class="k1"/><text x="456.6" y="128" class="k3">60%</text><line x1="538.8" y1="16" x2="538.8" y2="108" class="k1"/><text x="538.8" y="128" class="k3">80%</text><line x1="210" y1="16" x2="210" y2="108" class="k6"/><text x="387" y="138" class="k7">Annualised return (%/yr)</text><rect x="210" y="29" width="256.1" height="20" fill="var(--accent)" opacity="0.92" rx="2" class="mark" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Chained, geometric (headline)&lt;/span&gt;62.3%/yr" aria-label="Chained, geometric (headline): 62.3%/yr"/><text x="200" y="42.5" class="k9">Chained, geometric (headline)</text><text x="572" y="42.5" class="k8">62.3%/yr</text><rect x="210" y="75" width="354" height="20" fill="var(--neutral)" opacity="0.55" rx="2" class="mark" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Constant basket (survivor cohort)&lt;/span&gt;86.1%/yr" aria-label="Constant basket (survivor cohort): 86.1%/yr"/><text x="200" y="88.5" class="k10">Constant basket (survivor cohort)</text><text x="572" y="88.5" class="k8">86.1%/yr</text></svg><figcaption>Two defensible constructions of the same headline index. Data: <a href="etb_summary.md"><code>etb_summary.md</code></a>, <a href="etb_products.csv"><code>etb_products.csv</code></a>.</figcaption></figure></div></div></section><section id="finding-2" class="finding" data-reveal><h2>2. Age tracks value, tangled with vintage</h2><div class="fnd-full"><p class="fnd-stat" style="text-align:center;">0.71<span class="fnd-unit">rank correlation</span></p><p class="fnd-stat-sub" style="text-align:center;">p < 0.001, n = 67</p><div class="fnd-chartwrap"><figure><svg class="mchart" viewBox="0 0 680 360" width="680" height="360" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Median price (USD) by age band" style="max-width:680px;width:100%;height:auto;display:block;margin:0 auto;"><line x1="66" y1="302" x2="660" y2="302" class="k1"/><text x="58" y="305.5" class="k5">$0</text><line x1="66" y1="234.2" x2="660" y2="234.2" class="k1"/><text x="58" y="237.7" class="k5">$250</text><line x1="66" y1="166.4" x2="660" y2="166.4" class="k1"/><text x="58" y="169.9" class="k5">$500</text><line x1="66" y1="98.5" x2="660" y2="98.5" class="k1"/><text x="58" y="102" class="k5">$750</text><line x1="66" y1="30.7" x2="660" y2="30.7" class="k1"/><text x="58" y="34.2" class="k5">$1,000</text><line x1="66" y1="20" x2="66" y2="302" class="k6"/><line x1="66" y1="302" x2="660" y2="302" class="k6"/><rect x="90.8" y="270.4" width="49.5" height="31.6" fill="var(--accent)" opacity="0.75" rx="2" class="mark" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;&amp;lt;1yr&lt;/span&gt;Median $117, made ME; n = 7" aria-label="&lt;1yr: median $117"/><line x1="115.5" y1="282.3" x2="115.5" y2="260.6" class="k0"/><line x1="110.5" y1="282.3" x2="120.5" y2="282.3" class="k0"/><line x1="110.5" y1="260.6" x2="120.5" y2="260.6" class="k0"/><text x="115.5" y="319" class="k4">&lt;1yr</text><text x="115.5" y="333" class="k2">ME</text><text x="115.5" y="346" class="k2">n=7</text><rect x="189.8" y="259.5" width="49.5" height="42.5" fill="var(--accent)" opacity="0.75" rx="2" class="mark" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;1-2yr&lt;/span&gt;Median $157, made SV/other; n = 8" aria-label="1-2yr: median $157"/><line x1="214.5" y1="265.5" x2="214.5" y2="254.3" class="k0"/><line x1="209.5" y1="265.5" x2="219.5" y2="265.5" class="k0"/><line x1="209.5" y1="254.3" x2="219.5" y2="254.3" class="k0"/><text x="214.5" y="319" class="k4">1-2yr</text><text x="214.5" y="333" class="k2">SV/other</text><text x="214.5" y="346" class="k2">n=8</text><rect x="288.8" y="265.4" width="49.5" height="36.6" fill="var(--accent)" opacity="0.75" rx="2" class="mark" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;2-3yr&lt;/span&gt;Median $135, made SV; n = 8" aria-label="2-3yr: median $135"/><line x1="313.5" y1="268.6" x2="313.5" y2="200.5" class="k0"/><line x1="308.5" y1="268.6" x2="318.5" y2="268.6" class="k0"/><line x1="308.5" y1="200.5" x2="318.5" y2="200.5" class="k0"/><text x="313.5" y="319" class="k4">2-3yr</text><text x="313.5" y="333" class="k2">SV</text><text x="313.5" y="346" class="k2">n=8</text><rect x="387.8" y="242.1" width="49.5" height="59.9" fill="var(--accent)" opacity="0.75" rx="2" class="mark" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;3-5yr&lt;/span&gt;Median $221, made SV/SWSH/other; n = 11" aria-label="3-5yr: median $221"/><line x1="412.5" y1="261" x2="412.5" y2="212.5" class="k0"/><line x1="407.5" y1="261" x2="417.5" y2="261" class="k0"/><line x1="407.5" y1="212.5" x2="417.5" y2="212.5" class="k0"/><text x="412.5" y="319" class="k4">3-5yr</text><text x="412.5" y="333" class="k2">SV/SWSH/other</text><text x="412.5" y="346" class="k2">n=11</text><rect x="486.8" y="244.5" width="49.5" height="57.5" fill="var(--accent)" opacity="0.75" rx="2" class="mark" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;5-8yr&lt;/span&gt;Median $212, made SM/SWSH; n = 19" aria-label="5-8yr: median $212"/><line x1="511.5" y1="262.2" x2="511.5" y2="138.7" class="k0"/><line x1="506.5" y1="262.2" x2="516.5" y2="262.2" class="k0"/><line x1="506.5" y1="138.7" x2="516.5" y2="138.7" class="k0"/><text x="511.5" y="319" class="k4">5-8yr</text><text x="511.5" y="333" class="k2">SM/SWSH</text><text x="511.5" y="346" class="k2">n=19</text><rect x="585.8" y="97.9" width="49.5" height="204.1" fill="var(--accent)" opacity="0.75" rx="2" class="mark" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;8yr+&lt;/span&gt;Median $752, made SM/XY/other; n = 14" aria-label="8yr+: median $752"/><line x1="610.5" y1="138.9" x2="610.5" y2="33.4" class="k0"/><line x1="605.5" y1="138.9" x2="615.5" y2="138.9" class="k0"/><line x1="605.5" y1="33.4" x2="615.5" y2="33.4" class="k0"/><text x="610.5" y="319" class="k4">8yr+</text><text x="610.5" y="333" class="k2">SM/XY/other</text><text x="610.5" y="346" class="k2">n=14</text><text x="363" y="356" class="k7">Age band (calendar age at the archive's last month)</text><text x="14" y="161" transform="rotate(-90 14 161)" class="k7">Median price (USD)</text></svg><figcaption>Median price by age band, mass-retail Elite Trainer Boxes. Whiskers are the bootstrap 95% interval on the median. Data: <a href="etb_agevalue_bands.csv"><code>etb_agevalue_bands.csv</code></a>.</figcaption></figure></div><div class="fnd-prose"><p>Mass-retail box price rises with calendar age at Spearman rho = <strong>0.71</strong> (p < 0.001, n = 67): $117 at &lt;1yr against $752 at 8yr+. That is a real, well-separated ordering across bands.</p><p>It is also, by construction, a vintage ranking as much as an ageing curve: within one calendar month's cross-section, a box's age and its release cohort are the same variable (cohort R<sup>2</sup> = 1.000), so each band is a different set of products made in a different year. Consistent with that confound, the continuous ageing-rate regression, which does not confound age with which products happen to be old, finds a slope of +0.4pp/yr (t = 0.22) that is not distinguishable from zero. Age carries the cross-section; whether ageing itself is the cause is not something this sample can separate from vintage.</p></div></div></section><section id="finding-3" class="finding" data-reveal><h2>3. Honest uncertainty cost real width to build</h2><div class="fnd-split fnd-reverse"><div><p class="fnd-stat">81.5<span class="fnd-unit">% honest coverage</span></p><p class="fnd-stat-sub">against 80.0% nominal</p><div class="fnd-prose"><p>This is the rolling, out-of-calibration coverage: each held-out fold is scored against <span class="gloss" tabindex="0" data-tip="A price range whose width comes from how far past estimates actually missed, not from an assumed bell curve. An 80% range is one that held 80% of the time on months the fit had never seen." aria-label="conformal: A price range whose width comes from how far past estimates actually missed, not from an assumed bell curve. An 80% range is one that held 80% of the time on months the fit had never seen.">conformal</span> bands calibrated only on strictly prior folds. An in-sample check of the same bands reads near-nominal for any predictor, including pure noise, so it is published separately and never as coverage.</p><p>Building that honesty in bought a real number, and it was not free: the shipped per-rarity bands are <strong>5.5% narrower</strong> than a no-model baseline calibrated to the same target, and the per-tier own-band coverage spans <strong>78.4% to 84.3%</strong>, not one constant width applied everywhere.</p></div></div><div class="fnd-chartwrap"><figure><svg class="mchart" viewBox="0 0 660 142" width="660" height="142" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Interval width: model versus a no-model baseline" style="max-width:660px;width:100%;height:auto;display:block;margin:0 auto;"><line x1="210" y1="16" x2="210" y2="108" class="k1"/><text x="210" y="128" class="k3">0.00</text><line x1="288.5" y1="16" x2="288.5" y2="108" class="k1"/><text x="288.5" y="128" class="k3">0.10</text><line x1="367" y1="16" x2="367" y2="108" class="k1"/><text x="367" y="128" class="k3">0.20</text><line x1="445.5" y1="16" x2="445.5" y2="108" class="k1"/><text x="445.5" y="128" class="k3">0.30</text><line x1="524" y1="16" x2="524" y2="108" class="k1"/><text x="524" y="128" class="k3">0.40</text><line x1="210" y1="16" x2="210" y2="108" class="k6"/><text x="387" y="138" class="k7">80% interval width (return units)</text><rect x="210" y="29" width="334.4" height="20" fill="var(--accent)" opacity="0.92" rx="2" class="mark" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Model, per-rarity bands (shipped)&lt;/span&gt;0.426" aria-label="Model, per-rarity bands (shipped): 0.426"/><text x="200" y="42.5" class="k9">Model, per-rarity bands (shipped)</text><text x="572" y="42.5" class="k8">0.426 wide, 81.5% covered</text><rect x="210" y="75" width="354" height="20" fill="var(--neutral)" opacity="0.55" rx="2" class="mark" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;No-model baseline, one global band&lt;/span&gt;0.451" aria-label="No-model baseline, one global band: 0.451"/><text x="200" y="88.5" class="k10">No-model baseline, one global band</text><text x="572" y="88.5" class="k8">0.451 wide, 82.6% covered</text></svg><figcaption>Both bands hold the same 80% nominal target; the model's width is what it costs to get there conditionally instead of unconditionally. Data: <a href="forward_validation.md"><code>forward_validation.md</code></a>.</figcaption></figure></div></div></section><section id="finding-4" class="finding" data-reveal><h2>4. Three planned differentiators, refuted before they were built</h2><p class="fnd-prose" style="max-width:70ch;margin:0 auto 6px;">Each idea was attacked before any code was written for it. What a site declines to claim is part of its rigor, so the attacks are published here rather than left in a private note.</p><div class="fnd-quotes"><div class="fnd-quote"><h3>Book-derived liquidity: a price artifact, not a signal</h3><p>A candidate liquidity proxy, the gap between the cheapest and typical listing price, turned out to move with price level rather than with liquidity: it correlates -0.663 (Spearman rank, versus log market price), and adding it to a forecasting model that already used price and trailing volatility moved that model's information coefficient by +0.0002, indistinguishable from nothing.</p><p class="fnd-src">Source: <code>docs/research/DIFFERENTIATION_AUDIT.md</code></p></div><div class="fnd-quote"><h3>Cross-market lead-lag: blocked by too few snapshots</h3><p>The EUR (Cardmarket) feed this build has on hand carries <strong>4 distinct snapshot dates</strong> spanning 34 days, live-queried from the same table the site's own EU coverage figures use. A cross-market lead-lag study needs enough independent EUR/USD snapshot pairs to estimate a lag; 4 dates cannot support one yet. Blocked by data actually on hand, not by the idea.</p><p class="fnd-src">Source: live query against <code>prices_cardmarket</code>.</p></div><div class="fnd-quote"><h3>Pack expected value: already served, better</h3><p>An existing public site already simulates pack-by-pack, card-by-card expected value across roughly <strong>155 Pokemon products</strong>, with published methodology and Monte Carlo bands. Building a second, worse version of something already served well is not a differentiator.</p><p class="fnd-src">Source: <code>docs/research/DIFFERENTIATION_AUDIT.md</code></p></div></div></section><section id="finding-5" class="finding" data-reveal><h2>5. The card universe, honestly counted</h2><p class="fnd-prose" style="max-width:70ch;">Four numbers, each a real answer to "how many cards", and none interchangeable with another.</p><div class="fnd-trio"><div class="fnd-trio-cell"><p class="fk">In the catalogue</p><p class="fv">20,444<small>every card row in the DB</small></p></div><div class="fnd-trio-cell"><p class="fk">Ever priced</p><p class="fv">18,068<small>carries a TCGplayer price history row</small></p></div><div class="fnd-trio-cell"><p class="fk">Modeled and shown</p><p class="fv">465<small>on the outlook, valuation and models pages</small></p></div><div class="fnd-trio-cell"><p class="fk">Scored, held-out</p><p class="fv">456<small>had enough held-out folds to enter the headline IC</small></p></div></div></section><section id="finding-6" class="finding" data-reveal><h2>6. Set-level structure is real signal</h2><div class="fnd-solo"><p class="fnd-stat">+64.6<span class="fnd-unit">&Delta;elpd_loo</span></p><p class="fnd-stat-sub">standard error of the difference 14.0, 4.6 SE clear of zero</p><div class="fnd-prose"><p>A <span class="gloss" tabindex="0" data-tip="Pricing a card from its parts. The fit learns what buyers pay for each feature (set, rarity, artwork, age) and adds them up, the way a house is priced from its size, rooms and location." aria-label="hedonic: Pricing a card from its parts. The fit learns what buyers pay for each feature (set, rarity, artwork, age) and adds them up, the way a house is priced from its size, rooms and location.">hedonic</span> price fit that lets every set carry its own intercept, partially pooled toward the whole catalogue's mean, out-predicts a single pooled fit with one shared intercept by this margin on leave-one-out cross-validation, more than two standard errors clear of noise. Sets differ in typical price level by more than a common formula captures; letting the model say so, instead of assuming it away, measurably improves the fit.</p></div></div></section><section id="finding-7" class="finding" data-reveal><h2>7. Every feed wears its date on its sleeve</h2><div class="fnd-pair"><div class="fnd-pair-cell"><p class="fk">TCGplayer daily snapshot (USD)</p><p class="fv">2026-08-31</p></div><div class="fnd-pair-cell"><p class="fk">Cardmarket daily snapshot (EUR, 4 on hand)</p><p class="fv">2026-08-26</p></div></div><div class="fnd-prose" style="margin-top:14px;"><p>The two feeds are not read on the same day: TCGplayer is 5 days newer as of this build. Both dates are queried live from the tables they land in, not carried forward from a prior run, so a stalled ingest shows up here as a widening gap rather than a silent freeze.</p><p>The model itself trains on a monthly panel whose newest month is <strong>2026-08-01</strong>. That is a month label, not a lag: the August snapshot is the current one until September lands.</p></div></section>
+  <section id="sources" data-reveal>
+    <h2>Where the numbers come from</h2>
+    <div class="fnd-sources"><ul>
+      <li><a href="https://tcgcsv.com">tcgcsv.com</a>: the daily TCGplayer USD price archive
+        this site's model, backtest and momentum studies are all built from.</li>
+      <li><a href="https://api.tcgdex.net/v2/en">TCGdex</a> (<code>api.tcgdex.net</code>): live
+        Cardmarket EUR and TCGplayer snapshot pricing, used for the EU cross-check and the
+        cross-market coverage figures above.</li>
+      <li><a href="https://pokemontcg.io">pokemontcg.io</a>: the card and set catalogue this
+        site's ids are built on, plus <code>images.pokemontcg.io</code> for card artwork
+        (display only; no pricing comes from here).</li>
+      <li><a href="https://wikimedia.org/api/rest_v1/">Wikipedia pageviews API</a>
+        (<code>wikimedia.org/api/rest_v1</code>): trailing pageview history behind the
+        popularity-desirability input.</li>
+      <li>ECB reference EUR/USD rates, via the <a href="https://frankfurter.dev">Frankfurter
+        API</a>, which republishes the European Central Bank's daily reference rate.</li>
+      <li>How each of these feeds into the model and where they can and cannot be trusted:
+        <a href="how-it-works.html">how the pipeline is built</a> and the full
+        <a href="methods.html">methods and caveats</a> page.</li>
+    </ul></div>
   </section>
 
   <nav class="related" aria-label="Related pages" data-reveal>
     <p class="rel-head">Where to go next</p>
     <ul class="rel-list">
-      <li><a href="backtest.html">Does the edge survive out of sample?</a></li>
-      <li><a href="momentum.html">The null result it is measured against</a></li>
-      <li><a href="how-it-works.html">How the model is fitted</a></li>
-      <li><a href="outlook.html">The predictions it produces</a></li>
+      <li><a href="etb.html">The full sealed-box study</a></li>
+      <li><a href="models.html">The model and its calibration</a></li>
+      <li><a href="how-it-works.html">How the pipeline is built</a></li>
+      <li><a href="methods.html">Sources and caveats in full</a></li>
     </ul>
   </nav>
 
@@ -1249,243 +1161,7 @@ return '<div class="cardcell' + (compact ? ' cc-compact' : '') + '">'
 + '</div></div>';
 }
 
-const PAGE = {"validation":{"bestModel":"rf","heldoutIC":0.368,"heldoutIR":10.211,"heldoutNeff":5.673,"selIC":0.283,"verdict":"strong","ablFrom":0.328,"ablTo":0.26,"setageCorr":0.37,"flagsUp":0,"flagsDown":4,"roster":[{"model":"ridge","meanIC":0.318,"meanIC_raw":0.318,"icIR":4.622,"quintile":17.2,"upPrec":37.0,"upRec":18.1,"dnPrec":27.3,"dnRec":24.3,"baseline":false,"coverage":81.2,"selected":false},{"model":"elasticnet","meanIC":0.292,"meanIC_raw":0.292,"icIR":4.631,"quintile":14.9,"upPrec":34.5,"upRec":16.9,"dnPrec":27.5,"dnRec":24.5,"baseline":false,"coverage":80.4,"selected":false},{"model":"gbm","meanIC":0.316,"meanIC_raw":0.316,"icIR":3.023,"quintile":17.3,"upPrec":38.9,"upRec":19.1,"dnPrec":27.5,"dnRec":24.5,"baseline":false,"coverage":83.0,"selected":false},{"model":"ensemble","meanIC":0.34,"meanIC_raw":0.34,"icIR":3.875,"quintile":17.9,"upPrec":36.6,"upRec":18.0,"dnPrec":28.3,"dnRec":25.2,"baseline":false,"coverage":81.2,"selected":false},{"model":"rank_linear","meanIC":0.321,"meanIC_raw":0.321,"icIR":5.304,"quintile":17.3,"upPrec":37.8,"upRec":18.5,"dnPrec":28.3,"dnRec":25.2,"baseline":false,"coverage":81.3,"selected":false},{"model":"huber","meanIC":0.322,"meanIC_raw":0.322,"icIR":4.527,"quintile":16.7,"upPrec":37.5,"upRec":18.4,"dnPrec":28.1,"dnRec":25.1,"baseline":false,"coverage":81.7,"selected":false},{"model":"pls","meanIC":0.29,"meanIC_raw":0.29,"icIR":5.239,"quintile":15.1,"upPrec":32.8,"upRec":16.1,"dnPrec":28.9,"dnRec":25.8,"baseline":false,"coverage":80.0,"selected":false},{"model":"rf","meanIC":0.328,"meanIC_raw":0.328,"icIR":6.854,"quintile":17.0,"upPrec":34.2,"upRec":16.8,"dnPrec":31.2,"dnRec":27.9,"baseline":false,"coverage":81.5,"selected":true},{"model":"zero","meanIC":null,"meanIC_raw":0.0,"icIR":null,"quintile":7.6,"upPrec":19.6,"upRec":9.6,"dnPrec":19.9,"dnRec":17.7,"baseline":true,"coverage":null,"selected":false},{"model":"momentum","meanIC":-0.061,"meanIC_raw":-0.061,"icIR":-1.423,"quintile":-3.0,"upPrec":14.7,"upRec":7.2,"dnPrec":18.1,"dnRec":16.1,"baseline":true,"coverage":null,"selected":false},{"model":"reversion","meanIC":0.137,"meanIC_raw":0.137,"icIR":1.089,"quintile":6.6,"upPrec":22.3,"upRec":10.9,"dnPrec":15.8,"dnRec":14.1,"baseline":true,"coverage":null,"selected":false}],"band":{"lo":-0.178,"hi":0.206,"width":0.384,"n":3424,"coverage":81.5,"honestWidth":0.426,"insample":80.3,"nominal":80.0,"sliceKind":"rarity","slices":[{"label":"Hyper Rare","n":264,"own":true,"width":0.325,"scored":264,"coverage":81.1},{"label":"Mega Hyper Rare","n":14,"own":false,"width":0.384,"scored":12,"coverage":91.7},{"label":"Rare Rainbow","n":352,"own":true,"width":0.25,"scored":352,"coverage":78.4},{"label":"Rare Secret","n":120,"own":false,"width":0.384,"scored":120,"coverage":90.8},{"label":"Rare Ultra","n":832,"own":true,"width":0.324,"scored":832,"coverage":82.3},{"label":"Special Illustration Rare","n":765,"own":true,"width":0.423,"scored":765,"coverage":84.3},{"label":"Ultra Rare","n":1077,"own":true,"width":0.504,"scored":1077,"coverage":78.9}],"baselineNaive":{"label":"naive unconditional (no model, one band)","width":0.451,"coverage":82.6},"baselineGlobal":{"label":"model + one global band (previously shipped)","width":0.43,"coverage":84.1},"shipped":{"label":"model + per-rarity bands (**shipped now**)","width":0.426,"coverage":81.5}},"attribution":[{"diagnostic":"rf full features (all folds)","meanIC":0.328,"meanICSE":null,"note":"the reported number"},{"diagnostic":"rf STATIC features ablated (all folds)","meanIC":0.26,"meanICSE":null,"note":"21% of the signal gone"},{"diagnostic":"rf STATIC features ablated (eval folds)","meanIC":0.285,"meanICSE":0.018,"note":"held-out, clears the 0.05 floor by more than 1 SE"},{"diagnostic":"univariate set_age_months ranking","meanIC":0.296,"meanICSE":null,"note":"one feature, no model"},{"diagnostic":"rf momentum-only features","meanIC":0.13,"meanICSE":null,"note":"some signal on its own (40% of the full-feature IC), well short of the full feature set"}],"breakdown":{"minNeff":4.0,"eraFinding":"the held-out edge is WITHIN-era skill, not cross-era contrast.","rarityFinding":"within-tier skill survives; the tier ordering on its own does not","era":[{"slice":"pooled (headline)","cards":456,"folds":8,"ic":0.368,"se":0.036,"nEff":5.673,"ablIC":0.285,"ablSE":0.018,"call":{"text":"clears 0 by > 1 SE","thin":false,"kind":"clears"}},{"slice":"ME","cards":46,"folds":5,"ic":0.197,"se":0.162,"nEff":4.155,"ablIC":0.211,"ablSE":0.045,"call":{"text":"clears 0 by > 1 SE","thin":false,"kind":"clears"}},{"slice":"SV","cards":247,"folds":8,"ic":0.367,"se":0.027,"nEff":8.0,"ablIC":0.271,"ablSE":0.022,"call":{"text":"clears 0 by > 1 SE","thin":false,"kind":"clears"}},{"slice":"SWSH","cards":163,"folds":8,"ic":0.346,"se":0.016,"nEff":8.0,"ablIC":0.318,"ablSE":0.022,"call":{"text":"clears 0 by > 1 SE","thin":false,"kind":"clears"}},{"slice":"within-era neutralized","cards":456,"folds":8,"ic":0.355,"se":0.018,"nEff":8.0,"ablIC":0.287,"ablSE":0.017,"call":{"text":"clears 0 by > 1 SE","thin":false,"kind":"clears"}},{"slice":"between-era contrast only","cards":456,"folds":8,"ic":0.144,"se":0.49,"nEff":3.567,"ablIC":0.232,"ablSE":0.442,"call":{"text":"within 1 SE of 0","thin":false,"kind":"flat"}}],"rarity":[{"slice":"pooled (headline)","cards":456,"folds":8,"ic":0.368,"se":0.036,"nEff":5.673,"ablIC":0.285,"ablSE":0.018,"call":{"text":"clears 0 by > 1 SE","thin":false,"kind":"clears"}},{"slice":"Hyper Rare","cards":33,"folds":8,"ic":0.392,"se":0.17,"nEff":2.354,"ablIC":0.175,"ablSE":0.173,"call":{"text":"clears 0 by > 1 SE","thin":true,"kind":"clears"}},{"slice":"Mega Hyper Rare","cards":4,"folds":0,"ic":null,"se":null,"nEff":0.0,"ablIC":null,"ablSE":null,"call":{"text":"skipped (never >= 8 cards in a fold)","thin":false,"kind":"skipped"}},{"slice":"Rare Rainbow","cards":44,"folds":8,"ic":0.339,"se":0.112,"nEff":2.42,"ablIC":0.438,"ablSE":0.068,"call":{"text":"clears 0 by > 1 SE","thin":true,"kind":"clears"}},{"slice":"Rare Secret","cards":15,"folds":8,"ic":0.253,"se":0.094,"nEff":8.0,"ablIC":0.175,"ablSE":0.101,"call":{"text":"clears 0 by > 1 SE","thin":false,"kind":"clears"}},{"slice":"Rare Ultra","cards":104,"folds":8,"ic":0.366,"se":0.031,"nEff":8.0,"ablIC":0.328,"ablSE":0.036,"call":{"text":"clears 0 by > 1 SE","thin":false,"kind":"clears"}},{"slice":"Special Illustration Rare","cards":110,"folds":8,"ic":0.435,"se":0.047,"nEff":8.0,"ablIC":0.257,"ablSE":0.032,"call":{"text":"clears 0 by > 1 SE","thin":false,"kind":"clears"}},{"slice":"Ultra Rare","cards":146,"folds":8,"ic":0.37,"se":0.028,"nEff":8.0,"ablIC":0.223,"ablSE":0.023,"call":{"text":"clears 0 by > 1 SE","thin":false,"kind":"clears"}},{"slice":"within-rarity neutralized","cards":456,"folds":8,"ic":0.379,"se":0.016,"nEff":8.0,"ablIC":0.274,"ablSE":0.014,"call":{"text":"clears 0 by > 1 SE","thin":false,"kind":"clears"}},{"slice":"between-rarity contrast only","cards":456,"folds":8,"ic":0.106,"se":0.435,"nEff":2.494,"ablIC":0.267,"ablSE":0.309,"call":{"text":"within 1 SE of 0","thin":false,"kind":"flat"}}]},"listingBook":{"arms":[{"arm":"before (market only)","features":"12 numeric + 9 ind.","winner":"rf","selIC":0.289,"evalIC":0.313,"evalSE":0.083,"ir":3.771,"ablIC":0.233,"after":false},{"arm":"after (+ listing book)","features":"18 numeric + 10 ind.","winner":"rf","selIC":0.283,"evalIC":0.368,"evalSE":0.036,"ir":10.211,"ablIC":0.285,"after":true}],"before":{"arm":"before (market only)","features":"12 numeric + 9 ind.","winner":"rf","selIC":0.289,"evalIC":0.313,"evalSE":0.083,"ir":3.771,"ablIC":0.233,"after":false},"after":{"arm":"after (+ listing book)","features":"18 numeric + 10 ind.","winner":"rf","selIC":0.283,"evalIC":0.368,"evalSE":0.036,"ir":10.211,"ablIC":0.285,"after":true},"deltaIC":0.055,"deltaAbl":0.053,"features":[{"feature":"mid_skew","selIC":0.181,"heldIC":0.19,"se":0.036},{"feature":"d_market_pos_3m","selIC":-0.117,"heldIC":-0.087,"se":0.031},{"feature":"rel_spread","selIC":0.055,"heldIC":-0.028,"se":0.208},{"feature":"direct_discount","selIC":0.04,"heldIC":0.021,"se":0.053},{"feature":"market_pos","selIC":-0.124,"heldIC":0.012,"se":0.067},{"feature":"d_rel_spread_3m","selIC":0.003,"heldIC":0.001,"se":0.041}],"featureNames":["rel_spread","market_pos","mid_skew","direct_discount","d_rel_spread_3m","d_market_pos_3m"],"populated":{"low":100,"mid":100,"high":100,"direct_low":42},"driver":"mid_skew","decay":[{"horizon":1,"ic":0.277},{"horizon":2,"ic":0.24},{"horizon":3,"ic":0.19},{"horizon":6,"ic":0.076}],"driverAloneIC":0.364,"withoutIC":0.313,"allSixIC":0.368,"noiseCaveat":"State it plainly: the move (+0.055) is SMALLER than the 'before' arm's own one-SE band (0.083). On these error bars a reader cannot conclude that the improvement clears sampling noise, and no joint significance test of the two arms is claimed anywhere in this section.","artifactCaveat":"That is the signature of a mechanical catch-up, not of demand forecasting: TCGplayer's `market` is a trailing transaction-weighted average, while `mid` is the CURRENT listing midpoint, so `mid` carries fresher information than `market` at the same instant. A large part of this feature's edge is therefore the stale average converging on a book that was already visible at T -- honest as-of-T signal, but substantially a measurement-lag artifact of how the price series is constructed rather than a forecast of future demand. A buyer paying live listing prices would capture less of it than the IC suggests."},"sliceProbe":{"era":"ME","finding":"the ME cell is NOT statistically separated from zero.","ic":0.197,"se":0.162,"folds":5,"cards":46,"ablIC":0.211,"nEff":null,"permP":0.114,"permDraws":20000,"nullSD":0.125,"ci":[-0.013,0.394],"flipPct":3.3,"candidates":[{"candidate":"gbm","ic":0.468},{"candidate":"ensemble","ic":0.417},{"candidate":"pls","ic":0.356},{"candidate":"elasticnet","ic":0.321},{"candidate":"ridge","ic":0.295},{"candidate":"rank_linear","ic":0.253},{"candidate":"huber","ic":0.235},{"candidate":"rf","ic":0.197}],"sameSign":8,"nCandidates":8,"rosterMedian":0.308,"separated":false},"ablation":{"ablFrom":0.328,"ablTo":0.26,"survives":0.7927,"removed":0.2073,"removedPct":21,"survivesPct":79,"removedWords":"a substantial minority of","survivesWords":"most of","isMajorityStatic":false,"univariateSetage":0.296,"univariateShare":0.9024,"setageCorr":0.37,"sentence":"Ablating the static set-age and rarity features moves all-fold mean IC from 0.328 to 0.260, removing a substantial minority of the signal (21%), so the ranking does not collapse without them. It is still substantially a lifecycle ordering, though: ranking on set age alone with no model at all already scores 0.296, 90% of the full-feature IC, and the model's out-of-fold ranking correlates 0.370 (Spearman) with set age."}}};
-
-const V = PAGE.validation;
-function renderLeaderboard(){
-const tb=document.getElementById("leaderboard-body");
-let html="";
-for(const m of V.roster){
-const cls=(m.selected?"selected ":"")+(m.baseline?"baseline":"");
-const name=esc(m.model)+(m.selected?'<span class="sel-tag">selected</span>':'');
-html+='<tr class="'+cls.trim()+'">'
-+'<td>'+name+'</td>'
-+'<td class="num">'+m.meanIC_raw.toFixed(3)+'</td>'
-+'<td class="num">'+(m.icIR==null?"n/a":m.icIR.toFixed(2))+'</td>'
-+'<td class="num">'+m.quintile.toFixed(1)+'%</td>'
-+'<td class="num">'+m.upPrec.toFixed(1)+'%</td>'
-+'<td class="num">'+(m.coverage==null?"n/a":m.coverage.toFixed(1)+'%')+'</td>'
-+'</tr>';
-}
-tb.innerHTML=html;
-const a=V;
-// The static-effect wording is computed at build time from the live attribution
-// table (sitegen/ablation.py), never asserted here: on some runs the ablation
-// removes most of the signal and on others a minority, and the sentence must
-// follow the measurement in both directions.
-const AB = V.ablation;
-document.getElementById("attr-note").innerHTML =
-'<strong>Why '+esc(a.bestModel)+', and the '+esc(a.verdict)+' verdict.</strong> '
-+esc(a.bestModel)+' was chosen on the first selection folds (selection-fold mean IC '
-+a.selIC.toFixed(3)+') and then graded on the disjoint held-out evaluation folds, where it scores '
-+'mean IC <strong>'+a.heldoutIC.toFixed(3)+'</strong> (information ratio '+a.heldoutIR.toFixed(2)
-+', deflated for fold autocorrelation). '
-+(AB ? esc(AB.sentence)+' ' : '')
-+(a.verdict==="strong"
-? 'The held-out ablated signal clears the 0.05 noise floor by more than one standard '
-+'error, so a genuine non-static edge survives (the <strong>strong</strong> verdict); '
-+'it may not persist across regimes.'
-: 'The residual is within noise, so the score is essentially a set-age lifecycle effect, not diversified alpha.')
-+' <a href="how-it-works.html#lifecycle">See the set-age lifecycle curve.</a>'
-+(V.listingBook ? ' <a href="#listing-book">What the recovered listing-book features changed.</a>' : '')
-+(V.breakdown ? ' <a href="#within-era">Is that edge within-era skill or cross-era contrast?</a>' : '');
-}
-// ---------------------------------------------------------------------------
-// Within-era / within-rarity breakdown. Every cell, including the one-SE call
-// and the THIN badge, is lifted from forward_validation.md -- the page grades
-// nothing itself, so it cannot claim more than the model measured.
-// ---------------------------------------------------------------------------
-const BD = V.breakdown;
-const ANCHORS = ["pooled (headline)", "within-era neutralized", "between-era contrast only",
-"within-rarity neutralized", "between-rarity contrast only"];
-function icCell(ic, se){
-if(ic==null) return '<td class="num">n/a</td>';
-const c = ic>0?"ret-pos":(ic<0?"ret-neg":"");
-return '<td class="num"><span class="'+c+'">'+fmtSigned(ic,3)+'</span>'
-+ (se==null?"":' <span style="color:var(--ink-subtle);">&plusmn;'+se.toFixed(3)+'</span>') + '</td>';
-}
-function callCell(call, nEff){
-const thin = call.thin
-? '<span class="thin-tag" title="Clears its noise bar on fewer than '
-+ (BD.minNeff==null?"the required":BD.minNeff.toFixed(1))
-+ ' effectively independent folds, so the report does not count it as evidence.">thin</span>'
-: '';
-return '<td><span class="call-word '+esc(call.kind)+'">'+esc(call.text)+'</span>'+thin+'</td>';
-}
-function sliceRow(r){
-const anchor = ANCHORS.indexOf(r.slice) >= 0;
-const total = r.slice === "pooled (headline)";
-const cls = (anchor?"slice-anchor ":"") + (total?"slice-total":"");
-return '<tr class="'+cls.trim()+'">'
-+ '<td>'+esc(r.slice)+'</td>'
-+ '<td class="num">'+r.cards+'</td>'
-+ '<td class="num">'+r.folds+'</td>'
-+ icCell(r.ic, r.se)
-+ '<td class="num">'+(r.nEff==null?"n/a":r.nEff.toFixed(2))+'</td>'
-+ icCell(r.ablIC, r.ablSE)
-+ callCell(r.call, r.nEff)
-+ '</tr>';
-}
-function renderBreakdown(){
-if(!BD) return;
-const sec = document.getElementById("within-era");
-sec.style.display = "";
-document.getElementById("era-slices-body").innerHTML = BD.era.map(sliceRow).join("");
-document.getElementById("rarity-slices-body").innerHTML = BD.rarity.map(sliceRow).join("");
-const by = Object.fromEntries(BD.era.map(r=>[r.slice, r]));
-const pooled = by["pooled (headline)"], neutral = by["within-era neutralized"],
-contrast = by["between-era contrast only"];
-const bar = BD.minNeff==null ? "the effective-fold bar" : BD.minNeff.toFixed(1)+" effective folds";
-// The verdict clause is the report's own generated sentence (one of four
-// branches it picks from its one-SE gates), quoted rather than restated.
-let html = '<strong>Finding: '+esc(BD.eraFinding)+'</strong> '
-+ 'Ranking every card only against same-era cards gives held-out IC <strong>'
-+ fmtSigned(neutral.ic,3)+'</strong>'+fmtPM(neutral.se)+', against a pooled headline '
-+ fmtSigned(pooled.ic,3)+fmtPM(pooled.se)+'. Destroying all within-era information '
-+ 'and keeping only the era ordering leaves '+fmtSigned(contrast.ic,3)
-+ fmtPM(contrast.se)+', which is inside its own error bar. So the headline is reproduced by '
-+ 'within-era ranking and the era ordering alone carries nothing distinguishable from zero.';
-if(neutral.call.thin){
-html += ' <strong>Read with the stated limit:</strong> the neutralized row clears its noise bar on '
-+ fmtNEff(neutral.nEff)+', below the '+bar+' this repo requires before a cell may '
-+ 'claim a direction, so that half of the finding rests on roughly one independent draw and is '
-+ 'directional, not established.';
-}
-// A negative cell is only described as a wrong-way ranking when the report's
-// own resampling probe SEPARATED it from zero. A point estimate below zero on
-// a thin slice is an open question, not an established defect -- see the
-// weakest-slice block below, which is where that adjudication lives.
-const PR = V.sliceProbe;
-const wrong = BD.era.filter(r=>r.call.kind==="negative");
-const adjudicated = new Set(PR && !PR.separated ? [PR.era] : []);
-const established = wrong.filter(r=>!adjudicated.has(r.slice));
-if(established.length){
-html += ' It is also not uniform: inside '
-+ established.map(r=>esc(r.slice)+' ('+fmtSigned(r.ic,3)+fmtPM(r.se)+')').join(", ")
-+ ' the model ranks cards backwards on the held-out folds, so the claim rests on the eras that '
-+ 'do clear, not on all of them.';
-}
-const open = BD.era.filter(r=>adjudicated.has(r.slice));
-if(open.length){
-html += ' It is also not uniform, though the weakest slice is an open question rather than a '
-+ 'known defect: '
-+ open.map(r=>esc(r.slice)+' ('+fmtSigned(r.ic,3)+fmtPM(r.se)+')').join(", ")
-+ ' sits inside its own error bar, and the resampling probe below cannot separate it from '
-+ 'zero in either direction.';
-}
-document.getElementById("breakdown-callout").innerHTML = html;
-document.getElementById("era-legend").innerHTML =
-'Shaded rows are whole-universe references, not era slices. A (slice, fold) cell with fewer than '
-+ '8 scored cards is skipped rather than scored as zero, so a thin slice shows fewer folds instead '
-+ 'of a mean quietly pulled toward zero. Error bars are ic_std / sqrt(n_eff), not ic_std / '
-+ 'sqrt(folds): a slice re-scores mostly the same cards every month. Full tables and gate '
-+ 'definitions are in <code>forward_validation.md</code>.';
-const rby = Object.fromEntries(BD.rarity.map(r=>[r.slice, r]));
-const rn = rby["within-rarity neutralized"], rc = rby["between-rarity contrast only"];
-document.getElementById("rarity-sub").innerHTML = BD.rarityFinding
-? ('By rarity tier the same test says: '+esc(BD.rarityFinding)+' (neutralized '
-+fmtSigned(rn.ic,3)+fmtPM(rn.se)+', '+fmtNEff(rn.nEff)
-+'; contrast-only '+fmtSigned(rc.ic,3)+fmtPM(rc.se)+', '
-+fmtNEff(rc.nEff)+').')
-: 'The same neutralized-versus-contrast test, cut by rarity tier instead of era.';
-}
-// ---------------------------------------------------------------------------
-// Weakest era slice, adjudicated by resampling. The slice shown is chosen
-// DETERMINISTICALLY by the model code (lowest held-out IC for the chosen model),
-// so which era appears here is itself a result and not a pick. Every number and
-// the finding sentence come from forward_validation.md.
-// ---------------------------------------------------------------------------
-function renderProbe(){
-const P = V.sliceProbe;
-if(!P) return;
-document.getElementById("probe-block").style.display = "";
-document.getElementById("probe-title").textContent =
-"The weakest era slice (" + P.era + "), adjudicated by resampling";
-document.getElementById("probe-sub").innerHTML =
-'The table above screens every slice with a one-standard-error noise gate. That is the right '
-+ 'screen for a table but a weak adjudicator for the single worst cell, so the weakest slice '
-+ 'gets a direct test. It is chosen as the era with the lowest held-out IC for '
-+ '<code>' + esc(V.bestModel) + '</code> \u2014 not the one that looks wrong \u2014 and it is '
-+ 'reported whatever the answer turns out to be. Every test below runs on the SAME held-out '
-+ 'out-of-fold predictions as the headline: nothing is refit and nothing is re-selected.';
-const sign = P.ic < 0 ? "negative" : "positive";
-let html = '<strong>Finding: ' + esc(P.finding) + '</strong> ';
-html += 'Inside ' + esc(P.era) + ' the selected model scores held-out IC <strong>'
-+ fmtSigned(P.ic,3) + '</strong>' + fmtPM(P.se) + ' over ' + P.folds
-+ ' folds and ' + P.cards + ' cards. ';
-// permP is null whenever the report printed n/a for a non-finite p-value. The
-// adjudication itself is read off the report's own finding sentence and still
-// holds, so the verdict is kept and only the quoted number is withdrawn: a
-// p-value that was never computed is named as absent, never rendered as null.
-const pQuoted = P.permP != null ? P.permP.toFixed(3) : null;
-if(!P.separated){
-html += (pQuoted != null
-? 'The permutation test returns p = <strong>' + pQuoted + '</strong> and the '
-: 'The report states <strong>no permutation p-value</strong> for this slice, and the ')
-+ 'bootstrap interval spans zero, so this cell supports <strong>no directional claim</strong> '
-+ '\u2014 neither the ' + sign + ' one its point estimate suggests nor its opposite. ';
-} else {
-html += (pQuoted != null
-? 'The permutation test separates it from zero at the 0.05 level (p = ' + pQuoted + ')'
-: 'The report separates it from zero at the 0.05 level but states '
-+ '<strong>no permutation p-value</strong> for this slice')
-+ ', so the ' + sign + ' direction is an established property of this '
-+ 'slice and not sampling noise. ';
-}
-if(P.nEff != null){
-html += 'Note how its one-SE bar arose: <code>effective_n</code> clips n_eff to [1, folds] and '
-+ 'does not reward NEGATIVE autocorrelation, so this slice received n_eff <strong>'
-+ P.nEff.toFixed(3) + '</strong> \u2014 the maximum its ' + P.folds + ' folds allow, hence the '
-+ 'tightest error bar the deflation permits. The one-SE gate exists to stop a thin slice '
-+ 'claiming a direction on roughly one draw; where the fold ICs alternate in sign the same '
-+ 'clipping makes it correspondingly eager to award one. That is why this cell is adjudicated '
-+ 'by resampling rather than by its error bar alone.';
-}
-document.getElementById("probe-callout").innerHTML = html;
-const rows = [];
-if(P.permP != null){
-rows.push([
-'permutation (' + (P.permDraws!=null ? P.permDraws.toLocaleString("en-US") : "many")
-+ ' draws of a random card-constant ranking scored through this slice\u2019s own folds)',
-'p = ' + P.permP.toFixed(3) + ' (two-sided)' + (P.nullSD!=null ? ', null SD ' + P.nullSD.toFixed(3) : ''),
-P.separated ? 'separated from zero at the 0.05 level' : 'NOT separated from zero at the 0.05 level'
-]);
-}
-if(P.ci){
-rows.push([
-'bootstrap over the slice\u2019s ' + P.cards + ' cards',
-'95% CI [' + fmtSigned(P.ci[0],3) + ', ' + fmtSigned(P.ci[1],3) + ']',
-(P.ci[0] <= 0 && P.ci[1] >= 0 ? 'spans zero' : 'excludes zero')
-+ (P.flipPct!=null ? '; the sign flips in ' + P.flipPct.toFixed(1) + '% of resamples' : '')
-]);
-}
-if(P.sameSign != null && P.nCandidates != null){
-rows.push([
-'cross-candidate control (same folds, same cards, same features)',
-P.sameSign + ' of ' + P.nCandidates + ' candidates share the sign'
-+ (P.rosterMedian!=null ? ', roster median ' + fmtSigned(P.rosterMedian,3) : ''),
-P.sameSign === P.nCandidates ? 'the roster broadly agrees' : 'the roster does not agree, so the cell is model-specific rather than era-specific'
-]);
-}
-document.getElementById("probe-tests-body").innerHTML = rows.map(r =>
-'<tr><td>' + r[0] + '</td><td>' + r[1] + '</td><td>' + r[2] + '</td></tr>').join("");
-document.getElementById("probe-candidates-body").innerHTML = (P.candidates||[]).map(c =>
-'<tr' + (c.candidate === V.bestModel ? ' class="selected"' : '') + '><td>' + esc(c.candidate)
-+ (c.candidate === V.bestModel ? '<span class="sel-tag">selected</span>' : '')
-+ '</td>' + icCell(c.ic, null) + '</tr>').join("");
-document.getElementById("probe-legend").innerHTML =
-'Why the permutation null is a CARD-CONSTANT ranking rather than a per-fold shuffle: the '
-+ 'model\u2019s within-slice ordering barely changes month to month, so the honest question is '
-+ '\u201chow often does an ARBITRARY FIXED ranking of these same cards score this well or this '
-+ 'badly through these same overlapping folds?\u201d. Shuffling each fold independently would '
-+ 'answer a different, easier question \u2014 it destroys the fold overlap the n_eff deflation '
-+ 'exists to acknowledge, and returns a tighter null than the estimator deserves. The '
-+ 'per-candidate table is the decisive control: it holds folds, cards and features fixed and '
-+ 'varies only the learner. Full method in <code>forward_validation.md</code>.';
-}
-renderLeaderboard();
-renderBreakdown();
-renderProbe();
+const PAGE = {};
 
 </script>
 </body>
