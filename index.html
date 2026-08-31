@@ -658,6 +658,7 @@ display:flex;gap:var(--ct-gap);list-style:none;margin:0;
 padding:4px 2px 12px;overflow-x:auto;overflow-y:hidden;
 scroll-snap-type:x mandatory;scroll-padding-inline:2px;
 overscroll-behavior-x:contain;scrollbar-width:thin;
+perspective:1200px;
 }
 .crsl-rail::-webkit-scrollbar{height:8px;}
 .crsl-rail::-webkit-scrollbar-track{background:transparent;}
@@ -666,7 +667,10 @@ overscroll-behavior-x:contain;scrollbar-width:thin;
 @media (prefers-reduced-motion:no-preference){
 .crsl-rail.crsl-drift{scroll-snap-type:none;scroll-behavior:auto;}
 }
-.ct{flex:0 0 var(--ct-w);min-width:0;scroll-snap-align:start;}
+.ct{
+flex:0 0 var(--ct-w);min-width:0;scroll-snap-align:start;
+transform:rotateY(calc(var(--ct-d,0) * -10deg)) scale(calc(1 - var(--ct-a,0) * 0.1));
+}
 .ct-face{
 display:flex;flex-direction:column;gap:8px;width:100%;height:100%;
 text-align:left;padding:10px;background:var(--panel);
@@ -761,6 +765,7 @@ margin:6px 0 0;text-align:center;font-size:0.78rem;color:var(--ink-subtle);
 }
 @media (prefers-reduced-motion:reduce){
 .crsl button,.crsl-detail,.crsl-detail-in{transition:none;animation:none;}
+.ct{transform:none;}
 }
 html.compact .crsl{--ct-w:170px;--ct-gap:10px;}
 html.compact .ct-face{gap:6px;padding:8px;}
@@ -1508,6 +1513,9 @@ const CRSL_REDUCE = window.matchMedia("(prefers-reduced-motion: reduce)").matche
 const CRSL_BEHAVIOR = CRSL_REDUCE ? "auto" : "smooth";
 const CRSL_STATE = {track:0, focus:0, openId:null};
 let CRSL_IO = null, CRSL_CLOSE_T = null, CRSL_RAF = 0;
+// Indices crslUpdateDepth last wrote --ct-d/--ct-a onto, so the next call can
+// clear just the ones now out of range instead of touching every cell.
+let CRSL_DEPTH_TOUCHED = [];
 // Auto-advance: a continuous drift, not a page-step. Stepping a whole page on a
 // timer reads as a jump however smooth the easing is; moving a fraction of a
 // pixel every frame reads as motion. So this is a requestAnimationFrame loop
@@ -1792,6 +1800,51 @@ document.querySelectorAll(".crsl-arrow").forEach(b => {
 b.disabled = (b.getAttribute("data-dir") === "-1") ? (x <= 1) : (x >= max - 1);
 });
 }
+// ---------- coverflow depth ----------
+// --ct-d (signed, -1..1) drives rotateY's direction; --ct-a (its abs) drives
+// the scale falloff -- two vars because CSS abs() isn't reliably available.
+// Reads rail.scrollLeft only, never writes it: the drift loop above owns
+// every write, and a second writer here would fight it.
+function crslDepthFor(i, stride, tileW, center, half){
+const tileCenter = i * stride + tileW / 2;
+let d = (tileCenter - center) / half;
+if(d < -1) d = -1; else if(d > 1) d = 1;
+return d;
+}
+function crslUpdateDepth(){
+if(CRSL_REDUCE) return;               // flattened outright; see CAROUSEL_CSS
+const rail = crslEl("rail");
+if(!rail) return;
+const tiles = rail.querySelectorAll(".ct");
+if(!tiles.length) return;
+const gap = parseFloat(getComputedStyle(rail).columnGap) || 0;
+const tileW = tiles[0].getBoundingClientRect().width;
+const stride = tileW + gap;
+if(!stride) return;
+const half = (rail.clientWidth / 2) || 1;
+const center = rail.scrollLeft + half;
+// Visible range plus one tile of margin either side; runs on every drift
+// frame, so cells outside it are left alone rather than walked.
+const first = Math.max(0, Math.floor((rail.scrollLeft - stride) / stride));
+const last = Math.min(tiles.length - 1, Math.ceil((rail.scrollLeft + rail.clientWidth + stride) / stride));
+for(let k = 0; k < CRSL_DEPTH_TOUCHED.length; k++){
+const t = CRSL_DEPTH_TOUCHED[k];
+if((t < first || t > last) && tiles[t]){
+tiles[t].style.removeProperty("--ct-d");
+tiles[t].style.removeProperty("--ct-a");
+}
+}
+const touched = [];
+for(let i = first; i <= last; i++){
+const tile = tiles[i];
+if(!tile) continue;
+const d = crslDepthFor(i, stride, tileW, center, half);
+tile.style.setProperty("--ct-d", d.toFixed(3));
+tile.style.setProperty("--ct-a", Math.abs(d).toFixed(3));
+touched.push(i);
+}
+CRSL_DEPTH_TOUCHED = touched;
+}
 // ---------- detail panel ----------
 function crslCloseDetail(){
 const d = crslEl("detail");
@@ -1839,6 +1892,8 @@ crslEl("panel").setAttribute("aria-labelledby", "crsl-tab-" + track.key);
 rail.scrollLeft = 0;
 crslObserveImages();
 crslSyncArrows();
+CRSL_DEPTH_TOUCHED = [];   // fresh tiles; the old touched indices are gone
+crslUpdateDepth();
 crslEl("status").textContent = track.label + ": " + total + " cards.";
 }
 function crslSelectTrack(i){
@@ -1900,11 +1955,13 @@ crslAutoSyncBtn();
 ["wheel","touchstart","pointerdown"].forEach(ev => {
 rail.addEventListener(ev, crslAutoStop, {passive:true});
 });
+// Shared rAF throttle: the drift writes scrollLeft every frame, so this
+// fires every frame too, and both callbacks stay cheap for it.
 rail.addEventListener("scroll", () => {
 if(CRSL_RAF) return;
-CRSL_RAF = requestAnimationFrame(() => { CRSL_RAF = 0; crslSyncArrows(); });
+CRSL_RAF = requestAnimationFrame(() => { CRSL_RAF = 0; crslSyncArrows(); crslUpdateDepth(); });
 }, {passive:true});
-window.addEventListener("resize", crslSyncArrows);
+window.addEventListener("resize", () => { crslSyncArrows(); crslUpdateDepth(); });
 // Keyboard focus merely holds it still. A keyboard user reading a tile has
 // not asked to drive, so the drift resumes once focus moves elsewhere.
 // Mouse hover does NOT hold it: the drift keeps animating under the pointer,
