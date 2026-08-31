@@ -685,32 +685,20 @@ width:34px;height:32px;padding:0;color:var(--ink-muted);
 .crsl-arrow[disabled]{opacity:0.38;cursor:default;}
 .crsl-arrow[disabled]:hover{border-color:var(--border-strong);color:var(--ink-muted);}
 .crsl-note{margin:0 auto 10px;max-width:78ch;text-align:center;color:var(--ink-muted);font-size:0.86rem;}
-.crsl-panel{
-position:relative;overflow:visible;
-perspective:1200px;
-}
-.crsl-rail{list-style:none;margin:0;padding:4px 2px 12px;}
-.crsl.crsl-rail-mode .crsl-rail{
-display:flex;gap:var(--ct-gap);overflow-x:auto;overflow-y:hidden;
+.crsl-rail{
+display:flex;gap:var(--ct-gap);list-style:none;margin:0;
+padding:4px 2px 12px;overflow-x:auto;overflow-y:hidden;
 scroll-snap-type:x mandatory;scroll-padding-inline:2px;
 overscroll-behavior-x:contain;scrollbar-width:thin;
 }
 .crsl-rail::-webkit-scrollbar{height:8px;}
 .crsl-rail::-webkit-scrollbar-track{background:transparent;}
 .crsl-rail::-webkit-scrollbar-thumb{background:var(--border-strong);border-radius:999px;}
-.crsl.crsl-ring-mode .crsl-rail{
-position:relative;transform-style:preserve-3d;will-change:transform;
-}
+@media (prefers-reduced-motion:no-preference){.crsl-rail{scroll-behavior:smooth;}}
 @media (prefers-reduced-motion:no-preference){
-.crsl.crsl-ring-mode .crsl-ring-anim{
-transition:transform .38s cubic-bezier(.22,.68,.2,1);
+.crsl-rail.crsl-drift{scroll-snap-type:none;scroll-behavior:auto;}
 }
-}
-.crsl.crsl-rail-mode .ct{flex:0 0 var(--ct-w);min-width:0;scroll-snap-align:start;}
-.crsl.crsl-ring-mode .ct{
-position:absolute;top:0;left:50%;width:var(--ct-w);
-margin-left:calc(var(--ct-w) / -2);
-}
+.ct{flex:0 0 var(--ct-w);min-width:0;scroll-snap-align:start;}
 .ct-face{
 display:flex;flex-direction:column;gap:8px;width:100%;height:100%;
 text-align:left;padding:10px;background:var(--panel);
@@ -1615,32 +1603,26 @@ initRowDetail();
 const CRSL = PAGE.carousel;
 const CRSL_REDUCE = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const CRSL_BEHAVIOR = CRSL_REDUCE ? "auto" : "smooth";
-// angle is the ring's own current rotateY, in degrees, never wrapped to
-// +-180 (see crslNormAngle) so a step's shortest-path delta can always be
-// added straight onto it without a seam at +-180 forcing a long way round.
-const CRSL_STATE = {track:0, focus:0, openId:null, angle:0, ring:null};
+const CRSL_STATE = {track:0, focus:0, openId:null};
 let CRSL_IO = null, CRSL_CLOSE_T = null, CRSL_RAF = 0;
-// The whole ring tilts back this many degrees (container rotateX) so it
-// reads as an orbit viewed slightly from above, not a flat carousel with a
-// spin bolted on. Shallow on purpose, same reasoning the old coverflow tilt
-// used: the page exists to show card artwork, and a steeper tilt starts to
-// foreshorten it right at the edges.
-const CRSL_RING_TILT = 10;
-// The non-overlapping radius for n evenly spaced tiles of width w is
-// (w/2)/tan(pi/n) -- solving for the radius at which adjacent tile edges
-// just touch. CRSL_RING_R_FACTOR pulls in from that on purpose: a little
-// overlap at the edges is what makes it read as a ring of cards rather than
-// a ring of gaps. 0.85 was chosen by eye against the measured tile sizes
-// (170/214px) and is the one number in this file that is a genuine tuning
-// choice rather than a derivation -- see the evidence for what it produces.
-const CRSL_RING_R_FACTOR = 0.85;
-// Auto-rotate speed in degrees per second. At 10 slots (the default track
-// length) this crosses one slot roughly every 6 seconds.
-const CRSL_AUTO_DEG_PS = 6;
-let CRSL_AUTO_RAF = 0, CRSL_AUTO_LAST = 0, CRSL_AUTO_DEAD = false;
-// Pointer-drag state for spinning the ring by hand; null when no drag is live.
-let CRSL_DRAG = null;
-let CRSL_DRAG_MOVED = false;
+// Auto-advance: a continuous drift, not a page-step. Stepping a whole page on a
+// timer reads as a jump however smooth the easing is; moving a fraction of a
+// pixel every frame reads as motion. So this is a requestAnimationFrame loop
+// advancing CRSL_AUTO_PPS pixels per second, and it reverses at each end rather
+// than snapping back to zero, which would be the one visible jump left.
+//
+// Because it writes scrollLeft every frame, the rail's scroll event can no
+// longer tell us apart from a person: it fires constantly either way. User
+// takeover is therefore detected from real input events (wheel, touch, pointer)
+// instead of from scrolling.
+const CRSL_AUTO_PPS = 20;
+// CRSL_AUTO_POS is the drift's own sub-pixel position, and it exists because
+// scrollLeft rounds on readback: at 20px/s a frame advances about a third of a
+// pixel, so pos = rail.scrollLeft + delta reads back the rounded value every
+// time, the fraction is discarded, and the rail creeps a pixel and stops. The
+// float is kept here and only written to the DOM.
+let CRSL_AUTO_RAF = 0, CRSL_AUTO_LAST = 0, CRSL_AUTO_DIR = 1, CRSL_AUTO_DEAD = false;
+let CRSL_AUTO_POS = 0;
 function crslEl(suffix){ return document.getElementById("crsl-" + suffix); }
 // Merge what the payload carries with what the page already has. A field the
 // payload omits falls through to the host page's own per-card record, so the
@@ -1831,9 +1813,8 @@ CRSL_IO.unobserve(e.target);
 }, {root: rail, rootMargin: "0px 400px", threshold: 0});
 imgs.forEach(img => CRSL_IO.observe(img));
 }
-// ---------- rail / ring navigation ----------
+// ---------- rail navigation ----------
 function crslTiles(){ return crslEl("rail").querySelectorAll(".ct-face"); }
-function crslCells(){ return crslEl("rail").querySelectorAll(".ct"); }
 function crslSetRoving(i){
 const btns = crslTiles();
 if(!btns.length) return -1;
@@ -1842,26 +1823,14 @@ for(let k = 0; k < btns.length; k++) btns[k].tabIndex = (k === i) ? 0 : -1;
 CRSL_STATE.focus = i;
 return i;
 }
-// Moving the roving tile also moves real DOM focus to it (arrow keys, the
-// arrow buttons via crslStep, drag settling on a slot). That focus() call is
-// what crslRingGoTo hangs off of in ring mode (see the delegated "focusin"
-// listener in initCarousel) -- one mechanism drives both keyboard and click
-// navigation to the front, rather than two that could drift apart.
 function crslFocus(i){
 const j = crslSetRoving(i);
 if(j < 0) return;
 const btn = crslTiles()[j];
 btn.focus({preventScroll:true});
-// The ring has nothing to scroll; only the rail-mode fallback does.
-if(CRSL_REDUCE){
 btn.scrollIntoView({inline:"nearest", block:"nearest", behavior:CRSL_BEHAVIOR});
 }
-}
-// The arrow buttons. In ring mode this is exactly crslFocus one slot over --
-// the same path Tab/arrow-key focus takes -- so it is what makes the arrows
-// step the ring exactly one slot (360/n degrees), not an approximation of it.
 function crslStep(dir){
-if(!CRSL_REDUCE){ crslFocus(CRSL_STATE.focus + dir); return; }
 const rail = crslEl("rail");
 const tile = rail.querySelector(".ct");
 if(!tile) return;
@@ -1870,241 +1839,40 @@ const stride = tile.getBoundingClientRect().width + gap;
 const per = Math.max(1, Math.floor(rail.clientWidth / stride));
 rail.scrollBy({left: dir * per * stride, behavior:CRSL_BEHAVIOR});
 }
-function crslSyncArrows(){
-if(CRSL_REDUCE){
-const rail = crslEl("rail");
-const max = rail.scrollWidth - rail.clientWidth;
-const x = rail.scrollLeft;
-document.querySelectorAll(".crsl-arrow").forEach(b => {
-b.disabled = (b.getAttribute("data-dir") === "-1") ? (x <= 1) : (x >= max - 1);
-});
-return;
-}
-const n = crslCells().length;
-document.querySelectorAll(".crsl-arrow").forEach(b => {
-const left = b.getAttribute("data-dir") === "-1";
-b.disabled = left ? (CRSL_STATE.focus <= 0) : (CRSL_STATE.focus >= n - 1);
-});
-}
-// ---------- the ring ----------
-// Pure geometry, driven directly in the evidence and the node tests below --
-// no DOM required to reason about where a slot sits.
-//
-// step is 360/n: n evenly spaced slots around a full turn. r is the ring
-// radius. (w/2)/tan(pi/n) is the radius at which two adjacent tiles of width
-// w exactly touch edge to edge (solve the isosceles triangle a half-tile
-// makes with the ring centre); CRSL_RING_R_FACTOR pulls in from that for a
-// deliberate, gentle overlap. n<=1 has no ring to speak of (nothing to space
-// out), so it resolves to a single centred, non-rotating card rather than a
-// divide-by-a-degenerate-tangent.
-function crslRingGeometry(n, tileW){
-if(n <= 1) return {step:0, r:0};
-const step = 360 / n;
-const denom = Math.tan(Math.PI / n);
-const r = denom > 1e-6 ? (tileW / 2) / denom * CRSL_RING_R_FACTOR : 0;
-return {step:step, r:Math.max(0, r)};
-}
-// Wraps to (-180, 180] so "front" is always near 0 regardless of how many
-// turns the ring has accumulated.
-function crslNormAngle(a){
-let n = a % 360;
-if(n > 180) n -= 360; else if(n <= -180) n += 360;
-return n;
-}
-// The signed turn from an already-wrapped angle to any target, never more
-// than half a turn -- so animating by this delta always takes the short way
-// round instead of spinning the long way after many auto-rotate turns.
-function crslShortestDelta(fromMod, to){
-const toMod = crslNormAngle(to);
-let d = toMod - fromMod;
-if(d > 180) d -= 360; else if(d < -180) d += 360;
-return d;
-}
-// The container angle at which slot i sits at the front (0 degrees).
-function crslAngleForSlot(i, step){ return -i * step; }
-// A slot's own, unchanging placement on the ring -- set once per render in
-// crslLayoutRing, never touched again by rotation (only the container's
-// angle changes turn to turn). Lives on .ct, never on .ct-face, so it can
-// never collide with .ct-face's own hover/focus lift transform.
-function crslItemTransform(i, step, r){
-return "rotateY(" + (i * step).toFixed(3) + "deg) translateZ(" + r.toFixed(2) + "px)";
-}
-// The ring container's transform: tilt is fixed, angle is CRSL_STATE.angle.
-function crslContainerTransform(angle){
-return "rotateX(" + CRSL_RING_TILT + "deg) rotateY(" + angle.toFixed(3) + "deg)";
-}
-// Whether a slot at signed angle theta (0 = dead front) faces the camera,
-// and how much to dim it. |theta|>90 means it is over the horizon -- facing
-// away -- so it must not intercept clicks meant for whatever is now in front
-// of it; cos(theta) is 1 at dead front and falls to 0 at the horizon, so the
-// opacity floor (0.62) keeps every reachable card readable while still
-// letting the front one read as the focused one.
-function crslFacingFor(theta){
-const back = Math.abs(theta) > 90;
-const cos = Math.cos(theta * Math.PI / 180);
-return {back: back, opacity: +(0.62 + 0.38 * Math.max(0, cos)).toFixed(3)};
-}
-function crslSetRingAnimated(on){
-const rail = crslEl("rail");
-if(rail) rail.classList.toggle("crsl-ring-anim", !!on);
-}
-// Writes the container's rotateY and, from it, every slot's pointer-events
-// and opacity. The one function every rotation path (auto-rotate, a step,
-// drag tracking, momentum) funnels through, so facing is always in sync
-// with the angle actually on screen.
-function crslApplyAngle(angle){
-CRSL_STATE.angle = angle;
-const rail = crslEl("rail");
-if(!rail) return;
-rail.style.transform = crslContainerTransform(angle);
-const g = CRSL_STATE.ring;
-if(!g) return;
-const cells = crslCells();
-for(let i = 0; i < cells.length; i++){
-const f = crslFacingFor(crslNormAngle(angle + i * g.step));
-cells[i].style.pointerEvents = f.back ? "none" : "";
-cells[i].style.opacity = f.opacity;
-}
-}
-// Rotates the ring, by the shortest turn, to bring slot i to the front.
-// This is what the delegated "focusin" listener calls on Tab/arrow-key
-// focus, and what crslStep calls one slot at a time -- the single place a
-// "go to slot i" request turns into an actual angle.
-function crslRingGoTo(i){
-const g = CRSL_STATE.ring;
-if(!g || !g.step) return;
-const target = crslAngleForSlot(i, g.step);
-const delta = crslShortestDelta(crslNormAngle(CRSL_STATE.angle), target);
-crslSetRingAnimated(true);
-crslApplyAngle(CRSL_STATE.angle + delta);
-}
-// Lays each slot onto the ring (once per render / resize) and returns it to
-// today's focus. Reads real tile geometry (offsetWidth/offsetHeight, which
-// CSS transforms never affect) so it works at both the small and large
-// --ct-w breakpoint without hardcoding either.
-function crslLayoutRing(){
-// Belt and braces, matching every other ring entry point: reduced motion
-// never calls this (see crslRender/initCarousel), but a cell should stay
-// flat even if some future caller reached it directly.
-if(CRSL_REDUCE) return;
-const rail = crslEl("rail");
-if(!rail) return;
-const cells = rail.querySelectorAll(".ct");
-const n = cells.length;
-if(!n) return;
-const tileW = cells[0].offsetWidth || 214;
-const g = crslRingGeometry(n, tileW);
-CRSL_STATE.ring = g;
-let h = 0;
-for(let i = 0; i < n; i++){
-cells[i].style.transform = crslItemTransform(i, g.step, g.r);
-h = Math.max(h, cells[i].offsetHeight);
-}
-if(h) rail.style.height = h + "px";
-crslSetRingAnimated(false);
-crslApplyAngle(crslAngleForSlot(CRSL_STATE.focus, g.step));
-}
-// ---------- drag to spin ----------
-function crslDragStart(e){
-if(CRSL_REDUCE) return;
-if(e.pointerType === "mouse" && e.button !== 0) return;
-crslAutoStop();
-crslSetRingAnimated(false);
-CRSL_DRAG_MOVED = false;
-CRSL_DRAG = {
-id: e.pointerId, startX: e.clientX, startAngle: CRSL_STATE.angle,
-lastX: e.clientX, lastT: crslNow(), vel: 0
-};
-const rail = crslEl("rail");
-if(rail && rail.setPointerCapture){
-try{ rail.setPointerCapture(e.pointerId); }catch(err){ /* not capturable; drag still tracks via move */ }
-}
-}
-function crslRingDegPerPx(){
-const g = CRSL_STATE.ring;
-const r = g ? g.r : 0;
-// A point at the ring's own radius should track the pointer roughly 1:1;
-// dtheta(deg) = dx / r (radians) converted to degrees. r==0 (a one-card
-// "ring") falls back to a plain, still-usable rate.
-return r > 1 ? (180 / (Math.PI * r)) : 0.6;
-}
-function crslDragMove(e){
-if(!CRSL_DRAG || e.pointerId !== CRSL_DRAG.id) return;
-const dx = e.clientX - CRSL_DRAG.startX;
-if(Math.abs(dx) > 6) CRSL_DRAG_MOVED = true;
-const now = crslNow();
-const dt = now - CRSL_DRAG.lastT;
-if(dt > 4){
-CRSL_DRAG.vel = (e.clientX - CRSL_DRAG.lastX) / dt;   // px per ms
-CRSL_DRAG.lastX = e.clientX; CRSL_DRAG.lastT = now;
-}
-crslApplyAngle(CRSL_DRAG.startAngle + dx * crslRingDegPerPx());
-}
-function crslDragEnd(e){
-if(!CRSL_DRAG || e.pointerId !== CRSL_DRAG.id) return;
-const vel = CRSL_DRAG.vel;
-CRSL_DRAG = null;
-crslMomentumSettle(vel);
-}
-// Decelerating spin after release, then a snap to whichever slot ends up
-// nearest the front -- "momentum if it is cheap to do well": one friction
-// constant, one rAF loop, no physics library.
-function crslMomentumSettle(velPxMs){
-let degPerMs = velPxMs * crslRingDegPerPx();
-let last = crslNow();
-function frame(ts){
-const dt = Math.min(ts - last, 48);
-last = ts;
-if(Math.abs(degPerMs) > 0.01){
-crslApplyAngle(CRSL_STATE.angle + degPerMs * dt);
-degPerMs *= Math.pow(0.94, dt / 16);
-requestAnimationFrame(frame);
-} else {
-crslSnapToNearest();
-}
-}
-if(Math.abs(degPerMs) > 0.02) requestAnimationFrame(frame);
-else crslSnapToNearest();
-}
-function crslSnapToNearest(){
-const g = CRSL_STATE.ring;
-if(!g || !g.step) return;
-const n = crslCells().length;
-const nearest = Math.max(0, Math.min(n - 1, Math.round(-CRSL_STATE.angle / g.step)));
-crslSetRoving(nearest);
-crslRingGoTo(nearest);
-crslSyncArrows();
-}
-function crslNow(){ return (typeof performance !== "undefined" && performance.now) ? performance.now() : Date.now(); }
-// ---------- auto-rotate ----------
-// A continuous spin, not a page-step: at CRSL_AUTO_DEG_PS degrees/second the
-// ring just keeps turning, and because it is a literal ring there is no end
-// to reverse at the way the old scrollLeft drift needed. Guarded on
-// CRSL_REDUCE the same way crslAutoStart is, so it can never run in rail
-// mode even if something else called it directly.
 function crslAutoFrame(ts){
 CRSL_AUTO_RAF = 0;
-if(CRSL_AUTO_DEAD || CRSL_REDUCE) return;
+const rail = crslEl("rail");
+if(!rail || CRSL_AUTO_DEAD) return;
 if(!CRSL_AUTO_LAST) CRSL_AUTO_LAST = ts;
+// Clamped so returning to a backgrounded tab resumes rather than lurching.
 const dt = Math.min(ts - CRSL_AUTO_LAST, 64) / 1000;
 CRSL_AUTO_LAST = ts;
-crslSetRingAnimated(false);
-crslApplyAngle(CRSL_STATE.angle + CRSL_AUTO_DEG_PS * dt);
+const max = rail.scrollWidth - rail.clientWidth;
+if(max > 1){
+CRSL_AUTO_POS += CRSL_AUTO_DIR * CRSL_AUTO_PPS * dt;
+if(CRSL_AUTO_POS >= max){ CRSL_AUTO_POS = max; CRSL_AUTO_DIR = -1; }
+else if(CRSL_AUTO_POS <= 0){ CRSL_AUTO_POS = 0; CRSL_AUTO_DIR = 1; }
+rail.scrollLeft = CRSL_AUTO_POS;
+}
 CRSL_AUTO_RAF = requestAnimationFrame(crslAutoFrame);
 }
 function crslAutoStart(){
-// Reduced motion means no motion here, not slower motion, so the loop
-// never starts rather than spinning imperceptibly.
+// Reduced motion means no motion here, not slower motion, so the loop never
+// starts rather than drifting imperceptibly.
 if(CRSL_REDUCE || CRSL_AUTO_DEAD || CRSL_AUTO_RAF) return;
 CRSL_AUTO_LAST = 0;
+const rail = crslEl("rail");
+if(rail){ rail.classList.add("crsl-drift"); CRSL_AUTO_POS = rail.scrollLeft; }
 CRSL_AUTO_RAF = requestAnimationFrame(crslAutoFrame);
 crslAutoSyncBtn();
 }
 function crslAutoPause(){
 if(CRSL_AUTO_RAF){ cancelAnimationFrame(CRSL_AUTO_RAF); CRSL_AUTO_RAF = 0; }
 CRSL_AUTO_LAST = 0;
+const rail = crslEl("rail");
+if(rail) rail.classList.remove("crsl-drift");
 }
-// The visible control's label, kept in step with whether rotation is running.
+// The visible control's label, kept in step with whether the drift is running.
 function crslAutoSyncBtn(){
 const b = crslEl("auto");
 if(!b) return;
@@ -2113,6 +1881,14 @@ b.textContent = on ? "Pause" : "Play";
 b.setAttribute("aria-label", on ? "Pause the card carousel" : "Play the card carousel");
 }
 function crslAutoStop(){ CRSL_AUTO_DEAD = true; crslAutoPause(); crslAutoSyncBtn(); }
+function crslSyncArrows(){
+const rail = crslEl("rail");
+const max = rail.scrollWidth - rail.clientWidth;
+const x = rail.scrollLeft;
+document.querySelectorAll(".crsl-arrow").forEach(b => {
+b.disabled = (b.getAttribute("data-dir") === "-1") ? (x <= 1) : (x >= max - 1);
+});
+}
 // ---------- detail panel ----------
 function crslCloseDetail(){
 const d = crslEl("detail");
@@ -2153,18 +1929,11 @@ html += crslTile(crslCard(item.id), i + 1, total, track.metric, item.v, i === 0)
 }
 const rail = crslEl("rail");
 crslCloseDetail();
-rail.style.transform = "";     // clear any stale ring rotation before relayout
-rail.style.height = "";
 rail.innerHTML = html;
 CRSL_STATE.focus = 0;
-CRSL_STATE.angle = 0;
 crslEl("note").textContent = track.note;
 crslEl("panel").setAttribute("aria-labelledby", "crsl-tab-" + track.key);
-if(CRSL_REDUCE){
 rail.scrollLeft = 0;
-} else {
-crslLayoutRing();           // places every slot and applies angle 0
-}
 crslObserveImages();
 crslSyncArrows();
 crslEl("status").textContent = track.label + ": " + total + " cards.";
@@ -2183,12 +1952,6 @@ crslRender();
 function initCarousel(){
 if(typeof CRSL === "undefined" || !CRSL || !CRSL.tracks || !CRSL.tracks.length) return;
 if(!crslEl("rail")) return;
-const rail = crslEl("rail");
-const root = rail.closest(".crsl") || rail;
-// Decided once, before the first render, so there is no flash of the
-// other mode: reduced motion gets the flat rail verbatim, everyone else
-// gets the ring. See the CAROUSEL_CSS comment above .crsl-panel.
-root.classList.add(CRSL_REDUCE ? "crsl-rail-mode" : "crsl-ring-mode");
 // Only where nothing else on the page draws bands, or this would rescale them.
 if(CRSL.ownBounds){
 const los = [], his = [];
@@ -2222,53 +1985,29 @@ crslAutoStop();
 crslStep(parseInt(b.getAttribute("data-dir"), 10));
 });
 });
+const rail = crslEl("rail");
 const autoBtn = crslEl("auto");
 if(autoBtn) autoBtn.addEventListener("click", () => {
 if(CRSL_AUTO_DEAD){ CRSL_AUTO_DEAD = false; crslAutoStart(); }
 else crslAutoStop();
 crslAutoSyncBtn();
 });
-// Takeover is read from real input: a running drift/spin writes its own
-// position every frame, so the corresponding movement event (scroll for
-// the rail, none needed for the ring since crslDragStart covers pointer
-// takeover directly) can no longer tell us apart from a person.
+// Takeover is read from real input, because a per-frame drift writes
+// scrollLeft constantly and the scroll event can no longer distinguish us.
 ["wheel","touchstart","pointerdown"].forEach(ev => {
 rail.addEventListener(ev, crslAutoStop, {passive:true});
 });
-if(CRSL_REDUCE){
-// Rail-mode only: the ring never scrolls, so it needs none of this.
 rail.addEventListener("scroll", () => {
 if(CRSL_RAF) return;
 CRSL_RAF = requestAnimationFrame(() => { CRSL_RAF = 0; crslSyncArrows(); });
 }, {passive:true});
-} else {
-// Spinning the ring by hand. A plain click still opens the detail panel
-// (see the rail "click" listener below) -- CRSL_DRAG_MOVED is what tells
-// the two apart, so a drag that ends over a card does not also toggle it.
-rail.addEventListener("pointerdown", crslDragStart);
-rail.addEventListener("pointermove", crslDragMove);
-rail.addEventListener("pointerup", crslDragEnd);
-rail.addEventListener("pointercancel", crslDragEnd);
-// Any card gaining real DOM focus -- Tab landing on the roving tile, or
-// the .focus() calls inside crslFocus/the click handler below -- rotates
-// the ring to bring it to the front. One listener covers keyboard and
-// pointer navigation alike, because both already route through .focus().
-rail.addEventListener("focusin", e => {
-const btn = e.target.closest(".ct-face");
-if(!btn) return;
-crslRingGoTo(parseInt(btn.getAttribute("data-rank"), 10) - 1);
-crslSyncArrows();
-});
-}
-window.addEventListener("resize", () => {
-crslSyncArrows();
-if(!CRSL_REDUCE) crslLayoutRing();
-});
-// Keyboard focus merely holds rotation still. A keyboard user reading a
-// tile has not asked to drive, so it resumes once focus moves elsewhere.
-// Mouse hover does NOT hold it: rotation keeps animating under the
-// pointer, and only a real interaction (a click/drag inside the rail, or
-// the pause button) stops it for good -- see crslAutoStop() callers.
+window.addEventListener("resize", crslSyncArrows);
+// Keyboard focus merely holds it still. A keyboard user reading a tile has
+// not asked to drive, so the drift resumes once focus moves elsewhere.
+// Mouse hover does NOT hold it: the drift keeps animating under the pointer,
+// and only a real interaction (a click inside the rail, or the pause
+// button) stops it for good -- see crslAutoStop() callers below.
+const root = rail.closest(".crsl") || rail;
 function crslAutoResume(){
 if(root.contains(document.activeElement)) return;
 crslAutoStart();
@@ -2278,10 +2017,8 @@ root.addEventListener("focusout", crslAutoResume);
 rail.addEventListener("click", e => {
 const btn = e.target.closest(".ct-face");
 if(!btn) return;
-if(CRSL_DRAG_MOVED){ CRSL_DRAG_MOVED = false; return; }   // was a drag, not a tap
 crslAutoStop();
 crslSetRoving(parseInt(btn.getAttribute("data-rank"), 10) - 1);
-btn.focus({preventScroll:true});   // brings it to the ring's front too
 crslToggleDetail(btn);
 });
 rail.addEventListener("keydown", e => {
