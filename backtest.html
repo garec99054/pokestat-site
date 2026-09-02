@@ -1090,7 +1090,7 @@ initMarkTips();
 setTimeout(initPageNav, 0);
 // ---------- one site-wide card cell ----------
 // OBYID (Map id->{name,set,rarity,...}) and CARDLINKS (object id->{set_id,number,
-// tcg_pid,cm_pid}) are defined per page in EXTRA_JS before any cardCell() call.
+// tcg_pid,cm_pid,art}) are defined per page in EXTRA_JS before any cardCell() call.
 function ccFallback(img){ img.classList.add('cc-thumb--fallback'); img.removeAttribute('src'); }
 function cardCell(id, opts){
 opts = opts || {};
@@ -1109,11 +1109,13 @@ if(rarity) metaParts.push(esc(rarity));
 const meta = metaParts.join(" · ");
 let thumbHtml = "";
 if(wantThumb){
-// opts.src wins when the caller knows the real artwork URL. The derived
-// images.pokemontcg.io path below is a convention, not a fact: the newest
-// sets are catalogued on a second CDN, so deriving there yields a 404 and
-// a grey placeholder. A caller holding cards.image_url passes it in.
-const src = opts.src || ((cl.set_id && number != null && number !== "")
+// opts.src wins when the caller knows the real artwork URL. Next is
+// cl.art, the resolved URL unpackCardlinks already built from the stored
+// cards.image_url against whichever host it is on. Only when neither is
+// present does the cell fall back to the images.pokemontcg.io convention,
+// which is a guess, not a fact: the newest sets are catalogued on a second
+// CDN, so guessing there yields a 404 and a grey placeholder.
+const src = opts.src || cl.art || ((cl.set_id && number != null && number !== "")
 ? ("https://images.pokemontcg.io/" + cl.set_id + "/" + number + ".png") : null);
 if(src){
 thumbHtml = '<img class="cc-thumb" loading="lazy" decoding="async" src="' + esc(src)

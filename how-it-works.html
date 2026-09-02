@@ -1200,7 +1200,7 @@ initMarkTips();
 setTimeout(initPageNav, 0);
 // ---------- one site-wide card cell ----------
 // OBYID (Map id->{name,set,rarity,...}) and CARDLINKS (object id->{set_id,number,
-// tcg_pid,cm_pid}) are defined per page in EXTRA_JS before any cardCell() call.
+// tcg_pid,cm_pid,art}) are defined per page in EXTRA_JS before any cardCell() call.
 function ccFallback(img){ img.classList.add('cc-thumb--fallback'); img.removeAttribute('src'); }
 function cardCell(id, opts){
 opts = opts || {};
@@ -1219,11 +1219,13 @@ if(rarity) metaParts.push(esc(rarity));
 const meta = metaParts.join(" · ");
 let thumbHtml = "";
 if(wantThumb){
-// opts.src wins when the caller knows the real artwork URL. The derived
-// images.pokemontcg.io path below is a convention, not a fact: the newest
-// sets are catalogued on a second CDN, so deriving there yields a 404 and
-// a grey placeholder. A caller holding cards.image_url passes it in.
-const src = opts.src || ((cl.set_id && number != null && number !== "")
+// opts.src wins when the caller knows the real artwork URL. Next is
+// cl.art, the resolved URL unpackCardlinks already built from the stored
+// cards.image_url against whichever host it is on. Only when neither is
+// present does the cell fall back to the images.pokemontcg.io convention,
+// which is a guess, not a fact: the newest sets are catalogued on a second
+// CDN, so guessing there yields a 404 and a grey placeholder.
+const src = opts.src || cl.art || ((cl.set_id && number != null && number !== "")
 ? ("https://images.pokemontcg.io/" + cl.set_id + "/" + number + ".png") : null);
 if(src){
 thumbHtml = '<img class="cc-thumb" loading="lazy" decoding="async" src="' + esc(src)
@@ -1252,7 +1254,7 @@ return '<div class="cardcell' + (compact ? ' cc-compact' : '') + '">'
 + '</div></div>';
 }
 
-const PAGE = {"worked":{"id":"sv3-223","market":108.41,"drivers":["log_price -0.14","premium_asof +0.11","mispricing +0.06"],"pred":0.01468,"lo":-0.165711,"hi":0.24094,"flag":"none","eur30":110.33,"eurTrend":107.76,"divZ":-0.235446,"qlo":-0.180391,"qhi":0.22626,"poolWidth":0.38,"verdict":"strong","bestModel":"rf","caveat":"ablation removes only 22% of the all-fold IC, but set age alone scores 0.309 of 0.333 \u2014 read it as a lifecycle map first"},"obyid":{"sv3-223":{"name":"Charizard ex","set":"Obsidian Flames","set_id":"sv3","number":"223","rarity":"Special Illustration Rare","market":108.41}},"cardlinks":{"sv3-223":{"set_id":"sv3","number":"223","tcg_pid":509980,"cm_pid":725303}},"cmSym":"$","cmCurrency":"USD","eurusd":1.159};
+const PAGE = {"worked":{"id":"sv3-223","market":108.41,"drivers":["log_price -0.14","premium_asof +0.11","mispricing +0.06"],"pred":0.01468,"lo":-0.165711,"hi":0.24094,"flag":"none","eur30":110.33,"eurTrend":107.76,"divZ":-0.235446,"qlo":-0.180391,"qhi":0.22626,"poolWidth":0.38,"verdict":"strong","bestModel":"rf","caveat":"ablation removes only 22% of the all-fold IC, but set age alone scores 0.309 of 0.333 \u2014 read it as a lifecycle map first"},"obyid":{"sv3-223":{"name":"Charizard ex","set":"Obsidian Flames","set_id":"sv3","number":"223","rarity":"Special Illustration Rare","market":108.41}},"cardlinks":{"sv3-223":{"set_id":"sv3","number":"223","tcg_pid":509980,"cm_pid":725303,"art":"https://images.pokemontcg.io/sv3/223_hires.png"}},"cmSym":"$","cmCurrency":"USD","eurusd":1.159};
 
 const W = PAGE.worked;
 const OBYID = new Map(Object.entries(PAGE.obyid || {}));
