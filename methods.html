@@ -257,15 +257,8 @@ letter-spacing:0.04em;color:var(--ink-subtle);
 .nav-menu-group{display:flex;flex-direction:column;}
 .nav-menu-group a{padding:8px 6px;}
 .density-toggle{flex:none;white-space:nowrap;font-size:0.78rem;padding:6px 10px;}
-.copy-toggle{flex:none;white-space:nowrap;font-size:0.78rem;padding:6px 10px;}
-html:not(.plain) [data-copy="plain"]{display:none;}
-html.plain [data-copy="full"]{display:none;}
+.theme-cycle{flex:none;white-space:nowrap;font-size:0.78rem;padding:6px 10px;}
 @media (prefers-reduced-motion:no-preference){
-html.copy-anim.plain [data-copy="plain"],
-html.copy-anim:not(.plain) [data-copy="full"]{
-animation:pk-copyswap var(--t-mid) var(--ease);
-}
-@keyframes pk-copyswap{from{opacity:0;transform:translateY(-3px);}to{opacity:1;transform:none;}}
 .depth-in > *{animation:pk-rowin var(--t-mid) var(--ease) both;}
 .depth-in > *:nth-child(n+6){animation-delay:calc((var(--rowi,0)) * 1ms);}
 .depth-in > *:nth-child(6){--rowi:0;}
@@ -275,9 +268,6 @@ animation:pk-copyswap var(--t-mid) var(--ease);
 .depth-in > *:nth-child(10){--rowi:180;}
 @keyframes pk-rowin{from{opacity:0;transform:translateY(-4px);}to{opacity:1;transform:none;}}
 }
-.theme-group{flex:none;}
-.theme-group button{font-size:0.74rem;padding:5px 8px;white-space:nowrap;}
-.theme-opt[aria-pressed="true"]{background:var(--accent);color:var(--on-accent);}
 @media (max-width:720px){
 .nav-inner{flex-wrap:wrap;height:auto;row-gap:2px;padding-top:6px;padding-bottom:8px;}
 .brand{margin-right:auto;}
@@ -286,8 +276,7 @@ animation:pk-copyswap var(--t-mid) var(--ease);
 }
 @media (max-width:560px){
 .nav-inner{gap:6px;padding-left:12px;padding-right:12px;}
-.theme-group button{font-size:0.7rem;padding:4px 7px;}
-.density-toggle,.copy-toggle{font-size:0.72rem;padding:5px 8px;}
+.density-toggle,.theme-cycle{font-size:0.72rem;padding:5px 8px;}
 }
 header.masthead{border-bottom:1px solid var(--border);padding-bottom:14px;margin-bottom:18px;text-align:center;scroll-margin-top:calc(var(--nav-h) + 14px);}
 header.masthead h1{font-size:1.4rem;font-weight:650;margin:0 0 5px;letter-spacing:-0.01em;}
@@ -745,12 +734,7 @@ html.compact .cardcell .cc-meta{white-space:nowrap;overflow:hidden;text-overflow
       </div>
     </details>
     <button class="density-toggle" id="density-toggle" aria-pressed="false" title="Toggle information density">Compact</button>
-    <button class="copy-toggle" id="copy-toggle" title="Switch between plain-language and full technical wording">Plain</button>
-    <div class="preset-group theme-group" role="group" aria-label="Colour theme">
-      <button type="button" class="theme-opt" data-theme-opt="light" aria-pressed="false">Light</button>
-      <button type="button" class="theme-opt" data-theme-opt="dark" aria-pressed="false">Dark</button>
-      <button type="button" class="theme-opt" data-theme-opt="pastel" aria-pressed="false">Rose</button>
-    </div>
+    <button type="button" id="theme-cycle" class="theme-cycle" aria-label="Theme: Dark, click to change">Dark</button>
   </div>
 </nav>
 
@@ -758,8 +742,10 @@ html.compact .cardcell .cc-meta{white-space:nowrap;overflow:hidden;text-overflow
 
   <header class="masthead" data-reveal>
     <h1>Methods, sources, and caveats</h1>
-    <p class="lede prose" data-copy="full">Where every number comes from, how the pages are built, which sources are in and out of scope, and the caveats to read before trusting any figure on this site.</p>
-    <p class="lede prose" data-copy="plain">Where every number on this site comes from, how the pages are built, which sources are used and which are deliberately left out, and the warnings worth reading before you trust any figure here. The short version: this is one rising stretch of the market, measured after the fact, and none of it is advice.</p>
+    <p class="lede prose">Where every number on this site comes from, how the pages are built, which sources are used and which are deliberately left out, and the warnings worth reading before you trust any figure here. The short version: this is one rising stretch of the market, measured after the fact, and none of it is advice.</p>
+    <details class="explain"><summary><span class="custom">Technical wording</span></summary>
+      <div class="explain-body"><p>Where every number comes from, how the pages are built, which sources are in and out of scope, and the caveats to read before trusting any figure on this site.</p></div>
+    </details>
   </header>
 
 
@@ -854,7 +840,7 @@ html.compact .cardcell .cc-meta{white-space:nowrap;overflow:hidden;text-overflow
     </ul>
   </nav>
 
-  <p class="freshness-stamp">Prices as of 2026-09-03 (TCGplayer daily 2026-09-03, Cardmarket 2026-09-03, monthly panel 2026-09-01). Built 2026-09-03 16:58 UTC.</p>
+  <p class="freshness-stamp">Prices as of 2026-09-03 (TCGplayer daily 2026-09-03, Cardmarket 2026-09-03, monthly panel 2026-09-01). Built 2026-09-03 19:59 UTC.</p>
 
 </div>
 
@@ -979,47 +965,15 @@ applyDensity(next);
 try { localStorage.setItem(DENSITY_KEY, next); } catch(e){}
 });
 }
-// ---------- plain / full wording ----------
-// The stats prose is written for someone who already knows what an IC is. The
-// plain variant says the same thing without the vocabulary. Neither is a
-// summary of the other: both state the caveat, because dropping the caveat is
-// what makes plain language dishonest.
-const COPY_KEY = "pk-copy";
-function applyCopy(mode){
-const plain = mode === "plain";
-document.documentElement.classList.toggle("plain", plain);
-const btn = document.getElementById("copy-toggle");
-if(!btn) return;
-btn.textContent = plain ? "Full" : "Plain";
-btn.setAttribute("aria-pressed", plain ? "true" : "false");
-btn.setAttribute("aria-label", plain
-? "Plain wording is on. Switch to full technical wording."
-: "Full technical wording is on. Switch to plain wording.");
-}
-function initCopy(){
-// Plain is the default for a first-time visitor (no stored choice yet): the
-// jargon-heavy full wording used to win by default, so a reader had to
-// discover the toggle just to get the jargon-free copy. Anyone who has
-// already chosen either wording keeps that stored choice untouched.
-let mode = "plain";
-try { mode = localStorage.getItem(COPY_KEY) || "plain"; } catch(e){}
-applyCopy(mode);
-const btn = document.getElementById("copy-toggle");
-if(btn) btn.addEventListener("click", ()=>{
-// Armed on first use only, so the load paint is never animated.
-document.documentElement.classList.add("copy-anim");
-const next = document.documentElement.classList.contains("plain") ? "full" : "plain";
-applyCopy(next);
-try { localStorage.setItem(COPY_KEY, next); } catch(e){}
-});
-window.addEventListener("storage", e=>{ if(e.key===COPY_KEY && e.newValue) applyCopy(e.newValue); });
-}
 // ---------- theme toggle ----------
 const THEME_KEY = "pk-theme";
-// Three themes now, so the control is a cycle rather than a binary switch.
-// "pastel" is opt-in only: prefers-color-scheme has no value that means pastel,
-// so it is never reached by OS preference, only by an explicit stored choice.
+// One control cycling through all three themes (light -> dark -> pastel ->
+// light), rather than three segments each showing a static option. "pastel"
+// is opt-in only: prefers-color-scheme has no value that means pastel, so it
+// is never reached by OS preference, only by an explicit stored choice or by
+// cycling into it.
 const THEMES = ["light","dark","pastel"];
+const THEME_LABELS = {light:"Light", dark:"Dark", pastel:"Rose"};
 function currentTheme(){
 const a = document.documentElement.getAttribute("data-theme");
 if(a && THEMES.indexOf(a) >= 0) return a;
@@ -1027,20 +981,22 @@ return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "lig
 }
 function applyTheme(mode){
 document.documentElement.setAttribute("data-theme", mode);
-// Each segment is genuinely two-state, so aria-pressed is the right thing to
-// put on it; the group element carries the label.
-document.querySelectorAll("[data-theme-opt]").forEach(b=>{
-b.setAttribute("aria-pressed", b.getAttribute("data-theme-opt")===mode ? "true":"false");
-});
+const btn = document.getElementById("theme-cycle");
+if(!btn) return;
+// The button's visible text and accessible name are the CURRENT theme, not
+// the click's target -- a reader should be able to tell what is active
+// without having clicked yet.
+const label = THEME_LABELS[mode] || mode;
+btn.textContent = label;
+btn.setAttribute("aria-label", "Theme: " + label + ", click to change");
 }
 function initTheme(){
 applyTheme(currentTheme());
-document.querySelectorAll("[data-theme-opt]").forEach(b=>{
-b.addEventListener("click", ()=>{
-const next = b.getAttribute("data-theme-opt");
+const btn = document.getElementById("theme-cycle");
+if(btn) btn.addEventListener("click", ()=>{
+const next = THEMES[(THEMES.indexOf(currentTheme()) + 1) % THEMES.length];
 applyTheme(next);
 try{ localStorage.setItem(THEME_KEY, next); }catch(e){}
-});
 });
 // live cross-tab / cross-page sync
 window.addEventListener("storage", e=>{ if(e.key===THEME_KEY && e.newValue) applyTheme(e.newValue); });
@@ -1194,7 +1150,6 @@ document.addEventListener("mousemove", e=>{ if(tip && tip.classList.contains("sh
 // sitegen/glossary.py for why that is left alone.
 document.addEventListener("keydown", e=>{ if(e.key==="Escape") hideTip(); });
 initTheme();
-initCopy();
 initDensity();
 initReveal();
 initMarkTips();

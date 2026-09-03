@@ -257,15 +257,8 @@ letter-spacing:0.04em;color:var(--ink-subtle);
 .nav-menu-group{display:flex;flex-direction:column;}
 .nav-menu-group a{padding:8px 6px;}
 .density-toggle{flex:none;white-space:nowrap;font-size:0.78rem;padding:6px 10px;}
-.copy-toggle{flex:none;white-space:nowrap;font-size:0.78rem;padding:6px 10px;}
-html:not(.plain) [data-copy="plain"]{display:none;}
-html.plain [data-copy="full"]{display:none;}
+.theme-cycle{flex:none;white-space:nowrap;font-size:0.78rem;padding:6px 10px;}
 @media (prefers-reduced-motion:no-preference){
-html.copy-anim.plain [data-copy="plain"],
-html.copy-anim:not(.plain) [data-copy="full"]{
-animation:pk-copyswap var(--t-mid) var(--ease);
-}
-@keyframes pk-copyswap{from{opacity:0;transform:translateY(-3px);}to{opacity:1;transform:none;}}
 .depth-in > *{animation:pk-rowin var(--t-mid) var(--ease) both;}
 .depth-in > *:nth-child(n+6){animation-delay:calc((var(--rowi,0)) * 1ms);}
 .depth-in > *:nth-child(6){--rowi:0;}
@@ -275,9 +268,6 @@ animation:pk-copyswap var(--t-mid) var(--ease);
 .depth-in > *:nth-child(10){--rowi:180;}
 @keyframes pk-rowin{from{opacity:0;transform:translateY(-4px);}to{opacity:1;transform:none;}}
 }
-.theme-group{flex:none;}
-.theme-group button{font-size:0.74rem;padding:5px 8px;white-space:nowrap;}
-.theme-opt[aria-pressed="true"]{background:var(--accent);color:var(--on-accent);}
 @media (max-width:720px){
 .nav-inner{flex-wrap:wrap;height:auto;row-gap:2px;padding-top:6px;padding-bottom:8px;}
 .brand{margin-right:auto;}
@@ -286,8 +276,7 @@ animation:pk-copyswap var(--t-mid) var(--ease);
 }
 @media (max-width:560px){
 .nav-inner{gap:6px;padding-left:12px;padding-right:12px;}
-.theme-group button{font-size:0.7rem;padding:4px 7px;}
-.density-toggle,.copy-toggle{font-size:0.72rem;padding:5px 8px;}
+.density-toggle,.theme-cycle{font-size:0.72rem;padding:5px 8px;}
 }
 header.masthead{border-bottom:1px solid var(--border);padding-bottom:14px;margin-bottom:18px;text-align:center;scroll-margin-top:calc(var(--nav-h) + 14px);}
 header.masthead h1{font-size:1.4rem;font-weight:650;margin:0 0 5px;letter-spacing:-0.01em;}
@@ -799,12 +788,7 @@ svg.mchart .k0{stroke:var(--ink);stroke-width:1.3}svg.mchart .k1{opacity:0.7;str
       </div>
     </details>
     <button class="density-toggle" id="density-toggle" aria-pressed="false" title="Toggle information density">Compact</button>
-    <button class="copy-toggle" id="copy-toggle" title="Switch between plain-language and full technical wording">Plain</button>
-    <div class="preset-group theme-group" role="group" aria-label="Colour theme">
-      <button type="button" class="theme-opt" data-theme-opt="light" aria-pressed="false">Light</button>
-      <button type="button" class="theme-opt" data-theme-opt="dark" aria-pressed="false">Dark</button>
-      <button type="button" class="theme-opt" data-theme-opt="pastel" aria-pressed="false">Rose</button>
-    </div>
+    <button type="button" id="theme-cycle" class="theme-cycle" aria-label="Theme: Dark, click to change">Dark</button>
   </div>
 </nav>
 
@@ -812,8 +796,10 @@ svg.mchart .k0{stroke:var(--ink);stroke-width:1.3}svg.mchart .k1{opacity:0.7;str
 
   <header class="masthead" data-reveal>
     <h1>The findings, and what they imply</h1>
-    <p class="lede prose" data-copy="full">Seven results this project's own measurements support, each with the number that carries it, the chart that shows it, and the page where the full study lives. Nothing here is asserted twice: every figure is read from the same artifacts the rest of the site renders from, at build time.</p>
-    <p class="lede prose" data-copy="plain">The most important things this project actually found, in plain terms: what the sealed market does, what the model can and cannot tell you, and what turned out not to be worth building. Every number updates itself when the data does; nothing on this page is typed in by hand.</p>
+    <p class="lede prose">The most important things this project actually found, in plain terms: what the sealed market does, what the model can and cannot tell you, and what turned out not to be worth building. Every number updates itself when the data does; nothing on this page is typed in by hand.</p>
+    <details class="explain"><summary><span class="custom">Technical wording</span></summary>
+      <div class="explain-body"><p>Seven results this project's own measurements support, each with the number that carries it, the chart that shows it, and the page where the full study lives. Nothing here is asserted twice: every figure is read from the same artifacts the rest of the site renders from, at build time.</p></div>
+    </details>
   </header>
 
 <section id="finding-1" class="finding" data-reveal><div class="fnd-main"><h2>1. Sealed boxes have grown roughly 59.1% a year, if you hold them</h2><dl class="fnd-registers"><div class="fnd-tech"><dt>Technical</dt><dd>Chained geometric Elite Trainer Box index: 59.1%/yr, Newey-West 95% CI [22.2%, 107.2%] over n = 30 monthly returns; constant-basket construction 81.7%/yr; fee-adjusted breakeven at month 8 for the median-priced box.</dd></div><div class="fnd-bottom"><dt>Plain words</dt><dd><strong>Holding at least 8 months at the typical box price only covers the fees; the 59.1% to 81.7% a year growth is before costs, so keeping most of it takes longer than that.</strong></dd></div></dl></div><div class="fnd-stat"><p class="fnd-num">59.1<span class="fnd-unit">%/yr</span></p><p class="fnd-sub">95% CI [22.2%, 107.2%]</p></div><div class="fnd-detail"><p>Elite Trainer Box prices rose about <strong>59.1%</strong> a year over the archive's window. A different, equally fair way of counting the same boxes gives <strong>81.7%/yr</strong> instead, so the honest answer is a range, not one exact figure.</p><p>That pace still rewards patience over speed: a box needed roughly <strong>8 months</strong> of holding before the price gain cleared the one-time cost of buying and reselling it.</p><p class="fnd-fine">The fine print: the headline figure is chain-linked across the whole product line; the alternate figure only follows boxes present at both ends of the window. The hold figure rests on 1 non-overlapping 18-month window in the archive, a reading of this archive rather than a tested rule. Full study: <a href="etb.html">etb.html</a>, caveats in full at <a href="methods.html">methods.html</a>.</p></div><div class="fnd-chartwrap"><figure><svg class="mchart" viewBox="0 0 660 142" width="660" height="142" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Elite Trainer Box index, two ways to measure it" style="max-width:660px;width:100%;height:auto;display:block;margin:0 auto;"><line x1="210" y1="16" x2="210" y2="108" class="k1"/><text x="210" y="128" class="k3">0%</text><line x1="296.6" y1="16" x2="296.6" y2="108" class="k1"/><text x="296.6" y="128" class="k3">20%</text><line x1="383.2" y1="16" x2="383.2" y2="108" class="k1"/><text x="383.2" y="128" class="k3">40%</text><line x1="469.8" y1="16" x2="469.8" y2="108" class="k1"/><text x="469.8" y="128" class="k3">60%</text><line x1="556.5" y1="16" x2="556.5" y2="108" class="k1"/><text x="556.5" y="128" class="k3">80%</text><line x1="210" y1="16" x2="210" y2="108" class="k5"/><text x="387" y="138" class="k6">Annualised return (%/yr)</text><rect x="210" y="29" width="255.9" height="20" fill="var(--accent)" opacity="0.92" rx="2" class="mark" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Whole product line (headline)&lt;/span&gt;59.1%/yr" aria-label="Whole product line (headline): 59.1%/yr"/><text x="200" y="42.5" class="k9">Whole product line (headline)</text><text x="572" y="42.5" class="k7">59.1%/yr</text><rect x="210" y="75" width="354" height="20" fill="var(--neutral)" opacity="0.55" rx="2" class="mark" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Boxes present the whole time&lt;/span&gt;81.7%/yr" aria-label="Boxes present the whole time: 81.7%/yr"/><text x="200" y="88.5" class="k10">Boxes present the whole time</text><text x="572" y="88.5" class="k7">81.7%/yr</text></svg><figcaption>Two fair ways to measure the same index. Data: <a href="etb_summary.md"><code>etb_summary.md</code></a>, <a href="etb_products.csv"><code>etb_products.csv</code></a>.</figcaption></figure></div></section><section id="finding-2" class="finding" data-reveal><div class="fnd-main"><h2>2. Older boxes sell for more today, but ageing alone does not explain it</h2><dl class="fnd-registers"><div class="fnd-tech"><dt>Technical</dt><dd>Spearman rho = 0.72 (p &lt; 0.001, n = 67) between age and price across mass-retail boxes in one month's cross-section; cohort R-squared = 1.000, so age and release vintage are collinear; within-product ageing slope +2.1pp/yr (t = 1.31, not distinguishable from zero).</dd></div><div class="fnd-bottom"><dt>Plain words</dt><dd><strong>The oldest boxes sell for far more than the newest, with 2 out-of-order steps in between, and every age band is also a different vintage, so this is not proof that a box gains value just by ageing.</strong></dd></div></dl></div><div class="fnd-stat"><p class="fnd-num">0.72<span class="fnd-unit">rank correlation (age vs price)</span></p><p class="fnd-sub">p &lt; 0.001, n = 67</p></div><div class="fnd-detail"><p>Mass-retail box prices run from <strong>$73</strong> at &lt;1yr to <strong>$831</strong> at 8yr+; the ends are far apart, the middle is noisy.</p><p>Age and a box's release year move together within any single month's snapshot, so part of this ladder reflects which sets happened to launch when, not ageing on its own.</p><p class="fnd-fine">The fine print: the step up in the oldest band is separated from sampling noise at the bootstrap interval, so the ordering of adjacent bands is not established by this sample. See <a href="methods.html">methods.html</a>.</p></div><div class="fnd-chartwrap"><figure><svg class="mchart" viewBox="0 0 680 360" width="680" height="360" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Median price (USD) by age band" style="max-width:680px;width:100%;height:auto;display:block;margin:0 auto;"><line x1="66" y1="302" x2="660" y2="302" class="k1"/><text x="58" y="305.5" class="k8">$0</text><line x1="66" y1="195.1" x2="660" y2="195.1" class="k1"/><text x="58" y="198.6" class="k8">$500</text><line x1="66" y1="88.3" x2="660" y2="88.3" class="k1"/><text x="58" y="91.8" class="k8">$1,000</text><line x1="66" y1="20" x2="66" y2="302" class="k5"/><line x1="66" y1="302" x2="660" y2="302" class="k5"/><rect x="90.8" y="286.5" width="49.5" height="15.5" fill="var(--accent)" opacity="0.75" rx="2" class="mark" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;&amp;lt;1yr&lt;/span&gt;Median $73, made ME; n = 5" aria-label="&lt;1yr: median $73"/><line x1="115.5" y1="286.9" x2="115.5" y2="265.9" class="k0"/><line x1="110.5" y1="286.9" x2="120.5" y2="286.9" class="k0"/><line x1="110.5" y1="265.9" x2="120.5" y2="265.9" class="k0"/><text x="115.5" y="319" class="k4">&lt;1yr</text><text x="115.5" y="333" class="k2">ME</text><text x="115.5" y="346" class="k2">n=5</text><rect x="189.8" y="272.1" width="49.5" height="29.9" fill="var(--accent)" opacity="0.75" rx="2" class="mark" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;1-2yr&lt;/span&gt;Median $140, made ME/SV/other; n = 9" aria-label="1-2yr: median $140"/><line x1="214.5" y1="276.8" x2="214.5" y2="266.3" class="k0"/><line x1="209.5" y1="276.8" x2="219.5" y2="276.8" class="k0"/><line x1="209.5" y1="266.3" x2="219.5" y2="266.3" class="k0"/><text x="214.5" y="319" class="k4">1-2yr</text><text x="214.5" y="333" class="k2">ME/SV/other</text><text x="214.5" y="346" class="k2">n=9</text><rect x="288.8" y="272.8" width="49.5" height="29.2" fill="var(--accent)" opacity="0.75" rx="2" class="mark" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;2-3yr&lt;/span&gt;Median $137, made SV; n = 8" aria-label="2-3yr: median $137"/><line x1="313.5" y1="277.7" x2="313.5" y2="269" class="k0"/><line x1="308.5" y1="277.7" x2="318.5" y2="277.7" class="k0"/><line x1="308.5" y1="269" x2="318.5" y2="269" class="k0"/><text x="313.5" y="319" class="k4">2-3yr</text><text x="313.5" y="333" class="k2">SV</text><text x="313.5" y="346" class="k2">n=8</text><rect x="387.8" y="257.7" width="49.5" height="44.3" fill="var(--accent)" opacity="0.75" rx="2" class="mark" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;3-5yr&lt;/span&gt;Median $207, made SV/SWSH/other; n = 12" aria-label="3-5yr: median $207"/><line x1="412.5" y1="269.5" x2="412.5" y2="232.1" class="k0"/><line x1="407.5" y1="269.5" x2="417.5" y2="269.5" class="k0"/><line x1="407.5" y1="232.1" x2="417.5" y2="232.1" class="k0"/><text x="412.5" y="319" class="k4">3-5yr</text><text x="412.5" y="333" class="k2">SV/SWSH/other</text><text x="412.5" y="346" class="k2">n=12</text><rect x="486.8" y="260.9" width="49.5" height="41.1" fill="var(--accent)" opacity="0.75" rx="2" class="mark" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;5-8yr&lt;/span&gt;Median $192, made SM/SWSH; n = 18" aria-label="5-8yr: median $192"/><line x1="511.5" y1="271.4" x2="511.5" y2="181.1" class="k0"/><line x1="506.5" y1="271.4" x2="516.5" y2="271.4" class="k0"/><line x1="506.5" y1="181.1" x2="516.5" y2="181.1" class="k0"/><text x="511.5" y="319" class="k4">5-8yr</text><text x="511.5" y="333" class="k2">SM/SWSH</text><text x="511.5" y="346" class="k2">n=18</text><rect x="585.8" y="124.4" width="49.5" height="177.6" fill="var(--accent)" opacity="0.75" rx="2" class="mark" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;8yr+&lt;/span&gt;Median $831, made SM/XY/other; n = 15" aria-label="8yr+: median $831"/><line x1="610.5" y1="166.1" x2="610.5" y2="33.4" class="k0"/><line x1="605.5" y1="166.1" x2="615.5" y2="166.1" class="k0"/><line x1="605.5" y1="33.4" x2="615.5" y2="33.4" class="k0"/><text x="610.5" y="319" class="k4">8yr+</text><text x="610.5" y="333" class="k2">SM/XY/other</text><text x="610.5" y="346" class="k2">n=15</text><text x="363" y="356" class="k6">Age band (calendar age at the archive's last month)</text><text x="14" y="161" transform="rotate(-90 14 161)" class="k6">Median price (USD)</text></svg><figcaption>Median price by age band, mass-retail Elite Trainer Boxes. Whiskers are the bootstrap 95% interval on the median. Data: <a href="etb_agevalue_bands.csv"><code>etb_agevalue_bands.csv</code></a>.</figcaption></figure></div></section><section id="finding-3" class="finding" data-reveal><div class="fnd-main"><h2>3. When the model is unsure, it says so</h2><dl class="fnd-registers"><div class="fnd-tech"><dt>Technical</dt><dd>Walk-forward conformal coverage 82.1% against 80.0% nominal, each fold calibrated on strictly prior folds only; shipped per-rarity band width 0.425 versus 0.449 for one unconditional band (5.4% narrower); per-tier own-band coverage 79.3% to 85.3%.</dd></div><div class="fnd-bottom"><dt>Plain words</dt><dd><strong>The bands are tested on data the model never saw, and they stay 82.1% honest while being 5.4% tighter than a one-size-fits-all range.</strong></dd></div></dl></div><div class="fnd-stat"><p class="fnd-num">82.1<span class="fnd-unit">% honest coverage</span></p><p class="fnd-sub">target 80.0% nominal</p></div><div class="fnd-detail"><p>Each held-out month is checked against <span class="gloss" tabindex="0" data-tip="A price range whose width comes from how far past estimates actually missed, not from an assumed bell curve. An 80% range is one that held 80% of the time on months the fit had never seen." aria-label="conformal: A price range whose width comes from how far past estimates actually missed, not from an assumed bell curve. An 80% range is one that held 80% of the time on months the fit had never seen.">conformal</span> ranges built only from months before it, never after, so the check cannot see the future it is scoring.</p><p>That honesty is not free: the shipped bands are <strong>5.4% narrower</strong> than a one-size-fits-all baseline built to the same target, so the model earns real precision, not the appearance of it.</p><p class="fnd-fine">The fine print: per-tier coverage ranges 79.3% to 85.3% rather than one constant width applied everywhere; see <a href="methods.html">methods.html</a> for the full walk-forward setup.</p></div><div class="fnd-chartwrap"><figure><svg class="mchart" viewBox="0 0 660 142" width="660" height="142" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Interval width: model versus a no-model baseline" style="max-width:660px;width:100%;height:auto;display:block;margin:0 auto;"><line x1="210" y1="16" x2="210" y2="108" class="k1"/><text x="210" y="128" class="k3">0.00</text><line x1="288.8" y1="16" x2="288.8" y2="108" class="k1"/><text x="288.8" y="128" class="k3">0.10</text><line x1="367.7" y1="16" x2="367.7" y2="108" class="k1"/><text x="367.7" y="128" class="k3">0.20</text><line x1="446.5" y1="16" x2="446.5" y2="108" class="k1"/><text x="446.5" y="128" class="k3">0.30</text><line x1="525.4" y1="16" x2="525.4" y2="108" class="k1"/><text x="525.4" y="128" class="k3">0.40</text><line x1="210" y1="16" x2="210" y2="108" class="k5"/><text x="387" y="138" class="k6">Width of the 80% range (as a fraction of price)</text><rect x="210" y="29" width="335.1" height="20" fill="var(--accent)" opacity="0.92" rx="2" class="mark" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;Model, per-rarity bands (shipped)&lt;/span&gt;0.425" aria-label="Model, per-rarity bands (shipped): 0.425"/><text x="200" y="42.5" class="k9">Model, per-rarity bands (shipped)</text><text x="572" y="42.5" class="k7">0.425 wide</text><rect x="210" y="75" width="354" height="20" fill="var(--neutral)" opacity="0.55" rx="2" class="mark" tabindex="0" data-tip="&lt;span class=&quot;tt-name&quot;&gt;No-model baseline, one global band&lt;/span&gt;0.449" aria-label="No-model baseline, one global band: 0.449"/><text x="200" y="88.5" class="k10">No-model baseline, one global band</text><text x="572" y="88.5" class="k7">0.449 wide</text></svg><figcaption>Both bands aim at the same 80% target: the shipped bands cover 82.1%, the baseline 82.4%. The narrower width is what the model earns by conditioning on rarity. Data: <a href="forward_validation.md"><code>forward_validation.md</code></a>.</figcaption></figure></div></section><section id="finding-4" class="finding" data-reveal><div class="fnd-main"><h2>4. Two ideas we tested and rejected, one we cannot test yet</h2><dl class="fnd-registers"><div class="fnd-tech"><dt>Technical</dt><dd>Book-liquidity proxy: Spearman -0.663 against log market price, &Delta;IC +0.0002 when added to the forecast; cross-market lead-lag: 6 Cardmarket snapshot dates over 42 days, too few to estimate a lag; pack expected value: an existing simulator already covers 155 products.</dd></div><div class="fnd-bottom"><dt>Plain words</dt><dd><strong>A liquidity shortcut and pack odds failed our own tests, and Europe-versus-US timing cannot be tested yet, so this site sells none of them.</strong></dd></div></dl></div><div class="fnd-stat"><p class="fnd-num">3<span class="fnd-unit">ideas examined before any code was written</span></p><p class="fnd-sub">two rejected, one untestable so far</p></div><div class="fnd-detail"><p>A candidate liquidity shortcut tracked price level, not ease of resale: it correlates -0.663 with plain price, and adding it to the forecast barely moved the model (+0.0002).</p><p>A Europe-versus-US timing signal needs many overlapping price snapshots to test; the Cardmarket feed carries 6 distinct snapshot dates so far (42 days of history), not enough yet, blocked by the data on hand rather than by the idea.</p><p>A pack-opening value calculator already exists elsewhere, covering roughly 155 Pokemon products with published math, so a second, worse copy would not be a differentiator.</p><p class="fnd-fine">Full write-up: <code>docs/research/DIFFERENTIATION_AUDIT.md</code>.</p></div></section><section id="finding-5" class="finding" data-reveal><div class="fnd-main"><h2>5. How many cards? Four honest answers</h2><dl class="fnd-registers"><div class="fnd-tech"><dt>Technical</dt><dd>Nested counts: 20,444 catalogue rows, 18,068 with at least one TCGplayer price row, 478 in the modeled outlook universe, 465 with enough held-out folds to enter the pooled information coefficient.</dd></div><div class="fnd-bottom"><dt>Plain words</dt><dd><strong>20,444 in the catalogue, 18,068 ever priced, 478 modeled, 465 scored; quoting just one of these blends the rest.</strong></dd></div></dl></div><div class="fnd-stat"><p class="fnd-num">20,444<span class="fnd-unit">cards in the catalogue</span></p><p class="fnd-sub">18,068 of them ever carried a price</p></div><div class="fnd-detail"><p>Not every catalogued card has a price, and not every priced card gets modeled: <strong>478</strong> cards appear on the outlook, valuation and models pages.</p><p>Only <strong>465</strong> of those had enough held-out history to count toward the headline forecasting score, so a bare card count can mean any of four different things.</p></div></section><section id="finding-6" class="finding" data-reveal><div class="fnd-main"><h2>6. Which set a card is from predicts its price, beyond a shared formula</h2><dl class="fnd-registers"><div class="fnd-tech"><dt>Technical</dt><dd>Leave-one-out expected log predictive density, per-set partially pooled intercepts versus one pooled intercept: &Delta;elpd_loo = +62.6, SE of the difference 14.0, 4.5 SE above zero; a predictive-fit gain, not a causal estimate.</dd></div><div class="fnd-bottom"><dt>Plain words</dt><dd><strong>Letting each set have its own baseline predicts held-out prices better than one shared formula, by a margin 4.5 standard errors clear of chance.</strong></dd></div></dl></div><div class="fnd-stat"><p class="fnd-num">4.5<span class="fnd-unit">standard errors clear of chance</span></p><p class="fnd-sub">set-level baselines versus one shared formula</p></div><div class="fnd-detail"><p>A <span class="gloss" tabindex="0" data-tip="Pricing a card from its parts. The fit learns what buyers pay for each feature (set, rarity, artwork, age) and adds them up, the way a house is priced from its size, rooms and location." aria-label="hedonic: Pricing a card from its parts. The fit learns what buyers pay for each feature (set, rarity, artwork, age) and adds them up, the way a house is priced from its size, rooms and location.">hedonic</span> price model that lets every set carry its own baseline predicts held-out prices better than one shared formula for the whole catalogue, by a margin too large to be chance.</p><p>Sets genuinely differ in typical price level by more than a common formula captures, so letting the model say so measurably improves the fit.</p><p class="fnd-fine">The fine print: measured by cross-validated elpd_loo (diff +62.6, se 14.0); see <a href="methods.html">methods.html</a>.</p></div></section><section id="finding-7" class="finding" data-reveal><div class="fnd-main"><h2>7. Our price feeds show their dates, live</h2><dl class="fnd-registers"><div class="fnd-tech"><dt>Technical</dt><dd>Feed recency is read live as the newest date in each table: TCGplayer daily 2026-09-03, Cardmarket daily 2026-09-03, a 0-day gap; the model's monthly panel ends 2026-09-01.</dd></div><div class="fnd-bottom"><dt>Plain words</dt><dd><strong>TCGplayer 2026-09-03, Cardmarket 2026-09-03; when a feed stalls, its date freezes here instead of hiding.</strong></dd></div></dl></div><div class="fnd-stat"><p class="fnd-num">0<span class="fnd-unit">day gap between feeds</span></p><p class="fnd-sub">TCGplayer 2026-09-03 vs Cardmarket 2026-09-03</p></div><div class="fnd-detail"><p>Both daily feeds carry the same latest date as of this build, but that is not guaranteed: the Cardmarket feed has a history of outages, and when it stalls its date freezes while TCGplayer's keeps moving. Both dates are read live from the tables they land in, so a stalled feed shows up here as a widening gap, not a silent freeze.</p><p>The model itself trains on a monthly panel; its most recent month is <strong>2026-09-01</strong>, a label for the month, not a delay measurement.</p></div></section>
@@ -856,7 +842,7 @@ svg.mchart .k0{stroke:var(--ink);stroke-width:1.3}svg.mchart .k1{opacity:0.7;str
     </ul>
   </nav>
 
-  <p class="freshness-stamp">Prices as of 2026-09-03 (TCGplayer daily 2026-09-03, Cardmarket 2026-09-03, monthly panel 2026-09-01). Built 2026-09-03 16:58 UTC.</p>
+  <p class="freshness-stamp">Prices as of 2026-09-03 (TCGplayer daily 2026-09-03, Cardmarket 2026-09-03, monthly panel 2026-09-01). Built 2026-09-03 19:59 UTC.</p>
 
 </div>
 
@@ -981,47 +967,15 @@ applyDensity(next);
 try { localStorage.setItem(DENSITY_KEY, next); } catch(e){}
 });
 }
-// ---------- plain / full wording ----------
-// The stats prose is written for someone who already knows what an IC is. The
-// plain variant says the same thing without the vocabulary. Neither is a
-// summary of the other: both state the caveat, because dropping the caveat is
-// what makes plain language dishonest.
-const COPY_KEY = "pk-copy";
-function applyCopy(mode){
-const plain = mode === "plain";
-document.documentElement.classList.toggle("plain", plain);
-const btn = document.getElementById("copy-toggle");
-if(!btn) return;
-btn.textContent = plain ? "Full" : "Plain";
-btn.setAttribute("aria-pressed", plain ? "true" : "false");
-btn.setAttribute("aria-label", plain
-? "Plain wording is on. Switch to full technical wording."
-: "Full technical wording is on. Switch to plain wording.");
-}
-function initCopy(){
-// Plain is the default for a first-time visitor (no stored choice yet): the
-// jargon-heavy full wording used to win by default, so a reader had to
-// discover the toggle just to get the jargon-free copy. Anyone who has
-// already chosen either wording keeps that stored choice untouched.
-let mode = "plain";
-try { mode = localStorage.getItem(COPY_KEY) || "plain"; } catch(e){}
-applyCopy(mode);
-const btn = document.getElementById("copy-toggle");
-if(btn) btn.addEventListener("click", ()=>{
-// Armed on first use only, so the load paint is never animated.
-document.documentElement.classList.add("copy-anim");
-const next = document.documentElement.classList.contains("plain") ? "full" : "plain";
-applyCopy(next);
-try { localStorage.setItem(COPY_KEY, next); } catch(e){}
-});
-window.addEventListener("storage", e=>{ if(e.key===COPY_KEY && e.newValue) applyCopy(e.newValue); });
-}
 // ---------- theme toggle ----------
 const THEME_KEY = "pk-theme";
-// Three themes now, so the control is a cycle rather than a binary switch.
-// "pastel" is opt-in only: prefers-color-scheme has no value that means pastel,
-// so it is never reached by OS preference, only by an explicit stored choice.
+// One control cycling through all three themes (light -> dark -> pastel ->
+// light), rather than three segments each showing a static option. "pastel"
+// is opt-in only: prefers-color-scheme has no value that means pastel, so it
+// is never reached by OS preference, only by an explicit stored choice or by
+// cycling into it.
 const THEMES = ["light","dark","pastel"];
+const THEME_LABELS = {light:"Light", dark:"Dark", pastel:"Rose"};
 function currentTheme(){
 const a = document.documentElement.getAttribute("data-theme");
 if(a && THEMES.indexOf(a) >= 0) return a;
@@ -1029,20 +983,22 @@ return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "lig
 }
 function applyTheme(mode){
 document.documentElement.setAttribute("data-theme", mode);
-// Each segment is genuinely two-state, so aria-pressed is the right thing to
-// put on it; the group element carries the label.
-document.querySelectorAll("[data-theme-opt]").forEach(b=>{
-b.setAttribute("aria-pressed", b.getAttribute("data-theme-opt")===mode ? "true":"false");
-});
+const btn = document.getElementById("theme-cycle");
+if(!btn) return;
+// The button's visible text and accessible name are the CURRENT theme, not
+// the click's target -- a reader should be able to tell what is active
+// without having clicked yet.
+const label = THEME_LABELS[mode] || mode;
+btn.textContent = label;
+btn.setAttribute("aria-label", "Theme: " + label + ", click to change");
 }
 function initTheme(){
 applyTheme(currentTheme());
-document.querySelectorAll("[data-theme-opt]").forEach(b=>{
-b.addEventListener("click", ()=>{
-const next = b.getAttribute("data-theme-opt");
+const btn = document.getElementById("theme-cycle");
+if(btn) btn.addEventListener("click", ()=>{
+const next = THEMES[(THEMES.indexOf(currentTheme()) + 1) % THEMES.length];
 applyTheme(next);
 try{ localStorage.setItem(THEME_KEY, next); }catch(e){}
-});
 });
 // live cross-tab / cross-page sync
 window.addEventListener("storage", e=>{ if(e.key===THEME_KEY && e.newValue) applyTheme(e.newValue); });
@@ -1196,7 +1152,6 @@ document.addEventListener("mousemove", e=>{ if(tip && tip.classList.contains("sh
 // sitegen/glossary.py for why that is left alone.
 document.addEventListener("keydown", e=>{ if(e.key==="Escape") hideTip(); });
 initTheme();
-initCopy();
 initDensity();
 initReveal();
 initMarkTips();
