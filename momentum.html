@@ -795,7 +795,7 @@ html.compact .cardcell .cc-meta{white-space:nowrap;overflow:hidden;text-overflow
     </ul>
   </nav>
 
-  <p class="freshness-stamp">Prices as of 2026-09-03 (TCGplayer daily 2026-09-03, Cardmarket 2026-09-03, monthly panel 2026-09-01). Built 2026-09-03 03:05 UTC.</p>
+  <p class="freshness-stamp">Prices as of 2026-09-03 (TCGplayer daily 2026-09-03, Cardmarket 2026-09-03, monthly panel 2026-09-01). Built 2026-09-03 04:05 UTC.</p>
 
 </div>
 
@@ -816,9 +816,9 @@ function fmtPM(v, d){ d=d==null?3:d; return v==null ? " (error bar not stated)" 
 function fmtNEff(v){ return v==null ? "an effective-fold count the report leaves unstated" : "n_eff "+v.toFixed(2); }
 function esc(s){ return String(s).replace(/[&<>"]/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
 // Generated reports are written in ASCII, where a parenthetical dash is "--".
-// Sentences lifted verbatim from them get that rendered as an en dash so the
-// quote reads as prose without any of its wording being changed.
-function dashes(s){ return String(s).replace(/ -- /g, " \u2013 "); }
+// Sentences lifted verbatim from them get that collapsed to a plain hyphen so
+// the quote reads as prose without any of its wording being changed.
+function dashes(s){ return String(s).replace(/ -- /g, " - "); }
 // percent-point value (already scaled, e.g. 57.1) -> "+57.1", null -> "n/a"
 function pp(v){ return v==null?"n/a":(v>0?"+":"")+v.toFixed(1); }
 function ppTd(v){ if(v==null) return '<td class="num">n/a</td>';

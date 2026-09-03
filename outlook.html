@@ -840,7 +840,7 @@ html.compact .crsl-detail svg.band{width:224px;height:21px;}
 
   <header class="masthead" data-reveal>
     <h1>Full 90-day outlook, all modeled chase cards</h1>
-    <p class="lede prose" data-copy="full">Every modeled chase card ranked by its predicted market-relative price move over the next 90 days, each with an honest split-conformal 80 percent band. The headline accuracy is real on paper, and it is heavily entangled with the set-age lifecycle — see Models for exactly how much, measured two ways.</p>
+    <p class="lede prose" data-copy="full">Every modeled chase card ranked by its predicted market-relative price move over the next 90 days, each with an honest split-conformal 80 percent band. The headline accuracy is real on paper, and it is heavily entangled with the set-age lifecycle: see Models for exactly how much, measured two ways.</p>
     <p class="lede prose" data-copy="plain">Every card the model covers, ranked by how much its price should move over the next 90 days compared with the rest of the market. Each one comes with a range, not just a single number. The ranking does work, but weakly, and a lot of what looks like skill is really old sets behaving like old sets. The Models page measures how much, two different ways.</p>
   </header>
 
@@ -922,7 +922,7 @@ html.compact .crsl-detail svg.band{width:224px;height:21px;}
     </ul>
   </nav>
 
-  <p class="freshness-stamp">Prices as of 2026-09-03 (TCGplayer daily 2026-09-03, Cardmarket 2026-09-03, monthly panel 2026-09-01). Built 2026-09-03 03:05 UTC.</p>
+  <p class="freshness-stamp">Prices as of 2026-09-03 (TCGplayer daily 2026-09-03, Cardmarket 2026-09-03, monthly panel 2026-09-01). Built 2026-09-03 04:05 UTC.</p>
 
 </div>
 
@@ -943,9 +943,9 @@ function fmtPM(v, d){ d=d==null?3:d; return v==null ? " (error bar not stated)" 
 function fmtNEff(v){ return v==null ? "an effective-fold count the report leaves unstated" : "n_eff "+v.toFixed(2); }
 function esc(s){ return String(s).replace(/[&<>"]/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
 // Generated reports are written in ASCII, where a parenthetical dash is "--".
-// Sentences lifted verbatim from them get that rendered as an en dash so the
-// quote reads as prose without any of its wording being changed.
-function dashes(s){ return String(s).replace(/ -- /g, " \u2013 "); }
+// Sentences lifted verbatim from them get that collapsed to a plain hyphen so
+// the quote reads as prose without any of its wording being changed.
+function dashes(s){ return String(s).replace(/ -- /g, " - "); }
 // percent-point value (already scaled, e.g. 57.1) -> "+57.1", null -> "n/a"
 function pp(v){ return v==null?"n/a":(v>0?"+":"")+v.toFixed(1); }
 function ppTd(v){ if(v==null) return '<td class="num">n/a</td>';
@@ -1389,7 +1389,7 @@ const M = PAGE.meta;
 const OC = unpackColumns(PAGE.outlook);
 const SP = unpackKeyed(PAGE.sparklines, OC.id);
 // columnar payload (each field once) -> row objects; field order mirrors
-// OUTLOOK_FIELDS in build_dashboard_data.py — keep the two in sync.
+// OUTLOOK_FIELDS in build_dashboard_data.py: keep the two in sync.
 const OUTLOOK = OC.id.map((id, i) => ({
 id, name: OC.name[i], set: OC.set[i], rarity: OC.rarity[i], market: OC.market[i],
 pred: OC.pred[i], lo: OC.lo[i], hi: OC.hi[i], flag: OC.flag[i], flagP: OC.flagP[i],
@@ -1528,7 +1528,7 @@ const nPct = OUTLOOK.filter(o=>o.flagP!=="none").length;
 const bandPs = M.band
 ? '<p>Each predicted 3-month return carries a <strong>split-conformal 80 percent band</strong> '
 +'drawn from '+M.band.n+' evaluation-fold residuals, calibrated <strong>within the card’s own '
-+'rarity tier</strong> — so band width now varies by card instead of being one global number. '
++'rarity tier</strong>, so band width now varies by card instead of being one global number. '
 +'A tier with fewer than 200 residuals borrows the pooled band ['+M.band.lo.toFixed(3)+', '
 +M.band.hi.toFixed(3)+'], width '+M.band.width.toFixed(3)+'.</p>'
 + '<p>Realized coverage is <strong>'+M.band.coverage.toFixed(1)+' percent</strong> against the nominal '

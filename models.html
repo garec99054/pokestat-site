@@ -693,7 +693,7 @@ svg.mchart .k0{fill:var(--ink-subtle);font-size:11px;text-anchor:middle}svg.mcha
       <span class="gloss" tabindex="0" data-tip="What is left over: the price a card actually fetches minus the price its features say it should. Positive means it sells for more than the features explain, negative means less." aria-label="residuals: What is left over: the price a card actually fetches minus the price its features say it should. Positive means it sells for more than the features explain, negative means less.">residuals</span>.</p>
     <details class="explain">
       <summary><span class="custom"></span></summary>
-      <div class="explain-body" id="explain-models"><p>The <strong>information coefficient</strong> (IC) is the cross-sectional rank correlation between predicted and realized returns each fold; higher is better, and it is deflated for fold autocorrelation via an effective sample size.</p><p>rf was chosen on the selection folds (mean IC 0.283) and graded on disjoint held-out folds, scoring mean IC 0.371 at information ratio 11.07.</p><p>How much of that is the set-age lifecycle? Two different statistics answer that and they point opposite ways, so both are given. Ablating the static set-age and rarity features moves all-fold mean IC from 0.333 to 0.260, removing a substantial minority of the signal (22%), so the ranking does not collapse without them. It is still substantially a lifecycle ordering, though: ranking on set age alone with no model at all already scores 0.309, 93% of the full-feature IC, and the model&#x27;s out-of-fold ranking correlates 0.374 (Spearman) with set age. The ablated residual clears the noise floor on held-out folds, so a non-static edge survives — but a ranking this reproducible from one variable should be read as a lifecycle map first and a trading signal second.</p></div>
+      <div class="explain-body" id="explain-models"><p>The <strong>information coefficient</strong> (IC) is the cross-sectional rank correlation between predicted and realized returns each fold; higher is better, and it is deflated for fold autocorrelation via an effective sample size.</p><p>rf was chosen on the selection folds (mean IC 0.283) and graded on disjoint held-out folds, scoring mean IC 0.371 at information ratio 11.07.</p><p>How much of that is the set-age lifecycle? Two different statistics answer that and they point opposite ways, so both are given. Ablating the static set-age and rarity features moves all-fold mean IC from 0.333 to 0.260, removing a substantial minority of the signal (22%), so the ranking does not collapse without them. It is still substantially a lifecycle ordering, though: ranking on set age alone with no model at all already scores 0.309, 93% of the full-feature IC, and the model&#x27;s out-of-fold ranking correlates 0.374 (Spearman) with set age. The ablated residual clears the noise floor on held-out folds, so a non-static edge survives, but a ranking this reproducible from one variable should be read as a lifecycle map first and a trading signal second.</p></div>
     </details>
     <div class="table-wrap">
       <table id="leaderboard">
@@ -842,7 +842,7 @@ svg.mchart .k0{fill:var(--ink-subtle);font-size:11px;text-anchor:middle}svg.mcha
     </ul>
   </nav>
 
-  <p class="freshness-stamp">Prices as of 2026-09-03 (TCGplayer daily 2026-09-03, Cardmarket 2026-09-03, monthly panel 2026-09-01). Built 2026-09-03 03:05 UTC.</p>
+  <p class="freshness-stamp">Prices as of 2026-09-03 (TCGplayer daily 2026-09-03, Cardmarket 2026-09-03, monthly panel 2026-09-01). Built 2026-09-03 04:05 UTC.</p>
 
 </div>
 
@@ -863,9 +863,9 @@ function fmtPM(v, d){ d=d==null?3:d; return v==null ? " (error bar not stated)" 
 function fmtNEff(v){ return v==null ? "an effective-fold count the report leaves unstated" : "n_eff "+v.toFixed(2); }
 function esc(s){ return String(s).replace(/[&<>"]/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
 // Generated reports are written in ASCII, where a parenthetical dash is "--".
-// Sentences lifted verbatim from them get that rendered as an en dash so the
-// quote reads as prose without any of its wording being changed.
-function dashes(s){ return String(s).replace(/ -- /g, " \u2013 "); }
+// Sentences lifted verbatim from them get that collapsed to a plain hyphen so
+// the quote reads as prose without any of its wording being changed.
+function dashes(s){ return String(s).replace(/ -- /g, " - "); }
 // percent-point value (already scaled, e.g. 57.1) -> "+57.1", null -> "n/a"
 function pp(v){ return v==null?"n/a":(v>0?"+":"")+v.toFixed(1); }
 function ppTd(v){ if(v==null) return '<td class="num">n/a</td>';
@@ -1411,7 +1411,7 @@ document.getElementById("probe-sub").innerHTML =
 'The table above screens every slice with a one-standard-error noise gate. That is the right '
 + 'screen for a table but a weak adjudicator for the single worst cell, so the weakest slice '
 + 'gets a direct test. It is chosen as the era with the lowest held-out IC for '
-+ '<code>' + esc(V.bestModel) + '</code> \u2014 not the one that looks wrong \u2014 and it is '
++ '<code>' + esc(V.bestModel) + '</code> (not the one that looks wrong) and it is '
 + 'reported whatever the answer turns out to be. Every test below runs on the SAME held-out '
 + 'out-of-fold predictions as the headline: nothing is refit and nothing is re-selected.';
 const sign = P.ic < 0 ? "negative" : "positive";
@@ -1428,8 +1428,8 @@ if(!P.separated){
 html += (pQuoted != null
 ? 'The permutation test returns p = <strong>' + pQuoted + '</strong> and the '
 : 'The report states <strong>no permutation p-value</strong> for this slice, and the ')
-+ 'bootstrap interval spans zero, so this cell supports <strong>no directional claim</strong> '
-+ '\u2014 neither the ' + sign + ' one its point estimate suggests nor its opposite. ';
++ 'bootstrap interval spans zero, so this cell supports <strong>no directional claim</strong>: '
++ 'neither the ' + sign + ' one its point estimate suggests nor its opposite. ';
 } else {
 html += (pQuoted != null
 ? 'The permutation test separates it from zero at the 0.05 level (p = ' + pQuoted + ')'
@@ -1441,7 +1441,7 @@ html += (pQuoted != null
 if(P.nEff != null){
 html += 'Note how its one-SE bar arose: <code>effective_n</code> clips n_eff to [1, folds] and '
 + 'does not reward NEGATIVE autocorrelation, so this slice received n_eff <strong>'
-+ P.nEff.toFixed(3) + '</strong> \u2014 the maximum its ' + P.folds + ' folds allow, hence the '
++ P.nEff.toFixed(3) + '</strong>, the maximum its ' + P.folds + ' folds allow, hence the '
 + 'tightest error bar the deflation permits. The one-SE gate exists to stop a thin slice '
 + 'claiming a direction on roughly one draw; where the fold ICs alternate in sign the same '
 + 'clipping makes it correspondingly eager to award one. That is why this cell is adjudicated '
@@ -1484,7 +1484,7 @@ document.getElementById("probe-legend").innerHTML =
 + 'model\u2019s within-slice ordering barely changes month to month, so the honest question is '
 + '\u201chow often does an ARBITRARY FIXED ranking of these same cards score this well or this '
 + 'badly through these same overlapping folds?\u201d. Shuffling each fold independently would '
-+ 'answer a different, easier question \u2014 it destroys the fold overlap the n_eff deflation '
++ 'answer a different, easier question. It destroys the fold overlap the n_eff deflation '
 + 'exists to acknowledge, and returns a tighter null than the estimator deserves. The '
 + 'per-candidate table is the decisive control: it holds folds, cards and features fixed and '
 + 'varies only the learner. Full method in <code>forward_validation.md</code>.';
