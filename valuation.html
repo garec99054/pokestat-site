@@ -9,14 +9,14 @@
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="pokestat" />
 <meta property="og:title" content="Valuation: what each chase card is worth vs its price" />
-<meta property="og:description" content="Every card the model covers, priced against what its pull odds and its popularity say it should cost, with a range around that estimate and a cheap or expensive verdict that respects the range. Cheap" />
+<meta property="og:description" content="Every card the model covers, priced against what its pull odds and its popularity say it should cost, with a range around that estimate and a cheap or expensive verdict that respects the range..." />
 <meta property="og:url" content="https://garec99054.github.io/pokestat-site/valuation.html" />
 <meta property="og:image" content="https://garec99054.github.io/pokestat-site/share/valuation.png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Valuation: what each chase card is worth vs its price" />
-<meta name="twitter:description" content="Every card the model covers, priced against what its pull odds and its popularity say it should cost, with a range around that estimate and a cheap or expensive verdict that respects the range. Cheap" />
+<meta name="twitter:description" content="Every card the model covers, priced against what its pull odds and its popularity say it should cost, with a range around that estimate and a cheap or expensive verdict that respects the range..." />
 <meta name="twitter:image" content="https://garec99054.github.io/pokestat-site/share/valuation.png" />
 <style>
 
@@ -1007,15 +1007,18 @@ svg.mchart .k0{fill:rgba(var(--down-rgb),0.89)}svg.mchart .k1{fill:rgba(var(--up
     </div>
   </section>
 
-  <section id="momentum-intro" data-reveal>
+  <section id="momentum" data-reveal>
+    <details class="explain">
+      <summary><span class="custom">Momentum and reversion: no tradeable momentum, one era-stratified horizon shows reversion</span></summary>
+      <div class="explain-body">
+
     <h2>Is this hot? Momentum and reversion</h2>
     <p class="section-note">A mispricing flag above answers "is this priced right for what it is."
       It says nothing about whether the price has been moving. The study below asks that second,
       separate question directly: does a recent price move predict what happens next. The pooled
       answer is no tradeable momentum, and the second half re-examines that within each era.</p>
-  </section>
 
-  <section id="momentum" data-reveal>
+
     <h2>Momentum and short-horizon reversion</h2>
     <p class="section-note">Significance uses an overlap-deflated effective sample size, not the
       naive <span class="gloss" tabindex="0" data-tip="One slice of the test: fit on everything up to a date, then score the single month that follows. There is one such slice per month tested, and the scores are averaged into the headline number." aria-label="fold: One slice of the test: fit on everything up to a date, then score the single month that follows. There is one such slice per month tested, and the scores are averaged into the headline number.">fold</span> count.</p>
@@ -1044,9 +1047,8 @@ svg.mchart .k0{fill:rgba(var(--down-rgb),0.89)}svg.mchart .k1{fill:rgba(var(--up
     <p class="section-note" id="momentum-implication" style="margin-top:14px;"></p>
 
     <div class="callout" id="momentum-strata" style="margin-top:22px; display:none;"></div>
-  </section>
-
-  <section id="stratified" data-reveal style="display:none;">
+  
+        <section id="momentum-stratified" data-reveal style="display:none;">
     <h2>The same cards, ranked inside their own era</h2>
     <p class="section-note">The table above sorts all modeled cards into quintiles against each
       other, so a card is partly sorted on which era it belongs to rather than on its return against
@@ -1101,8 +1103,10 @@ svg.mchart .k0{fill:rgba(var(--down-rgb),0.89)}svg.mchart .k1{fill:rgba(var(--up
 
     <div class="callout" id="strata-caveats" style="margin-top:22px;"></div>
   </section>
-
-  <section id="independence" data-reveal>
+      </div>
+    </details>
+  </section>
+<section id="independence" data-reveal>
     <div class="callout" id="momentum-independence">
       <strong>Not independent of the value backtest.</strong> The value backtest tags a card
       "overvalued" when its market price sits well above the forward model's fair value, and those
@@ -1144,7 +1148,7 @@ svg.mchart .k0{fill:rgba(var(--down-rgb),0.89)}svg.mchart .k1{fill:rgba(var(--up
     </ul>
   </nav>
 
-  <p class="freshness-stamp">Prices as of 2026-09-03 (TCGplayer daily 2026-09-03, Cardmarket 2026-09-03, monthly panel 2026-09-01). Built 2026-09-03 06:59 UTC.</p>
+  <p class="freshness-stamp">Prices as of 2026-09-03 (TCGplayer daily 2026-09-03, Cardmarket 2026-09-03, monthly panel 2026-09-01). Built 2026-09-03 12:34 UTC.</p>
 
 </div>
 
@@ -1625,8 +1629,13 @@ return '<button type="button" class="star-btn" data-star-id="' + esc(id)
 + '" aria-label="Star ' + esc(id) + '">' + glyph + '</button>';
 }
 function filterButton(){
-return '<button type="button" class="star-filter" id="star-filter" '
+var btn = '<button type="button" class="star-filter" id="star-filter" '
 + 'aria-pressed="false">Starred only</button>';
+// The caveat lives here, in the toolbar, once per table -- never per row
+// -- and only once there is anything starred for a delta cell to show.
+if(!starredIds().length) return btn;
+return btn + '<span class="star-caveat">Change since your last visit, '
++ "whatever its length; not the site's 90-day horizon.</span>";
 }
 function seenStore(){
 var v = readJSON(SEEN_KEY, {});
@@ -1667,7 +1676,11 @@ if(prior.builtAt != null) out.since = prior.builtAt;
 return (out.price || out.pred) ? out : null;
 }
 function formatDelta(delta){
-if(!delta || !delta.price) return "";
+// delta is null exactly when there is no prior snapshot for this id on
+// this page -- a freshly starred row -- distinct from a stored snapshot
+// that simply carries no price component (handled below).
+if(delta == null) return "watching since " + new Date().toISOString().slice(0, 10);
+if(!delta.price) return "";
 var v = delta.price.pctChange;
 var sign = v > 0 ? "+" : "";
 var text = sign + v.toFixed(1) + "%";
@@ -2169,7 +2182,7 @@ if (sh) {
 const box = document.getElementById("momentum-strata");
 box.innerHTML = '<strong>The pooled table is not the whole story.</strong> ' + dashes(esc(sh))
 + (MO.strata
-? ' <a href="#stratified">See the pooled-versus-within-era comparison below.</a>'
+? ' <a href="#momentum-stratified">See the pooled-versus-within-era comparison below.</a>'
 : ' Full stratified tables, per-cell sample sizes and caveats are in '
 + '<code>momentum_summary.md</code> and <code>momentum_strata.csv</code>.');
 box.style.display = "";
@@ -2196,7 +2209,7 @@ return '<td class="num '+(v<0?"ret-neg":(v>0?"ret-pos":""))+'">'+pp(v)+'%</td>';
 }
 function renderBlocked(){
 if(!ST) return;
-document.getElementById("stratified").style.display = "";
+document.getElementById("momentum-stratified").style.display = "";
 const bby = Object.fromEntries(ST.blocked.map(r=>[r.formation, r]));
 document.getElementById("blocked-body").innerHTML = ST.pooled.map(p=>{
 const b = bby[p.formation] || {};

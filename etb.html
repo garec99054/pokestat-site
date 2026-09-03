@@ -9,14 +9,14 @@
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="pokestat" />
 <meta property="og:title" content="Elite Trainer Boxes: did they go up, and is one worth holding?" />
-<meta property="og:description" content="Every Elite Trainer Box in the price archive, measured over 31 monthly snapshots from March 2024 to September 2026. Prices went up a lot. Nearly every explanation of why, and every guess about what" />
+<meta property="og:description" content="Every Elite Trainer Box in the price archive, measured over 31 monthly snapshots from March 2024 to September 2026. Prices went up a lot. Nearly every explanation of why, and every guess about..." />
 <meta property="og:url" content="https://garec99054.github.io/pokestat-site/etb.html" />
 <meta property="og:image" content="https://garec99054.github.io/pokestat-site/share/etb.png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Elite Trainer Boxes: did they go up, and is one worth holding?" />
-<meta name="twitter:description" content="Every Elite Trainer Box in the price archive, measured over 31 monthly snapshots from March 2024 to September 2026. Prices went up a lot. Nearly every explanation of why, and every guess about what" />
+<meta name="twitter:description" content="Every Elite Trainer Box in the price archive, measured over 31 monthly snapshots from March 2024 to September 2026. Prices went up a lot. Nearly every explanation of why, and every guess about..." />
 <meta name="twitter:image" content="https://garec99054.github.io/pokestat-site/share/etb.png" />
 <style>
 
@@ -1221,7 +1221,7 @@ svg.mchart .k0{opacity:0.55;stroke:var(--neutral)}svg.mchart .k1{fill:var(--up);
     </ul>
   </nav>
 
-  <p class="freshness-stamp">Prices as of 2026-09-03 (TCGplayer daily 2026-09-03, Cardmarket 2026-09-03, monthly panel 2026-09-01). Built 2026-09-03 06:59 UTC.</p>
+  <p class="freshness-stamp">Prices as of 2026-09-03 (TCGplayer daily 2026-09-03, Cardmarket 2026-09-03, monthly panel 2026-09-01). Built 2026-09-03 12:34 UTC.</p>
 
 </div>
 
@@ -1687,8 +1687,13 @@ return '<button type="button" class="star-btn" data-star-id="' + esc(id)
 + '" aria-label="Star ' + esc(id) + '">' + glyph + '</button>';
 }
 function filterButton(){
-return '<button type="button" class="star-filter" id="star-filter" '
+var btn = '<button type="button" class="star-filter" id="star-filter" '
 + 'aria-pressed="false">Starred only</button>';
+// The caveat lives here, in the toolbar, once per table -- never per row
+// -- and only once there is anything starred for a delta cell to show.
+if(!starredIds().length) return btn;
+return btn + '<span class="star-caveat">Change since your last visit, '
++ "whatever its length; not the site's 90-day horizon.</span>";
 }
 function seenStore(){
 var v = readJSON(SEEN_KEY, {});
@@ -1729,7 +1734,11 @@ if(prior.builtAt != null) out.since = prior.builtAt;
 return (out.price || out.pred) ? out : null;
 }
 function formatDelta(delta){
-if(!delta || !delta.price) return "";
+// delta is null exactly when there is no prior snapshot for this id on
+// this page -- a freshly starred row -- distinct from a stored snapshot
+// that simply carries no price component (handled below).
+if(delta == null) return "watching since " + new Date().toISOString().slice(0, 10);
+if(!delta.price) return "";
 var v = delta.price.pctChange;
 var sign = v > 0 ? "+" : "";
 var text = sign + v.toFixed(1) + "%";
