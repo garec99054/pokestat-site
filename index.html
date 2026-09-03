@@ -6,6 +6,18 @@
 <link rel="icon" href="data:," />
 <script>(function(){try{var t=localStorage.getItem('pk-theme');if(t==='dark'||t==='light'||t==='pastel')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="pokestat" />
+<meta property="og:title" content="pokestat: 90-day chase-card outlook" />
+<meta property="og:description" content="This ranks 441 cards by how much their price should move over the next 90 days, compared with the market. Every prediction comes with a range, not just a number. The ranking works, but only weakly" />
+<meta property="og:url" content="https://garec99054.github.io/pokestat-site/dashboard.html" />
+<meta property="og:image" content="https://garec99054.github.io/pokestat-site/share/dashboard.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="pokestat: 90-day chase-card outlook" />
+<meta name="twitter:description" content="This ranks 441 cards by how much their price should move over the next 90 days, compared with the market. Every prediction comes with a range, not just a number. The ranking works, but only weakly" />
+<meta name="twitter:image" content="https://garec99054.github.io/pokestat-site/share/dashboard.png" />
 <style>
 
 :root{
@@ -193,18 +205,55 @@ from{opacity:0;letter-spacing:.08em;}
 to{opacity:1;letter-spacing:-0.01em;}
 }
 }
-.nav-links{
-display:flex;gap:2px;flex:1;overflow-x:auto;overflow-y:hidden;
-scrollbar-width:none;-ms-overflow-style:none;
+.nav-links-desktop{display:flex;gap:2px;align-items:center;flex:1;min-width:0;}
+.nav-group{position:relative;}
+.nav-group-panel{
+position:absolute;top:100%;left:0;margin-top:2px;display:none;flex-direction:column;
+min-width:172px;padding:5px 0;background:var(--panel);border:1px solid var(--border);
+border-radius:var(--radius);box-shadow:0 6px 18px rgba(var(--shadow-tint),0.16);z-index:50;
 }
-.nav-links::-webkit-scrollbar{display:none;}
-.nav-links a{
-font-size:0.83rem;color:var(--ink-muted);text-decoration:none;
-padding:6px 7px;border-radius:var(--radius);white-space:nowrap;
+.nav-group-panel a{padding:7px 14px;}
+.nav-group:hover > .nav-group-panel,
+.nav-group:focus-within > .nav-group-panel{display:flex;}
+.nav-group-label{
+border:none;background:none;font-family:inherit;cursor:pointer;
+display:flex;align-items:center;gap:5px;
+font-size:0.83rem;color:var(--ink-muted);padding:7px 10px;
+border-radius:var(--radius);white-space:nowrap;
 transition:background-color .15s ease-out,color .15s ease-out;
 }
-.nav-links a:hover{background:var(--panel-alt);color:var(--ink);}
-.nav-links a.active{color:var(--accent-ink);background:rgba(var(--accent-rgb),0.10);font-weight:600;}
+.nav-group-label::after{
+content:"";width:5px;height:5px;flex:none;margin-top:-2px;
+border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;
+transform:rotate(45deg);
+}
+.nav-group-label:hover{background:var(--panel-alt);color:var(--ink);}
+.nav-group-label:focus-visible{outline:2px solid var(--accent);outline-offset:-2px;}
+.nav-group.has-active > .nav-group-label{color:var(--accent-ink);font-weight:600;}
+.nav-group-panel a,.nav-menu-group a{
+font-size:0.83rem;color:var(--ink-muted);text-decoration:none;
+border-radius:var(--radius);white-space:nowrap;
+transition:background-color .15s ease-out,color .15s ease-out;
+}
+.nav-group-panel a:hover,.nav-menu-group a:hover{background:var(--panel-alt);color:var(--ink);}
+.nav-group-panel a.active,.nav-menu-group a.active{
+color:var(--accent-ink);background:rgba(var(--accent-rgb),0.10);font-weight:600;
+}
+.nav-more{display:none;}
+.nav-more > summary{
+cursor:pointer;list-style:none;display:flex;align-items:center;
+font-size:0.83rem;font-weight:600;padding:6px 10px;white-space:nowrap;
+}
+.nav-more > summary::-webkit-details-marker{display:none;}
+.nav-more > summary:hover{background:var(--panel-alt);}
+.nav-more > summary:focus-visible{outline:2px solid var(--accent);outline-offset:-2px;}
+.nav-links-mobile{display:flex;flex-direction:column;gap:14px;padding:6px 4px 4px;}
+.nav-menu-label{
+margin:0 0 2px;font-size:0.7rem;font-weight:700;text-transform:uppercase;
+letter-spacing:0.04em;color:var(--ink-subtle);
+}
+.nav-menu-group{display:flex;flex-direction:column;}
+.nav-menu-group a{padding:8px 6px;}
 .density-toggle{flex:none;white-space:nowrap;font-size:0.78rem;padding:6px 10px;}
 .copy-toggle{flex:none;white-space:nowrap;font-size:0.78rem;padding:6px 10px;}
 html:not(.plain) [data-copy="plain"]{display:none;}
@@ -228,20 +277,15 @@ animation:pk-copyswap var(--t-mid) var(--ease);
 .theme-group button{font-size:0.74rem;padding:5px 8px;white-space:nowrap;}
 .theme-opt[aria-pressed="true"]{background:var(--accent);color:var(--on-accent);}
 @media (max-width:720px){
-.nav-links{
--webkit-mask-image:linear-gradient(to right,#000 calc(100% - 22px),transparent);
-mask-image:linear-gradient(to right,#000 calc(100% - 22px),transparent);
-}
+.nav-inner{flex-wrap:wrap;height:auto;row-gap:2px;padding-top:6px;padding-bottom:8px;}
+.brand{margin-right:auto;}
+.nav-links-desktop{display:none;}
+.nav-more{display:block;order:3;flex:0 0 100%;width:100%;}
 }
 @media (max-width:560px){
-.nav-inner{
-flex-wrap:wrap;height:auto;row-gap:2px;padding-top:6px;padding-bottom:8px;
-}
-.nav-links{order:3;flex:0 0 100%;width:100%;}
-.brand{margin-right:auto;}
-.nav-inner{gap:8px;padding-left:12px;padding-right:12px;}
+.nav-inner{gap:6px;padding-left:12px;padding-right:12px;}
 .theme-group button{font-size:0.7rem;padding:4px 7px;}
-.density-toggle{font-size:0.72rem;padding:5px 8px;}
+.density-toggle,.copy-toggle{font-size:0.72rem;padding:5px 8px;}
 }
 header.masthead{border-bottom:1px solid var(--border);padding-bottom:14px;margin-bottom:18px;text-align:center;scroll-margin-top:calc(var(--nav-h) + 14px);}
 header.masthead h1{font-size:1.4rem;font-weight:650;margin:0 0 5px;letter-spacing:-0.01em;}
@@ -569,7 +613,7 @@ font-size:14px;
 --spark-h:18px;
 --band-w:120px;
 }
-@media (max-width:560px){
+@media (max-width:720px){
 :root{--nav-h:82px;}
 html.compact{--nav-h:78px;}
 }
@@ -779,21 +823,71 @@ html.compact .crsl-detail svg.band{width:224px;height:21px;}
 <nav class="topnav" aria-label="Site navigation">
   <div class="nav-inner">
     <a class="brand" href="dashboard.html">pokestat</a>
-    <div class="nav-links" id="nav-links">
-      <a href="dashboard.html" class="active" aria-current="page">Summary</a>
-      <a href="outlook.html">Outlook</a>
-      <a href="watchlists.html">Watchlists</a>
-      <a href="valuation.html">Valuation</a>
-      <a href="market.html">Market</a>
-      <a href="compendium.html">Compendium</a>
-      <a href="etb.html">Trainer boxes</a>
-      <a href="models.html">Models</a>
-      <a href="momentum.html">Momentum</a>
-      <a href="backtest.html">Backtest</a>
-      <a href="how-it-works.html">How it works</a>
-      <a href="methods.html">Methods</a>
-      <a href="findings.html">Findings</a>
+    <div class="nav-links-desktop" id="nav-links">
+      <div class="nav-group has-active">
+        <button type="button" class="nav-group-label">Overview</button>
+        <div class="nav-group-panel">
+          <a href="dashboard.html" class="active" aria-current="page">Summary</a>
+          <a href="findings.html">Findings</a>
+          <a href="changelog.html">Changelog</a>
+        </div>
+      </div>
+      <div class="nav-group">
+        <button type="button" class="nav-group-label">Cards</button>
+        <div class="nav-group-panel">
+          <a href="outlook.html">Outlook</a>
+          <a href="watchlists.html">Watchlists</a>
+          <a href="valuation.html">Valuation</a>
+          <a href="compendium.html">Compendium</a>
+        </div>
+      </div>
+      <div class="nav-group">
+        <button type="button" class="nav-group-label">Sealed</button>
+        <div class="nav-group-panel">
+          <a href="etb.html">Trainer boxes</a>
+          <a href="market.html">Market</a>
+        </div>
+      </div>
+      <div class="nav-group">
+        <button type="button" class="nav-group-label">Research</button>
+        <div class="nav-group-panel">
+          <a href="models.html">Models</a>
+          <a href="backtest.html">Backtest</a>
+          <a href="how-it-works.html">How it works</a>
+          <a href="methods.html">Methods</a>
+        </div>
+      </div>
     </div>
+    <details class="nav-more">
+      <summary>Menu</summary>
+      <div class="nav-links-mobile">
+        <div class="nav-menu-group">
+          <p class="nav-menu-label">Overview</p>
+          <a href="dashboard.html" class="active" aria-current="page">Summary</a>
+          <a href="findings.html">Findings</a>
+          <a href="changelog.html">Changelog</a>
+        </div>
+        <div class="nav-menu-group">
+          <p class="nav-menu-label">Cards</p>
+          <a href="outlook.html">Outlook</a>
+          <a href="watchlists.html">Watchlists</a>
+          <a href="valuation.html">Valuation</a>
+          <a href="compendium.html">Compendium</a>
+        </div>
+        <div class="nav-menu-group">
+          <p class="nav-menu-label">Sealed</p>
+          <a href="etb.html">Trainer boxes</a>
+          <a href="market.html">Market</a>
+        </div>
+        <div class="nav-menu-group">
+          <p class="nav-menu-label">Research</p>
+          <a href="models.html">Models</a>
+          <a href="backtest.html">Backtest</a>
+          <a href="how-it-works.html">How it works</a>
+          <a href="methods.html">Methods</a>
+        </div>
+      </div>
+    </details>
     <button class="density-toggle" id="density-toggle" aria-pressed="false" title="Toggle information density">Compact</button>
     <button class="copy-toggle" id="copy-toggle" title="Switch between plain-language and full technical wording">Plain</button>
     <div class="preset-group theme-group" role="group" aria-label="Colour theme">
@@ -812,6 +906,8 @@ html.compact .crsl-detail svg.band{width:224px;height:21px;}
     <p class="lede prose" data-copy="plain">This ranks 441 cards by how much their price should move over the next 90 days, compared with the market. Every prediction comes with a range, not just a number. The ranking works, but only weakly, and some of it is just old sets behaving like old sets. It measures what happened. It is not a buy list.</p>
   </header>
 
+
+<p id="changed-strip"><a href="changelog.html">Since the last build (2026-09-03): 2 figures moved, 10 unchanged. See what changed.</a></p>
 
   <section id="summary" data-reveal>
     <div class="summary-strip" id="summary-strip"></div>
@@ -904,7 +1000,7 @@ html.compact .crsl-detail svg.band{width:224px;height:21px;}
   <section id="explore" data-reveal>
     <h2>Explore the analysis</h2>
     <p class="section-note">Each part of the study is now its own page.</p>
-    <div class="hub-grid" id="hub-grid"><a class="hub-card" href="outlook.html"><p class="hc-title">Full outlook</p><p class="hc-desc">All modeled chase cards ranked by predicted 90-day move, with conformal bands, flags, sparklines and marketplace links.</p></a><a class="hub-card" href="watchlists.html"><p class="hc-title">Watchlists</p><p class="hc-desc">Reversion watch, set pulse, tier lens, divergence watch and realized movers.</p></a><a class="hub-card" href="valuation.html"><p class="hc-title">Fair value</p><p class="hc-desc">What each modeled chase card looks worth against what it costs: a hedonic fair value from pull cost and desirability, an 80 percent interval, and an interval-aware over/under-valued verdict. A verdict on mispricing, not a return forecast.</p></a><a class="hub-card" href="market.html"><p class="hc-title">Whole-market stats</p><p class="hc-desc">Charts on the broader singles and sealed market across 31 months.</p></a><a class="hub-card" href="compendium.html"><p class="hc-title">Set compendium</p><p class="hc-desc">Every chase-rarity card from the sets released in the trailing two-year window, with its monthly price panel, trailing moves, artwork and a cross-check against two other marketplaces. Realized prices only, no predictions.</p></a><a class="hub-card" href="etb.html"><p class="hc-title">Elite Trainer Boxes</p><p class="hc-desc">Every ETB in the archive: prices rose about 59%/yr, they did not beat booster boxes, ageing cannot be identified at all, and the frictions decide how long a hold has to run.</p></a><a class="hub-card" href="models.html"><p class="hc-title">Model leaderboard</p><p class="hc-desc">Which model was selected over the <span class="gloss" tabindex="0" data-tip="Testing only forwards in time. Fit on everything up to a date, predict the month after it, step the date on, repeat. Nothing being scored was known to the fit that produced it." aria-label="walk-forward: Testing only forwards in time. Fit on everything up to a date, predict the month after it, step the date on, repeat. Nothing being scored was known to the fit that produced it.">walk-forward</span> <span class="gloss" tabindex="0" data-tip="One slice of the test: fit on everything up to a date, then score the single month that follows. There is one such slice per month tested, and the scores are averaged into the headline number." aria-label="folds: One slice of the test: fit on everything up to a date, then score the single month that follows. There is one such slice per month tested, and the scores are averaged into the headline number.">folds</span>, how much of its edge survives ablating the set-age features, and whether that edge is within-era skill or just the eras ranked against each other.</p></a><a class="hub-card" href="momentum.html"><p class="hc-title">Momentum & reversion</p><p class="hc-desc">No tradeable momentum. Pooled, no reliable reversion either. Ranking the same cards inside their own era changes part of that picture, and the page shows exactly how much.</p></a><a class="hub-card" href="backtest.html"><p class="hc-title">Value-flag backtest</p><p class="hc-desc">Whether undervalued flags predict forward returns out of sample (they do not).</p></a><a class="hub-card" href="how-it-works.html"><p class="hc-title">How it works</p><p class="hc-desc">Diagrams of the pipeline, the model, the conformal band and the flag rule, with a worked example.</p></a><a class="hub-card" href="methods.html"><p class="hc-title">Methods & caveats</p><p class="hc-desc">Data sources, Cardmarket coverage, model tiering, page doctrine and the honest caveats.</p></a><a class="hub-card" href="findings.html"><p class="hc-title">Findings</p><p class="hc-desc">Seven results this project's own measurements support, each with the number that carries it, a chart, and what it implies for a collector.</p></a></div>
+    <div class="hub-grid" id="hub-grid"><a class="hub-card" href="outlook.html"><p class="hc-title">Full outlook</p><p class="hc-desc">All modeled chase cards ranked by predicted 90-day move, with conformal bands, flags, sparklines and marketplace links.</p></a><a class="hub-card" href="watchlists.html"><p class="hc-title">Watchlists</p><p class="hc-desc">Reversion watch, set pulse, tier lens, divergence watch and realized movers.</p></a><a class="hub-card" href="valuation.html"><p class="hc-title">Fair value</p><p class="hc-desc">What each modeled chase card looks worth against what it costs: a hedonic fair value from pull cost and desirability, an 80 percent interval, and an interval-aware over/under-valued verdict. A verdict on mispricing, not a return forecast.</p></a><a class="hub-card" href="market.html"><p class="hc-title">Whole-market stats</p><p class="hc-desc">Charts on the broader singles and sealed market across 31 months.</p></a><a class="hub-card" href="compendium.html"><p class="hc-title">Set compendium</p><p class="hc-desc">Every chase-rarity card from the sets released in the trailing two-year window, with its monthly price panel, trailing moves, artwork and a cross-check against two other marketplaces. Realized prices only, no predictions.</p></a><a class="hub-card" href="etb.html"><p class="hc-title">Elite Trainer Boxes</p><p class="hc-desc">Every ETB in the archive: prices rose about 59%/yr, they did not beat booster boxes, ageing cannot be identified at all, and the frictions decide how long a hold has to run.</p></a><a class="hub-card" href="models.html"><p class="hc-title">Model leaderboard</p><p class="hc-desc">Which model was selected over the <span class="gloss" tabindex="0" data-tip="Testing only forwards in time. Fit on everything up to a date, predict the month after it, step the date on, repeat. Nothing being scored was known to the fit that produced it." aria-label="walk-forward: Testing only forwards in time. Fit on everything up to a date, predict the month after it, step the date on, repeat. Nothing being scored was known to the fit that produced it.">walk-forward</span> <span class="gloss" tabindex="0" data-tip="One slice of the test: fit on everything up to a date, then score the single month that follows. There is one such slice per month tested, and the scores are averaged into the headline number." aria-label="folds: One slice of the test: fit on everything up to a date, then score the single month that follows. There is one such slice per month tested, and the scores are averaged into the headline number.">folds</span>, how much of its edge survives ablating the set-age features, and whether that edge is within-era skill or just the eras ranked against each other.</p></a><a class="hub-card" href="valuation.html#momentum"><p class="hc-title">Momentum & reversion</p><p class="hc-desc">No tradeable momentum. Pooled, no reliable reversion either. Ranking the same cards inside their own era changes part of that picture, and the page shows exactly how much.</p></a><a class="hub-card" href="backtest.html"><p class="hc-title">Value-flag backtest</p><p class="hc-desc">Whether undervalued flags predict forward returns out of sample (they do not).</p></a><a class="hub-card" href="how-it-works.html"><p class="hc-title">How it works</p><p class="hc-desc">Diagrams of the pipeline, the model, the conformal band and the flag rule, with a worked example.</p></a><a class="hub-card" href="methods.html"><p class="hc-title">Methods & caveats</p><p class="hc-desc">Data sources, Cardmarket coverage, model tiering, page doctrine and the honest caveats.</p></a><a class="hub-card" href="findings.html"><p class="hc-title">Findings</p><p class="hc-desc">Seven results this project's own measurements support, each with the number that carries it, a chart, and what it implies for a collector.</p></a><a class="hub-card" href="changelog.html"><p class="hc-title">What changed</p><p class="hc-desc">Every headline number diffed against the last build: what moved, whether it was the market or the model, and a plain 'nothing moved' on a quiet week. Subscribes as an Atom feed.</p></a></div>
   </section>
 
   <nav class="related" aria-label="Related pages" data-reveal>
@@ -917,7 +1013,7 @@ html.compact .crsl-detail svg.band{width:224px;height:21px;}
     </ul>
   </nav>
 
-  <p class="freshness-stamp">Prices as of 2026-09-03 (TCGplayer daily 2026-09-03, Cardmarket 2026-09-03, monthly panel 2026-09-01). Built 2026-09-03 04:05 UTC.</p>
+  <p class="freshness-stamp">Prices as of 2026-09-03 (TCGplayer daily 2026-09-03, Cardmarket 2026-09-03, monthly panel 2026-09-01). Built 2026-09-03 06:37 UTC.</p>
 
 </div>
 
@@ -1245,17 +1341,10 @@ targets.forEach(t=>reveal.observe(t));
 revealBatch(targets);
 setTimeout(()=>{ revealBatch(targets); }, 1200);
 }
-// ---------- active nav visibility ----------
-// The link strip scrolls horizontally on narrow viewports; bring the active
-// page's link into view on load so the highlighted item is visible at first
-// paint (keyboard Tab already auto-scrolls a focused link, but no focus exists
-// on load). block:"nearest" keeps the page from scrolling vertically.
-function initActiveNav(){
-const a = document.querySelector(".nav-links a.active");
-if(a && a.scrollIntoView){
-try{ a.scrollIntoView({inline:"center", block:"nearest"}); }catch(e){}
-}
-}
+// Active-nav visibility no longer needs a scroll-into-view: the grouped nav
+// does not scroll horizontally, and build_nav marks the current page's group
+// with a "has-active" class server-side, so the affordance survives with the
+// group collapsed and costs no script.
 document.addEventListener("mousemove", e=>{ if(tip && tip.classList.contains("show")) moveTip(e); });
 // Escape dismisses the tip (WCAG 2.1 SC 1.4.13 "Dismissable"), for the glossary
 // terms above all: their tip can cover the sentence being read. PARTIAL and
@@ -1267,7 +1356,6 @@ initTheme();
 initCopy();
 initDensity();
 initReveal();
-initActiveNav();
 initMarkTips();
 // Deferred by one task: page-specific extra_js is appended AFTER JS_CORE inside
 // the same script tag, and two pages (models #within-era, momentum #stratified)

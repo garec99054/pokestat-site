@@ -6,6 +6,19 @@
 <link rel="icon" href="data:," />
 <script>(function(){try{var t=localStorage.getItem('pk-theme');if(t==='dark'||t==='light'||t==='pastel')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="pokestat" />
+<meta property="og:title" content="Is there tradeable momentum? No" />
+<meta property="og:description" content="Each month the cards are sorted into five groups by how they have done recently, then held for three months. If the recent winners kept winning, that would be momentum; if they gave it back, that" />
+<meta property="og:url" content="https://garec99054.github.io/pokestat-site/momentum.html" />
+<meta property="og:image" content="https://garec99054.github.io/pokestat-site/share/momentum.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Is there tradeable momentum? No" />
+<meta name="twitter:description" content="Each month the cards are sorted into five groups by how they have done recently, then held for three months. If the recent winners kept winning, that would be momentum; if they gave it back, that" />
+<meta name="twitter:image" content="https://garec99054.github.io/pokestat-site/share/momentum.png" />
+<meta http-equiv="refresh" content="0; url=valuation.html#momentum" />
 <style>
 
 :root{
@@ -193,18 +206,55 @@ from{opacity:0;letter-spacing:.08em;}
 to{opacity:1;letter-spacing:-0.01em;}
 }
 }
-.nav-links{
-display:flex;gap:2px;flex:1;overflow-x:auto;overflow-y:hidden;
-scrollbar-width:none;-ms-overflow-style:none;
+.nav-links-desktop{display:flex;gap:2px;align-items:center;flex:1;min-width:0;}
+.nav-group{position:relative;}
+.nav-group-panel{
+position:absolute;top:100%;left:0;margin-top:2px;display:none;flex-direction:column;
+min-width:172px;padding:5px 0;background:var(--panel);border:1px solid var(--border);
+border-radius:var(--radius);box-shadow:0 6px 18px rgba(var(--shadow-tint),0.16);z-index:50;
 }
-.nav-links::-webkit-scrollbar{display:none;}
-.nav-links a{
-font-size:0.83rem;color:var(--ink-muted);text-decoration:none;
-padding:6px 7px;border-radius:var(--radius);white-space:nowrap;
+.nav-group-panel a{padding:7px 14px;}
+.nav-group:hover > .nav-group-panel,
+.nav-group:focus-within > .nav-group-panel{display:flex;}
+.nav-group-label{
+border:none;background:none;font-family:inherit;cursor:pointer;
+display:flex;align-items:center;gap:5px;
+font-size:0.83rem;color:var(--ink-muted);padding:7px 10px;
+border-radius:var(--radius);white-space:nowrap;
 transition:background-color .15s ease-out,color .15s ease-out;
 }
-.nav-links a:hover{background:var(--panel-alt);color:var(--ink);}
-.nav-links a.active{color:var(--accent-ink);background:rgba(var(--accent-rgb),0.10);font-weight:600;}
+.nav-group-label::after{
+content:"";width:5px;height:5px;flex:none;margin-top:-2px;
+border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;
+transform:rotate(45deg);
+}
+.nav-group-label:hover{background:var(--panel-alt);color:var(--ink);}
+.nav-group-label:focus-visible{outline:2px solid var(--accent);outline-offset:-2px;}
+.nav-group.has-active > .nav-group-label{color:var(--accent-ink);font-weight:600;}
+.nav-group-panel a,.nav-menu-group a{
+font-size:0.83rem;color:var(--ink-muted);text-decoration:none;
+border-radius:var(--radius);white-space:nowrap;
+transition:background-color .15s ease-out,color .15s ease-out;
+}
+.nav-group-panel a:hover,.nav-menu-group a:hover{background:var(--panel-alt);color:var(--ink);}
+.nav-group-panel a.active,.nav-menu-group a.active{
+color:var(--accent-ink);background:rgba(var(--accent-rgb),0.10);font-weight:600;
+}
+.nav-more{display:none;}
+.nav-more > summary{
+cursor:pointer;list-style:none;display:flex;align-items:center;
+font-size:0.83rem;font-weight:600;padding:6px 10px;white-space:nowrap;
+}
+.nav-more > summary::-webkit-details-marker{display:none;}
+.nav-more > summary:hover{background:var(--panel-alt);}
+.nav-more > summary:focus-visible{outline:2px solid var(--accent);outline-offset:-2px;}
+.nav-links-mobile{display:flex;flex-direction:column;gap:14px;padding:6px 4px 4px;}
+.nav-menu-label{
+margin:0 0 2px;font-size:0.7rem;font-weight:700;text-transform:uppercase;
+letter-spacing:0.04em;color:var(--ink-subtle);
+}
+.nav-menu-group{display:flex;flex-direction:column;}
+.nav-menu-group a{padding:8px 6px;}
 .density-toggle{flex:none;white-space:nowrap;font-size:0.78rem;padding:6px 10px;}
 .copy-toggle{flex:none;white-space:nowrap;font-size:0.78rem;padding:6px 10px;}
 html:not(.plain) [data-copy="plain"]{display:none;}
@@ -228,20 +278,15 @@ animation:pk-copyswap var(--t-mid) var(--ease);
 .theme-group button{font-size:0.74rem;padding:5px 8px;white-space:nowrap;}
 .theme-opt[aria-pressed="true"]{background:var(--accent);color:var(--on-accent);}
 @media (max-width:720px){
-.nav-links{
--webkit-mask-image:linear-gradient(to right,#000 calc(100% - 22px),transparent);
-mask-image:linear-gradient(to right,#000 calc(100% - 22px),transparent);
-}
+.nav-inner{flex-wrap:wrap;height:auto;row-gap:2px;padding-top:6px;padding-bottom:8px;}
+.brand{margin-right:auto;}
+.nav-links-desktop{display:none;}
+.nav-more{display:block;order:3;flex:0 0 100%;width:100%;}
 }
 @media (max-width:560px){
-.nav-inner{
-flex-wrap:wrap;height:auto;row-gap:2px;padding-top:6px;padding-bottom:8px;
-}
-.nav-links{order:3;flex:0 0 100%;width:100%;}
-.brand{margin-right:auto;}
-.nav-inner{gap:8px;padding-left:12px;padding-right:12px;}
+.nav-inner{gap:6px;padding-left:12px;padding-right:12px;}
 .theme-group button{font-size:0.7rem;padding:4px 7px;}
-.density-toggle{font-size:0.72rem;padding:5px 8px;}
+.density-toggle,.copy-toggle{font-size:0.72rem;padding:5px 8px;}
 }
 header.masthead{border-bottom:1px solid var(--border);padding-bottom:14px;margin-bottom:18px;text-align:center;scroll-margin-top:calc(var(--nav-h) + 14px);}
 header.masthead h1{font-size:1.4rem;font-weight:650;margin:0 0 5px;letter-spacing:-0.01em;}
@@ -569,7 +614,7 @@ font-size:14px;
 --spark-h:18px;
 --band-w:120px;
 }
-@media (max-width:560px){
+@media (max-width:720px){
 :root{--nav-h:82px;}
 html.compact{--nav-h:78px;}
 }
@@ -633,21 +678,71 @@ html.compact .cardcell .cc-meta{white-space:nowrap;overflow:hidden;text-overflow
 <nav class="topnav" aria-label="Site navigation">
   <div class="nav-inner">
     <a class="brand" href="dashboard.html">pokestat</a>
-    <div class="nav-links" id="nav-links">
-      <a href="dashboard.html">Summary</a>
-      <a href="outlook.html">Outlook</a>
-      <a href="watchlists.html">Watchlists</a>
-      <a href="valuation.html">Valuation</a>
-      <a href="market.html">Market</a>
-      <a href="compendium.html">Compendium</a>
-      <a href="etb.html">Trainer boxes</a>
-      <a href="models.html">Models</a>
-      <a href="momentum.html" class="active" aria-current="page">Momentum</a>
-      <a href="backtest.html">Backtest</a>
-      <a href="how-it-works.html">How it works</a>
-      <a href="methods.html">Methods</a>
-      <a href="findings.html">Findings</a>
+    <div class="nav-links-desktop" id="nav-links">
+      <div class="nav-group">
+        <button type="button" class="nav-group-label">Overview</button>
+        <div class="nav-group-panel">
+          <a href="dashboard.html">Summary</a>
+          <a href="findings.html">Findings</a>
+          <a href="changelog.html">Changelog</a>
+        </div>
+      </div>
+      <div class="nav-group has-active">
+        <button type="button" class="nav-group-label">Cards</button>
+        <div class="nav-group-panel">
+          <a href="outlook.html">Outlook</a>
+          <a href="watchlists.html">Watchlists</a>
+          <a href="valuation.html" class="active" aria-current="page">Valuation</a>
+          <a href="compendium.html">Compendium</a>
+        </div>
+      </div>
+      <div class="nav-group">
+        <button type="button" class="nav-group-label">Sealed</button>
+        <div class="nav-group-panel">
+          <a href="etb.html">Trainer boxes</a>
+          <a href="market.html">Market</a>
+        </div>
+      </div>
+      <div class="nav-group">
+        <button type="button" class="nav-group-label">Research</button>
+        <div class="nav-group-panel">
+          <a href="models.html">Models</a>
+          <a href="backtest.html">Backtest</a>
+          <a href="how-it-works.html">How it works</a>
+          <a href="methods.html">Methods</a>
+        </div>
+      </div>
     </div>
+    <details class="nav-more">
+      <summary>Menu</summary>
+      <div class="nav-links-mobile">
+        <div class="nav-menu-group">
+          <p class="nav-menu-label">Overview</p>
+          <a href="dashboard.html">Summary</a>
+          <a href="findings.html">Findings</a>
+          <a href="changelog.html">Changelog</a>
+        </div>
+        <div class="nav-menu-group">
+          <p class="nav-menu-label">Cards</p>
+          <a href="outlook.html">Outlook</a>
+          <a href="watchlists.html">Watchlists</a>
+          <a href="valuation.html" class="active" aria-current="page">Valuation</a>
+          <a href="compendium.html">Compendium</a>
+        </div>
+        <div class="nav-menu-group">
+          <p class="nav-menu-label">Sealed</p>
+          <a href="etb.html">Trainer boxes</a>
+          <a href="market.html">Market</a>
+        </div>
+        <div class="nav-menu-group">
+          <p class="nav-menu-label">Research</p>
+          <a href="models.html">Models</a>
+          <a href="backtest.html">Backtest</a>
+          <a href="how-it-works.html">How it works</a>
+          <a href="methods.html">Methods</a>
+        </div>
+      </div>
+    </details>
     <button class="density-toggle" id="density-toggle" aria-pressed="false" title="Toggle information density">Compact</button>
     <button class="copy-toggle" id="copy-toggle" title="Switch between plain-language and full technical wording">Plain</button>
     <div class="preset-group theme-group" role="group" aria-label="Colour theme">
@@ -667,123 +762,8 @@ html.compact .cardcell .cc-meta{white-space:nowrap;overflow:hidden;text-overflow
   </header>
 
 
-  <section id="momentum" data-reveal>
-    <h2>Momentum and short-horizon reversion</h2>
-    <p class="section-note">Significance uses an overlap-deflated effective sample size, not the
-      naive <span class="gloss" tabindex="0" data-tip="One slice of the test: fit on everything up to a date, then score the single month that follows. There is one such slice per month tested, and the scores are averaged into the headline number." aria-label="fold: One slice of the test: fit on everything up to a date, then score the single month that follows. There is one such slice per month tested, and the scores are averaged into the headline number.">fold</span> count.</p>
-    <details class="explain">
-      <summary><span class="custom"></span></summary>
-      <div class="explain-body" id="explain-momentum"><p>Each rebalance the universe is sorted into quintiles by trailing formation return and held three months. A positive winners-minus-losers spread would mean momentum; a negative one means reversion.</p><p>Short horizons: past 1-month winners underperformed losers by 2.9 points (t_eff -1.8, null) and past 3-month winners by 6.4 points (t_eff -1.7, null). Neither clears the overlap-deflated significance line, so these are point estimates inside the noise band, not measured effects.</p><p>Practically, there is nothing here to trade on in either direction: the pooled data does not support chasing recent winners or fading them.</p></div>
-    </details>
-    <div class="callout" id="momentum-callout"></div>
-    <div class="table-wrap">
-      <table id="momentum-table">
-        <thead>
-          <tr>
-            <th title="Trailing window used to sort cards before the 3-month hold.">Formation</th>
-            <th class="num" title="Number of rebalance dates.">Rebalances</th>
-            <th class="num" title="Overlap-deflated effective sample size.">n_eff</th>
-            <th class="num" title="Mean winners-minus-losers return over the 3-month hold, percent points. Negative means reversion.">Mean 3m spread</th>
-            <th class="num" title="Share of rebalances with a positive winners-minus-losers spread.">Hit rate</th>
-            <th class="num" title="t-statistic on the effective (deflated) sample.">t (n_eff)</th>
-            <th class="num" title="Average fraction of the portfolio replaced each rebalance.">Turnover</th>
-            <th title="reversion, momentum, or null based on sign and significance.">Verdict</th>
-          </tr>
-        </thead>
-        <tbody id="momentum-body"></tbody>
-      </table>
-    </div>
-    <p class="section-note" id="momentum-implication" style="margin-top:14px;"></p>
-
-    <div class="callout" id="momentum-strata" style="margin-top:22px; display:none;"></div>
-  </section>
-
-  <section id="stratified" data-reveal style="display:none;">
-    <h2>The same cards, ranked inside their own era</h2>
-    <p class="section-note">The table above sorts all modeled cards into quintiles against each
-      other, so a card is partly sorted on which era it belongs to rather than on its return against
-      its own peers. The blocked estimator changes exactly one thing: quintiles are formed within
-      each era and the per-era spreads are averaged. Same universe, same rebalance dates, same
-      overlap-deflated significance machinery.</p>
-    <details class="explain">
-      <summary><span class="custom"></span></summary>
-      <div class="explain-body" id="explain-stratified"><p>A pooled null has two very different explanations: no effect anywhere, or an effect inside each stratum that pooling washes out. Pooling eras that sit in different lifecycle phases means the pooled quintile sort partly sorts cards on era membership rather than on their return relative to their own peers.</p><p>At the 1-month window the pooled spread is -2.9 points (t_eff -1.82, no signal); ranking the same cards inside their own era gives -5.4 points (t_eff -5.61, reversion). Nothing about the cards, the dates or the significance machinery changed, only which field each card is ranked against.</p><p>Read the verdict words carefully. <span class="verdict-word null">no signal</span> means a measurable spread indistinguishable from zero. <span class="verdict-word insufficient">insufficient</span> means there was not enough independent data to distinguish anything at all, which is a different statement and is never counted as a null.</p></div>
-    </details>
-    <div class="table-wrap">
-      <table id="blocked-table">
-        <thead>
-          <tr>
-            <th title="Formation window. A _skip1 row forms one month earlier so its window never touches the price at T.">Formation</th>
-            <th class="num" title="Rebalance months behind the cell.">Rebal</th>
-            <th class="num" title="Pooled: mean winners-minus-losers spread over the 3-month hold, ranking across the whole cross-section.">Pooled spread</th>
-            <th class="num" title="Pooled t-statistic on the overlap-deflated effective sample.">Pooled t</th>
-            <th title="Pooled verdict. 'insufficient' means a sample-size gate failed, which is not the same as a measured zero.">Pooled</th>
-            <th class="num" title="Era-blocked: the same cards ranked inside their own era, per-era spreads averaged.">Within-era spread</th>
-            <th class="num" title="Era-blocked t-statistic on the overlap-deflated effective sample.">Within-era t</th>
-            <th title="Era-blocked verdict.">Within-era</th>
-          </tr>
-        </thead>
-        <tbody id="blocked-body"></tbody>
-      </table>
-    </div>
-    <p class="slice-legend" id="blocked-legend"></p>
-
-    <div class="wl-block" id="era-cells-block" style="margin-top:32px;">
-      <h3>Era by era, with the shared-endpoint control</h3>
-      <p class="wl-sub" id="era-cells-sub"></p>
-      <div class="table-wrap">
-        <table id="era-cells-table">
-          <thead>
-            <tr>
-              <th title="Era slice.">Era</th>
-              <th class="num" title="Cards in the slice.">Cards</th>
-              <th title="Formation window. A _skip1 twin forms on T-1-w to T-1, so its formation window never touches the price at T.">Formation</th>
-              <th class="num" title="Rebalance months behind the cell.">Rebal</th>
-              <th class="num" title="Mean names per quintile leg. A leg built from a handful of cards is noise amplification, and the study gates on it.">Names/leg</th>
-              <th class="num" title="Overlap-deflated effective sample size.">n_eff</th>
-              <th class="num" title="Mean winners-minus-losers return over the 3-month hold, percent points. Negative means reversion.">3m spread</th>
-              <th class="num" title="t-statistic on the effective (deflated) sample.">t (n_eff)</th>
-              <th title="reversion, momentum, null, or insufficient when a sample-size gate failed.">Verdict</th>
-            </tr>
-          </thead>
-          <tbody id="era-cells-body"></tbody>
-        </table>
-      </div>
-    </div>
-
-    <div class="callout" id="strata-caveats" style="margin-top:22px;"></div>
-  </section>
-
-  <section id="independence" data-reveal>
-    <div class="callout" id="momentum-independence">
-      <strong>Not independent of the value backtest.</strong> The value backtest tags a card
-      "overvalued" when its market price sits well above the forward model's fair value, and those
-      overvalued cards are drawn disproportionately from this study's top (past-winner) quintile,
-      markedly so at the longer 6-month formation window, because a recent run-up is exactly what
-      lifts market above fair value. So the two studies re-test overlapping recent-run-up cards
-      rather than independent samples. Neither shows a significant pooled effect: the pooled quintile
-      spreads here are within noise once the overlapping holds are deflated, and the backtest's
-      under-minus-over spread is small and <span class="gloss" tabindex="0" data-tip="A stretch of months over which the market behaved one way, such as a long climb or a long slide. What works in one stretch often stops working in the next." aria-label="regime: A stretch of months over which the market behaved one way, such as a long climb or a long slide. What works in one stretch often stops working in the next.">regime</span>-dependent. Read them as two lenses on the same
-      population, not as independent confirmations. The same warning applies to the stratified cells
-      above, which are cut from that one panel over that one calendar window.
-    </div>
-
-    <div class="wl-block" id="wl-quintiles" style="margin-top:34px;">
-      <h3>Quintile ladders</h3>
-      <p class="wl-sub">Mean 3-month forward return of each formation quintile, Q1 (losers) to Q5
-        (winners). A downward ladder would indicate a reversion tilt; Spearman rank correlation summarises the
-        monotonicity.</p>
-      <div class="table-wrap"><table id="quintile-table">
-        <thead><tr>
-          <th title="Formation window.">Formation</th>
-          <th class="num" title="Q1 (trailing losers) mean forward 3m return, percent points.">Q1</th>
-          <th class="num">Q2</th>
-          <th class="num">Q3</th>
-          <th class="num">Q4</th>
-          <th class="num" title="Q5 (trailing winners) mean forward 3m return, percent points.">Q5</th>
-          <th class="num" title="Spearman rank correlation of quintile index vs forward return; negative = reversion.">Rank corr</th>
-        </tr></thead><tbody id="quintile-body"></tbody></table></div>
-    </div>
+  <section id="momentum-redirect" data-reveal>
+    <p>This moved to <a href="valuation.html#momentum">valuation.html#momentum</a>.</p>
   </section>
 
   <nav class="related" aria-label="Related pages" data-reveal>
@@ -795,7 +775,7 @@ html.compact .cardcell .cc-meta{white-space:nowrap;overflow:hidden;text-overflow
     </ul>
   </nav>
 
-  <p class="freshness-stamp">Prices as of 2026-09-03 (TCGplayer daily 2026-09-03, Cardmarket 2026-09-03, monthly panel 2026-09-01). Built 2026-09-03 04:05 UTC.</p>
+  <p class="freshness-stamp">Prices as of 2026-09-03 (TCGplayer daily 2026-09-03, Cardmarket 2026-09-03, monthly panel 2026-09-01). Built 2026-09-03 06:37 UTC.</p>
 
 </div>
 
@@ -1123,17 +1103,10 @@ targets.forEach(t=>reveal.observe(t));
 revealBatch(targets);
 setTimeout(()=>{ revealBatch(targets); }, 1200);
 }
-// ---------- active nav visibility ----------
-// The link strip scrolls horizontally on narrow viewports; bring the active
-// page's link into view on load so the highlighted item is visible at first
-// paint (keyboard Tab already auto-scrolls a focused link, but no focus exists
-// on load). block:"nearest" keeps the page from scrolling vertically.
-function initActiveNav(){
-const a = document.querySelector(".nav-links a.active");
-if(a && a.scrollIntoView){
-try{ a.scrollIntoView({inline:"center", block:"nearest"}); }catch(e){}
-}
-}
+// Active-nav visibility no longer needs a scroll-into-view: the grouped nav
+// does not scroll horizontally, and build_nav marks the current page's group
+// with a "has-active" class server-side, so the affordance survives with the
+// group collapsed and costs no script.
 document.addEventListener("mousemove", e=>{ if(tip && tip.classList.contains("show")) moveTip(e); });
 // Escape dismisses the tip (WCAG 2.1 SC 1.4.13 "Dismissable"), for the glossary
 // terms above all: their tip can cover the sentence being read. PARTIAL and
@@ -1145,7 +1118,6 @@ initTheme();
 initCopy();
 initDensity();
 initReveal();
-initActiveNav();
 initMarkTips();
 // Deferred by one task: page-specific extra_js is appended AFTER JS_CORE inside
 // the same script tag, and two pages (models #within-era, momentum #stratified)
@@ -1208,180 +1180,7 @@ return '<div class="cardcell' + (compact ? ' cc-compact' : '') + '">'
 + '</div></div>';
 }
 
-const PAGE = {"momentum":{"strategies":[{"strategy":"form1m","rebalances":27,"nEff":13.253,"spread":-2.9,"hitRate":37.0,"tEff":-1.817,"turnover":80.9,"verdict":"null"},{"strategy":"form3m","rebalances":25,"nEff":5.094,"spread":-6.4,"hitRate":16.0,"tEff":-1.738,"turnover":50.4,"verdict":"null"},{"strategy":"form6m","rebalances":22,"nEff":3.213,"spread":-2.7,"hitRate":22.7,"tEff":-0.962,"turnover":38.2,"verdict":"null"},{"strategy":"form6m_skip1","rebalances":21,"nEff":7.132,"spread":2.0,"hitRate":66.7,"tEff":0.931,"turnover":38.2,"verdict":"null"}],"quintiles":[{"strategy":"form1m","q":[1.6,3.7,4.6,3.9,-0.9],"steps":"2/4","rankCorr":-0.1},{"strategy":"form3m","q":[3.6,5.6,5.8,3.6,-2.1],"steps":"2/4","rankCorr":-0.6},{"strategy":"form6m","q":[4.9,8.1,7.8,6.4,2.5],"steps":"1/4","rankCorr":-0.4},{"strategy":"form6m_skip1","q":[3.8,6.8,8.3,6.8,5.9],"steps":"2/4","rankCorr":0.3}],"reversion":[],"momentum":[],"null":["form1m","form3m","form6m","form6m_skip1"],"strataHeadline":"STRATIFIED RE-EXAMINATION (read this with the line above): the pooled null is partly a COMPOSITION artifact. Ranking the same cards inside their own era instead of across the whole cross-section turns 4 pooled horizon(s) directional, and reversion clears the sample-size gates in 2 of 3 eras. After the shared-endpoint (bid-ask-bounce) control, the era-level reversion that survives is Sword & Shield only; momentum survives nowhere (0 momentum cells). This is a POST-HOC subgroup finding on one calendar window with no trading costs applied -- it is not a tradeable signal and does not overturn the pooled null. Full tables, sample sizes and caveats below.","strata":{"pooled":[{"stratum":"all cards","cards":491,"formation":"form1m","rebalances":27,"namesPerLeg":74.733,"nEff":13.253,"spread":-2.9,"hitRate":37.0,"tEff":-1.817,"verdict":"null","skip1":false},{"stratum":"all cards","cards":491,"formation":"form1m_skip1","rebalances":26,"namesPerLeg":74.031,"nEff":16.505,"spread":-1.7,"hitRate":38.5,"tEff":-1.366,"verdict":"null","skip1":true},{"stratum":"all cards","cards":491,"formation":"form3m","rebalances":25,"namesPerLeg":73.272,"nEff":5.094,"spread":-6.4,"hitRate":16.0,"tEff":-1.738,"verdict":"null","skip1":false},{"stratum":"all cards","cards":491,"formation":"form3m_skip1","rebalances":24,"namesPerLeg":72.45,"nEff":11.436,"spread":-3.9,"hitRate":16.7,"tEff":-1.794,"verdict":"null","skip1":true},{"stratum":"all cards","cards":491,"formation":"form6m","rebalances":22,"namesPerLeg":70.882,"nEff":3.213,"spread":-2.7,"hitRate":22.7,"tEff":-0.962,"verdict":"insufficient (n_eff<4)","skip1":false},{"stratum":"all cards","cards":491,"formation":"form6m_skip1","rebalances":21,"namesPerLeg":70.057,"nEff":7.132,"spread":2.0,"hitRate":66.7,"tEff":0.931,"verdict":"null","skip1":true}],"blocked":[{"stratum":"within-era ranking","cards":491,"formation":"form1m","rebalances":27,"namesPerLeg":74.733,"nEff":21.159,"spread":-5.4,"hitRate":7.4,"tEff":-5.607,"verdict":"reversion","skip1":false},{"stratum":"within-era ranking","cards":491,"formation":"form1m_skip1","rebalances":26,"namesPerLeg":74.031,"nEff":18.101,"spread":-3.7,"hitRate":19.2,"tEff":-3.607,"verdict":"reversion","skip1":true},{"stratum":"within-era ranking","cards":491,"formation":"form3m","rebalances":25,"namesPerLeg":73.272,"nEff":6.404,"spread":-8.6,"hitRate":8.0,"tEff":-3.526,"verdict":"reversion","skip1":false},{"stratum":"within-era ranking","cards":491,"formation":"form3m_skip1","rebalances":24,"namesPerLeg":72.45,"nEff":16.465,"spread":-5.7,"hitRate":8.3,"tEff":-4.352,"verdict":"reversion","skip1":true},{"stratum":"within-era ranking","cards":491,"formation":"form6m","rebalances":22,"namesPerLeg":70.882,"nEff":3.742,"spread":-5.0,"hitRate":18.2,"tEff":-1.885,"verdict":"insufficient (n_eff<4)","skip1":false},{"stratum":"within-era ranking","cards":491,"formation":"form6m_skip1","rebalances":21,"namesPerLeg":70.057,"nEff":5.011,"spread":0.3,"hitRate":57.1,"tEff":0.123,"verdict":"null","skip1":true}],"era":[{"stratum":"Scarlet & Violet","cards":247,"formation":"form1m","rebalances":27,"namesPerLeg":39.844,"nEff":22.242,"spread":-5.7,"hitRate":25.9,"tEff":-4.116,"verdict":"reversion","skip1":false},{"stratum":"Scarlet & Violet","cards":247,"formation":"form1m_skip1","rebalances":26,"namesPerLeg":39.477,"nEff":23.524,"spread":-2.3,"hitRate":42.3,"tEff":-1.848,"verdict":"null","skip1":true},{"stratum":"Scarlet & Violet","cards":247,"formation":"form3m","rebalances":25,"namesPerLeg":39.08,"nEff":13.665,"spread":-7.3,"hitRate":20.0,"tEff":-3.704,"verdict":"reversion","skip1":false},{"stratum":"Scarlet & Violet","cards":247,"formation":"form3m_skip1","rebalances":24,"namesPerLeg":38.65,"nEff":14.917,"spread":-2.8,"hitRate":20.8,"tEff":-1.392,"verdict":"null","skip1":true},{"stratum":"Scarlet & Violet","cards":247,"formation":"form6m","rebalances":22,"namesPerLeg":37.673,"nEff":8.162,"spread":-1.6,"hitRate":50.0,"tEff":-0.63,"verdict":"null","skip1":false},{"stratum":"Scarlet & Violet","cards":247,"formation":"form6m_skip1","rebalances":21,"namesPerLeg":37.114,"nEff":6.212,"spread":3.1,"hitRate":66.7,"tEff":0.965,"verdict":"null","skip1":true},{"stratum":"Sword & Shield","cards":163,"formation":"form1m","rebalances":27,"namesPerLeg":32.6,"nEff":27.0,"spread":-5.2,"hitRate":14.8,"tEff":-4.824,"verdict":"reversion","skip1":false},{"stratum":"Sword & Shield","cards":163,"formation":"form1m_skip1","rebalances":26,"namesPerLeg":32.6,"nEff":10.441,"spread":-4.6,"hitRate":26.9,"tEff":-2.098,"verdict":"reversion","skip1":true},{"stratum":"Sword & Shield","cards":163,"formation":"form3m","rebalances":25,"namesPerLeg":32.6,"nEff":4.852,"spread":-9.9,"hitRate":4.0,"tEff":-2.89,"verdict":"reversion","skip1":false},{"stratum":"Sword & Shield","cards":163,"formation":"form3m_skip1","rebalances":24,"namesPerLeg":32.6,"nEff":6.532,"spread":-8.3,"hitRate":4.2,"tEff":-3.208,"verdict":"reversion","skip1":true},{"stratum":"Sword & Shield","cards":163,"formation":"form6m","rebalances":22,"namesPerLeg":32.6,"nEff":5.021,"spread":-8.5,"hitRate":9.1,"tEff":-2.704,"verdict":"reversion","skip1":false},{"stratum":"Sword & Shield","cards":163,"formation":"form6m_skip1","rebalances":21,"namesPerLeg":32.6,"nEff":7.781,"spread":-2.6,"hitRate":42.9,"tEff":-1.028,"verdict":"null","skip1":true},{"stratum":"Mega Evolution","cards":81,"formation":"form1m","rebalances":8,"namesPerLeg":7.725,"nEff":8.0,"spread":-3.3,"hitRate":37.5,"tEff":-0.627,"verdict":"insufficient (leg<8)","skip1":false},{"stratum":"Mega Evolution","cards":81,"formation":"form1m_skip1","rebalances":7,"namesPerLeg":7.257,"nEff":7.0,"spread":2.1,"hitRate":57.1,"tEff":0.488,"verdict":"insufficient (rebalances<8, leg<8)","skip1":true},{"stratum":"Mega Evolution","cards":81,"formation":"form3m","rebalances":6,"namesPerLeg":6.633,"nEff":6.0,"spread":-4.1,"hitRate":33.3,"tEff":-0.974,"verdict":"insufficient (rebalances<8, leg<8)","skip1":false},{"stratum":"Mega Evolution","cards":81,"formation":"form3m_skip1","rebalances":5,"namesPerLeg":5.76,"nEff":5.0,"spread":0.1,"hitRate":40.0,"tEff":0.022,"verdict":"insufficient (rebalances<8, leg<8)","skip1":true},{"stratum":"Mega Evolution","cards":81,"formation":"form6m","rebalances":3,"namesPerLeg":4.467,"nEff":3.0,"spread":0.2,"hitRate":66.7,"tEff":0.079,"verdict":"insufficient (rebalances<8, n_eff<4, leg<8)","skip1":false},{"stratum":"Mega Evolution","cards":81,"formation":"form6m_skip1","rebalances":2,"namesPerLeg":3.6,"nEff":2.0,"spread":-0.6,"hitRate":50.0,"tEff":-0.205,"verdict":"insufficient (rebalances<8, n_eff<4, leg<8)","skip1":true}]}}};
-
-const MO = PAGE.momentum;
-// The 'null' verdict is a real category (no reliable momentum/reversion); show a
-// readable label to the user while keeping the raw value as the styling class.
-function vLabel(v){ return v==="null" ? "no signal" : v; }
-function renderMomentum(){
-const tb=document.getElementById("momentum-body");
-let html="";
-for(const s of MO.strategies){
-html+='<tr>'
-+'<td>'+esc(s.strategy)+'</td>'
-+'<td class="num">'+s.rebalances+'</td>'
-+'<td class="num">'+s.nEff.toFixed(2)+'</td>'
-+'<td class="num">'+s.spread.toFixed(1)+'%</td>'
-+'<td class="num">'+s.hitRate.toFixed(1)+'%</td>'
-+'<td class="num">'+s.tEff.toFixed(2)+'</td>'
-+'<td class="num">'+s.turnover.toFixed(1)+'%</td>'
-+'<td><span class="verdict-word '+esc(s.verdict)+'">'+esc(vLabel(s.verdict))+'</span></td>'
-+'</tr>';
-}
-tb.innerHTML=html;
-const rev=MO.reversion, mom=MO.momentum, nul=MO.null;
-const andList = a => a.length<=1 ? (a[0]||"") : a.slice(0,-1).join(", ")+" and "+a[a.length-1];
-let callout;
-if(rev.length===0 && mom.length===0){
-// every strategy is 'null' -> neither momentum nor reversion is distinguishable from noise
-callout = '<strong>No horizon supports momentum, or reversion.</strong> At every formation '
-+'window ('+esc(andList(nul))+') the top-minus-bottom quintile spread is not distinguishable '
-+'from zero once the overlapping-hold autocorrelation is accounted for (|t| below 2 on the '
-+'overlap-deflated sample). The data supports neither a tradeable momentum nor a tradeable '
-+'reversion effect in this cross-section.';
-} else {
-const parts=[];
-if(rev.length) parts.push('significant short-horizon <span class="verdict-word reversion">reversion</span> at '
-+esc(andList(rev))+' formation (t on the overlap-deflated sample below \u22122)');
-if(mom.length) parts.push('<span class="verdict-word momentum">momentum</span> at '+esc(andList(mom))+' formation');
-let s = '<strong>No horizon supports plain momentum.</strong> The data shows '+parts.join(", and ")+'.';
-if(nul.length) s += ' No reliable effect at '+esc(andList(nul))+'.';
-callout = s;
-}
-document.getElementById("momentum-callout").innerHTML = callout;
-const f1 = MO.strategies.find(s=>s.strategy==="form1m");
-const f3 = MO.strategies.find(s=>s.strategy==="form3m");
-const anySig = rev.length>0 || mom.length>0;
-document.getElementById("momentum-implication").innerHTML = anySig
-? ('Practical implication for collectors: chasing recent winners is counterproductive at short '
-+'horizons. Past 1-month winners moved '+fmtSigned(f1.spread,1)+' points versus past losers over '
-+'the next quarter, and past 3-month winners '+fmtSigned(f3.spread,1)+' points.')
-: ('Practical implication for collectors: pooled over the whole cross-section there is no reliable '
-+'short-horizon edge in either direction. Past 1-month winners minus losers averaged '
-+fmtSigned(f1.spread,1)+' points over the next quarter and past 3-month '+fmtSigned(f3.spread,1)
-+' points, but neither is distinguishable from noise once the overlapping holds are deflated, so '
-+'chasing or fading recent moves is not supported by this table.');
-// The table above pools the whole cross-section. The stratified re-examination
-// (era / rarity tier / era x tier / rarity, plus a shared-endpoint control) is
-// generated by the model code itself, so its headline is surfaced verbatim
-// rather than restated here -- it can never drift from what was measured.
-const sh = MO.strataHeadline;
-if (sh) {
-const box = document.getElementById("momentum-strata");
-box.innerHTML = '<strong>The pooled table is not the whole story.</strong> ' + dashes(esc(sh))
-+ (MO.strata
-? ' <a href="#stratified">See the pooled-versus-within-era comparison below.</a>'
-: ' Full stratified tables, per-cell sample sizes and caveats are in '
-+ '<code>momentum_summary.md</code> and <code>momentum_strata.csv</code>.');
-box.style.display = "";
-}
-}
-// ---------------------------------------------------------------------------
-// Stratified re-run. Every cell (spread, t, verdict, sample-size columns) is read
-// from momentum_summary.md, so an "insufficient" verdict stays distinct from a
-// null one and no cell is re-graded here.
-// (No backticks anywhere in emitted JS: one would trip minify.strip_js's
-// template-literal guard and ship this page's whole script unminified.)
-// ---------------------------------------------------------------------------
-const ST = MO.strata;
-function fLabel(f){ return f.replace("_skip1", " skip-1"); }
-function vClass(v){ return v.startsWith("insufficient") ? "insufficient" : v; }
-function vShort(v){ return v.startsWith("insufficient") ? "insufficient" : vLabel(v); }
-function vTd(v){
-return '<td><span class="verdict-word '+esc(vClass(v))+'" title="'+esc(v)+'">'
-+ esc(vShort(v))+'</span></td>';
-}
-function spreadTd(v){
-if(v==null) return '<td class="num">n/a</td>';
-return '<td class="num '+(v<0?"ret-neg":(v>0?"ret-pos":""))+'">'+pp(v)+'%</td>';
-}
-function renderBlocked(){
-if(!ST) return;
-document.getElementById("stratified").style.display = "";
-const bby = Object.fromEntries(ST.blocked.map(r=>[r.formation, r]));
-document.getElementById("blocked-body").innerHTML = ST.pooled.map(p=>{
-const b = bby[p.formation] || {};
-const flips = p.verdict === "null" && (b.verdict === "reversion" || b.verdict === "momentum");
-return '<tr class="'+(p.skip1?"":"slice-anchor")+'">'
-+ '<td>'+esc(fLabel(p.formation))+(flips?'<span class="thin-tag" title="Pooled says nothing '
-+'measurable here; ranking the same cards within their era does.">flips</span>':'')+'</td>'
-+ '<td class="num">'+p.rebalances+'</td>'
-+ spreadTd(p.spread)
-+ '<td class="num">'+(p.tEff==null?"n/a":p.tEff.toFixed(2))+'</td>'
-+ vTd(p.verdict)
-+ spreadTd(b.spread==null?null:b.spread)
-+ '<td class="num">'+(b.tEff==null?"n/a":b.tEff.toFixed(2))+'</td>'
-+ vTd(b.verdict || "n/a")
-+ '</tr>';
-}).join("");
-const flipped = ST.pooled.filter(p=>{
-const b = bby[p.formation];
-return b && p.verdict === "null" && (b.verdict === "reversion" || b.verdict === "momentum");
-}).map(p=>fLabel(p.formation));
-document.getElementById("blocked-legend").innerHTML =
-'Unshaded rows are the skip-1 twins: they form on T-1-w to T-1, so the price at T is never both '
-+ 'the closing endpoint of the formation return and the opening endpoint of the hold return. '
-+ 'That shared endpoint mechanically manufactures a negative, reversion-looking spread out of '
-+ 'pure measurement error (Blume-Stambaugh, bid-ask bounce), so a result that survives skip-1 is '
-+ 'not explained by it and one that vanishes very likely was. '
-+ (flipped.length
-? 'Horizons where within-era ranking turns a pooled null directional: '+esc(flipped.join(", "))+'.'
-: 'No horizon changes verdict under within-era ranking.');
-const era = ST.era;
-const eraNames = [];
-for(const r of era){ if(eraNames.indexOf(r.stratum)<0) eraNames.push(r.stratum); }
-document.getElementById("era-cells-body").innerHTML = era.map(r=>
-'<tr class="'+(r.skip1?"":"slice-anchor")+'">'
-+ '<td>'+esc(r.stratum)+'</td>'
-+ '<td class="num">'+r.cards+'</td>'
-+ '<td>'+esc(fLabel(r.formation))+'</td>'
-+ '<td class="num">'+r.rebalances+'</td>'
-+ '<td class="num">'+(r.namesPerLeg==null?"n/a":r.namesPerLeg.toFixed(1))+'</td>'
-+ '<td class="num">'+r.nEff.toFixed(2)+'</td>'
-+ spreadTd(r.spread)
-+ '<td class="num">'+(r.tEff==null?"n/a":r.tEff.toFixed(2))+'</td>'
-+ vTd(r.verdict)
-+ '</tr>').join("");
-const survives = era.filter(r=>r.skip1 && (r.verdict==="reversion" || r.verdict==="momentum"));
-const insuffEras = eraNames.filter(n=>era.filter(r=>r.stratum===n)
-.every(r=>r.verdict.startsWith("insufficient")));
-let sub = 'Every era cell, including its skip-1 twin. ';
-sub += survives.length
-? ('Only ' + esc(survives.map(r=>r.stratum+" at "+fLabel(r.formation)).join(", "))
-+ ' survive the shared-endpoint control, so those are the only era-level cells that cannot be '
-+ 'explained by measurement error in the single price shared between the formation and the '
-+ 'hold return.')
-: 'No era cell survives the shared-endpoint control, so none of them can be separated from '
-+ 'measurement error in the single price shared between the formation and hold returns.';
-if(insuffEras.length){
-sub += ' No claim is made for ' + esc(insuffEras.join(", "))
-+ ': every horizon there fails a sample-size gate. A thin slice is not weak evidence, it is no '
-+ 'evidence.';
-}
-document.getElementById("era-cells-sub").innerHTML = sub;
-document.getElementById("strata-caveats").innerHTML =
-'<strong>What this does and does not license.</strong> This stratification was run AFTER the '
-+ 'pooled result came back null, so it is a post-hoc subgroup finding: a hypothesis about where '
-+ 'to look next, not a measured effect. Every stratum is cut from one panel over one calendar '
-+ 'window, so two strata agreeing mostly says they lived through the same months. Many cells were '
-+ 'read for significance and they overlap heavily, so no clean multiplicity correction exists. '
-+ 'Nothing here is net of fees, spread or shipping, and the quintile legs reshuffle most of their '
-+ 'membership every month. And no stratum at any horizon supports momentum, with or without the '
-+ 'endpoint control. The bottom line is unchanged: there is still no tradeable momentum.';
-}
-function ppQ(v){ if(v==null) return '<td class="num">n/a</td>';
-const c=v>0?"ret-pos":(v<0?"ret-neg":""); return '<td class="num '+c+'">'+(v>0?"+":"")+v.toFixed(1)+'</td>'; }
-function renderQuintiles(){
-document.getElementById("quintile-body").innerHTML = MO.quintiles.map(r=>'<tr>'
-+'<td>'+esc(r.strategy)+'</td>'
-+r.q.map(ppQ).join("")
-+'<td class="num '+(r.rankCorr<0?"ret-neg":(r.rankCorr>0?"ret-pos":""))+'">'+fmtSigned(r.rankCorr,2)+'</td>'
-+'</tr>').join("");
-}
-renderMomentum();
-renderBlocked();
-renderQuintiles();
+const PAGE = {};
 
 </script>
 </body>
