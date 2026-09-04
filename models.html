@@ -775,7 +775,7 @@ svg.mchart .k0{fill:var(--ink-subtle);font-size:11px;text-anchor:middle}svg.mcha
       <span class="gloss" tabindex="0" data-tip="What is left over: the price a card actually fetches minus the price its features say it should. Positive means it sells for more than the features explain, negative means less." aria-label="residuals: What is left over: the price a card actually fetches minus the price its features say it should. Positive means it sells for more than the features explain, negative means less.">residuals</span>.</p>
     <details class="explain">
       <summary><span class="custom"></span></summary>
-      <div class="explain-body" id="explain-models"><p>The <strong>information coefficient</strong> (IC) is the cross-sectional rank correlation between predicted and realized returns each fold; higher is better, and it is deflated for fold autocorrelation via an effective sample size.</p><p>rf was chosen on the selection folds (mean IC 0.283) and graded on disjoint held-out folds, scoring mean IC 0.371 at information ratio 11.07.</p><p>How much of that is the set-age lifecycle? Two different statistics answer that and they point opposite ways, so both are given. Ablating the static set-age and rarity features moves all-fold mean IC from 0.333 to 0.260, removing a substantial minority of the signal (22%), so the ranking does not collapse without them. It is still substantially a lifecycle ordering, though: ranking on set age alone with no model at all already scores 0.309, 93% of the full-feature IC, and the model&#x27;s out-of-fold ranking correlates 0.374 (Spearman) with set age. The ablated residual clears the noise floor on held-out folds, so a non-static edge survives, but a ranking this reproducible from one variable should be read as a lifecycle map first and a trading signal second.</p></div>
+      <div class="explain-body" id="explain-models"><p>The <strong>information coefficient</strong> (IC) is the cross-sectional rank correlation between predicted and realized returns each fold; higher is better, and it is deflated for fold autocorrelation via an effective sample size.</p><p>rf was chosen on the selection folds (mean IC 0.283) and graded on disjoint held-out folds, scoring mean IC 0.371 &plusmn;0.033 at information ratio 11.07 (n_eff 5.82).</p><p>How much of that is the set-age lifecycle? Two different statistics answer that and they point opposite ways, so both are given. Ablating the static set-age and rarity features moves all-fold mean IC from 0.333 to 0.260, removing a substantial minority of the signal (22%), so the ranking does not collapse without them. It is still substantially a lifecycle ordering, though: ranking on set age alone with no model at all already scores 0.309, 93% of the full-feature IC, and the model&#x27;s out-of-fold ranking correlates 0.374 (Spearman) with set age. The ablated residual clears the noise floor on held-out folds, so a non-static edge survives, but a ranking this reproducible from one variable should be read as a lifecycle map first and a trading signal second.</p></div>
     </details>
     <div class="table-wrap">
       <table id="leaderboard">
@@ -925,7 +925,7 @@ svg.mchart .k0{fill:var(--ink-subtle);font-size:11px;text-anchor:middle}svg.mcha
     </ul>
   </nav>
 
-  <p class="freshness-stamp">Prices as of 2026-09-03 (TCGplayer daily 2026-09-03, Cardmarket 2026-09-03, monthly panel 2026-09-01). Built 2026-09-03 19:59 UTC.</p>
+  <p class="freshness-stamp">Prices as of 2026-09-04 (TCGplayer daily 2026-09-04, Cardmarket 2026-09-04, monthly panel 2026-09-01). Built 2026-09-04 02:48 UTC.</p>
 
 </div>
 
@@ -1324,12 +1324,18 @@ const a=V;
 // removes most of the signal and on others a minority, and the sentence must
 // follow the measurement in both directions.
 const AB = V.ablation;
+// The headline heldout IC has no standalone SE field of its own -- it is the
+// SAME "pooled (headline)" row the within-era table renders further down the
+// page (BD.era), so the callout reads its error bar and n_eff from there
+// rather than asserting the bare number the leaderboard used to show.
+const HL = BD ? BD.era.find(r => r.slice === "pooled (headline)") : null;
 document.getElementById("attr-note").innerHTML =
 '<strong>Why '+esc(a.bestModel)+', and the '+esc(a.verdict)+' verdict.</strong> '
 +esc(a.bestModel)+' was chosen on the first selection folds (selection-fold mean IC '
 +a.selIC.toFixed(3)+') and then graded on the disjoint held-out evaluation folds, where it scores '
-+'mean IC <strong>'+a.heldoutIC.toFixed(3)+'</strong> (information ratio '+a.heldoutIR.toFixed(2)
-+', deflated for fold autocorrelation). '
++'mean IC <strong>'+a.heldoutIC.toFixed(3)+'</strong>'+fmtPM(HL ? HL.se : null)
++' (information ratio '+a.heldoutIR.toFixed(2)
++', '+fmtNEff(HL ? HL.nEff : a.heldoutNeff)+', deflated for fold autocorrelation). '
 +(AB ? esc(AB.sentence)+' ' : '')
 +(a.verdict==="strong"
 ? 'The held-out ablated signal clears the 0.05 noise floor by more than one standard '
