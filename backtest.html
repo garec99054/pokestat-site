@@ -410,6 +410,20 @@ border-radius:999px;white-space:nowrap;letter-spacing:0.01em;
 .flag-badge.up{background:rgba(var(--up-rgb),0.13);color:var(--up-text);}
 .flag-badge.down{background:rgba(var(--down-rgb),0.13);color:var(--down-text);}
 .flag-badge.none{background:var(--panel-alt);color:var(--ink-subtle);font-weight:600;}
+.show-all-btn{
+display:inline-block;margin-left:6px;padding:3px 10px;border-radius:999px;
+border:1px solid var(--border);background:var(--panel);color:var(--accent-ink);
+font:inherit;font-size:0.82rem;font-weight:600;cursor:pointer;min-height:32px;
+}
+.show-all-btn:hover{background:var(--panel-alt);}
+.skip-link{
+position:absolute;left:8px;top:-48px;z-index:1000;padding:8px 12px;border-radius:8px;
+background:var(--accent);color:var(--on-accent);font-weight:600;text-decoration:none;
+}
+.skip-link:focus{top:8px;}
+@media (max-width:480px){
+.cc-links .chip{padding:6px 10px;min-height:30px;line-height:1.3;}
+}
 .flag-chip{
 display:inline-block;font-size:0.68rem;font-weight:600;padding:1px 7px;margin-top:3px;
 border-radius:999px;border:1px solid var(--border-strong);white-space:nowrap;color:var(--ink-subtle);
@@ -648,7 +662,7 @@ linear-gradient(var(--border-strong),var(--border-strong)) no-repeat center/60% 
 .cc-links .chip{
 display:inline-block;font-size:0.68rem;font-weight:600;padding:1px 7px;
 border-radius:999px;border:1px solid var(--border-strong);white-space:nowrap;
-color:var(--ink-subtle);text-decoration:none;
+color:var(--ink-subtle);text-decoration:none;position:relative;
 transition:border-color .15s ease-out,color .15s ease-out;
 }
 .cc-links .chip:hover{border-color:var(--accent);color:var(--accent-ink);}
@@ -674,6 +688,7 @@ svg.mchart .k0{stroke:var(--border-strong)}svg.mchart .k1{fill:var(--ink-subtle)
 </head>
 <body>
 
+<a class="skip-link" href="#main">Skip to content</a>
 <nav class="topnav" aria-label="Site navigation">
   <div class="nav-inner">
     <a class="brand" href="dashboard.html">pokestat</a>
@@ -747,7 +762,7 @@ svg.mchart .k0{stroke:var(--border-strong)}svg.mchart .k1{fill:var(--ink-subtle)
   </div>
 </nav>
 
-<div class="page">
+<main class="page" id="main">
 
   <header class="masthead" data-reveal>
     <h1>Do the value flags predict forward returns?</h1>
@@ -763,7 +778,7 @@ svg.mchart .k0{stroke:var(--border-strong)}svg.mchart .k1{fill:var(--ink-subtle)
     <p class="section-note" id="backtest-note"></p>
     <details class="explain">
       <summary><span class="custom"></span></summary>
-      <div class="explain-body" id="explain-backtest"><p>Cards flagged undervalued, overvalued, or fair are tracked forward about 90 days across 8 snapshots. The headline is the undervalued-minus-overvalued mean-return spread of <strong>+1.0 points</strong>, which is positive: so undervalued flags modestly outperformed overvalued ones.</p><p>This spread is small and has been <strong><span class="gloss" tabindex="0" data-tip="A stretch of months over which the market behaved one way, such as a long climb or a long slide. What works in one stretch often stops working in the next." aria-label="regime: A stretch of months over which the market behaved one way, such as a long climb or a long slide. What works in one stretch often stops working in the next.">regime</span>-dependent</strong> (negative in 2025, positive in 2026), and the leakage-free as-of-T desirability inputs (Wikipedia pageviews and character premium rebuilt at each date) leave no look-ahead lift, so it should be read as a weak, unstable signal rather than a durable edge.</p><p>The per-flag groups are also small and share recurring cards, so the remaining differences are best read as largely noise.</p></div>
+      <div class="explain-body" id="explain-backtest"><p>Cards flagged undervalued, overvalued, or fair are tracked forward about 90 days across 8 snapshots. The headline is the undervalued-minus-overvalued mean-return spread of <strong>+1.0 points</strong>, which is positive: so undervalued flags modestly outperformed overvalued ones.</p><p>This spread is small and has been <strong><span class="gloss" tabindex="0" data-tip="A stretch of months over which the market behaved one way, such as a long climb or a long slide. What works in one stretch often stops working in the next." aria-label="regime: A stretch of months over which the market behaved one way, such as a long climb or a long slide. What works in one stretch often stops working in the next.">regime</span>-dependent</strong> (2024 mixed: 1 of 2 snapshots positive, mean -1.1 points; 2025 mixed: 2 of 4 snapshots positive, mean -1.3 points; 2026 positive: 2 of 2 snapshots positive, mean +6.5 points), and the leakage-free as-of-T desirability inputs (Wikipedia pageviews and character premium rebuilt at each date) leave no look-ahead lift, so it should be read as a weak, unstable signal rather than a durable edge.</p><p>The per-flag groups are also small and share recurring cards, so the remaining differences are best read as largely noise.</p></div>
     </details>
     <figure class="regime-fig" data-reveal><svg class="mchart" viewBox="0 0 680 300" width="680" height="300" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Mean forward return by value flag over snapshot dates" style="max-width:680px;width:100%;height:auto;display:block;margin:0 auto;"><line x1="52" y1="254.3" x2="572" y2="254.3" class="k5"/><text x="44" y="257.8" class="k6">0%</text><line x1="52" y1="179.8" x2="572" y2="179.8" class="k5"/><text x="44" y="183.3" class="k6">10%</text><line x1="52" y1="105.4" x2="572" y2="105.4" class="k5"/><text x="44" y="108.9" class="k6">20%</text><line x1="52" y1="30.9" x2="572" y2="30.9" class="k5"/><text x="44" y="34.4" class="k6">30%</text><line x1="52" y1="254.3" x2="572" y2="254.3" stroke="var(--border-strong)" stroke-width="1.2" stroke-dasharray="3 3"/><line x1="52" y1="16" x2="52" y2="258" class="k0"/><line x1="52" y1="258" x2="572" y2="258" class="k0"/><line x1="52" y1="258" x2="52" y2="262" class="k0"/><text x="52" y="274" class="k1">24-09</text><line x1="126.3" y1="258" x2="126.3" y2="262" class="k0"/><text x="126.3" y="274" class="k1">24-12</text><line x1="200.6" y1="258" x2="200.6" y2="262" class="k0"/><text x="200.6" y="274" class="k1">25-03</text><line x1="274.9" y1="258" x2="274.9" y2="262" class="k0"/><text x="274.9" y="274" class="k1">25-06</text><line x1="349.1" y1="258" x2="349.1" y2="262" class="k0"/><text x="349.1" y="274" class="k1">25-09</text><line x1="423.4" y1="258" x2="423.4" y2="262" class="k0"/><text x="423.4" y="274" class="k1">25-12</text><line x1="497.7" y1="258" x2="497.7" y2="262" class="k0"/><text x="497.7" y="274" class="k1">26-03</text><line x1="572" y1="258" x2="572" y2="262" class="k0"/><text x="572" y="274" class="k1">26-06</text><text x="312" y="296" class="k7">Snapshot date</text><text x="12" y="137" transform="rotate(-90 12 137)" class="k7">Mean forward return</text><polyline points="52,230.4 126.3,35.4 200.6,194 274.9,258 349.1,205.9 423.4,181.3 497.7,126.9 572,174.6" fill="none" stroke="var(--down-text)" stroke-width="1.9" stroke-linejoin="round" stroke-linecap="round"/><circle cx="52" cy="230.4" r="2" class="k2"/><circle cx="126.3" cy="35.4" r="2" class="k2"/><circle cx="200.6" cy="194" r="2" class="k2"/><circle cx="274.9" cy="258" r="2" class="k2"/><circle cx="349.1" cy="205.9" r="2" class="k2"/><circle cx="423.4" cy="181.3" r="2" class="k2"/><circle cx="497.7" cy="126.9" r="2" class="k2"/><circle cx="572" cy="174.6" r="2" class="k2"/><polyline points="52,234.9 126.3,97.9 200.6,214.8 274.9,202.9 349.1,211.8 423.4,211.1 497.7,125.5 572,226" fill="none" stroke="var(--neutral)" stroke-width="1.9" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="2 3"/><circle cx="52" cy="234.9" r="2" class="k3"/><circle cx="126.3" cy="97.9" r="2" class="k3"/><circle cx="200.6" cy="214.8" r="2" class="k3"/><circle cx="274.9" cy="202.9" r="2" class="k3"/><circle cx="349.1" cy="211.8" r="2" class="k3"/><circle cx="423.4" cy="211.1" r="2" class="k3"/><circle cx="497.7" cy="125.5" r="2" class="k3"/><circle cx="572" cy="226" r="2" class="k3"/><polyline points="52,233.4 126.3,16 200.6,228.2 274.9,149.3 349.1,168.6 423.4,252.8 497.7,173.9 572,225.2" fill="none" stroke="var(--up-text)" stroke-width="1.9" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="6 4"/><circle cx="52" cy="233.4" r="2" class="k4"/><circle cx="126.3" cy="16" r="2" class="k4"/><circle cx="200.6" cy="228.2" r="2" class="k4"/><circle cx="274.9" cy="149.3" r="2" class="k4"/><circle cx="349.1" cy="168.6" r="2" class="k4"/><circle cx="423.4" cy="252.8" r="2" class="k4"/><circle cx="497.7" cy="173.9" r="2" class="k4"/><circle cx="572" cy="225.2" r="2" class="k4"/><text x="578" y="178.1" font-size="11" fill="var(--down-text)" font-weight="600">undervalued</text><text x="578" y="228.7" font-size="11" fill="var(--up-text)" font-weight="600">overvalued</text><text x="578" y="241.7" font-size="11" fill="var(--ink-muted)" font-weight="600">fair</text></svg><figcaption>Mean forward
       ~90-day return of each value-flag cohort at every backtest snapshot. The lines
@@ -817,9 +832,9 @@ svg.mchart .k0{stroke:var(--border-strong)}svg.mchart .k1{fill:var(--ink-subtle)
     </ul>
   </nav>
 
-  <p class="freshness-stamp">Prices as of 2026-09-05 (TCGplayer daily 2026-09-05, Cardmarket 2026-09-05, monthly panel 2026-09-01). Built 2026-09-05 06:36 UTC.</p>
+  <p class="freshness-stamp">Prices as of 2026-09-05 (TCGplayer daily 2026-09-05, Cardmarket 2026-09-05, monthly panel 2026-09-01). Built 2026-09-05 23:46 UTC.</p>
 
-</div>
+</main>
 
 <div id="tooltip" role="tooltip"></div>
 

@@ -410,6 +410,20 @@ border-radius:999px;white-space:nowrap;letter-spacing:0.01em;
 .flag-badge.up{background:rgba(var(--up-rgb),0.13);color:var(--up-text);}
 .flag-badge.down{background:rgba(var(--down-rgb),0.13);color:var(--down-text);}
 .flag-badge.none{background:var(--panel-alt);color:var(--ink-subtle);font-weight:600;}
+.show-all-btn{
+display:inline-block;margin-left:6px;padding:3px 10px;border-radius:999px;
+border:1px solid var(--border);background:var(--panel);color:var(--accent-ink);
+font:inherit;font-size:0.82rem;font-weight:600;cursor:pointer;min-height:32px;
+}
+.show-all-btn:hover{background:var(--panel-alt);}
+.skip-link{
+position:absolute;left:8px;top:-48px;z-index:1000;padding:8px 12px;border-radius:8px;
+background:var(--accent);color:var(--on-accent);font-weight:600;text-decoration:none;
+}
+.skip-link:focus{top:8px;}
+@media (max-width:480px){
+.cc-links .chip{padding:6px 10px;min-height:30px;line-height:1.3;}
+}
 .flag-chip{
 display:inline-block;font-size:0.68rem;font-weight:600;padding:1px 7px;margin-top:3px;
 border-radius:999px;border:1px solid var(--border-strong);white-space:nowrap;color:var(--ink-subtle);
@@ -648,7 +662,7 @@ linear-gradient(var(--border-strong),var(--border-strong)) no-repeat center/60% 
 .cc-links .chip{
 display:inline-block;font-size:0.68rem;font-weight:600;padding:1px 7px;
 border-radius:999px;border:1px solid var(--border-strong);white-space:nowrap;
-color:var(--ink-subtle);text-decoration:none;
+color:var(--ink-subtle);text-decoration:none;position:relative;
 transition:border-color .15s ease-out,color .15s ease-out;
 }
 .cc-links .chip:hover{border-color:var(--accent);color:var(--accent-ink);}
@@ -665,6 +679,7 @@ html.compact .cardcell .cc-meta{white-space:nowrap;overflow:hidden;text-overflow
 </head>
 <body>
 
+<a class="skip-link" href="#main">Skip to content</a>
 <nav class="topnav" aria-label="Site navigation">
   <div class="nav-inner">
     <a class="brand" href="dashboard.html">pokestat</a>
@@ -738,7 +753,7 @@ html.compact .cardcell .cc-meta{white-space:nowrap;overflow:hidden;text-overflow
   </div>
 </nav>
 
-<div class="page">
+<main class="page" id="main">
 
   <header class="masthead" data-reveal>
     <h1>Methods, sources, and caveats</h1>
@@ -826,11 +841,11 @@ html.compact .cardcell .cc-meta{white-space:nowrap;overflow:hidden;text-overflow
   <footer>
     <p>Every figure across these pages is read from a generated output file by
       <code>scripts/build_dashboard_data.py</code>. Sources: full per-card outlook
-      <code>data/output/forward_outlook.csv</code>; model validation and signal attribution
-      <code>data/output/forward_validation.md</code>; momentum study
-      <code>data/output/momentum_summary.md</code>; value backtest
-      <code>data/output/backtest_summary.md</code>; price trends
-      <code>data/output/sparklines.json</code>. Rebuild with
+      <a href="forward_outlook.csv"><code>data/output/forward_outlook.csv</code></a>; model validation and signal attribution
+      <a href="forward_validation.md"><code>data/output/forward_validation.md</code></a>; momentum study
+      <a href="momentum_summary.md"><code>data/output/momentum_summary.md</code></a>; value backtest
+      <a href="backtest_summary.md"><code>data/output/backtest_summary.md</code></a>; price trends
+      <a href="sparklines.json"><code>data/output/sparklines.json</code></a>. Rebuild with
       <code>uv run python scripts/build_dashboard_data.py</code>.</p>
   </footer>
 
@@ -843,9 +858,9 @@ html.compact .cardcell .cc-meta{white-space:nowrap;overflow:hidden;text-overflow
     </ul>
   </nav>
 
-  <p class="freshness-stamp">Prices as of 2026-09-05 (TCGplayer daily 2026-09-05, Cardmarket 2026-09-05, monthly panel 2026-09-01). Built 2026-09-05 06:36 UTC.</p>
+  <p class="freshness-stamp">Prices as of 2026-09-05 (TCGplayer daily 2026-09-05, Cardmarket 2026-09-05, monthly panel 2026-09-01). Built 2026-09-05 23:46 UTC.</p>
 
-</div>
+</main>
 
 <div id="tooltip" role="tooltip"></div>
 
