@@ -191,9 +191,10 @@ height:var(--nav-h);display:flex;align-items:center;gap:10px;
 .brand{
 font-weight:700;letter-spacing:-0.01em;color:var(--ink);
 text-decoration:none;font-size:var(--fs-4);flex:none;
-position:relative;display:inline-flex;align-items:flex-end;min-height:44px;
+position:relative;display:inline-flex;align-items:center;
 }
 .brand:hover{color:var(--accent-ink);}
+.brand::before{content:"";position:absolute;left:-6px;right:-6px;top:-10px;bottom:-10px;}
 .brand::after{
 content:"";position:absolute;left:0;right:0;bottom:-3px;height:1.5px;
 background:var(--accent);opacity:0.34;
@@ -288,7 +289,6 @@ display:inline-flex;align-items:center;min-height:44px;
 .brand{margin-right:auto;}
 .nav-links-desktop{display:none;}
 .nav-more{display:block;order:2;flex:none;position:static;}
-.brand{padding-bottom:6px;}
 .nav-more > summary{padding:6px 10px;}
 .nav-more > .nav-links-mobile{
 position:absolute;left:0;right:0;top:100%;z-index:41;
@@ -946,7 +946,7 @@ svg.mchart .k0{stroke:var(--border-strong)}svg.mchart .k1{fill:var(--ink-subtle)
     </ul>
   </nav>
 
-  <p class="freshness-stamp" data-stale="true">Prices as of 2026-09-02 (TCGplayer daily 2026-09-02, Cardmarket 2026-09-02, monthly panel 2026-09-01). Built 2026-09-09 21:03 UTC. Published upstream: Cardmarket (EU) 2026-09-01 09:33 UTC. Feed stale: 8 days old.</p>
+  <p class="freshness-stamp" data-stale="true">Prices as of 2026-09-02 (TCGplayer daily 2026-09-02, Cardmarket 2026-09-02, monthly panel 2026-09-01). Built 2026-09-09 21:49 UTC. Published upstream: Cardmarket (EU) 2026-09-01 09:33 UTC. Feed stale: 8 days old.</p>
 
 </main>
 
