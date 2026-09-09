@@ -191,7 +191,7 @@ height:var(--nav-h);display:flex;align-items:center;gap:10px;
 .brand{
 font-weight:700;letter-spacing:-0.01em;color:var(--ink);
 text-decoration:none;font-size:var(--fs-4);flex:none;
-position:relative;display:inline-block;
+position:relative;display:inline-flex;align-items:flex-end;min-height:44px;
 }
 .brand:hover{color:var(--accent-ink);}
 .brand::after{
@@ -224,6 +224,7 @@ border-radius:var(--radius);box-shadow:0 6px 18px rgba(var(--shadow-tint),0.16);
 .nav-group-panel a{padding:7px 14px;}
 .nav-group:hover > .nav-group-panel,
 .nav-group:focus-within > .nav-group-panel{visibility:visible;opacity:1;transition-delay:0s;}
+.nav-group.js-closed > .nav-group-panel{visibility:hidden;opacity:0;}
 .nav-group-label{
 border:none;background:none;font-family:inherit;cursor:pointer;
 display:flex;align-items:center;gap:5px;
@@ -252,6 +253,7 @@ color:var(--accent-ink);background:rgba(var(--accent-rgb),0.10);font-weight:600;
 .nav-more > summary{
 cursor:pointer;list-style:none;display:flex;align-items:center;
 font-size:var(--fs-2);font-weight:600;padding:6px 10px;white-space:nowrap;
+min-height:44px;
 }
 .nav-more > summary::-webkit-details-marker{display:none;}
 .nav-more > summary:hover{background:var(--panel-alt);}
@@ -262,9 +264,15 @@ margin:0 0 2px;font-size:var(--fs-1);font-weight:700;text-transform:uppercase;
 letter-spacing:0.04em;color:var(--ink-subtle);
 }
 .nav-menu-group{display:flex;flex-direction:column;}
-.nav-menu-group a{padding:8px 6px;}
-.density-toggle{flex:none;white-space:nowrap;font-size:var(--fs-2);padding:6px 10px;}
-.theme-cycle{flex:none;white-space:nowrap;font-size:var(--fs-2);padding:6px 10px;}
+.nav-menu-group a{display:flex;align-items:center;padding:8px 6px;min-height:44px;}
+.density-toggle{
+flex:none;white-space:nowrap;font-size:var(--fs-2);padding:6px 10px;
+display:inline-flex;align-items:center;min-height:44px;
+}
+.theme-cycle{
+flex:none;white-space:nowrap;font-size:var(--fs-2);padding:6px 10px;
+display:inline-flex;align-items:center;min-height:44px;
+}
 @media (prefers-reduced-motion:no-preference){
 .depth-in > *{animation:pk-rowin var(--t-mid) var(--ease) both;}
 .depth-in > *:nth-child(n+6){animation-delay:calc((var(--rowi,0)) * 1ms);}
@@ -276,16 +284,25 @@ letter-spacing:0.04em;color:var(--ink-subtle);
 @keyframes pk-rowin{from{opacity:0;transform:translateY(-4px);}to{opacity:1;transform:none;}}
 }
 @media (max-width:720px){
-.nav-inner{flex-wrap:wrap;height:auto;row-gap:2px;padding-top:6px;padding-bottom:8px;}
+.nav-inner{flex-wrap:nowrap;height:var(--nav-h);}
 .brand{margin-right:auto;}
 .nav-links-desktop{display:none;}
-.nav-more{display:block;order:3;flex:0 0 100%;width:100%;}
+.nav-more{display:block;order:2;flex:none;position:static;}
+.brand{padding-bottom:6px;}
+.nav-more > summary{padding:6px 10px;}
+.nav-more > .nav-links-mobile{
+position:absolute;left:0;right:0;top:100%;z-index:41;
+background:var(--surface);border-bottom:1px solid var(--border);
+padding:10px 16px 16px;max-height:calc(100vh - var(--nav-h));overflow:auto;
+box-shadow:0 12px 24px -16px rgba(0,0,0,.35);
+}
+.density-toggle{margin-left:auto;}
 }
 @media (max-width:560px){
 .nav-inner{gap:6px;padding-left:12px;padding-right:12px;}
 .density-toggle,.theme-cycle{font-size:var(--fs-1);padding:5px 8px;}
 }
-header.masthead{border-bottom:1px solid var(--border);padding-bottom:14px;margin-bottom:18px;text-align:center;scroll-margin-top:calc(var(--nav-h) + 14px);}
+header.masthead{border-bottom:1px solid var(--border);padding-bottom:14px;margin-bottom:18px;text-align:center;scroll-margin-top:calc(var(--nav-h) + 24px + var(--onpage-h,0px));}
 header.masthead h1{font-size:var(--fs-6);font-weight:650;margin:0 0 5px;letter-spacing:-0.01em;}
 header.masthead p.lede{margin:0 auto 8px;max-width:80ch;color:var(--ink-muted);font-size:var(--fs-3);}
 .onpage{
@@ -299,11 +316,19 @@ text-transform:uppercase;letter-spacing:0.06em;
 .onpage ol{
 list-style:none;margin:0;padding:1px 1px 6px;display:flex;gap:8px;
 flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;
+background-repeat:no-repeat;background-color:var(--surface);
+background-image:
+linear-gradient(to left,var(--surface) 60%,rgba(var(--shadow-tint),0)),
+linear-gradient(to left,rgba(var(--shadow-tint),0.25),rgba(var(--shadow-tint),0));
+background-position:100% 0,100% 0;
+background-size:28px 100%,16px 100%;
+background-attachment:local,scroll;
 }
 .onpage ol::-webkit-scrollbar{display:none;}
 .onpage li{flex:none;}
 .onpage a{
-display:inline-block;white-space:nowrap;padding:7px 13px;font-size:var(--fs-2);
+display:inline-flex;align-items:center;min-height:44px;white-space:nowrap;
+padding:7px 13px;font-size:var(--fs-2);
 border:1px solid var(--border-strong);border-radius:var(--radius);
 background:var(--panel);color:var(--accent-ink);text-decoration:none;
 }
@@ -323,8 +348,8 @@ border-bottom:1px solid var(--border);margin:0 0 var(--section-gap);
 --onpage-cur-bg:transparent;--onpage-cur-deco:underline;
 }
 .onpage-k{margin:0;flex:none;white-space:nowrap;}
-.onpage ol{flex:1;overflow-x:visible;flex-wrap:wrap;padding:0;gap:4px 20px;justify-content:center;}
-.onpage a{padding:0;border:none;border-radius:0;background:none;}
+.onpage ol{flex:1;overflow-x:visible;flex-wrap:wrap;padding:0;gap:4px 20px;justify-content:center;background:none;}
+.onpage a{padding:0;border:none;border-radius:0;background:none;min-height:0;display:inline;}
 .onpage a:hover{border-color:transparent;background:none;color:var(--ink);}
 }
 .summary-strip{
@@ -356,7 +381,7 @@ transition:background-color .15s ease-out,border-color .15s ease-out;
 }
 .verdict-chip:hover{border-color:var(--warn-border-hover);color:var(--warn-ink-hover);background:var(--warn-bg-hover);}
 .verdict-chip .dot{width:7px;height:7px;border-radius:50%;background:var(--warn-dot);}
-section{margin-bottom:var(--section-gap);scroll-margin-top:calc(var(--nav-h) + 14px);}
+section{margin-bottom:var(--section-gap);scroll-margin-top:calc(var(--nav-h) + 24px + var(--onpage-h,0px));}
 section > h2{font-size:var(--fs-5);font-weight:650;margin:0 0 4px;letter-spacing:-0.005em;text-align:center;}
 section > p.section-note{margin:0 auto 10px;color:var(--ink-muted);font-size:var(--fs-3);max-width:78ch;text-align:center;}
 details.explain{
@@ -430,6 +455,7 @@ input[type="search"]:focus,select:focus,button:focus{outline:2px solid var(--acc
 a:focus-visible,summary:focus-visible,.hub-card:focus-visible,.verdict-chip:focus-visible{
 outline:2px solid var(--accent);outline-offset:2px;border-radius:var(--radius);
 }
+[tabindex="-1"]:focus{outline:none;}
 .preset-group{display:flex;gap:0;border:1px solid var(--border-strong);border-radius:var(--radius);overflow:hidden;}
 .preset-group button{border:none;border-right:1px solid var(--border-strong);border-radius:0;background:var(--panel);}
 .preset-group button:last-child{border-right:none;}
@@ -632,7 +658,8 @@ text-transform:uppercase;letter-spacing:0.06em;
 }
 .rel-list{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px 10px;}
 .rel-list a{
-display:inline-block;padding:7px 13px;font-size:var(--fs-2);
+display:inline-flex;align-items:center;min-height:44px;padding:7px 13px;
+font-size:var(--fs-2);
 border:1px solid var(--border-strong);border-radius:var(--radius);
 background:var(--panel);color:var(--accent-ink);text-decoration:none;
 transition:border-color var(--t-fast) ease-out,background-color var(--t-fast) ease-out;
@@ -646,17 +673,23 @@ transition:opacity var(--t-mid) var(--ease),transform var(--t-mid) var(--ease);
 transition-delay:calc(var(--rv,0) * var(--rv-step));}
 html.motion [data-reveal].in-view{opacity:1;transform:none;}
 .back-to-top{
-position:fixed;right:18px;bottom:18px;z-index:44;
-font-size:var(--fs-2);padding:7px 14px;background:var(--panel);
-border:1px solid var(--border-strong);border-radius:var(--radius);
+position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));
+z-index:44;width:44px;height:44px;padding:0;border-radius:50%;
+display:inline-flex;align-items:center;justify-content:center;
+font-size:var(--fs-1);background:var(--panel);
+border:1px solid var(--border-strong);
 color:var(--ink-muted);box-shadow:0 2px 10px rgba(var(--shadow-tint),0.18);
 }
 .back-to-top:hover{color:var(--ink);border-color:var(--accent);}
+.back-to-top.is-hidden{opacity:0;pointer-events:none;}
 @media (prefers-reduced-motion:no-preference){
-.back-to-top{transition:color var(--t-fast) ease-out,border-color var(--t-fast) ease-out;}
+.back-to-top{
+transition:color var(--t-fast) ease-out,border-color var(--t-fast) ease-out,
+opacity var(--t-fast) ease-out;
+}
 }
 @media (max-width:560px){
-.back-to-top{right:10px;bottom:10px;}
+.back-to-top{right:10px;bottom:calc(10px + env(safe-area-inset-bottom,0px));}
 }
 @media (prefers-reduced-motion:no-preference){
 @supports (animation-timeline:scroll()){
@@ -681,8 +714,8 @@ font-size:14px;
 --band-w:120px;
 }
 @media (max-width:720px){
-:root{--nav-h:82px;}
-html.compact{--nav-h:78px;}
+:root{--nav-h:52px;}
+html.compact{--nav-h:52px;}
 }
 html.compact .page{padding-top:22px;}
 html.compact header.masthead{padding-bottom:10px;margin-bottom:12px;}
@@ -946,7 +979,7 @@ color:var(--ink-subtle);}
           <a href="dashboard.html">Summary</a>
           <a href="mine.html">My cards</a>
           <a href="findings.html">Findings</a>
-          <a href="changelog.html">Changelog</a>
+          <a href="changelog.html">What changed</a>
           <a href="sitemap.html">Site map</a>
         </div>
       </div>
@@ -970,7 +1003,7 @@ color:var(--ink-subtle);}
       <div class="nav-group">
         <button type="button" class="nav-group-label">Sealed</button>
         <div class="nav-group-panel">
-          <a href="etb.html">Trainer boxes</a>
+          <a href="etb.html">Elite Trainer Boxes</a>
           <a href="hits.html">Hit rates</a>
         </div>
       </div>
@@ -992,7 +1025,7 @@ color:var(--ink-subtle);}
           <a href="dashboard.html">Summary</a>
           <a href="mine.html">My cards</a>
           <a href="findings.html">Findings</a>
-          <a href="changelog.html">Changelog</a>
+          <a href="changelog.html">What changed</a>
           <a href="sitemap.html">Site map</a>
         </div>
         <div class="nav-menu-group">
@@ -1010,7 +1043,7 @@ color:var(--ink-subtle);}
         </div>
         <div class="nav-menu-group">
           <p class="nav-menu-label">Sealed</p>
-          <a href="etb.html">Trainer boxes</a>
+          <a href="etb.html">Elite Trainer Boxes</a>
           <a href="hits.html">Hit rates</a>
         </div>
         <div class="nav-menu-group">
@@ -1027,7 +1060,7 @@ color:var(--ink-subtle);}
   </div>
 </nav>
 
-<main class="page" id="main">
+<main class="page" id="main" tabindex="-1">
 
   <header class="masthead" data-reveal>
     <h1>Full 90-day outlook, all modeled chase cards</h1>
@@ -1126,7 +1159,7 @@ color:var(--ink-subtle);}
     </ul>
   </nav>
 
-  <p class="freshness-stamp" data-stale="true">Prices as of 2026-09-02 (TCGplayer daily 2026-09-02, Cardmarket 2026-09-02, monthly panel 2026-09-01). Built 2026-09-09 19:06 UTC. Published upstream: Cardmarket (EU) 2026-09-01 09:33 UTC. Feed stale: 8 days old.</p>
+  <p class="freshness-stamp" data-stale="true">Prices as of 2026-09-02 (TCGplayer daily 2026-09-02, Cardmarket 2026-09-02, monthly panel 2026-09-01). Built 2026-09-09 21:03 UTC. Published upstream: Cardmarket (EU) 2026-09-01 09:33 UTC. Feed stale: 8 days old.</p>
 
 </main>
 
@@ -1287,14 +1320,183 @@ try{ localStorage.setItem(THEME_KEY, next); }catch(e){}
 // live cross-tab / cross-page sync
 window.addEventListener("storage", e=>{ if(e.key===THEME_KEY && e.newValue) applyTheme(e.newValue); });
 }
+// ---------- chrome heights (--nav-h, --onpage-h) ----------
+// The top nav's and on-page bar's own rendered heights, fed to CSS as custom
+// properties rather than hand-maintained literals, so scroll-margin-top
+// always clears BOTH sticky bars exactly, at every density and breakpoint,
+// without a pixel count anyone has to keep in sync by hand. --nav-h is
+// measured off .nav-inner specifically, not .topnav itself: .nav-inner is
+// the element whose CSS height:var(--nav-h) already drives the desktop bar,
+// so writing the measurement straight back into that same property is a
+// stable no-op there (never a feedback loop) and, below 720px where
+// .nav-inner's height is auto, it captures the two-row phone bar's real,
+// organic height instead of a guess. --onpage-h is nav.onpage's own height
+// when (and only when) it is actually sticky (position:sticky, 1024px and
+// up) -- 0px otherwise, so a page with no on-page index, or one viewed
+// below 1024px where the index is a plain scrolling chip row, adds nothing.
+function measureChromeHeights(){
+const inner = document.querySelector(".nav-inner");
+if(inner){
+document.documentElement.style.setProperty("--nav-h", inner.getBoundingClientRect().height + "px");
+}
+const onpage = document.querySelector("nav.onpage");
+let onpageH = 0;
+if(onpage && window.getComputedStyle(onpage).position === "sticky"){
+onpageH = onpage.getBoundingClientRect().height;
+}
+document.documentElement.style.setProperty("--onpage-h", onpageH + "px");
+}
+function initChromeHeights(){
+measureChromeHeights();
+window.addEventListener("resize", measureChromeHeights);
+}
+// ---------- fragment-link focus ----------
+// A skip link or an on-page jump moved the SCROLL position but never
+// document.activeElement, which stayed on <body> (WCAG 2.4.3): a screen
+// reader announced nothing, and the next Tab press resumed from the top of
+// the document instead of from where the reader just landed. <main id="main">
+// already carries tabindex="-1" server-side (see emitter.emit_page); every
+// section[id] gets the same treatment here, since those are the only other
+// fragment targets the site links to (the on-page index, and any in-body
+// anchor). Both a click on the link (which may not change location.hash --
+// clicking the SAME on-page link twice fires no hashchange) and a hashchange
+// (back/forward, or a hash typed/pasted into the address bar) reach the same
+// handler, after a macrotask so it runs once the browser's own scroll has
+// already happened.
+function focusFragmentTarget(hash){
+if(!hash || hash.length < 2) return;
+let id;
+try{ id = decodeURIComponent(hash.slice(1)); }catch(e){ id = hash.slice(1); }
+const el = document.getElementById(id);
+if(!el) return;
+el.focus({preventScroll:true});
+}
+function initFragmentFocus(){
+document.querySelectorAll("section[id]").forEach(function(sec){ sec.tabIndex = -1; });
+window.addEventListener("hashchange", function(){ focusFragmentTarget(location.hash); });
+document.addEventListener("click", function(e){
+const a = e.target.closest && e.target.closest('a[href^="#"]');
+if(!a) return;
+const href = a.getAttribute("href");
+setTimeout(function(){ focusFragmentTarget(href); }, 0);
+});
+}
+// ---------- grouped nav: aria-expanded/aria-controls, Escape, Tab-out,
+// click-outside, and arrow-key movement ----------
+// Each desktop dropdown (.nav-group, see build_nav/CSS_CORE) opens and
+// closes purely on CSS :hover/:focus-within -- that part is untouched. This
+// only (a) keeps aria-expanded and aria-controls truthful for the
+// accessibility tree, since build_nav emits neither, and (b) forces a panel
+// shut in the two cases CSS alone cannot: Escape while focus is inside it
+// (focus RETURNS to the label, so :focus-within would otherwise hold the
+// panel open), and a click that lands outside the group without moving focus
+// away from it at all (a tap on inert page text, most often). Both add
+// ".js-closed" (see CSS_CORE), which a later, equal-specificity rule uses to
+// override the hover/focus-within panel regardless of which one is true;
+// the next fresh mouseenter or focusin on the group clears it again.
+function initNavGroups(){
+const groups = Array.prototype.slice.call(document.querySelectorAll(".topnav .nav-group"));
+groups.forEach(function(group, gi){
+const label = group.querySelector(".nav-group-label");
+const panel = group.querySelector(".nav-group-panel");
+if(!label || !panel) return;
+if(!panel.id) panel.id = "nav-panel-" + gi;
+label.setAttribute("aria-controls", panel.id);
+label.setAttribute("aria-expanded", "false");
+const links = Array.prototype.slice.call(panel.querySelectorAll("a"));
+function open(){ group.classList.remove("js-closed"); label.setAttribute("aria-expanded", "true"); }
+function close(){ label.setAttribute("aria-expanded", "false"); }
+group.addEventListener("mouseenter", open);
+group.addEventListener("mouseleave", function(){
+if(!group.contains(document.activeElement)) close();
+});
+group.addEventListener("focusin", open);
+group.addEventListener("focusout", function(e){
+if(!group.contains(e.relatedTarget)){ close(); group.classList.remove("js-closed"); }
+});
+group.addEventListener("keydown", function(e){
+if(e.key === "Escape"){
+group.classList.add("js-closed");
+close();
+label.focus();
+e.stopPropagation();
+return;
+}
+// Any other key on the trigger itself clears a prior Escape-close, so
+// the panel can reopen without first leaving the group and coming back.
+if(document.activeElement === label) group.classList.remove("js-closed");
+const idx = links.indexOf(document.activeElement);
+if(idx === -1) return;
+if(e.key === "ArrowDown"){ e.preventDefault(); links[(idx + 1) % links.length].focus(); }
+else if(e.key === "ArrowUp"){ e.preventDefault(); links[(idx - 1 + links.length) % links.length].focus(); }
+else if(e.key === "Home"){ e.preventDefault(); links[0].focus(); }
+else if(e.key === "End"){ e.preventDefault(); links[links.length - 1].focus(); }
+});
+});
+document.addEventListener("click", function(e){
+groups.forEach(function(group){
+if(group.contains(e.target)) return;
+const label = group.querySelector(".nav-group-label");
+if(label && label.getAttribute("aria-expanded") === "true"){
+group.classList.add("js-closed");
+label.setAttribute("aria-expanded", "false");
+if(group.contains(document.activeElement)) document.activeElement.blur();
+}
+});
+});
+}
+// ---------- mobile "Menu" disclosure ----------
+// aria-expanded/aria-controls track the native <details>'s own open state
+// (see .nav-more in CSS_CORE) -- HTML-AAM maps a summary's implicit state
+// from its parent's open attribute, but that mapping is not consistently
+// surfaced by every browser/AT pairing, so it is made explicit here too. The
+// one thing a native <details> does NOT do on its own is close on Escape (it
+// has no built-in keyboard dismissal at all, unlike <dialog>): that part is
+// real behaviour, not just bookkeeping.
+function initNavMore(){
+const det = document.querySelector(".topnav .nav-more");
+if(!det) return;
+const summary = det.querySelector("summary");
+const panel = det.querySelector(".nav-links-mobile");
+if(!summary || !panel) return;
+if(!panel.id) panel.id = "nav-more-panel";
+summary.setAttribute("aria-controls", panel.id);
+summary.setAttribute("aria-expanded", det.open ? "true" : "false");
+det.addEventListener("toggle", function(){
+summary.setAttribute("aria-expanded", det.open ? "true" : "false");
+});
+det.addEventListener("keydown", function(e){
+if(e.key === "Escape" && det.open){
+det.open = false;
+summary.focus();
+}
+});
+}
 // ---------- on-page section index ----------
 // nav.onpage is server-rendered (see emitter._onpage_nav_html and
 // sitegen/sections.py), so this never builds markup -- it only tracks which
 // section is the current one, by marking that section's own link (see
 // ONPAGE_CUR_ATTR, and the shared CSS rule keyed off the same attribute in
-// CSS_CORE). No other behaviour rides along: no scroll listener beyond the
-// observer itself, no animation.
+// CSS_CORE). Runs at every width, not only while the bar is sticky (>=1024px):
+// below that the index is a scrolling chip row rather than a fixed bar, but a
+// reader still benefits from knowing which chip is current, and
+// scrollChipIntoView keeps that chip inside the row's own horizontal
+// scrollport (never the page itself -- see its own comment) as it changes.
 const ONPAGE_CUR_ATTR = "aria-current";
+function scrollChipIntoView(link){
+// Adjusts only the chip row's OWN horizontal scroll position (ol.scrollLeft),
+// never the page: a native link.scrollIntoView() walks every scrollable
+// ancestor, including the document itself, and this row is not sticky
+// below 1024px -- it can be scrolled far off the top of the viewport by
+// then, and "nearest" on that axis would drag the whole page back up to
+// reveal it. This never touches window/document scroll at all.
+const ol = link.closest("nav.onpage ol");
+if(!ol) return;
+const linkLeft = link.offsetLeft, linkRight = linkLeft + link.offsetWidth;
+const viewLeft = ol.scrollLeft, viewRight = viewLeft + ol.clientWidth;
+if(linkLeft < viewLeft) ol.scrollLeft = linkLeft;
+else if(linkRight > viewRight) ol.scrollLeft = linkRight - ol.clientWidth;
+}
 function initOnPageIndex(){
 const nav = document.querySelector("nav.onpage");
 if(!nav || !("IntersectionObserver" in window)) return;
@@ -1314,6 +1516,7 @@ const a = byId[en.target.id];
 if(!a || !en.isIntersecting) return;
 links.forEach(function(l){ l.removeAttribute(ONPAGE_CUR_ATTR); });
 a.setAttribute(ONPAGE_CUR_ATTR, "true");
+scrollChipIntoView(a);
 });
 }, {rootMargin:"-15% 0px -70% 0px", threshold:0});
 secs.forEach(function(sec){ spy.observe(sec); });
@@ -1323,6 +1526,12 @@ secs.forEach(function(sec){ spy.observe(sec); });
 // the page is tall enough that scrolling back up by hand is real friction.
 // Below that height it would be a corner clutter item with nothing to solve,
 // so it is never mounted at all rather than hidden.
+// Once mounted it still hides (opacity, not removed -- see .is-hidden) in two
+// cases (2026 phone audit): while the reader is actively scrolling, showing
+// again 400ms after the last scroll event so it never fights a thumb mid-swipe
+// or blocks whatever a fast scroll is passing over; and for good once the
+// "Where to go next" exit slot scrolls into view, since a jump-to-top control
+// has nothing left above it worth returning for.
 function initBackToTop(){
 if(document.documentElement.scrollHeight <= window.innerHeight * 3) return;
 const btn = document.createElement("button");
@@ -1335,6 +1544,24 @@ const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 window.scrollTo({top:0, behavior: reduce ? "auto" : "smooth"});
 });
 document.body.appendChild(btn);
+let nearRelated = false;
+let scrollTimer = null;
+function applyVisibility(scrolling){
+btn.classList.toggle("is-hidden", nearRelated || scrolling);
+}
+window.addEventListener("scroll", function(){
+applyVisibility(true);
+if(scrollTimer) clearTimeout(scrollTimer);
+scrollTimer = setTimeout(function(){ applyVisibility(false); }, 400);
+}, {passive:true});
+const related = document.querySelector(".related");
+if(related && ("IntersectionObserver" in window)){
+const relObs = new IntersectionObserver(function(entries){
+nearRelated = entries[0].isIntersecting;
+applyVisibility(false);
+});
+relObs.observe(related);
+}
 }
 // ---------- reveal motion (no scroll-spy: pages are separate documents) ----------
 // --rv is the stagger index the CSS multiplies by --rv-step. It is assigned
@@ -1405,6 +1632,14 @@ initTheme();
 initDensity();
 initReveal();
 initMarkTips();
+// Run before anything below reads --nav-h/--onpage-h (the scroll-margin
+// calc() in CSS_CORE, and the sticky-bar gap a fragment jump has to clear):
+// server-rendered nav.onpage and .nav-inner are already in the DOM by the
+// time this script runs, so there is nothing to wait on.
+initChromeHeights();
+initFragmentFocus();
+initNavGroups();
+initNavMore();
 // Deferred by one task: page-specific extra_js is appended AFTER JS_CORE inside
 // the same script tag, and two pages (models #within-era, momentum #stratified)
 // un-hide a section from there. Running inline would measure the page's
