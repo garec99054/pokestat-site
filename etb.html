@@ -49,6 +49,13 @@
 --warn-dot:#c58a2a;
 --shadow-tint:39,39,42;
 --radius:3px;
+--fs-1:0.72rem;
+--fs-2:0.8rem;
+--fs-3:0.88rem;
+--fs-4:1rem;
+--fs-5:1.15rem;
+--fs-6:1.4rem;
+--fs-7:1.8rem;
 --ease:cubic-bezier(.16,1,.3,1);
 --t-fast:.15s;
 --t-mid:.24s;
@@ -56,7 +63,7 @@
 --nav-h:52px;
 --tbl-pad-y:6px;
 --tbl-pad-x:12px;
---tbl-fs:0.85rem;
+--tbl-fs:var(--fs-3);
 --section-gap:30px;
 --spark-w:84px;
 --spark-h:22px;
@@ -158,7 +165,7 @@ body{
 background:var(--surface);
 color:var(--ink);
 font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-font-size:15px;
+font-size:var(--fs-3);
 line-height:1.55;
 -webkit-font-smoothing:antialiased;
 }
@@ -183,7 +190,7 @@ height:var(--nav-h);display:flex;align-items:center;gap:10px;
 }
 .brand{
 font-weight:700;letter-spacing:-0.01em;color:var(--ink);
-text-decoration:none;font-size:0.98rem;flex:none;
+text-decoration:none;font-size:var(--fs-4);flex:none;
 position:relative;display:inline-block;
 }
 .brand:hover{color:var(--accent-ink);}
@@ -220,7 +227,7 @@ border-radius:var(--radius);box-shadow:0 6px 18px rgba(var(--shadow-tint),0.16);
 .nav-group-label{
 border:none;background:none;font-family:inherit;cursor:pointer;
 display:flex;align-items:center;gap:5px;
-font-size:0.83rem;color:var(--ink-muted);padding:7px 10px;
+font-size:var(--fs-2);color:var(--ink-muted);padding:7px 10px;
 border-radius:var(--radius);white-space:nowrap;
 transition:background-color .15s ease-out,color .15s ease-out;
 }
@@ -233,7 +240,7 @@ transform:rotate(45deg);
 .nav-group-label:focus-visible{outline:2px solid var(--accent);outline-offset:-2px;}
 .nav-group.has-active > .nav-group-label{color:var(--accent-ink);font-weight:600;}
 .nav-group-panel a,.nav-menu-group a{
-font-size:0.83rem;color:var(--ink-muted);text-decoration:none;
+font-size:var(--fs-2);color:var(--ink-muted);text-decoration:none;
 border-radius:var(--radius);white-space:nowrap;
 transition:background-color .15s ease-out,color .15s ease-out;
 }
@@ -244,20 +251,20 @@ color:var(--accent-ink);background:rgba(var(--accent-rgb),0.10);font-weight:600;
 .nav-more{display:none;}
 .nav-more > summary{
 cursor:pointer;list-style:none;display:flex;align-items:center;
-font-size:0.83rem;font-weight:600;padding:6px 10px;white-space:nowrap;
+font-size:var(--fs-2);font-weight:600;padding:6px 10px;white-space:nowrap;
 }
 .nav-more > summary::-webkit-details-marker{display:none;}
 .nav-more > summary:hover{background:var(--panel-alt);}
 .nav-more > summary:focus-visible{outline:2px solid var(--accent);outline-offset:-2px;}
 .nav-links-mobile{display:flex;flex-direction:column;gap:14px;padding:6px 4px 4px;}
 .nav-menu-label{
-margin:0 0 2px;font-size:0.7rem;font-weight:700;text-transform:uppercase;
+margin:0 0 2px;font-size:var(--fs-1);font-weight:700;text-transform:uppercase;
 letter-spacing:0.04em;color:var(--ink-subtle);
 }
 .nav-menu-group{display:flex;flex-direction:column;}
 .nav-menu-group a{padding:8px 6px;}
-.density-toggle{flex:none;white-space:nowrap;font-size:0.78rem;padding:6px 10px;}
-.theme-cycle{flex:none;white-space:nowrap;font-size:0.78rem;padding:6px 10px;}
+.density-toggle{flex:none;white-space:nowrap;font-size:var(--fs-2);padding:6px 10px;}
+.theme-cycle{flex:none;white-space:nowrap;font-size:var(--fs-2);padding:6px 10px;}
 @media (prefers-reduced-motion:no-preference){
 .depth-in > *{animation:pk-rowin var(--t-mid) var(--ease) both;}
 .depth-in > *:nth-child(n+6){animation-delay:calc((var(--rowi,0)) * 1ms);}
@@ -276,11 +283,11 @@ letter-spacing:0.04em;color:var(--ink-subtle);
 }
 @media (max-width:560px){
 .nav-inner{gap:6px;padding-left:12px;padding-right:12px;}
-.density-toggle,.theme-cycle{font-size:0.72rem;padding:5px 8px;}
+.density-toggle,.theme-cycle{font-size:var(--fs-1);padding:5px 8px;}
 }
 header.masthead{border-bottom:1px solid var(--border);padding-bottom:14px;margin-bottom:18px;text-align:center;scroll-margin-top:calc(var(--nav-h) + 14px);}
-header.masthead h1{font-size:1.4rem;font-weight:650;margin:0 0 5px;letter-spacing:-0.01em;}
-header.masthead p.lede{margin:0 auto 8px;max-width:80ch;color:var(--ink-muted);font-size:0.92rem;}
+header.masthead h1{font-size:var(--fs-6);font-weight:650;margin:0 0 5px;letter-spacing:-0.01em;}
+header.masthead p.lede{margin:0 auto 8px;max-width:80ch;color:var(--ink-muted);font-size:var(--fs-3);}
 .summary-strip{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
@@ -294,16 +301,16 @@ overflow:hidden;
 background:var(--panel);padding:9px 12px;text-align:center;
 display:flex;flex-direction:column;justify-content:center;
 }
-.summary-cell .k{font-size:0.72rem;text-transform:uppercase;letter-spacing:0.04em;color:var(--ink-subtle);margin:0 0 4px;}
-.summary-cell .v{font-size:1.15rem;font-weight:650;margin:0;line-height:1.25;}
+.summary-cell .k{font-size:var(--fs-1);text-transform:uppercase;letter-spacing:0.04em;color:var(--ink-subtle);margin:0 0 4px;}
+.summary-cell .v{font-size:var(--fs-5);font-weight:650;margin:0;line-height:1.25;}
 .summary-cell .v small{
-font-weight:500;color:var(--ink-muted);font-size:0.7rem;display:-webkit-box;
+font-weight:500;color:var(--ink-muted);font-size:var(--fs-1);display:-webkit-box;
 -webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.3;
 }
 .verdict-cell{background:var(--panel-alt);}
 .verdict-chip{
 display:inline-flex;align-items:center;gap:7px;
-font-size:0.82rem;font-weight:650;color:var(--warn-ink);
+font-size:var(--fs-2);font-weight:650;color:var(--warn-ink);
 background:var(--warn-bg);border:1px solid var(--warn-border);border-radius:999px;
 padding:4px 12px;text-decoration:none;
 transition:background-color .15s ease-out,border-color .15s ease-out;
@@ -311,15 +318,15 @@ transition:background-color .15s ease-out,border-color .15s ease-out;
 .verdict-chip:hover{border-color:var(--warn-border-hover);color:var(--warn-ink-hover);background:var(--warn-bg-hover);}
 .verdict-chip .dot{width:7px;height:7px;border-radius:50%;background:var(--warn-dot);}
 section{margin-bottom:var(--section-gap);scroll-margin-top:calc(var(--nav-h) + 14px);}
-section > h2{font-size:1.08rem;font-weight:650;margin:0 0 4px;letter-spacing:-0.005em;text-align:center;}
-section > p.section-note{margin:0 auto 10px;color:var(--ink-muted);font-size:0.88rem;max-width:78ch;text-align:center;}
+section > h2{font-size:var(--fs-5);font-weight:650;margin:0 0 4px;letter-spacing:-0.005em;text-align:center;}
+section > p.section-note{margin:0 auto 10px;color:var(--ink-muted);font-size:var(--fs-3);max-width:78ch;text-align:center;}
 details.explain{
 max-width:78ch;margin:0 auto 12px;border:1px solid var(--border);
 border-radius:var(--radius);background:var(--panel);
 }
 details.explain > summary{
 cursor:pointer;list-style:none;padding:9px 14px;
-font-size:0.82rem;font-weight:600;color:var(--accent-ink);
+font-size:var(--fs-2);font-weight:600;color:var(--accent-ink);
 display:flex;align-items:center;gap:8px;user-select:none;
 transition:background-color .15s ease-out;border-radius:var(--radius);
 }
@@ -341,7 +348,7 @@ ul.kpi-key{margin:4px 0 12px;padding-left:18px;}
 ul.kpi-key li{margin-bottom:5px;}
 ul.kpi-key li strong{color:var(--ink);}
 details.explain .explain-body{
-padding:2px 16px 14px 30px;font-size:0.86rem;color:var(--ink-muted);
+padding:2px 16px 14px 30px;font-size:var(--fs-3);color:var(--ink-muted);
 line-height:1.6;border-top:1px solid var(--border);margin-top:0;padding-top:12px;
 }
 details.explain .explain-body p{margin:0 0 9px;}
@@ -350,7 +357,7 @@ details.explain .explain-body strong{color:var(--ink);}
 details.explain-inline{margin:0 auto 14px;max-width:78ch;text-align:center;}
 details.explain-inline > summary{
 cursor:pointer;list-style:none;padding:2px 0;
-font-size:0.82rem;font-weight:600;color:var(--accent-ink);
+font-size:var(--fs-2);font-weight:600;color:var(--accent-ink);
 display:inline-flex;align-items:center;gap:8px;user-select:none;
 }
 details.explain-inline > summary:hover{color:var(--ink);}
@@ -367,7 +374,7 @@ details.explain-inline > summary span.custom{display:none;}
 details.explain-inline[open] .explain-body{animation:pk-explain var(--t-mid) var(--ease);}
 }
 details.explain-inline .explain-body{
-padding:8px 0 2px;font-size:0.86rem;color:var(--ink-muted);
+padding:8px 0 2px;font-size:var(--fs-3);color:var(--ink-muted);
 line-height:1.6;text-align:left;
 }
 details.explain-inline .explain-body p{margin:0 0 9px;}
@@ -375,7 +382,7 @@ details.explain-inline .explain-body p:last-child{margin-bottom:0;}
 details.explain-inline .explain-body strong{color:var(--ink);}
 .toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:center;margin-bottom:16px;}
 input[type="search"],select{
-font-family:inherit;font-size:0.88rem;padding:7px 10px;
+font-family:inherit;font-size:var(--fs-3);padding:7px 10px;
 border:1px solid var(--border-strong);border-radius:var(--radius);
 background:var(--panel);color:var(--ink);
 }
@@ -388,7 +395,7 @@ outline:2px solid var(--accent);outline-offset:2px;border-radius:var(--radius);
 .preset-group button{border:none;border-right:1px solid var(--border-strong);border-radius:0;background:var(--panel);}
 .preset-group button:last-child{border-right:none;}
 .depth-group{margin:0 0 10px auto;width:max-content;}
-.depth-group button{font-size:0.76rem;padding:4px 11px;}
+.depth-group button{font-size:var(--fs-1);padding:4px 11px;}
 .section-head{display:flex;align-items:baseline;justify-content:center;gap:14px;position:relative;margin-bottom:4px;}
 .section-head h2{margin:0;}
 .section-head .depth-group{position:absolute;right:0;margin:0;}
@@ -397,7 +404,7 @@ outline:2px solid var(--accent);outline-offset:2px;border-radius:var(--radius);
 .section-head .depth-group{position:static;margin:10px auto 0;}
 }
 button{
-font-family:inherit;font-size:0.85rem;padding:7px 12px;
+font-family:inherit;font-size:var(--fs-3);padding:7px 12px;
 border:1px solid var(--border-strong);border-radius:var(--radius);
 background:var(--panel);color:var(--ink);cursor:pointer;
 transition:background-color var(--t-fast) ease-out,border-color var(--t-fast) ease-out,
@@ -431,16 +438,16 @@ tbody tr:hover{background:var(--panel-alt);}
 tbody tr:hover td:first-child{box-shadow:inset 2px 0 0 var(--accent);}
 td.num{text-align:right;}
 .card-name{font-weight:600;}
-.card-set{color:var(--ink-subtle);font-size:0.8rem;}
-.rarity-tag{font-size:0.74rem;color:var(--ink-muted);white-space:nowrap;}
+.card-set{color:var(--ink-subtle);font-size:var(--fs-2);}
+.rarity-tag{font-size:var(--fs-1);color:var(--ink-muted);white-space:nowrap;}
 .band-cell{min-width:170px;}
-.band-val{font-weight:700;font-size:0.95rem;font-variant-numeric:tabular-nums;}
+.band-val{font-weight:700;font-size:var(--fs-4);font-variant-numeric:tabular-nums;}
 .band-val.up{color:var(--up-text);}
 .band-val.down{color:var(--down);}
 svg.band{display:block;margin-top:3px;overflow:visible;width:var(--band-w);height:14px;}
 svg.spark{display:block;width:var(--spark-w);height:var(--spark-h);}
 .flag-badge{
-display:inline-block;font-size:0.72rem;font-weight:700;padding:2px 8px;
+display:inline-block;font-size:var(--fs-1);font-weight:700;padding:2px 8px;
 border-radius:999px;white-space:nowrap;letter-spacing:0.01em;
 }
 .flag-badge.up{background:rgba(var(--up-rgb),0.13);color:var(--up-text);}
@@ -449,7 +456,7 @@ border-radius:999px;white-space:nowrap;letter-spacing:0.01em;
 .show-all-btn{
 display:inline-block;margin-left:6px;padding:3px 10px;border-radius:999px;
 border:1px solid var(--border);background:var(--panel);color:var(--accent-ink);
-font:inherit;font-size:0.82rem;font-weight:600;cursor:pointer;min-height:32px;
+font:inherit;font-size:var(--fs-2);font-weight:600;cursor:pointer;min-height:32px;
 }
 .show-all-btn:hover{background:var(--panel-alt);}
 .skip-link{
@@ -461,40 +468,40 @@ background:var(--accent);color:var(--on-accent);font-weight:600;text-decoration:
 .cc-links .chip{padding:6px 10px;min-height:30px;line-height:1.3;}
 }
 .flag-chip{
-display:inline-block;font-size:0.68rem;font-weight:600;padding:1px 7px;margin-top:3px;
+display:inline-block;font-size:var(--fs-1);font-weight:600;padding:1px 7px;margin-top:3px;
 border-radius:999px;border:1px solid var(--border-strong);white-space:nowrap;color:var(--ink-subtle);
 }
 .flag-chip.up{border-color:rgba(var(--up-rgb),0.5);color:var(--up-text);}
 .flag-chip.down{border-color:rgba(var(--down-rgb),0.5);color:var(--down-text);}
 .flag-stack{display:flex;flex-direction:column;align-items:flex-start;gap:0;}
-.drivers{font-size:0.74rem;color:var(--ink-muted);white-space:normal;max-width:210px;line-height:1.4;}
+.drivers{font-size:var(--fs-1);color:var(--ink-muted);white-space:normal;max-width:210px;line-height:1.4;}
 .drivers .dw{display:inline-block;margin-right:8px;white-space:nowrap;}
-.eur-cell{font-size:0.78rem;color:var(--ink-muted);white-space:nowrap;}
+.eur-cell{font-size:var(--fs-2);color:var(--ink-muted);white-space:nowrap;}
 .eur-cell .z{font-weight:650;}
 .eur-cell .z.pos{color:var(--up-text);}
 .eur-cell .z.neg{color:var(--down);}
-.table-footer{display:flex;justify-content:space-between;align-items:center;margin-top:12px;font-size:0.82rem;color:var(--ink-subtle);gap:12px;flex-wrap:wrap;}
+.table-footer{display:flex;justify-content:space-between;align-items:center;margin-top:12px;font-size:var(--fs-2);color:var(--ink-subtle);gap:12px;flex-wrap:wrap;}
 .wl-block{margin-bottom:38px;}
 .wl-block:last-child{margin-bottom:0;}
-.wl-block h3{font-size:0.98rem;font-weight:650;margin:0 0 3px;text-align:center;letter-spacing:-0.005em;}
-.wl-sub{text-align:center;color:var(--ink-muted);font-size:0.86rem;margin:0 auto 10px;max-width:78ch;}
+.wl-block h3{font-size:var(--fs-4);font-weight:650;margin:0 0 3px;text-align:center;letter-spacing:-0.005em;}
+.wl-sub{text-align:center;color:var(--ink-muted);font-size:var(--fs-3);margin:0 auto 10px;max-width:78ch;}
 .wl-duo{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start;}
 .wl-duo > *{min-width:0;}
 @media (max-width:820px){.wl-duo{grid-template-columns:1fr;}}
-.duo-head{font-size:0.78rem;font-weight:650;color:var(--ink-muted);text-align:center;margin:0 0 5px;text-transform:uppercase;letter-spacing:0.04em;}
+.duo-head{font-size:var(--fs-2);font-weight:650;color:var(--ink-muted);text-align:center;margin:0 0 5px;text-transform:uppercase;letter-spacing:0.04em;}
 .stat-cards{
 display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;
 background:var(--border);border:1px solid var(--border);border-radius:var(--radius);
 overflow:hidden;margin:0 auto 16px;max-width:760px;
 }
 .stat-card{background:var(--panel);padding:12px 14px;text-align:center;}
-.stat-card .k{font-size:0.7rem;text-transform:uppercase;letter-spacing:0.04em;color:var(--ink-subtle);margin:0 0 4px;}
-.stat-card .v{font-size:1.1rem;font-weight:650;margin:0;line-height:1.2;}
-.stat-card .v small{font-weight:500;color:var(--ink-muted);font-size:0.7rem;display:block;margin-top:2px;}
+.stat-card .k{font-size:var(--fs-1);text-transform:uppercase;letter-spacing:0.04em;color:var(--ink-subtle);margin:0 0 4px;}
+.stat-card .v{font-size:var(--fs-5);font-weight:650;margin:0;line-height:1.2;}
+.stat-card .v small{font-weight:500;color:var(--ink-muted);font-size:var(--fs-1);display:block;margin-top:2px;}
 #leaderboard tbody tr.selected{background:rgba(var(--accent-rgb),0.08);}
 #leaderboard tbody tr.selected td:first-child{box-shadow:inset 3px 0 0 var(--accent);}
 #leaderboard tbody tr.baseline td{color:var(--ink-subtle);}
-.sel-tag{font-size:0.68rem;font-weight:700;color:var(--accent-ink);text-transform:uppercase;letter-spacing:0.04em;margin-left:6px;}
+.sel-tag{font-size:var(--fs-1);font-weight:700;color:var(--accent-ink);text-transform:uppercase;letter-spacing:0.04em;margin-left:6px;}
 .attr-note{margin-top:14px;}
 .verdict-word{font-weight:700;}
 .verdict-word.reversion{color:var(--down);}
@@ -505,7 +512,7 @@ tr.slice-anchor{background:var(--panel-alt);}
 tr.slice-anchor td{font-weight:650;}
 tr.slice-total td:first-child{box-shadow:inset 3px 0 0 var(--accent);}
 .thin-tag{
-display:inline-block;font-size:0.64rem;font-weight:700;letter-spacing:0.04em;
+display:inline-block;font-size:var(--fs-1);font-weight:700;letter-spacing:0.04em;
 text-transform:uppercase;padding:1px 6px;margin-left:6px;border-radius:999px;
 color:var(--warn-ink);background:var(--warn-bg);border:1px solid var(--warn-border);
 white-space:nowrap;vertical-align:1px;
@@ -516,12 +523,12 @@ white-space:nowrap;vertical-align:1px;
 .call-word.flat{color:var(--ink-subtle);}
 .call-word.skipped{color:var(--ink-subtle);}
 .slice-legend{
-font-size:0.8rem;color:var(--ink-subtle);margin:10px auto 0;max-width:80ch;line-height:1.5;
+font-size:var(--fs-2);color:var(--ink-subtle);margin:10px auto 0;max-width:80ch;line-height:1.5;
 }
 html.compact .slice-legend{display:none;}
 .callout{
 border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:var(--radius);
-padding:14px 18px;background:var(--panel);font-size:0.9rem;color:var(--ink-muted);margin-bottom:18px;
+padding:14px 18px;background:var(--panel);font-size:var(--fs-3);color:var(--ink-muted);margin-bottom:18px;
 }
 .callout strong{color:var(--ink);}
 .split{display:grid;grid-template-columns:1.15fr 1fr;gap:24px;align-items:start;}
@@ -529,9 +536,9 @@ padding:14px 18px;background:var(--panel);font-size:0.9rem;color:var(--ink-muted
 @media (max-width:900px){.split{grid-template-columns:1fr;}}
 .caveats{
 border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:var(--radius);
-padding:18px 20px;background:var(--panel);font-size:0.86rem;color:var(--ink-muted);
+padding:18px 20px;background:var(--panel);font-size:var(--fs-3);color:var(--ink-muted);
 }
-.caveats h4{margin:0 0 10px;color:var(--ink);font-size:0.9rem;font-weight:650;}
+.caveats h4{margin:0 0 10px;color:var(--ink);font-size:var(--fs-3);font-weight:650;}
 .caveats ul{margin:0;padding-left:1.15em;}
 .caveats li{margin-bottom:11px;}
 .caveats li:last-child{margin-bottom:0;}
@@ -539,8 +546,8 @@ padding:18px 20px;background:var(--panel);font-size:0.86rem;color:var(--ink-mute
 .methods-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px;}
 .methods-grid > *{min-width:0;}
 @media (max-width:760px){.methods-grid{grid-template-columns:1fr;}}
-.method-card{border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;background:var(--panel);font-size:0.86rem;color:var(--ink-muted);}
-.method-card h4{margin:0 0 8px;color:var(--ink);font-size:0.9rem;font-weight:650;}
+.method-card{border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;background:var(--panel);font-size:var(--fs-3);color:var(--ink-muted);}
+.method-card h4{margin:0 0 8px;color:var(--ink);font-size:var(--fs-3);font-weight:650;}
 .method-card ul{margin:0;padding-left:1.1em;}
 .method-card li{margin-bottom:6px;}
 .method-card p{margin:0 0 8px;}
@@ -552,8 +559,8 @@ padding:15px 17px;background:var(--panel);text-decoration:none;color:inherit;
 transition:border-color .15s ease-out,transform .15s ease-out;
 }
 .hub-card:hover{border-color:var(--accent);transform:translateY(-1px);}
-.hub-card .hc-title{font-weight:650;color:var(--ink);font-size:0.95rem;margin:0 0 4px;}
-.hub-card .hc-desc{color:var(--ink-muted);font-size:0.83rem;margin:0;line-height:1.45;}
+.hub-card .hc-title{font-weight:650;color:var(--ink);font-size:var(--fs-4);margin:0 0 4px;}
+.hub-card .hc-desc{color:var(--ink-muted);font-size:var(--fs-2);margin:0;line-height:1.45;}
 .hub-grid .hc-desc{
 display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;
 }
@@ -562,11 +569,11 @@ border:1px dashed var(--border-strong);border-radius:var(--radius);
 padding:34px 26px;background:var(--panel);text-align:center;color:var(--ink-muted);
 max-width:72ch;margin:0 auto;
 }
-.stub h3{margin:0 0 8px;color:var(--ink);font-size:1.02rem;}
+.stub h3{margin:0 0 8px;color:var(--ink);font-size:var(--fs-4);}
 .stub p{margin:0 auto;max-width:60ch;}
 #tooltip{
 position:fixed;pointer-events:none;background:var(--ink);color:var(--surface);
-border-radius:var(--radius);padding:8px 10px;font-size:12px;line-height:1.45;max-width:250px;
+border-radius:var(--radius);padding:8px 10px;font-size:var(--fs-1);line-height:1.45;max-width:250px;
 opacity:0;transition:opacity 60ms linear;z-index:50;box-shadow:0 2px 10px rgba(var(--shadow-tint),0.22);
 }
 #tooltip.show{opacity:1;}
@@ -575,18 +582,18 @@ opacity:0;transition:opacity 60ms linear;z-index:50;box-shadow:0 2px 10px rgba(v
 .mark:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
 .mark-dot{fill-opacity:0;transition:fill-opacity var(--t-fast) ease-out;}
 .mark-dot:hover,.mark-dot:focus-visible{fill-opacity:1;}
-footer{border-top:1px solid var(--border);padding-top:18px;margin-top:8px;font-size:0.82rem;color:var(--ink-subtle);}
+footer{border-top:1px solid var(--border);padding-top:18px;margin-top:8px;font-size:var(--fs-2);color:var(--ink-subtle);}
 footer code{background:var(--panel-alt);padding:1px 5px;border-radius:2px;font-size:0.92em;}
-.freshness-stamp{margin:10px 0 0;font-size:0.78rem;color:var(--ink-subtle);}
+.freshness-stamp{margin:10px 0 0;font-size:var(--fs-2);color:var(--ink-subtle);}
 .freshness-stamp[data-stale="true"]{color:var(--warn-ink);font-weight:600;}
 .related{border-top:1px solid var(--border);margin-top:var(--section-gap);padding-top:16px;}
 .rel-head{
-margin:0 0 10px;font-size:0.72rem;font-weight:650;color:var(--ink-muted);
+margin:0 0 10px;font-size:var(--fs-1);font-weight:650;color:var(--ink-muted);
 text-transform:uppercase;letter-spacing:0.06em;
 }
 .rel-list{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px 10px;}
 .rel-list a{
-display:inline-block;padding:7px 13px;font-size:0.83rem;
+display:inline-block;padding:7px 13px;font-size:var(--fs-2);
 border:1px solid var(--border-strong);border-radius:var(--radius);
 background:var(--panel);color:var(--accent-ink);text-decoration:none;
 transition:border-color var(--t-fast) ease-out,background-color var(--t-fast) ease-out;
@@ -606,7 +613,7 @@ display:flex;flex-direction:column;align-items:flex-end;gap:8px;
 .pagenav[hidden]{display:none;}
 .pn-row{display:flex;gap:6px;}
 .pagenav button{
-font-size:0.78rem;padding:6px 11px;background:var(--panel);
+font-size:var(--fs-2);padding:6px 11px;background:var(--panel);
 border:1px solid var(--border-strong);border-radius:var(--radius);
 color:var(--ink-muted);box-shadow:0 2px 10px rgba(var(--shadow-tint),0.18);
 }
@@ -618,7 +625,7 @@ border-radius:var(--radius);box-shadow:0 4px 18px rgba(var(--shadow-tint),0.22);
 }
 .pn-list[hidden]{display:none;}
 .pn-list a{
-padding:7px 12px;font-size:0.79rem;line-height:1.35;color:var(--ink-muted);
+padding:7px 12px;font-size:var(--fs-2);line-height:1.35;color:var(--ink-muted);
 text-decoration:none;border-left:2px solid transparent;
 }
 .pn-list a + a{border-top:1px solid var(--border);}
@@ -651,7 +658,7 @@ font-size:14px;
 --nav-h:46px;
 --tbl-pad-y:4px;
 --tbl-pad-x:9px;
---tbl-fs:0.79rem;
+--tbl-fs:var(--fs-2);
 --section-gap:20px;
 --spark-w:66px;
 --spark-h:18px;
@@ -663,17 +670,17 @@ html.compact{--nav-h:78px;}
 }
 html.compact .page{padding-top:22px;}
 html.compact header.masthead{padding-bottom:10px;margin-bottom:12px;}
-html.compact header.masthead h1{font-size:1.34rem;margin-bottom:6px;}
+html.compact header.masthead h1{font-size:var(--fs-6);margin-bottom:6px;}
 html.compact .lede{display:none;}
 html.compact .section-note{display:none;}
 html.compact .wl-sub{display:none;}
-html.compact section > h2{font-size:1.02rem;margin-bottom:10px;}
+html.compact section > h2{font-size:var(--fs-4);margin-bottom:10px;}
 html.compact .summary-cell{padding:8px 11px;}
-html.compact .summary-cell .v{font-size:1rem;}
+html.compact .summary-cell .v{font-size:var(--fs-4);}
 html.compact .stat-card{padding:8px 11px;}
-html.compact .stat-card .v{font-size:0.98rem;}
+html.compact .stat-card .v{font-size:var(--fs-4);}
 html.compact .band-cell{min-width:132px;}
-html.compact .band-val{font-size:0.85rem;}
+html.compact .band-val{font-size:var(--fs-3);}
 html.compact .drivers{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:150px;}
 html.compact .toolbar{margin-bottom:10px;}
 html.compact details.explain{margin-bottom:12px;}
@@ -694,12 +701,12 @@ background:
 linear-gradient(var(--border-strong),var(--border-strong)) no-repeat center/60% 1px;
 }
 .cc-body{display:flex;flex-direction:column;min-width:0;gap:1px;}
-.cc-name{font-weight:600;font-size:0.85rem;line-height:1.28;color:var(--ink);}
-.cc-meta{color:var(--ink-subtle);font-size:0.74rem;line-height:1.3;}
-.cc-price{font-weight:600;font-size:0.8rem;font-variant-numeric:tabular-nums;color:var(--ink);}
+.cc-name{font-weight:600;font-size:var(--fs-3);line-height:1.28;color:var(--ink);}
+.cc-meta{color:var(--ink-subtle);font-size:var(--fs-1);line-height:1.3;}
+.cc-price{font-weight:600;font-size:var(--fs-2);font-variant-numeric:tabular-nums;color:var(--ink);}
 .cc-links{display:flex;gap:5px;margin-top:2px;flex-wrap:wrap;}
 .cc-links .chip{
-display:inline-block;font-size:0.68rem;font-weight:600;padding:1px 7px;
+display:inline-block;font-size:var(--fs-1);font-weight:600;padding:1px 7px;
 border-radius:999px;border:1px solid var(--border-strong);white-space:nowrap;
 color:var(--ink-subtle);text-decoration:none;position:relative;
 transition:border-color .15s ease-out,color .15s ease-out;
@@ -707,7 +714,7 @@ transition:border-color .15s ease-out,color .15s ease-out;
 .cc-links .chip:hover{border-color:var(--accent);color:var(--accent-ink);}
 .cardcell.cc-compact{gap:7px;}
 .cardcell.cc-compact .cc-thumb,.cardcell.cc-compact .cc-thumb--fallback{width:28px;height:39px;}
-.cardcell.cc-compact .cc-name{font-size:0.82rem;}
+.cardcell.cc-compact .cc-name{font-size:var(--fs-2);}
 .cardcell.cc-compact .cc-meta{
 white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:220px;
 }
@@ -718,7 +725,7 @@ margin:0 0 14px;border:1px solid var(--border);border-radius:var(--radius);
 background:var(--panel);padding:16px 18px 12px;overflow-x:auto;
 }
 figure.chartfig figcaption.chart-cap{
-font-size:0.78rem;color:var(--ink-subtle);margin:10px auto 0;text-align:center;
+font-size:var(--fs-2);color:var(--ink-subtle);margin:10px auto 0;text-align:center;
 line-height:1.55;max-width:82ch;
 }
 figure.chartfig figcaption.chart-cap strong{color:var(--ink-muted);}
@@ -726,43 +733,56 @@ figure.chartfig figcaption.chart-cap strong{color:var(--ink-muted);}
 .takeaway{
 max-width:78ch;margin:0 auto 16px;border:1px solid var(--border);
 border-left:3px solid var(--accent);border-radius:var(--radius);
-padding:12px 16px;background:var(--panel);font-size:0.88rem;color:var(--ink-muted);
+padding:12px 16px;background:var(--panel);font-size:var(--fs-3);color:var(--ink-muted);
 line-height:1.6;
 }
 .takeaway strong{color:var(--ink);}
 .block-head{
-max-width:78ch;margin:24px auto 8px;font-size:0.82rem;font-weight:650;
+max-width:78ch;margin:24px auto 8px;font-size:var(--fs-2);font-weight:650;
 text-transform:uppercase;letter-spacing:0.045em;color:var(--ink-subtle);
 text-align:center;
 }
 .table-legend{
-max-width:80ch;margin:10px auto 0;font-size:0.8rem;color:var(--ink-subtle);
+max-width:80ch;margin:10px auto 0;font-size:var(--fs-2);color:var(--ink-subtle);
 line-height:1.55;
 }
 .table-legend strong{color:var(--ink-muted);}
 .na{color:var(--ink-subtle);}
-.mono-note{font-size:0.78rem;color:var(--ink-subtle);}
+.mono-note{font-size:var(--fs-2);color:var(--ink-subtle);}
 section > .table-wrap{margin-bottom:2px;}
 .regime{
 border:1px solid var(--warn-border);border-left:3px solid var(--warn-ink);
 border-radius:var(--radius);background:var(--warn-bg);color:var(--warn-ink);
-padding:15px 19px;margin:0 auto 22px;max-width:82ch;font-size:0.89rem;line-height:1.6;
+padding:15px 19px;margin:0 auto 22px;max-width:82ch;font-size:var(--fs-3);line-height:1.6;
 }
-.regime h3{margin:0 0 6px;font-size:0.94rem;font-weight:700;color:var(--warn-ink);}
+.regime h3{margin:0 0 6px;font-size:var(--fs-3);font-weight:700;color:var(--warn-ink);}
 .regime p{margin:0 0 8px;}
 .regime p:last-child{margin-bottom:0;}
 .regime strong{font-weight:700;}
+.hold-warn{
+border:1px solid var(--warn-border);border-left:3px solid var(--warn-ink);
+border-radius:var(--radius);background:var(--warn-bg);color:var(--warn-ink);
+padding:13px 17px;margin:14px auto 0;max-width:82ch;font-size:var(--fs-3);
+line-height:1.6;
+}
+.hold-warn h4{margin:0 0 6px;font-size:var(--fs-3);font-weight:700;color:var(--warn-ink);}
+.hold-warn p{margin:0;}
+.hold-warn strong{font-weight:700;}
+html.compact .hold-warn{padding:10px 13px;font-size:var(--fs-2);}
+details.explain-inline .explain-body ul{margin:0;padding-left:1.15em;}
+details.explain-inline .explain-body li{margin-bottom:9px;}
+details.explain-inline .explain-body li:last-child{margin-bottom:0;}
 .flag-tags{display:flex;flex-wrap:wrap;gap:4px;}
 .ptag{
-display:inline-block;font-size:0.66rem;font-weight:650;padding:1px 6px;
+display:inline-block;font-size:var(--fs-1);font-weight:650;padding:1px 6px;
 border-radius:999px;border:1px solid var(--border-strong);color:var(--ink-subtle);
 white-space:nowrap;
 }
 .ptag.warn{color:var(--warn-ink);background:var(--warn-bg);border-color:var(--warn-border);}
 .etb-name{font-weight:600;line-height:1.3;}
-.etb-set{color:var(--ink-subtle);font-size:0.78rem;}
+.etb-set{color:var(--ink-subtle);font-size:var(--fs-2);}
 #etb-table td:first-child{min-width:190px;max-width:280px;}
-td.ci{font-size:0.78rem;color:var(--ink-subtle);white-space:nowrap;}
+td.ci{font-size:var(--fs-2);color:var(--ink-subtle);white-space:nowrap;}
 .artifact-links{
 display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;
 margin:0 auto;max-width:82ch;
@@ -771,28 +791,28 @@ margin:0 auto;max-width:82ch;
 border:1px solid var(--border);border-left:3px solid var(--down);
 border-radius:var(--radius);background:var(--panel);
 padding:14px 18px;margin:0 auto 18px;max-width:82ch;
-font-size:0.87rem;line-height:1.6;color:var(--ink-muted);
+font-size:var(--fs-3);line-height:1.6;color:var(--ink-muted);
 }
 .correction h3{
-margin:0 0 8px;font-size:0.94rem;font-weight:700;color:var(--down-text);
+margin:0 0 8px;font-size:var(--fs-3);font-weight:700;color:var(--down-text);
 }
 .correction p{margin:0 0 6px;}
 .correction ul{margin:0 0 12px;padding-left:20px;}
 .correction li{margin:0 0 5px;}
-.correction table{font-size:0.84rem;}
+.correction table{font-size:var(--fs-2);}
 .correction td.was{text-decoration:line-through;color:var(--down-text);}
 .correction td.now{font-weight:650;color:var(--ink);}
-.correction .corr-src{margin:10px 0 0;font-size:0.8rem;color:var(--ink-subtle);}
+.correction .corr-src{margin:10px 0 0;font-size:var(--fs-2);color:var(--ink-subtle);}
 .correction .table-wrap{margin:0;}
 .correction figure.chartfig{
 border:none;background:transparent;padding:4px 0 2px;margin:0 0 10px;
 }
 .correction figure.chartfig figcaption.chart-cap{text-align:left;margin-top:8px;}
 html.compact figure.chartfig{padding:11px 12px 9px;}
-html.compact .takeaway{padding:9px 13px;font-size:0.84rem;}
+html.compact .takeaway{padding:9px 13px;font-size:var(--fs-2);}
 html.compact .block-head{margin-top:16px;}
-html.compact .regime{padding:11px 14px;font-size:0.85rem;}
-html.compact .correction{padding:10px 13px;font-size:0.83rem;}
+html.compact .regime{padding:11px 14px;font-size:var(--fs-3);}
+html.compact .correction{padding:10px 13px;font-size:var(--fs-2);}
 .boxgrid{
 display:grid;grid-template-columns:repeat(auto-fill,minmax(min(146px,100%),1fr));
 gap:14px;margin:0 0 6px;padding:0;list-style:none;
@@ -813,16 +833,16 @@ border-radius:2px;opacity:0.5;
 .boxart img{
 position:relative;width:100%;height:100%;object-fit:contain;display:block;
 }
-.boxname{font-size:0.8rem;font-weight:600;line-height:1.3;color:var(--ink);overflow-wrap:anywhere;}
+.boxname{font-size:var(--fs-2);font-weight:600;line-height:1.3;color:var(--ink);overflow-wrap:anywhere;}
 .boxgrid li{min-width:0;}
-.boxmeta{font-size:0.72rem;color:var(--ink-subtle);line-height:1.4;}
+.boxmeta{font-size:var(--fs-1);color:var(--ink-subtle);line-height:1.4;}
 .boxprice{
-font-size:0.9rem;font-weight:650;color:var(--ink);font-variant-numeric:tabular-nums;
+font-size:var(--fs-3);font-weight:650;color:var(--ink);font-variant-numeric:tabular-nums;
 }
 td .boxart{width:40px;height:40px;aspect-ratio:auto;flex:none;}
 .movercell{display:flex;gap:9px;align-items:center;min-width:0;}
-.movercell .mc-name{font-size:0.83rem;font-weight:600;line-height:1.3;}
-.movercell .mc-set{font-size:0.72rem;color:var(--ink-subtle);}
+.movercell .mc-name{font-size:var(--fs-2);font-weight:600;line-height:1.3;}
+.movercell .mc-set{font-size:var(--fs-1);color:var(--ink-subtle);}
 #etb-price-trends td.num{white-space:nowrap;}
 html.compact .boxgrid{grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;}
 html.compact .boxgrid li{padding:8px 8px 7px;}
@@ -846,29 +866,29 @@ clip:rect(0 0 0 0);white-space:nowrap;border:0;
 display:flex;align-items:center;flex-wrap:wrap;gap:7px;margin:0 0 7px;
 }
 .calc-field label.calc-label{
-font-size:0.82rem;font-weight:650;color:var(--ink);margin:0;
+font-size:var(--fs-2);font-weight:650;color:var(--ink);margin:0;
 }
 .calc-row{display:flex;align-items:center;gap:10px;}
 .calc-row input[type="range"]{
 flex:1 1 auto;min-width:0;height:22px;accent-color:var(--accent);cursor:pointer;
 }
 .calc-row input[type="number"]{
-flex:0 0 auto;width:92px;font-family:inherit;font-size:0.88rem;padding:6px 8px;
+flex:0 0 auto;width:92px;font-family:inherit;font-size:var(--fs-3);padding:6px 8px;
 border:1px solid var(--border-strong);border-radius:var(--radius);
 background:var(--panel);color:var(--ink);font-variant-numeric:tabular-nums;
 }
-.calc-row .calc-unit{flex:0 0 auto;font-size:0.8rem;color:var(--ink-subtle);}
+.calc-row .calc-unit{flex:0 0 auto;font-size:var(--fs-2);color:var(--ink-subtle);}
 input[type="number"]:focus,input[type="range"]:focus,
 input[type="range"]:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
-.calc-help{margin:7px 0 0;font-size:0.77rem;color:var(--ink-subtle);line-height:1.5;}
+.calc-help{margin:7px 0 0;font-size:var(--fs-2);color:var(--ink-subtle);line-height:1.5;}
 .calc-help strong{color:var(--ink-muted);}
 .calc-presets{display:flex;flex-wrap:wrap;gap:5px;margin:8px 0 0;}
 .calc-presets button{
-font-size:0.73rem;padding:3px 9px;border:1px solid var(--border-strong);
+font-size:var(--fs-1);padding:3px 9px;border:1px solid var(--border-strong);
 border-radius:var(--radius);
 }
 .calc-chip{
-display:inline-block;font-size:0.67rem;font-weight:650;padding:1px 8px;
+display:inline-block;font-size:var(--fs-1);font-weight:650;padding:1px 8px;
 border-radius:999px;border:1px solid var(--border-strong);color:var(--ink-subtle);
 white-space:nowrap;
 }
@@ -879,14 +899,14 @@ color:var(--warn-ink);background:var(--warn-bg);border-color:var(--warn-border);
 margin-bottom:12px;max-width:none;grid-template-columns:repeat(2,1fr);
 }
 .calc-verdict{
-margin:0 0 12px;padding:9px 13px;font-size:0.86rem;line-height:1.5;
+margin:0 0 12px;padding:9px 13px;font-size:var(--fs-3);line-height:1.5;
 border:1px solid var(--border);border-left:3px solid var(--neutral);
 border-radius:var(--radius);background:var(--panel-alt);color:var(--ink-muted);
 }
 .calc-verdict strong{color:var(--ink);}
 .calc-verdict.clears{border-left-color:var(--up);}
 .calc-verdict.short{border-left-color:var(--down);}
-.calc-results table{font-size:0.82rem;}
+.calc-results table{font-size:var(--fs-2);}
 .calc-results tbody td{padding:5px var(--tbl-pad-x);}
 tr.calc-sub td{font-weight:650;background:var(--panel-alt);}
 tr.calc-gross td{border-top:1px solid var(--border-strong);}
@@ -902,11 +922,11 @@ border-left:1px dashed var(--warn-border);
 .calc-mark{position:absolute;top:0;bottom:0;width:3px;background:var(--accent-ink);}
 .calc-mark.floor{background:var(--up-text);}
 .calc-scale{
-display:flex;justify-content:space-between;font-size:0.71rem;
+display:flex;justify-content:space-between;font-size:var(--fs-1);
 color:var(--ink-subtle);margin:4px 0 0;
 }
 .calc-key{
-display:flex;flex-wrap:wrap;gap:12px;margin:7px 0 0;font-size:0.76rem;
+display:flex;flex-wrap:wrap;gap:12px;margin:7px 0 0;font-size:var(--fs-1);
 color:var(--ink-muted);
 }
 .calc-key span::before{
@@ -916,7 +936,7 @@ border-radius:1px;vertical-align:0;
 .calc-key .k-you::before{background:var(--accent-ink);}
 .calc-key .k-floor::before{background:var(--up-text);}
 .calc-key .k-extrap::before{background:var(--warn-bg);border:1px solid var(--warn-border);}
-.calc-needs{margin:12px 0 0;padding-left:1.15em;font-size:0.82rem;color:var(--ink-muted);}
+.calc-needs{margin:12px 0 0;padding-left:1.15em;font-size:var(--fs-2);color:var(--ink-muted);}
 .calc-needs li{margin:0 0 5px;line-height:1.5;}
 .calc-needs li:last-child{margin-bottom:0;}
 .calc-needs strong{color:var(--ink);}
@@ -930,13 +950,13 @@ html.compact .calc-results tbody td{padding:3px var(--tbl-pad-x);}
 flex:none;display:inline-flex;align-items:center;justify-content:center;
 width:22px;height:22px;padding:0;margin-top:1px;border:none;background:transparent;
 position:relative;
-font-size:1rem;line-height:1;color:var(--ink-subtle);cursor:pointer;
+font-size:var(--fs-4);line-height:1;color:var(--ink-subtle);cursor:pointer;
 transition:color .15s ease-out;
 }
 .star-btn::after{content:"";position:absolute;inset:-11px;}
 .star-btn:hover{color:var(--accent-ink);}
 .star-btn[aria-pressed="true"]{color:var(--accent-ink);}
-.star-delta{display:inline-block;margin-left:6px;font-size:0.72rem;white-space:nowrap;
+.star-delta{display:inline-block;margin-left:6px;font-size:var(--fs-1);white-space:nowrap;
 color:var(--ink-subtle);}
 .star-delta.pos{color:var(--up);}
 .star-delta.neg{color:var(--down);}
@@ -955,6 +975,7 @@ svg.mchart .k0{opacity:0.55;stroke:var(--neutral)}svg.mchart .k1{fill:var(--up);
         <button type="button" class="nav-group-label">Overview</button>
         <div class="nav-group-panel">
           <a href="dashboard.html">Summary</a>
+          <a href="mine.html">My cards</a>
           <a href="findings.html">Findings</a>
           <a href="changelog.html">Changelog</a>
         </div>
@@ -999,6 +1020,7 @@ svg.mchart .k0{opacity:0.55;stroke:var(--neutral)}svg.mchart .k1{fill:var(--up);
         <div class="nav-menu-group">
           <p class="nav-menu-label">Overview</p>
           <a href="dashboard.html">Summary</a>
+          <a href="mine.html">My cards</a>
           <a href="findings.html">Findings</a>
           <a href="changelog.html">Changelog</a>
         </div>
@@ -1065,7 +1087,7 @@ svg.mchart .k0{opacity:0.55;stroke:var(--neutral)}svg.mchart .k1{fill:var(--up);
     <h2>Work it out for a box you own</h2>
     <p class="section-note">The same cost model as the tables above, with the numbers you choose. Drag the price down and watch how much longer the box has to be held: that is the one-time toll, not a rate.</p>
     <div class="calc"><div class="calc-panel calc-controls"><div class="calc-field"><div class="calc-label-row"><label class="calc-label" for="calc-price-range">What you paid for the box</label></div><div class="calc-row"><input type="range" id="calc-price-range" min="0" max="150" step="1" value="74" aria-describedby="calc-price-help" aria-valuetext="$218.37" /><label class="calc-vh" for="calc-price-num">What you paid, in dollars</label><input type="number" id="calc-price-num" inputmode="decimal" step="0.01" min="10" max="5000" value="218.37" /></div><p class="calc-help" id="calc-price-help">The slider is logarithmic and spans $10.00 to $5,000.00, which covers every Elite Trainer Box in the archive. The stops below are points of the observed price distribution in the last month of data.</p><div class="calc-presets" id="calc-price-presets" role="group" aria-label="Jump to a price from the archive"><button type="button" data-value="70.66" aria-pressed="false">cheapest in the archive</button><button type="button" data-value="149.89" aria-pressed="false">25th percentile</button><button type="button" data-value="218.37" class="active" aria-pressed="true">median box</button><button type="button" data-value="1081.28" aria-pressed="false">90th percentile</button></div></div><div class="calc-field"><div class="calc-label-row"><label class="calc-label" for="calc-months-range">How long you hold</label><span class="calc-chip" id="calc-months-chip">inside the archive span</span></div><div class="calc-row"><input type="range" id="calc-months-range" min="1" max="120" step="1" value="12" aria-describedby="calc-months-chip calc-months-help" aria-valuetext="12 months" /><label class="calc-vh" for="calc-months-num">How long you hold, in months</label><input type="number" id="calc-months-num" inputmode="numeric" step="1" min="1" max="120" value="12" /><span class="calc-unit">months</span></div><p class="calc-help" id="calc-months-help">The archive is 28 months long. Anything past that is arithmetic on an assumed rate rather than an observed hold, and the shaded end of the bar marks where that starts.</p><div class="calc-presets" id="calc-months-presets" role="group" aria-label="Jump to a holding length"><button type="button" data-value="3" aria-pressed="false">3 months</button><button type="button" data-value="6" aria-pressed="false">6 months</button><button type="button" data-value="12" class="active" aria-pressed="true">12 months</button><button type="button" data-value="18" aria-pressed="false">18 months</button><button type="button" data-value="24" aria-pressed="false">24 months</button><button type="button" data-value="28" aria-pressed="false">the archive span</button><button type="button" data-value="36" aria-pressed="false">36 months</button><button type="button" data-value="60" aria-pressed="false">60 months</button></div></div><div class="calc-field"><div class="calc-label-row"><label class="calc-label" for="calc-growth-range">Assumed gross price growth</label><span class="calc-chip" id="calc-growth-chip">the measured index rate</span></div><div class="calc-row"><input type="range" id="calc-growth-range" min="-50" max="200" step="0.1" value="0" aria-describedby="calc-growth-chip calc-growth-help" aria-valuetext="0.0 percent a year" /><label class="calc-vh" for="calc-growth-num">Assumed gross price growth, percent a year</label><input type="number" id="calc-growth-num" inputmode="decimal" step="0.1" min="-50" max="200" value="0.0" /><span class="calc-unit">%/yr</span></div><p class="calc-help" id="calc-growth-help"><strong>This one is your assumption, not a measurement.</strong> It starts at the rate the ETB index actually grew over the 30-month archive, 59.1%/yr. Its 95% interval runs 22.2% to 107.2%/yr. That window holds one regime and no downturn anywhere in it, so nothing here forecasts that rate continuing. Drag it to zero, or below, and the arithmetic still holds.</p><div class="calc-presets" id="calc-growth-presets" role="group" aria-label="Jump to a growth assumption"><button type="button" data-value="0" class="active" aria-pressed="true">flat market</button><button type="button" data-value="4.5" aria-pressed="false">the cash rate</button><button type="button" data-value="22.2" aria-pressed="false">low end of the interval</button><button type="button" data-value="59.1" aria-pressed="false">the measured index rate</button><button type="button" data-value="107.2" aria-pressed="false">high end of the interval</button></div></div><button type="button" id="calc-reset">Reset to the defaults</button></div><div class="calc-panel calc-results"><p class="calc-vh" id="calc-live" role="status" aria-live="polite" aria-atomic="true"></p><div class="stat-cards" id="calc-tiles"><div class="stat-card"><p class="k">Out of pocket</p><p class="v num">$234.75<small>price plus the tax you paid on it</small></p></div><div class="stat-card"><p class="k">Quoted at sale</p><p class="v num">$218.37<small>your growth assumption, compounded</small></p></div><div class="stat-card"><p class="k">Frictions paid</p><p class="v num">$57.72<small>tax, take, shipping and storage</small></p></div><div class="stat-card"><p class="k">Net proceeds</p><p class="v num">$177.03<small>what reaches your bank</small></p></div><div class="stat-card"><p class="k">Net multiple</p><p class="v num">0.75x<small>on the money you put up</small></p></div><div class="stat-card"><p class="k">Net return</p><p class="v num ret-neg">-24.6%/yr<small>annualised, after every cost</small></p></div></div><p class="calc-verdict short" id="calc-verdict"><strong>Does not clear the 4.5%/yr cash hurdle</strong>: it falls $68.28 short of simply leaving the money alone. Frictions cost $57.72 on this round trip, 24.6%/yr off the annual rate.</p><div class="table-wrap"><table><thead><tr><th title="Every line between the price on the sticker and the money that reaches your bank. Costs carry a minus sign; the two shaded rows are subtotals.">where the money goes</th><th class="num">amount</th></tr></thead><tbody id="calc-items"><tr><td>What you paid for the box</td><td class="num">$218.37</td></tr><tr><td>Sales tax on the buy, at 7.5%</td><td class="num">$16.38</td></tr><tr class="calc-sub"><td>Total out of pocket</td><td class="num">$234.75</td></tr><tr class="calc-gross"><td>What the box is quoted at when you sell</td><td class="num">$218.37</td></tr><tr><td>Marketplace commission, at 10.25%</td><td class="num">−$22.38</td></tr><tr><td>Payment processing, at 2.5% plus $0.30</td><td class="num">−$5.76</td></tr><tr><td>Shipping the box out</td><td class="num">−$12.00</td></tr><tr><td>Storage, at $0.10 a month</td><td class="num">−$1.20</td></tr><tr class="calc-sub"><td>Net proceeds</td><td class="num">$177.03</td></tr></tbody></table></div><div class="calc-timeline" id="calc-timeline"><div class="calc-track" aria-hidden="true"><div class="calc-extrap" style="left:77.78%"></div><div class="calc-mark" style="left:33.33%"></div></div><p class="calc-scale" aria-hidden="true"><span>0</span><span>36 months</span></p><p class="calc-key"><span class="k-you">you hold 12 months</span><span class="k-floor">never clears cash inside 120 months</span><span class="k-extrap">past 28 months, beyond the archive</span></p></div><ul class="calc-needs" id="calc-needs"><li>To get your money back you must sell for <strong>$284.52</strong>, which is 1.30x what you paid, or +30.3%/yr.</li><li>To beat leaving the money in cash you must sell for <strong>$296.63</strong>, which needs +35.8%/yr of gross price growth.</li><li>At this price and this growth assumption the shortest hold that beats cash is <strong>longer than 120 months</strong>. The frictions are a one-time toll, so a cheaper box needs a longer hold to amortise the same fixed dollars.</li></ul></div></div>
-    <p class="table-legend calc-foot">Every rate in the itemisation is the same stated constant the tables above use, emitted from <code>pokestat/model/etb_hold.py</code> at build time rather than written into this page, and a test fails if the two ever disagree. What the calculator is <strong>not</strong> is a forecast: the growth control is an input you choose, the archive it defaults to contains one regime and no downturn, and holding lengths past 28 months are arithmetic rather than anything anyone observed. Liquidity, time to sale, condition and the risk of the box not selling at all are outside the model entirely. Measurement, not investment advice.</p>
+    <div class="hold-warn" data-reveal role="note"><h4>Before you use this calculator</h4><p>Every rate in the itemisation is the same stated constant the tables above use, emitted from <code>pokestat/model/etb_hold.py</code> at build time rather than written into this page, and a test fails if the two ever disagree. What the calculator is <strong>not</strong> is a forecast: the growth control is an input you choose, the archive it defaults to contains one regime and no downturn, and holding lengths past 28 months are arithmetic rather than anything anyone observed. Liquidity, time to sale, condition and the risk of the box not selling at all are outside the model entirely. Measurement, not investment advice.</p></div>
   </section>
 
   <section id="etb-index" data-reveal>
@@ -1111,7 +1133,7 @@ svg.mchart .k0{opacity:0.55;stroke:var(--neutral)}svg.mchart .k1{fill:var(--up);
     <p class="block-head">Is any of this specific to Elite Trainer Boxes?</p>
     <div class="table-wrap"><table><thead><tr><th title="Trailing window. The short ones are printed and are not read.">window</th><th title="What the ETB index is compared against, built the same way over the same months.">against</th><th class="num" title="ETB index annualised over the window.">ETBs</th><th class="num" title="Benchmark annualised over the same window.">benchmark</th><th class="num" title="Paired difference in annualised percentage points. Paired, so the common market move cancels before the standard error is formed.">difference</th><th class="num" title="t on the paired monthly difference. Clears the bar at |t| &gt;= 2.">t</th><th title="The study&#39;s own reading. On a window with too few returns the reliability gate overrides the raw significance call, which is why a t of -6.5 on three returns does not become a finding here.">reading</th></tr></thead><tbody><tr><td>trailing 3m <span class="ptag warn" title="Fewer than the 12 returns the study requires for a Newey-West interval. Printed because hiding it would be its own distortion; not usable as evidence.">not usable</span></td><td>Booster boxes</td><td class="num">-5%</td><td class="num">-11%</td><td class="num">+7.4pp</td><td class="num">4.76</td><td><span class="call-word flat">window too short to judge</span></td></tr><tr><td>trailing 3m <span class="ptag warn" title="Fewer than the 12 returns the study requires for a Newey-West interval. Printed because hiding it would be its own distortion; not usable as evidence.">not usable</span></td><td>Booster bundles</td><td class="num">-5%</td><td class="num">8%</td><td class="num">-11.9pp</td><td class="num">-1.44</td><td><span class="call-word flat">window too short to judge</span></td></tr><tr><td>trailing 3m <span class="ptag warn" title="Fewer than the 12 returns the study requires for a Newey-West interval. Printed because hiding it would be its own distortion; not usable as evidence.">not usable</span></td><td>Singles</td><td class="num">-5%</td><td class="num">70%</td><td class="num">-43.8pp</td><td class="num">-9.41</td><td><span class="call-word flat">window too short to judge</span></td></tr><tr><td>trailing 6m <span class="ptag warn" title="Fewer than the 12 returns the study requires for a Newey-West interval. Printed because hiding it would be its own distortion; not usable as evidence.">not usable</span></td><td>Booster boxes</td><td class="num">52%</td><td class="num">8%</td><td class="num">+39.8pp</td><td class="num">1.78</td><td><span class="call-word flat">window too short to judge</span></td></tr><tr><td>trailing 6m <span class="ptag warn" title="Fewer than the 12 returns the study requires for a Newey-West interval. Printed because hiding it would be its own distortion; not usable as evidence.">not usable</span></td><td>Booster bundles</td><td class="num">52%</td><td class="num">64%</td><td class="num">-7.6pp</td><td class="num">-0.99</td><td><span class="call-word flat">window too short to judge</span></td></tr><tr><td>trailing 6m <span class="ptag warn" title="Fewer than the 12 returns the study requires for a Newey-West interval. Printed because hiding it would be its own distortion; not usable as evidence.">not usable</span></td><td>Singles</td><td class="num">52%</td><td class="num">105%</td><td class="num">-25.9pp</td><td class="num">-1.52</td><td><span class="call-word flat">window too short to judge</span></td></tr><tr><td>trailing 9m <span class="ptag warn" title="Fewer than the 12 returns the study requires for a Newey-West interval. Printed because hiding it would be its own distortion; not usable as evidence.">not usable</span></td><td>Booster boxes</td><td class="num">41%</td><td class="num">18%</td><td class="num">+19.8pp</td><td class="num">1.12</td><td><span class="call-word flat">window too short to judge</span></td></tr><tr><td>trailing 9m <span class="ptag warn" title="Fewer than the 12 returns the study requires for a Newey-West interval. Printed because hiding it would be its own distortion; not usable as evidence.">not usable</span></td><td>Booster bundles</td><td class="num">41%</td><td class="num">50%</td><td class="num">-6.0pp</td><td class="num">-1.17</td><td><span class="call-word flat">window too short to judge</span></td></tr><tr><td>trailing 9m <span class="ptag warn" title="Fewer than the 12 returns the study requires for a Newey-West interval. Printed because hiding it would be its own distortion; not usable as evidence.">not usable</span></td><td>Singles</td><td class="num">41%</td><td class="num">86%</td><td class="num">-24.4pp</td><td class="num">-2.02</td><td><span class="call-word flat">window too short to judge</span></td></tr><tr><td><strong>trailing 12m</strong></td><td>Booster boxes</td><td class="num">42%</td><td class="num">26%</td><td class="num">+12.5pp</td><td class="num">0.79</td><td><span class="call-word flat">no detectable difference</span></td></tr><tr><td><strong>trailing 12m</strong></td><td>Booster bundles</td><td class="num">42%</td><td class="num">45%</td><td class="num">-1.9pp</td><td class="num">-0.29</td><td><span class="call-word flat">no detectable difference</span></td></tr><tr><td><strong>trailing 12m</strong></td><td>Singles</td><td class="num">42%</td><td class="num">73%</td><td class="num">-18.2pp</td><td class="num">-1.57</td><td><span class="call-word flat">no detectable difference</span></td></tr><tr><td><strong>full window (30m)</strong></td><td>Booster boxes</td><td class="num">59%</td><td class="num">60%</td><td class="num">-0.3pp</td><td class="num">-0.03</td><td><span class="call-word flat">no detectable difference</span></td></tr><tr><td><strong>full window (30m)</strong></td><td>Booster bundles</td><td class="num">59%</td><td class="num">54%</td><td class="num">+3.2pp</td><td class="num">0.35</td><td><span class="call-word flat">no detectable difference</span></td></tr><tr><td><strong>full window (30m)</strong></td><td>Singles</td><td class="num">59%</td><td class="num">40%</td><td class="num">+13.8pp</td><td class="num">1.04</td><td><span class="call-word flat">no detectable difference</span></td></tr></tbody></table></div>
     <p class="table-legend">Same construction, same months, paired monthly differences. On every window long enough to judge the answer is the same null the full-window comparison gives: the category is going up with the market, not instead of it. Data: <a href="etb_recent_benchmarks.csv"><code>etb_recent_benchmarks.csv</code></a>.</p>
-    <div class="caveats"><h4>What this section does and does not establish</h4><ul><li><strong>It is not concentrated.</strong> The top 10% of movers (9 products) hold 19.6% of the summed log rise, 1.96x their even share, and the top half hold 71.6%. A rise carried by a handful of products would put those ratios far higher.</li><li><strong>It is not narrowing.</strong> Holding the product set fixed at the 66 boxes priced across both, the share rising went from 97.0% in first 12m to 98.5% in last 12m. The comparison needs a fixed cohort: the products priced in one window are not the products priced in the other.</li><li><strong>The falls that did happen were shallow.</strong> 6 negative months in the whole archive (2024-04 at -1.08%, 2024-05 at -0.61%, 2025-12 at -2.32%, 2026-01 at -1.13%, 2026-08 at -2.07%, 2026-09 at -0.98%), and the deepest peak-to-trough fall inside the trailing 12 months is -3.4%. A drawdown that shallow after a rise this large is not reassurance; it is the clearest sign that no down market has been observed here at all.</li><li><strong>The exceptions are named.</strong> 3 products fell over the trailing window: Mega Evolution Pokemon Center Elite Trainer Box (Exclusive) [Mega Gardevoir] (0.54x), Mega Evolution Pokemon Center Elite Trainer Box (Exclusive) [Mega Lucario] (0.62x), Temporal Forces Pokemon Center Elite Trainer Box (Exclusive) [Walking Wake] (0.95x). Both are Pokemon Center exclusive products, which is where the launch-decay path in the section below lives.</li><li><strong>The only visible split is channel.</strong> Mass-retail ran 31.5% above Pokemon Center exclusive over the window (t = 5.11, 60 against 31 products). Age band and price quartile do not separate: their intervals overlap and their shares of the rise sit within a few points of their shares of the products.</li></ul></div>
+    <details class="explain-inline"><summary><span class="custom">What this section does and does not establish</span></summary><div class="explain-body"><ul><li><strong>It is not concentrated.</strong> The top 10% of movers (9 products) hold 19.6% of the summed log rise, 1.96x their even share, and the top half hold 71.6%. A rise carried by a handful of products would put those ratios far higher.</li><li><strong>It is not narrowing.</strong> Holding the product set fixed at the 66 boxes priced across both, the share rising went from 97.0% in first 12m to 98.5% in last 12m. The comparison needs a fixed cohort: the products priced in one window are not the products priced in the other.</li><li><strong>The falls that did happen were shallow.</strong> 6 negative months in the whole archive (2024-04 at -1.08%, 2024-05 at -0.61%, 2025-12 at -2.32%, 2026-01 at -1.13%, 2026-08 at -2.07%, 2026-09 at -0.98%), and the deepest peak-to-trough fall inside the trailing 12 months is -3.4%. A drawdown that shallow after a rise this large is not reassurance; it is the clearest sign that no down market has been observed here at all.</li><li><strong>The exceptions are named.</strong> 3 products fell over the trailing window: Mega Evolution Pokemon Center Elite Trainer Box (Exclusive) [Mega Gardevoir] (0.54x), Mega Evolution Pokemon Center Elite Trainer Box (Exclusive) [Mega Lucario] (0.62x), Temporal Forces Pokemon Center Elite Trainer Box (Exclusive) [Walking Wake] (0.95x). Both are Pokemon Center exclusive products, which is where the launch-decay path in the section below lives.</li><li><strong>The only visible split is channel.</strong> Mass-retail ran 31.5% above Pokemon Center exclusive over the window (t = 5.11, 60 against 31 products). Age band and price quartile do not separate: their intervals overlap and their shares of the rise sit within a few points of their shares of the products.</li></ul></div></details>
   </section>
 
   <section id="etb-price-trends" data-reveal>
@@ -1131,7 +1153,7 @@ svg.mchart .k0{opacity:0.55;stroke:var(--neutral)}svg.mchart .k1{fill:var(--up);
     <div class="summary-strip"><div class="summary-cell"><p class="k">Median box volatility</p><p class="v num">31.1%/yr<small>mean 35.5%, IQR 23 to 40%, 94 boxes, +/-4.2pp on a typical box</small></p></div><div class="summary-cell"><p class="k">Median box price now</p><p class="v num">$218<small>$68 at the start; 106 boxes priced at the widest month, 71 at the narrowest</small></p></div><div class="summary-cell"><p class="k">Up over 6 months</p><p class="v num">92 of 98<small>2026-03 to 2026-09; 10 boxes lack an endpoint</small></p></div><div class="summary-cell"><p class="k">ETB moves with its chase card</p><p class="v num">rho 0.23<small>median over 51 sets, 47 positive, only 17 clear |t| &gt;= 2</small></p></div><div class="summary-cell"><p class="k">Set-months on one listing</p><p class="v num">46%<small>711 of 1,561 set-months rest on a single SKU</small></p></div></div>
     <div class="table-wrap"><table><thead><tr><th title="The set's own series, as the catalogue records it.">Generation</th><th class="num" title="Boxes with a real price at BOTH 2025-09 and 2026-09.">products</th><th class="num" title="Median price change over that one common window.">median</th><th class="num" title="Mean of the same changes. Where it sits far from the median, one box is carrying the group.">mean</th><th class="num" title="Smallest change in the group.">worst</th><th class="num" title="Largest change in the group.">best</th></tr></thead><tbody><tr><td>XY</td><td class="num">5</td><td class="num"><strong><span class="ret-pos">+109.8%</span></strong></td><td class="num"><span class="ret-pos">+118.4%</span></td><td class="num"><span class="ret-pos">+61.9%</span></td><td class="num"><span class="ret-pos">+190.8%</span></td></tr><tr><td>Sun &amp; Moon</td><td class="num">14</td><td class="num"><strong><span class="ret-pos">+76.6%</span></strong></td><td class="num"><span class="ret-pos">+78.9%</span></td><td class="num"><span class="ret-pos">+16.0%</span></td><td class="num"><span class="ret-pos">+176.6%</span></td></tr><tr><td>Sword &amp; Shield</td><td class="num">30</td><td class="num"><strong><span class="ret-pos">+55.2%</span></strong></td><td class="num"><span class="ret-pos">+53.8%</span></td><td class="num"><span class="ret-pos">+7.6%</span></td><td class="num"><span class="ret-pos">+83.9%</span></td></tr><tr><td>Scarlet &amp; Violet</td><td class="num">38</td><td class="num"><strong><span class="ret-pos">+54.1%</span></strong></td><td class="num"><span class="ret-pos">+53.5%</span></td><td class="num"><span class="ret-neg">-5.1%</span></td><td class="num"><span class="ret-pos">+117.9%</span></td></tr><tr><td>Mega Evolution</td><td class="num">4</td><td class="num"><strong><span class="ret-neg">-11.2%</span></strong></td><td class="num"><span class="ret-neg">-11.0%</span></td><td class="num"><span class="ret-neg">-45.8%</span></td><td class="num"><span class="ret-pos">+24.3%</span></td></tr></tbody></table></div>
     <p class="table-legend">Every box measured over the SAME window, 2025-09 to 2026-09, so unlike the per-product totals further down these rows are comparable across groups. 91 of the 108 boxes have a real price at both ends. The cut is by GENERATION and not by set because no set has more than 4 priced Elite Trainer Boxes and 21 of the 50 have exactly one, so a per-set median would usually be a single observation wearing a median’s clothes.</p>
-    <div class="caveats" style="max-width:82ch;margin:18px auto 0;"><h4>What these numbers are, and are not</h4><ul><li><strong>Popularity is not in this database and is not claimed here.</strong> <code>price_history</code> carries price points only: no volume, no sales count, no seller count, no listing quantity. The rankings above are by highest median market price, which is a price level and orders expensive boxes, not wanted ones. A box can be dear because almost nobody lists it.</li><li><strong>711 of 1,561 ETB set-months (45.5%) rest on a single priced listing.</strong> 25 of the 60 sets have exactly one Elite Trainer Box in the archive and the richest has 4. Where a set-month is one SKU, its series inherits that one listing's idiosyncratic noise whole and no averaging softens it. The booster-box index is worse on the same measure (1,226 of 1,308 rows built on one product), which is why this was checked rather than assumed.</li><li><strong>The movers window is fixed and stated, and n travels with every row.</strong> 2026-03 to 2026-09, both endpoints real observations, at least 5 of 7 months priced. 10 of the 108 boxes do not qualify and are absent rather than estimated. A large fall on a box with few archive months is launch decay measured on a short panel, not a market view.</li><li><strong>Volatility is a quote series, not a traded one.</strong> The market field is a trailing sales average, so these are the wobbles of a published quote. Each box needs 12 consecutive monthly returns before a number is published; 14 boxes fall short and are left out. The typical sampling error is about 4.2 percentage points, so the calmest box (14%/yr) and the wildest (145%/yr) are far apart but neighbours in the middle of the range are not distinguishable.</li><li><strong>The chase-card correlation is on monthly log RETURNS, never on price levels.</strong> Two series that both rise through the same boom correlate near one on levels whatever their real relationship. On returns the median across 51 sets is 0.23 and only 17 of them clear |t| &gt;= 2, so "the box follows the chase card" is a weak tendency and not a rule. The chase card is the set’s dearest card by median price, which is another price proxy for demand.</li><li><strong>Everything here is inside the same single regime as the rest of the page.</strong> One historic sealed boom, no bust anywhere in it. A trailing window drawn from a boom describes a boom.</li></ul></div>
+    <details class="explain-inline" style="margin-top:18px;"><summary><span class="custom">What these numbers are, and are not</span></summary><div class="explain-body"><ul><li><strong>Popularity is not in this database and is not claimed here.</strong> <code>price_history</code> carries price points only: no volume, no sales count, no seller count, no listing quantity. The rankings above are by highest median market price, which is a price level and orders expensive boxes, not wanted ones. A box can be dear because almost nobody lists it.</li><li><strong>711 of 1,561 ETB set-months (45.5%) rest on a single priced listing.</strong> 25 of the 60 sets have exactly one Elite Trainer Box in the archive and the richest has 4. Where a set-month is one SKU, its series inherits that one listing's idiosyncratic noise whole and no averaging softens it. The booster-box index is worse on the same measure (1,226 of 1,308 rows built on one product), which is why this was checked rather than assumed.</li><li><strong>The movers window is fixed and stated, and n travels with every row.</strong> 2026-03 to 2026-09, both endpoints real observations, at least 5 of 7 months priced. 10 of the 108 boxes do not qualify and are absent rather than estimated. A large fall on a box with few archive months is launch decay measured on a short panel, not a market view.</li><li><strong>Volatility is a quote series, not a traded one.</strong> The market field is a trailing sales average, so these are the wobbles of a published quote. Each box needs 12 consecutive monthly returns before a number is published; 14 boxes fall short and are left out. The typical sampling error is about 4.2 percentage points, so the calmest box (14%/yr) and the wildest (145%/yr) are far apart but neighbours in the middle of the range are not distinguishable.</li><li><strong>The chase-card correlation is on monthly log RETURNS, never on price levels.</strong> Two series that both rise through the same boom correlate near one on levels whatever their real relationship. On returns the median across 51 sets is 0.23 and only 17 of them clear |t| &gt;= 2, so "the box follows the chase card" is a weak tendency and not a rule. The chase card is the set’s dearest card by median price, which is another price proxy for demand.</li><li><strong>Everything here is inside the same single regime as the rest of the page.</strong> One historic sealed boom, no bust anywhere in it. A trailing window drawn from a boom describes a boom.</li></ul></div></details>
   </section>
 
   <section id="etb-age-price" data-reveal>
@@ -1159,7 +1181,7 @@ svg.mchart .k0{opacity:0.55;stroke:var(--neutral)}svg.mchart .k1{fill:var(--up);
     <p class="takeaway">Slope <em>changes</em> survive the fixed effects, so curvature is estimable with no assumption at all, and it is strong. The joint test that the age profile is linear gives <strong>chi&sup2;(5) = 86.7, p = 3.3e-17</strong>. The normalisation-free contrast between the young and mature bands (12-24m -&gt; 36-60m) is <strong>-0.254 log/yr</strong> (t = -2.84): mature boxes compounded at a <em>lower</em> annual factor than young ones, the opposite of &ldquo;it takes off once it is retired&rdquo;. 4 of 6 subsamples reproduce it.</p>
     <p class="block-head">Refitting the same model on six slices of the panel</p>
     <div class="table-wrap"><table><thead><tr><th title="Which slice of the panel the same model was refitted on.">subsample</th><th class="num" title="Products in the slice.">products</th><th class="num" title="Slope change at the first knot (12 months).">12m break</th><th class="num" title="t on the 12-month break.">t</th><th class="num" title="The young-band versus mature-band deceleration contrast, which needs no normalisation.">deceleration</th><th class="num" title="t on the deceleration contrast.">t</th><th class="num" title="Clears |t| &gt;= 2.">significant</th></tr></thead><tbody><tr><td>all</td><td class="num">108</td><td class="num">+0.640</td><td class="num">+6.53</td><td class="num">-0.254</td><td class="num">-2.84</td><td class="num"><span class="call-word clears">yes</span></td></tr><tr><td>mass-retail only</td><td class="num">72</td><td class="num">+0.451</td><td class="num">+3.70</td><td class="num">-0.257</td><td class="num">-2.27</td><td class="num"><span class="call-word clears">yes</span></td></tr><tr><td>Pokemon Center only</td><td class="num">36</td><td class="num">+0.835</td><td class="num">+5.97</td><td class="num">-0.195</td><td class="num">-1.55</td><td class="num"><span class="call-word flat">no</span></td></tr><tr><td>excluding the launch cohort</td><td class="num">72</td><td class="num">-0.120</td><td class="num">-0.70</td><td class="num">-0.318</td><td class="num">-3.32</td><td class="num"><span class="call-word clears">yes</span></td></tr><tr><td>calendar first half (..2025-06)</td><td class="num">92</td><td class="num">+0.621</td><td class="num">+3.86</td><td class="num">-0.522</td><td class="num">-4.20</td><td class="num"><span class="call-word clears">yes</span></td></tr><tr><td>calendar second half (2025-06..)</td><td class="num">108</td><td class="num">+0.254</td><td class="num">+2.16</td><td class="num">+0.002</td><td class="num">+0.02</td><td class="num"><span class="call-word flat">no</span></td></tr></tbody></table></div>
-    <div class="caveats"><h4>Two caveats that cut the shape down</h4><ul><li><strong>The 12-month acceleration is the launch cooldown ending, not a property of one-year-old boxes.</strong> Drop the launch cohort and it vanishes: -0.120 (t = -0.70).</li><li><strong>The deceleration is estimated almost entirely from the first calendar half.</strong> In the second half it is +0.002 (t = +0.02), indistinguishable from zero.</li></ul></div>
+    <details class="explain-inline"><summary><span class="custom">Two caveats that cut the shape down</span></summary><div class="explain-body"><ul><li><strong>The 12-month acceleration is the launch cooldown ending, not a property of one-year-old boxes.</strong> Drop the launch cohort and it vanishes: -0.120 (t = -0.70).</li><li><strong>The deceleration is estimated almost entirely from the first calendar half.</strong> In the second half it is +0.002 (t = +0.02), indistinguishable from zero.</li></ul></div></details>
   </section>
 
   <section id="etb-agevalue" data-reveal>
@@ -1170,7 +1192,7 @@ svg.mchart .k0{opacity:0.55;stroke:var(--neutral)}svg.mchart .k1{fill:var(--up);
     <p class="block-head">Mass-retail median price by age band</p>
     <div class="table-wrap"><table><thead><tr><th title="How long ago the product was released, as of the last month in the archive.">age band</th><th class="num" title="Mass-retail products in the band that are still priced. Read this before the median.">products</th><th class="num" title="Distinct release events behind those products. SKUs from one launch are not independent observations.">sets</th><th class="num" title="Median current market price of the products in the band.">median price</th><th class="num" title="Bootstrap 95% interval on that median. Adjacent bands whose intervals overlap cannot be ordered by this sample.">95% CI</th><th class="num" title="Interquartile range of the band. The spread inside a band is generally wider than the step between bands.">p25 to p75</th><th title="Which release eras the band is made of. Every row is a different set of products bought in a different year.">made in</th></tr></thead><tbody><tr><td>&lt;1yr</td><td class="num">5</td><td class="num">5</td><td class="num">$73</td><td class="num">[$71, $169]</td><td class="num">$71 to $157</td><td><span class="mono-note">ME</span></td></tr><tr><td>1-2yr</td><td class="num">9</td><td class="num">7</td><td class="num">$140</td><td class="num">[$118, $167]</td><td class="num">$124 to $157</td><td><span class="mono-note">ME/SV/other</span></td></tr><tr><td>2-3yr</td><td class="num">8</td><td class="num">6</td><td class="num">$137</td><td class="num">[$114, $154]</td><td class="num">$123 to $147</td><td><span class="mono-note">SV</span></td></tr><tr><td>3-5yr</td><td class="num">12</td><td class="num">11</td><td class="num">$207</td><td class="num">[$152, $327]</td><td class="num">$154 to $326</td><td><span class="mono-note">SV/SWSH/other</span></td></tr><tr><td>5-8yr</td><td class="num">18</td><td class="num">14</td><td class="num">$192</td><td class="num">[$143, $566]</td><td class="num">$143 to $568</td><td><span class="mono-note">SM/SWSH</span></td></tr><tr><td>8yr+</td><td class="num">15</td><td class="num">13</td><td class="num">$831</td><td class="num">[$636, $1,256]</td><td class="num">$661 to $1,378</td><td><span class="mono-note">SM/XY/other</span></td></tr></tbody></table></div>
     <p class="table-legend"><strong>Read as written on the artifact:</strong> age = calendar_month - release_month, so within one calendar month age and release cohort are the SAME variable (R^2 = 1.0): this gradient is a vintage ranking as much as an ageing curve, and the cross-section cannot separate them. Every row is a different set of products, made in a different year and sold into a different market; the table is printed by age because that is how the question was asked, not because age is what separates the rows. The published table with both channels, every column and the confound note on each row is <a href="etb_agevalue_bands.csv"><code>etb_agevalue_bands.csv</code></a>.</p>
-    <div class="caveats"><h4>What this gradient is not</h4><ul><li><strong>The medians do NOT rise monotonically.</strong> There are 2 inversions, the worst being 3-5yr -&gt; 5-8yr at -7.2% &ndash; older product selling for less than younger product.</li><li><strong>0 of those 2 dips separate at the bootstrap interval, and the step up into the oldest band does separate either</strong> &ndash; despite that one step supplying 84% of the whole top-to-bottom range. The point estimates are what they are; <strong>their ORDER is not established by this sample</strong>.</li><li><strong>The oldest band is where the level lives and where the sample is worst.</strong> Only 60.0% of the 25 same-era mass-retail products in the catalogue are still priced &ndash; 6 were never priced and 4 were delisted &ndash; so $831 is a median over SURVIVORS. Putting every missing box at the cheapest and then the dearest observed price bounds the true band median in [$421.79, $1,800.00], a 4.27x span that contains the survivor median rather than being centred on it.</li><li><strong>The rate question is a different question, and its answer is a null.</strong> Whether a box appreciates FASTER because it is old is measured in the two sections above and in the age-at-entry cohorts below; none of those contrasts clears this page's evidence bar. A higher price LEVEL and a higher growth RATE are not the same claim, and only the first of them is supported here. Dropping the products still inside their launch window at entry &ndash; whose early decay is launch behaviour rather than ageing &ndash; moves the panel's ageing slope to -1.8pp/yr (t = -1.21): no age dependence distinguishable from zero, the opposite sign to an ageing reading of the table above. That cut is a post-hoc slice of one regime, so the headline null is still the statement to quote; it is printed because its sign is decision-relevant, not because it establishes that age is bad for a box.</li></ul></div>
+    <details class="explain-inline"><summary><span class="custom">What this gradient is not</span></summary><div class="explain-body"><ul><li><strong>The medians do NOT rise monotonically.</strong> There are 2 inversions, the worst being 3-5yr -&gt; 5-8yr at -7.2% &ndash; older product selling for less than younger product.</li><li><strong>0 of those 2 dips separate at the bootstrap interval, and the step up into the oldest band does separate either</strong> &ndash; despite that one step supplying 84% of the whole top-to-bottom range. The point estimates are what they are; <strong>their ORDER is not established by this sample</strong>.</li><li><strong>The oldest band is where the level lives and where the sample is worst.</strong> Only 60.0% of the 25 same-era mass-retail products in the catalogue are still priced &ndash; 6 were never priced and 4 were delisted &ndash; so $831 is a median over SURVIVORS. Putting every missing box at the cheapest and then the dearest observed price bounds the true band median in [$421.79, $1,800.00], a 4.27x span that contains the survivor median rather than being centred on it.</li><li><strong>The rate question is a different question, and its answer is a null.</strong> Whether a box appreciates FASTER because it is old is measured in the two sections above and in the age-at-entry cohorts below; none of those contrasts clears this page's evidence bar. A higher price LEVEL and a higher growth RATE are not the same claim, and only the first of them is supported here. Dropping the products still inside their launch window at entry &ndash; whose early decay is launch behaviour rather than ageing &ndash; moves the panel's ageing slope to -1.8pp/yr (t = -1.21): no age dependence distinguishable from zero, the opposite sign to an ageing reading of the table above. That cut is a post-hoc slice of one regime, so the headline null is still the statement to quote; it is printed because its sign is decision-relevant, not because it establishes that age is bad for a box.</li></ul></div></details>
   </section>
 
       </div>
@@ -1274,10 +1296,14 @@ svg.mchart .k0{opacity:0.55;stroke:var(--neutral)}svg.mchart .k1{fill:var(--up);
     <h2>Limits, and the data itself</h2>
     <p class="section-note">The things that have to travel with any number quoted from
       this page.</p>
-    <div class="caveats" style="max-width:82ch;margin:0 auto 18px;">
-      <h4>Before quoting anything above</h4>
-      <ul id="etb-limits-list"></ul>
-    </div>
+    <!-- Quiet by design (2026 Minimalist review, round two): the regime
+         banner above is the one loud callout that governs the whole page,
+         and the hold calculator carries the other; every other caveat,
+         including this list, reads as a disclosure rather than a warning. -->
+    <details class="explain-inline" style="max-width:82ch;margin:0 auto 18px;">
+      <summary><span class="custom">Before quoting anything above</span></summary>
+      <div class="explain-body"><ul id="etb-limits-list"></ul></div>
+    </details>
     <div class="artifact-links" id="etb-artifacts"></div>
   </section>
 
@@ -1290,7 +1316,7 @@ svg.mchart .k0{opacity:0.55;stroke:var(--neutral)}svg.mchart .k1{fill:var(--up);
     </ul>
   </nav>
 
-  <p class="freshness-stamp">Prices as of 2026-09-08 (TCGplayer daily 2026-09-08, Cardmarket 2026-09-08, monthly panel 2026-09-01). Built 2026-09-08 06:31 UTC. Published upstream: TCGplayer daily 2026-09-07 20:05 UTC, Cardmarket (EU) 2026-09-08 03:18 UTC. Two TCGplayer sources agree within 5% on 98.6% of 13759 cards.</p>
+  <p class="freshness-stamp">Prices as of 2026-09-09 (TCGplayer daily 2026-09-09, Cardmarket 2026-09-08, monthly panel 2026-09-01). Built 2026-09-09 18:06 UTC. Published upstream: TCGplayer daily 2026-09-08 20:06 UTC, Cardmarket (EU) 2026-09-08 03:18 UTC.</p>
 
 </main>
 
