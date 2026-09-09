@@ -2,22 +2,22 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<title>What changed</title>
+<title>Every page on this site, and what is in it</title>
 <link rel="icon" href="data:," />
 <script>(function(){try{var t=localStorage.getItem('pk-theme');if(t==='dark'||t==='light'||t==='pastel')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="pokestat" />
-<meta property="og:title" content="What changed" />
-<meta property="og:description" content="This page tracks what changed each time the site rebuilds: which numbers moved, by how much, and whether that was the market moving or the model or currency rate changing under it. When nothing..." />
-<meta property="og:url" content="https://garec99054.github.io/pokestat-site/changelog.html" />
-<meta property="og:image" content="https://garec99054.github.io/pokestat-site/share/changelog.png" />
+<meta property="og:title" content="Every page on this site, and what is in it" />
+<meta property="og:description" content="pokestat turns Pokemon card and sealed box prices into a model, a set of value calls, and a handful of studies. This page is the map of everything it publishes: every page, grouped the way the..." />
+<meta property="og:url" content="https://garec99054.github.io/pokestat-site/sitemap.html" />
+<meta property="og:image" content="https://garec99054.github.io/pokestat-site/share/sitemap.png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="What changed" />
-<meta name="twitter:description" content="This page tracks what changed each time the site rebuilds: which numbers moved, by how much, and whether that was the market moving or the model or currency rate changing under it. When nothing..." />
-<meta name="twitter:image" content="https://garec99054.github.io/pokestat-site/share/changelog.png" />
+<meta name="twitter:title" content="Every page on this site, and what is in it" />
+<meta name="twitter:description" content="pokestat turns Pokemon card and sealed box prices into a model, a set of value calls, and a handful of studies. This page is the map of everything it publishes: every page, grouped the way the..." />
+<meta name="twitter:image" content="https://garec99054.github.io/pokestat-site/share/sitemap.png" />
 <style>
 
 :root{
@@ -736,12 +736,46 @@ white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:220px;
 }
 html.compact .cardcell .cc-thumb,html.compact .cardcell .cc-thumb--fallback{width:28px;height:39px;}
 html.compact .cardcell .cc-meta{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:200px;}
-.build-entry{max-width:900px;margin:0 auto 30px;border-top:1px solid var(--border);
-padding-top:20px;}
-.build-entry:first-of-type{border-top:none;padding-top:0;}
-.build-entry h2{font-size:var(--fs-4);font-weight:650;margin:0 0 6px;letter-spacing:-0.005em;}
-.build-date{color:var(--ink-subtle);font-weight:400;font-size:0.82em;margin-left:8px;}
-.build-note{margin:2px 0 0;}
+.sitemap-groups{
+display:grid;grid-template-columns:1fr;gap:20px;margin:0 0 8px;
+}
+@media (min-width:1024px){
+.sitemap-groups{grid-template-columns:1fr 1fr;gap:22px 32px;}
+}
+.sitemap-group{
+border:1px solid var(--border);border-radius:var(--radius);
+padding:16px 18px;background:var(--panel);min-width:0;
+}
+.sitemap-group h3{
+margin:0 0 10px;font-size:var(--fs-4);font-weight:650;color:var(--ink);
+letter-spacing:-0.005em;
+}
+dl.sitemap-list{margin:0;}
+dl.sitemap-list dt{margin:14px 0 3px;font-size:var(--fs-4);font-weight:650;line-height:1.35;}
+dl.sitemap-list dt:first-of-type{margin-top:0;}
+dl.sitemap-list dt a{color:var(--ink);text-decoration:none;}
+dl.sitemap-list dt a:hover{color:var(--accent-ink);text-decoration:underline;}
+dl.sitemap-list dd{
+margin:0 0 14px;padding:0 0 14px;border-bottom:1px solid var(--border);
+}
+dl.sitemap-list dd:last-of-type{margin-bottom:0;padding-bottom:0;border-bottom:none;}
+.sitemap-lede{margin:0 0 5px;color:var(--ink-muted);font-size:var(--fs-3);line-height:1.5;}
+.sitemap-sections{
+margin:0;color:var(--ink-subtle);font-size:var(--fs-2);line-height:1.6;
+overflow-wrap:anywhere;
+}
+.sitemap-sections a{color:var(--accent-ink);text-decoration:none;}
+.sitemap-sections a:hover{text-decoration:underline;}
+dl.sitemap-artifacts{margin:0;}
+dl.sitemap-artifacts dt{margin:12px 0 2px;font-size:var(--fs-3);font-weight:650;}
+dl.sitemap-artifacts dt:first-of-type{margin-top:0;}
+dl.sitemap-artifacts dt a{color:var(--accent-ink);text-decoration:none;}
+dl.sitemap-artifacts dt a:hover{text-decoration:underline;}
+dl.sitemap-artifacts dd{
+margin:0 0 12px;padding:0 0 12px;border-bottom:1px solid var(--border);
+color:var(--ink-muted);font-size:var(--fs-3);
+}
+dl.sitemap-artifacts dd:last-of-type{margin-bottom:0;padding-bottom:0;border-bottom:none;}
 
 </style>
 </head>
@@ -758,8 +792,8 @@ padding-top:20px;}
           <a href="dashboard.html">Summary</a>
           <a href="mine.html">My cards</a>
           <a href="findings.html">Findings</a>
-          <a href="changelog.html" class="active" aria-current="page">Changelog</a>
-          <a href="sitemap.html">Site map</a>
+          <a href="changelog.html">Changelog</a>
+          <a href="sitemap.html" class="active" aria-current="page">Site map</a>
         </div>
       </div>
       <div class="nav-group">
@@ -804,8 +838,8 @@ padding-top:20px;}
           <a href="dashboard.html">Summary</a>
           <a href="mine.html">My cards</a>
           <a href="findings.html">Findings</a>
-          <a href="changelog.html" class="active" aria-current="page">Changelog</a>
-          <a href="sitemap.html">Site map</a>
+          <a href="changelog.html">Changelog</a>
+          <a href="sitemap.html" class="active" aria-current="page">Site map</a>
         </div>
         <div class="nav-menu-group">
           <p class="nav-menu-label">Markets</p>
@@ -842,10 +876,10 @@ padding-top:20px;}
 <main class="page" id="main">
 
   <header class="masthead" data-reveal>
-    <h1>What changed</h1>
-    <p class="lede prose">This page tracks what changed each time the site rebuilds: which numbers moved, by how much, and whether that was the market moving or the model or currency rate changing under it. When nothing moved, it says so.</p>
+    <h1>Every page on this site, and what is in it</h1>
+    <p class="lede prose">pokestat turns Pokemon card and sealed box prices into a model, a set of value calls, and a handful of studies. This page is the map of everything it publishes: every page, grouped the way the navigation groups them, with a one-line description and a link to each of its sections, plus the raw data files behind it all. Every number on every page is generated from the data and refreshed daily. Nothing here is typed in by hand.</p>
     <details class="explain"><summary><span class="custom">Technical wording</span></summary>
-      <div class="explain-body"><p>Every headline number this site publishes, snapshotted at each build and diffed against the last one: a data change when only the market moved, a pipeline change when the model was refit or the euro rate shifted. A quiet build says so plainly instead of padding the page.</p></div>
+      <div class="explain-body"><p>Every published page, grouped the way the top navigation groups them, each with its own one-line lede and a jump link to every section it renders, plus the full list of generated data files this build published alongside them.</p></div>
     </details>
   </header>
 
@@ -853,23 +887,104 @@ padding-top:20px;}
   <nav class="onpage" aria-label="On this page">
     <p class="onpage-k">On this page</p>
     <ol>
-      <li><a href="#b-2026-09-09">Latest build, 7 runs that day merged 2026-09-09</a></li>
-      <li><a href="#b-2026-09-08">Build, 4 runs that day merged 2026-09-08</a></li>
-      <li><a href="#b-2026-09-07">Build 2026-09-07</a></li>
+      <li><a href="#pages">Every page, grouped</a></li>
+      <li><a href="#downloads">Data and downloads</a></li>
     </ol>
   </nav>
-<section id="changelog-feed" data-reveal><p class="section-note">Subscribe to this history: <a href="feed.xml">feed.xml</a> (Atom).</p></section>
-<section id="b-2026-09-09" class="build-entry" data-reveal><h2>Latest build, 7 runs that day merged<span class="build-date">2026-09-09</span></h2><p class="section-note build-note">3 figures moved, 10 unchanged.</p><div class="table-wrap"><table><thead><tr><th>Figure</th><th>Before</th><th>After</th><th>Change</th><th>Kind</th></tr></thead><tbody><tr><td><a href="gap.html">EU versus US median price ratio, modeled cards</a></td><td>1.04</td><td>1.04</td><td>-0.003943</td><td>Data change</td></tr><tr><td><a href="findings.html">TCGplayer daily feed, latest date</a></td><td>2026-09-08</td><td>2026-09-02</td><td>n/a</td><td>Data change</td></tr><tr><td><a href="findings.html">Cardmarket feed, latest date</a></td><td>2026-09-08</td><td>2026-09-02</td><td>n/a</td><td>Data change</td></tr></tbody></table></div></section>
-<section id="b-2026-09-08" class="build-entry" data-reveal><h2>Build, 4 runs that day merged<span class="build-date">2026-09-08</span></h2><p class="section-note build-note">3 figures moved, 10 unchanged.</p><div class="table-wrap"><table><thead><tr><th>Figure</th><th>Before</th><th>After</th><th>Change</th><th>Kind</th></tr></thead><tbody><tr><td><a href="gap.html">EU versus US median price ratio, modeled cards</a></td><td>1.04</td><td>1.04</td><td>-0.004184</td><td>Data change</td></tr><tr><td><a href="findings.html">TCGplayer daily feed, latest date</a></td><td>2026-09-07</td><td>2026-09-08</td><td>n/a</td><td>Data change</td></tr><tr><td><a href="findings.html">Cardmarket feed, latest date</a></td><td>2026-09-07</td><td>2026-09-08</td><td>n/a</td><td>Data change</td></tr></tbody></table></div></section>
-<section id="b-2026-09-07" class="build-entry" data-reveal><h2>Build<span class="build-date">2026-09-07</span></h2><p class="section-note build-note">1 figures moved, 12 unchanged.</p><div class="table-wrap"><table><thead><tr><th>Figure</th><th>Before</th><th>After</th><th>Change</th><th>Kind</th></tr></thead><tbody><tr><td><a href="gap.html">EU versus US median price ratio, modeled cards</a></td><td>0.68</td><td>1.04</td><td>+0.361267</td><td>Data change</td></tr></tbody></table></div></section>
+
+  <section id="pages" data-reveal>
+    <h2>Every page, grouped</h2>
+    <p class="section-note">One block per navigation group, in the order the top navigation
+      itself uses. Each page title links to that page; where a page has more than one section,
+      every section links straight to it.</p>
+    <div class="sitemap-groups"><div class="sitemap-group">
+    <h3>Overview</h3>
+    <dl class="sitemap-list">
+      <dt><a href="dashboard.html">pokestat: 90-day chase-card outlook</a></dt>
+      <dd><p class="sitemap-lede">This ranks every modeled chase card by how much its price should move over the next 90 days against the market, with a range on every prediction, not just a...</p><p class="sitemap-sections"><a href="dashboard.html#card-carousel">Browse the cards</a> · <a href="dashboard.html#teaser">Today&#x27;s biggest predicted movers</a> · <a href="dashboard.html#value-teaser">Most over- and under-valued right now</a> · <a href="dashboard.html#explore">Explore the analysis</a></p></dd>
+      <dt><a href="mine.html">My cards: what you starred, with today&#x27;s numbers</a></dt>
+      <dd><p class="sitemap-lede">The cards you starred on the Outlook, Valuation, Compendium, Watchlists or Hit rates page, gathered here with today&#x27;s numbers. This list lives only in this...</p><p class="sitemap-sections">one screen</p></dd>
+      <dt><a href="findings.html">The findings, and what they imply</a></dt>
+      <dd><p class="sitemap-lede">The most important things this project actually found, in plain terms: what the sealed market does, what the model can and cannot tell you, and what turned...</p><p class="sitemap-sections"><a href="findings.html#finding-1">1. Sealed boxes have grown roughly 59.1% a year, if you hold them</a> · <a href="findings.html#finding-2">2. Older boxes sell for more today, but ageing alone does not explain it</a> · <a href="findings.html#finding-3">3. When the model is unsure, it says so</a> · <a href="findings.html#finding-4">4. Two ideas we tested and rejected, one we cannot test yet</a> · <a href="findings.html#finding-5">5. How many cards? Four honest answers</a> · <a href="findings.html#finding-6">6. Which set a card is from predicts its price, beyond a shared formula</a> · <a href="findings.html#finding-7">7. Our price feeds show their dates, live</a> · <a href="findings.html#sources">Where the numbers come from</a></p></dd>
+      <dt><a href="changelog.html">What changed</a></dt>
+      <dd><p class="sitemap-lede">This page tracks what changed each time the site rebuilds: which numbers moved, by how much, and whether that was the market moving or the model or currency...</p><p class="sitemap-sections"><a href="changelog.html#b-2026-09-09">Latest build, 7 runs that day merged 2026-09-09</a> · <a href="changelog.html#b-2026-09-08">Build, 4 runs that day merged 2026-09-08</a> · <a href="changelog.html#b-2026-09-07">Build 2026-09-07</a></p></dd>
+    </dl>
+  </div>
+  <div class="sitemap-group">
+    <h3>Markets</h3>
+    <dl class="sitemap-list">
+      <dt><a href="gap.html">The Gap: Europe vs US pricing for the same card</a></dt>
+      <dd><p class="sitemap-lede">Every card this project prices in both Europe and the US, on the same day, converted to one currency so the two numbers can be compared directly. Some cards...</p><p class="sitemap-sections"><a href="gap.html#gap-tiers">Where the gap concentrates</a> · <a href="gap.html#gap-table-sec">Every paired card</a></p></dd>
+      <dt><a href="variants.html">What is the variant premium today</a></dt>
+      <dd><p class="sitemap-lede">Some cards print in two or more finishes, such as a Reverse Holofoil next to a plain Normal copy of the same card. This page measures how much more the...</p><p class="sitemap-sections"><a href="variants.html#variants">Variant premium</a></p></dd>
+      <dt><a href="market.html">Whole-market statistics</a></dt>
+      <dd><p class="sitemap-lede">What the wider Pokemon card and sealed market did across 31 monthly snapshots, from March 2024 to September 2026. The index charts follow the same fixed...</p><p class="sitemap-sections"><a href="market.html#mkt-index">Chase-single price index by tier</a> · <a href="market.html#mkt-dist">Price distribution by tier</a> · <a href="market.html#mkt-models">Model skill versus baselines</a> · <a href="market.html#mkt-momentum">Do recent winners keep winning?</a> · <a href="market.html#mkt-divergence">EUR versus USD pricing</a> · <a href="market.html#mkt-sealed">Sealed product versus singles</a> · <a href="market.html#sealed-coverage">The sealed side of the catalogue</a> · <a href="market.html#sealed-leadlag">Do sealed prices lead the singles, or just track them?</a> · <a href="market.html#sealed-ev">How much of a box price do the hits explain?</a> · <a href="market.html#sealed-limits">What the sealed study deliberately does not do</a></p></dd>
+    </dl>
+  </div>
+  <div class="sitemap-group">
+    <h3>Cards</h3>
+    <dl class="sitemap-list">
+      <dt><a href="outlook.html">Full 90-day outlook, all modeled chase cards</a></dt>
+      <dd><p class="sitemap-lede">Every card the model covers, ranked by how much its price should move over the next 90 days compared with the rest of the market. Each one comes with a...</p><p class="sitemap-sections"><a href="outlook.html#card-carousel">Browse the ranked universe</a> · <a href="outlook.html#outlook">90-day outlook, all modeled cards</a></p></dd>
+      <dt><a href="watchlists.html">Watchlists: where the model and the market disagree</a></dt>
+      <dd><p class="sitemap-lede">Five short reads built from the same rankings and the same price history: the biggest movers right now, set against a momentum study that found nothing...</p><p class="sitemap-sections">one screen</p></dd>
+      <dt><a href="valuation.html">Valuation: what each chase card is worth vs its price</a></dt>
+      <dd><p class="sitemap-lede">Every card the model covers, priced against what its pull odds and its popularity say it should cost, with a range around that estimate and a cheap or...</p><p class="sitemap-sections"><a href="valuation.html#scatters">Where price sits versus its two fair-value drivers</a> · <a href="valuation.html#val-table-sec">Full fair-value table</a> · <a href="valuation.html#persistence">Do the same cards stay mispriced?</a> · <a href="valuation.html#combined">Combined signals: mispricing meets momentum</a> · <a href="valuation.html#methods">Methodology &amp; honest caveats</a> · <a href="valuation.html#momentum">Is this hot? Momentum and reversion</a> · <a href="valuation.html#momentum-stratified">The same cards, ranked inside their own era</a></p></dd>
+      <dt><a href="compendium.html">Compendium: the chase cards of every recent set</a></dt>
+      <dd><p class="sitemap-lede">Every big-money card from the sets that came out in the last two years, with what it costs now, how its price has moved, its picture, and what two other...</p><p class="sitemap-sections"><a href="compendium.html#sets">Recent sets, newest first</a> · <a href="compendium.html#chase">Every chase card in the window</a> · <a href="compendium.html#markets">The same cards across three price reads</a> · <a href="compendium.html#limits">What this page does not do</a></p></dd>
+    </dl>
+  </div>
+  <div class="sitemap-group">
+    <h3>Sealed</h3>
+    <dl class="sitemap-list">
+      <dt><a href="etb.html">Elite Trainer Boxes: did they go up, and is one worth holding?</a></dt>
+      <dd><p class="sitemap-lede">Every Elite Trainer Box in the price archive, measured over 31 monthly snapshots from March 2024 to September 2026. Prices went up a lot. Nearly every...</p><p class="sitemap-sections"><a href="etb.html#etb-calculator">Work it out for a box you own</a> · <a href="etb.html#etb-index">Did ETB prices go up?</a> · <a href="etb.html#etb-benchmarks">Did ETBs beat the alternatives?</a> · <a href="etb.html#etb-dispersion">What the average hides</a> · <a href="etb.html#etb-recent">Is it still going up?</a> · <a href="etb.html#etb-price-trends">ETB price trends</a> · <a href="etb.html#etb-age-price">Age and price</a> · <a href="etb.html#etb-launch">Buying at launch, and buying old stock</a> · <a href="etb.html#etb-predict">Can you tell in advance which ETB will win?</a> · <a href="etb.html#etb-hold">What would a holder actually have kept?</a> · <a href="etb.html#etb-products">Every Elite Trainer Box in the study</a> · <a href="etb.html#etb-limits">Limits, and the data itself</a></p></dd>
+      <dt><a href="hits.html">Hit rates: what the pull-rate studies say</a></dt>
+      <dd><p class="sitemap-lede">A hit rate is simply how often, on average, a card of a given rarity turns up in a pack. No manufacturer publishes official pull odds, so this page reads...</p><p class="sitemap-sections"><a href="hits.html#hits-index">Sets covered</a> · <a href="hits.html#set-me5">Pitch Black</a> · <a href="hits.html#set-me4">Chaos Rising</a> · <a href="hits.html#set-me2pt5">Ascended Heroes</a> · <a href="hits.html#set-me2">Phantasmal Flames</a> · <a href="hits.html#set-me1">Mega Evolution</a> · <a href="hits.html#set-sv10">Destined Rivals</a> · <a href="hits.html#set-sv9">Journey Together</a> · <a href="hits.html#set-sv8pt5">Prismatic Evolutions</a> · <a href="hits.html#set-sv8">Surging Sparks</a> · <a href="hits.html#set-sv7">Stellar Crown</a> · <a href="hits.html#set-sv6pt5">Shrouded Fable</a> · <a href="hits.html#set-sv6">Twilight Masquerade</a> · <a href="hits.html#hits-sources">Sources</a></p></dd>
+    </dl>
+  </div>
+  <div class="sitemap-group">
+    <h3>Research</h3>
+    <dl class="sitemap-list">
+      <dt><a href="models.html">Which model was selected, and why</a></dt>
+      <dd><p class="sitemap-lede">The models that were tried, and the three simple rules each one had to beat: predict no change, follow the recent winners, or bet against them. Every model...</p><p class="sitemap-sections"><a href="models.html#models">Model leaderboard</a> · <a href="models.html#listing-book">Recovered listing-book features: what they bought, and what they really are</a> · <a href="models.html#within-era">Is that edge within-era skill, or just cross-era contrast?</a> · <a href="models.html#scorecard">Live forecasts, scored</a></p></dd>
+      <dt><a href="backtest.html">Do the value flags predict forward returns?</a></dt>
+      <dd><p class="sitemap-lede">Cards flagged cheap, expensive or fairly priced are followed for about 90 days to see what actually happened next. Both inputs that could have peeked at the...</p><p class="sitemap-sections"><a href="backtest.html#backtest">Value-flag backtest</a></p></dd>
+      <dt><a href="how-it-works.html">How the models work</a></dt>
+      <dd><p class="sitemap-lede">How the numbers on this site are made, drawn as labelled diagrams that match the actual code: where the prices come from, how a fair value is estimated from...</p><p class="sitemap-sections"><a href="how-it-works.html#pipeline">1 · Data pipeline, as of T</a> · <a href="how-it-works.html#hedonic">2 · Desirability / hedonic model</a> · <a href="how-it-works.html#walkforward">3 · Walk-forward folds</a> · <a href="how-it-works.html#lifecycle">The set-age lifecycle, seen directly</a> · <a href="how-it-works.html#conformal">4 · Conformal interval</a> · <a href="how-it-works.html#flags">5 · The dual-flag rule</a> · <a href="how-it-works.html#momentum">6 · Momentum vs reversion</a> · <a href="how-it-works.html#backtest">7 · Value-flag backtest</a> · <a href="how-it-works.html#worked">Worked example, traced end to end</a> · <a href="how-it-works.html#close">What the model can and cannot tell you</a></p></dd>
+      <dt><a href="methods.html">Methods, sources, and caveats</a></dt>
+      <dd><p class="sitemap-lede">Where every number on this site comes from, how the pages are built, which sources are used and which are deliberately left out, and the warnings worth...</p><p class="sitemap-sections"><a href="methods.html#sources">Data sources and coverage</a> · <a href="methods.html#governance">Model tiering, sourcing, and page doctrine</a> · <a href="methods.html#caveats">Caveats</a></p></dd>
+    </dl>
+  </div></div>
+  </section>
+
+  <section id="downloads" data-reveal>
+    <h2>Data and downloads</h2>
+    <p class="section-note">The generated files this build published alongside the pages
+      themselves. Only files that actually exist in this run are listed.</p>
+    <dl class="sitemap-artifacts"><dt><a href="feed.xml">feed.xml</a></dt>
+      <dd>Atom feed of what changed, one entry per refresh day</dd>
+      <dt><a href="pokestat-dataset.zip">pokestat-dataset.zip</a></dt>
+      <dd>The canonical dataset: every table the pages are built from</dd>
+      <dt><a href="market_gap.csv">market_gap.csv</a></dt>
+      <dd>Every Cardmarket to TCGplayer pair behind The Gap</dd>
+      <dt><a href="variant_premium_daily.csv">variant_premium_daily.csv</a></dt>
+      <dd>Every reverse holo premium behind the Variants page</dd>
+      <dt><a href="forward_validation.md">forward_validation.md</a></dt>
+      <dd>The forward model&#x27;s held-out validation report</dd>
+      <dt><a href="momentum_summary.md">momentum_summary.md</a></dt>
+      <dd>The momentum study&#x27;s summary</dd>
+      <dt><a href="backtest_summary.md">backtest_summary.md</a></dt>
+      <dd>The backtest summary</dd>
+      </dl>
+  </section>
 
   <nav class="related" aria-label="Related pages" data-reveal>
     <p class="rel-head">Where to go next</p>
     <ul class="rel-list">
-      <li><a href="dashboard.html">Back to the summary</a></li>
-      <li><a href="findings.html">The findings behind the numbers</a></li>
-      <li><a href="methods.html">Sources and caveats in full</a></li>
-      <li><a href="sitemap.html">Site map</a></li>
+      <li><a href="dashboard.html">The hub summary</a></li>
+      <li><a href="findings.html">This project's own findings</a></li>
+      <li><a href="methods.html">Where every number comes from</a></li>
     </ul>
   </nav>
 
@@ -1214,7 +1329,7 @@ return '<div class="cardcell' + (compact ? ' cc-compact' : '') + '">'
 + '</div></div>';
 }
 
-const PAGE = {"history":[{"date":"2026-09-09","builtAt":"2026-09-09T19:06:34Z","firstSnapshot":false,"quiet":false,"modelRefit":false,"moved":3,"unchanged":10,"figures":{"gap.median_ratio":{"label":"EU versus US median price ratio, modeled cards","unit":"","page":"gap.html","before":1.0407293324342548,"after":1.0367863481163706,"delta":-0.003943,"kind":"data"},"etb.cagr":{"label":"Sealed box growth","unit":"%/yr","page":"etb.html#etb-index","before":59.09,"after":59.09,"delta":0,"kind":"data"},"forward.ic":{"label":"Held-out IC","unit":"","page":"models.html#leaderboard","before":0.371,"after":0.371,"delta":0,"kind":"data"},"forward.ir":{"label":"Held-out IR","unit":"","page":"models.html#leaderboard","before":11.075,"after":11.075,"delta":0,"kind":"data"},"forward.coverage":{"label":"Conformal band coverage","unit":"%","page":"models.html#leaderboard","before":82.1,"after":82.1,"delta":0,"kind":"data"},"fair_value.r2":{"label":"Fair-value LOOCV R2","unit":"","page":"valuation.html#m-hedonic","before":0.6302,"after":0.6302,"delta":0,"kind":"data"},"universe.modeled":{"label":"Modeled universe","unit":"cards","page":"outlook.html","before":478,"after":478,"delta":0,"kind":"data"},"universe.scored":{"label":"Cards scored for fair value","unit":"cards","page":"valuation.html","before":491,"after":491,"delta":0,"kind":"data"},"universe.cardmarket_coverage":{"label":"Cardmarket coverage of the modeled universe","unit":"cards","page":"methods.html","before":477,"after":477,"delta":0,"kind":"data"},"feeds.tcgplayer":{"label":"TCGplayer daily feed, latest date","unit":"","page":"findings.html","before":"2026-09-08","after":"2026-09-02","delta":null,"kind":"data"},"feeds.cardmarket":{"label":"Cardmarket feed, latest date","unit":"","page":"findings.html","before":"2026-09-08","after":"2026-09-02","delta":null,"kind":"data"},"model.best":{"label":"Selected model","unit":"","page":"models.html#leaderboard","before":"rf","after":"rf","delta":0,"kind":"data"},"findings.dataset_cards":{"label":"Cards in the catalogue","unit":"cards","page":"findings.html","before":20444,"after":20444,"delta":0,"kind":"data"}},"builds":7},{"date":"2026-09-08","builtAt":"2026-09-08T06:31:52Z","firstSnapshot":false,"quiet":false,"modelRefit":false,"moved":3,"unchanged":10,"figures":{"gap.median_ratio":{"label":"EU versus US median price ratio, modeled cards","unit":"","page":"gap.html","before":1.0449137614678896,"after":1.0407293324342548,"delta":-0.004184,"kind":"data"},"etb.cagr":{"label":"Sealed box growth","unit":"%/yr","page":"etb.html#etb-index","before":59.09,"after":59.09,"delta":0,"kind":"data"},"forward.ic":{"label":"Held-out IC","unit":"","page":"models.html#leaderboard","before":0.371,"after":0.371,"delta":0,"kind":"data"},"forward.ir":{"label":"Held-out IR","unit":"","page":"models.html#leaderboard","before":11.075,"after":11.075,"delta":0,"kind":"data"},"forward.coverage":{"label":"Conformal band coverage","unit":"%","page":"models.html#leaderboard","before":82.1,"after":82.1,"delta":0,"kind":"data"},"fair_value.r2":{"label":"Fair-value LOOCV R2","unit":"","page":"valuation.html#m-hedonic","before":0.6302,"after":0.6302,"delta":0,"kind":"data"},"universe.modeled":{"label":"Modeled universe","unit":"cards","page":"outlook.html","before":478,"after":478,"delta":0,"kind":"data"},"universe.scored":{"label":"Cards scored for fair value","unit":"cards","page":"valuation.html","before":491,"after":491,"delta":0,"kind":"data"},"universe.cardmarket_coverage":{"label":"Cardmarket coverage of the modeled universe","unit":"cards","page":"methods.html","before":477,"after":477,"delta":0,"kind":"data"},"feeds.tcgplayer":{"label":"TCGplayer daily feed, latest date","unit":"","page":"findings.html","before":"2026-09-07","after":"2026-09-08","delta":null,"kind":"data"},"feeds.cardmarket":{"label":"Cardmarket feed, latest date","unit":"","page":"findings.html","before":"2026-09-07","after":"2026-09-08","delta":null,"kind":"data"},"model.best":{"label":"Selected model","unit":"","page":"models.html#leaderboard","before":"rf","after":"rf","delta":0,"kind":"data"},"findings.dataset_cards":{"label":"Cards in the catalogue","unit":"cards","page":"findings.html","before":20444,"after":20444,"delta":0,"kind":"data"}},"builds":4},{"date":"2026-09-07","builtAt":"2026-09-07T20:15:35Z","firstSnapshot":false,"quiet":false,"modelRefit":false,"moved":1,"unchanged":12,"figures":{"gap.median_ratio":{"label":"EU versus US median price ratio, modeled cards","unit":"","page":"gap.html","before":0.6836470588235293,"after":1.0449137614678896,"delta":0.361267,"kind":"data"},"etb.cagr":{"label":"Sealed box growth","unit":"%/yr","page":"etb.html#etb-index","before":59.09,"after":59.09,"delta":0,"kind":"data"},"forward.ic":{"label":"Held-out IC","unit":"","page":"models.html#leaderboard","before":0.371,"after":0.371,"delta":0,"kind":"data"},"forward.ir":{"label":"Held-out IR","unit":"","page":"models.html#leaderboard","before":11.075,"after":11.075,"delta":0,"kind":"data"},"forward.coverage":{"label":"Conformal band coverage","unit":"%","page":"models.html#leaderboard","before":82.1,"after":82.1,"delta":0,"kind":"data"},"fair_value.r2":{"label":"Fair-value LOOCV R2","unit":"","page":"valuation.html#m-hedonic","before":0.6302,"after":0.6302,"delta":0,"kind":"data"},"universe.modeled":{"label":"Modeled universe","unit":"cards","page":"outlook.html","before":478,"after":478,"delta":0,"kind":"data"},"universe.scored":{"label":"Cards scored for fair value","unit":"cards","page":"valuation.html","before":491,"after":491,"delta":0,"kind":"data"},"universe.cardmarket_coverage":{"label":"Cardmarket coverage of the modeled universe","unit":"cards","page":"methods.html","before":477,"after":477,"delta":0,"kind":"data"},"feeds.tcgplayer":{"label":"TCGplayer daily feed, latest date","unit":"","page":"findings.html","before":"2026-09-07","after":"2026-09-07","delta":0,"kind":"data"},"feeds.cardmarket":{"label":"Cardmarket feed, latest date","unit":"","page":"findings.html","before":"2026-09-07","after":"2026-09-07","delta":0,"kind":"data"},"model.best":{"label":"Selected model","unit":"","page":"models.html#leaderboard","before":"rf","after":"rf","delta":0,"kind":"data"},"findings.dataset_cards":{"label":"Cards in the catalogue","unit":"cards","page":"findings.html","before":20444,"after":20444,"delta":0,"kind":"data"}}}]};
+const PAGE = {"nPages":17,"nSections":85};
 
 </script>
 </body>

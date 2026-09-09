@@ -289,6 +289,45 @@ letter-spacing:0.04em;color:var(--ink-subtle);
 header.masthead{border-bottom:1px solid var(--border);padding-bottom:14px;margin-bottom:18px;text-align:center;scroll-margin-top:calc(var(--nav-h) + 14px);}
 header.masthead h1{font-size:var(--fs-6);font-weight:650;margin:0 0 5px;letter-spacing:-0.01em;}
 header.masthead p.lede{margin:0 auto 8px;max-width:80ch;color:var(--ink-muted);font-size:var(--fs-3);}
+.onpage{
+margin:0 0 var(--section-gap);
+--onpage-cur-bg:var(--panel-alt);--onpage-cur-deco:none;
+}
+.onpage-k{
+margin:0 0 8px;font-size:var(--fs-1);font-weight:650;color:var(--ink-muted);
+text-transform:uppercase;letter-spacing:0.06em;
+}
+.onpage ol{
+list-style:none;margin:0;padding:1px 1px 6px;display:flex;gap:8px;
+flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;
+}
+.onpage ol::-webkit-scrollbar{display:none;}
+.onpage li{flex:none;}
+.onpage a{
+display:inline-block;white-space:nowrap;padding:7px 13px;font-size:var(--fs-2);
+border:1px solid var(--border-strong);border-radius:var(--radius);
+background:var(--panel);color:var(--accent-ink);text-decoration:none;
+}
+.onpage a:hover{border-color:var(--accent);background:var(--panel-alt);}
+.onpage a[aria-current="true"]{
+border-color:var(--accent);background:var(--onpage-cur-bg);font-weight:650;
+text-decoration:var(--onpage-cur-deco);text-underline-offset:4px;
+}
+@media (prefers-reduced-motion:no-preference){
+.onpage a{transition:border-color var(--t-fast) ease-out,background-color var(--t-fast) ease-out;}
+}
+@media (min-width:1024px){
+.onpage{
+position:sticky;top:var(--nav-h);z-index:39;background:var(--surface);
+display:flex;align-items:baseline;gap:18px;padding:9px 0;
+border-bottom:1px solid var(--border);margin:0 0 var(--section-gap);
+--onpage-cur-bg:transparent;--onpage-cur-deco:underline;
+}
+.onpage-k{margin:0;flex:none;white-space:nowrap;}
+.onpage ol{flex:1;overflow-x:visible;flex-wrap:wrap;padding:0;gap:4px 20px;justify-content:center;}
+.onpage a{padding:0;border:none;border-radius:0;background:none;}
+.onpage a:hover{border-color:transparent;background:none;color:var(--ink);}
+}
 .summary-strip{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
@@ -607,41 +646,18 @@ html.motion [data-reveal]{opacity:0;transform:translateY(10px);
 transition:opacity var(--t-mid) var(--ease),transform var(--t-mid) var(--ease);
 transition-delay:calc(var(--rv,0) * var(--rv-step));}
 html.motion [data-reveal].in-view{opacity:1;transform:none;}
-.pagenav{
+.back-to-top{
 position:fixed;right:18px;bottom:18px;z-index:44;
-display:flex;flex-direction:column;align-items:flex-end;gap:8px;
-}
-.pagenav[hidden]{display:none;}
-.pn-row{display:flex;gap:6px;}
-.pagenav button{
-font-size:var(--fs-2);padding:6px 11px;background:var(--panel);
+font-size:var(--fs-2);padding:7px 14px;background:var(--panel);
 border:1px solid var(--border-strong);border-radius:var(--radius);
 color:var(--ink-muted);box-shadow:0 2px 10px rgba(var(--shadow-tint),0.18);
 }
-.pagenav button:hover{color:var(--ink);border-color:var(--accent);}
-.pn-list{
-display:flex;flex-direction:column;max-height:min(58vh,420px);overflow-y:auto;
-width:250px;background:var(--panel);border:1px solid var(--border-strong);
-border-radius:var(--radius);box-shadow:0 4px 18px rgba(var(--shadow-tint),0.22);
-}
-.pn-list[hidden]{display:none;}
-.pn-list a{
-padding:7px 12px;font-size:var(--fs-2);line-height:1.35;color:var(--ink-muted);
-text-decoration:none;border-left:2px solid transparent;
-}
-.pn-list a + a{border-top:1px solid var(--border);}
-.pn-list a:hover{background:var(--panel-alt);color:var(--ink);}
-.pn-list a.active{color:var(--accent-ink);border-left-color:var(--accent);font-weight:600;}
+.back-to-top:hover{color:var(--ink);border-color:var(--accent);}
 @media (prefers-reduced-motion:no-preference){
-.pagenav button{transition:color var(--t-fast) ease-out,border-color var(--t-fast) ease-out,
-transform var(--t-fast) var(--ease);}
-.pn-list a{transition:background-color var(--t-fast) ease-out,color var(--t-fast) ease-out;}
-.pn-list{animation:pk-pn var(--t-mid) var(--ease);}
-@keyframes pk-pn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+.back-to-top{transition:color var(--t-fast) ease-out,border-color var(--t-fast) ease-out;}
 }
 @media (max-width:560px){
-.pagenav{right:10px;bottom:10px;}
-.pn-list{width:min(74vw,250px);}
+.back-to-top{right:10px;bottom:10px;}
 }
 @media (prefers-reduced-motion:no-preference){
 @supports (animation-timeline:scroll()){
@@ -738,6 +754,7 @@ html.compact .cardcell .cc-meta{white-space:nowrap;overflow:hidden;text-overflow
           <a href="mine.html">My cards</a>
           <a href="findings.html">Findings</a>
           <a href="changelog.html">Changelog</a>
+          <a href="sitemap.html">Site map</a>
         </div>
       </div>
       <div class="nav-group">
@@ -783,6 +800,7 @@ html.compact .cardcell .cc-meta{white-space:nowrap;overflow:hidden;text-overflow
           <a href="mine.html">My cards</a>
           <a href="findings.html">Findings</a>
           <a href="changelog.html">Changelog</a>
+          <a href="sitemap.html">Site map</a>
         </div>
         <div class="nav-menu-group">
           <p class="nav-menu-label">Markets</p>
@@ -837,10 +855,11 @@ html.compact .cardcell .cc-meta{white-space:nowrap;overflow:hidden;text-overflow
       <li><a href="models.html">What the selected model does instead</a></li>
       <li><a href="backtest.html">The other null result</a></li>
       <li><a href="how-it-works.html">How the momentum test is built</a></li>
+      <li><a href="sitemap.html">Site map</a></li>
     </ul>
   </nav>
 
-  <p class="freshness-stamp">Prices as of 2026-09-09 (TCGplayer daily 2026-09-09, Cardmarket 2026-09-08, monthly panel 2026-09-01). Built 2026-09-09 18:06 UTC. Published upstream: TCGplayer daily 2026-09-08 20:06 UTC, Cardmarket (EU) 2026-09-08 03:18 UTC.</p>
+  <p class="freshness-stamp" data-stale="true">Prices as of 2026-09-02 (TCGplayer daily 2026-09-02, Cardmarket 2026-09-02, monthly panel 2026-09-01). Built 2026-09-09 19:06 UTC. Published upstream: Cardmarket (EU) 2026-09-01 09:33 UTC. Feed stale: 8 days old.</p>
 
 </main>
 
@@ -1001,102 +1020,54 @@ try{ localStorage.setItem(THEME_KEY, next); }catch(e){}
 // live cross-tab / cross-page sync
 window.addEventListener("storage", e=>{ if(e.key===THEME_KEY && e.newValue) applyTheme(e.newValue); });
 }
-// ---------- floating page nav (jump list + back to top) ----------
-// Built from the DOM: every section already carries a stable id, so nothing is
-// emitted server-side for this. Sections without a heading, and sections a page
-// script has left hidden, are skipped. Below MIN_SECTIONS the control would be
-// noise, so short pages never get one.
-const MIN_SECTIONS = 3;
-function sectionHeading(sec){
-const h = sec.querySelector("h2, h3");
-if(!h) return "";
-return (h.textContent || "").trim();
-}
-function initPageNav(){
-const page = document.querySelector(".page");
-if(!page) return;
-const secs = Array.prototype.slice.call(page.querySelectorAll("section[id]"))
-.filter(function(sec){
-if(sec.offsetParent === null) return false;   // page script left it hidden
-return sectionHeading(sec).length > 0;
-});
-if(secs.length < MIN_SECTIONS) return;
-const wrap = document.createElement("div");
-wrap.className = "pagenav";
-const list = document.createElement("nav");
-list.className = "pn-list";
-list.id = "pn-list";
-list.hidden = true;
-list.setAttribute("aria-label", "Sections on this page");
+// ---------- on-page section index ----------
+// nav.onpage is server-rendered (see emitter._onpage_nav_html and
+// sitegen/sections.py), so this never builds markup -- it only tracks which
+// section is the current one, by marking that section's own link (see
+// ONPAGE_CUR_ATTR, and the shared CSS rule keyed off the same attribute in
+// CSS_CORE). No other behaviour rides along: no scroll listener beyond the
+// observer itself, no animation.
+const ONPAGE_CUR_ATTR = "aria-current";
+function initOnPageIndex(){
+const nav = document.querySelector("nav.onpage");
+if(!nav || !("IntersectionObserver" in window)) return;
+const links = Array.prototype.slice.call(nav.querySelectorAll('a[href^="#"]'));
 const byId = {};
-secs.forEach(function(sec){
-const a = document.createElement("a");
-a.href = "#" + sec.id;
-a.textContent = sectionHeading(sec);
-list.appendChild(a);
+const secs = [];
+links.forEach(function(a){
+const sec = document.getElementById(a.getAttribute("href").slice(1));
+if(!sec) return;
 byId[sec.id] = a;
+secs.push(sec);
 });
-const row = document.createElement("div");
-row.className = "pn-row";
-const secBtn = document.createElement("button");
-secBtn.type = "button";
-secBtn.id = "pn-sections";
-secBtn.textContent = "Sections";
-secBtn.setAttribute("aria-expanded", "false");
-secBtn.setAttribute("aria-controls", "pn-list");
-const topBtn = document.createElement("button");
-topBtn.type = "button";
-topBtn.id = "pn-top";
-topBtn.textContent = "Top";
-topBtn.setAttribute("aria-label", "Back to top");
-row.appendChild(secBtn);
-row.appendChild(topBtn);
-wrap.appendChild(list);
-wrap.appendChild(row);
-document.body.appendChild(wrap);
-function closeList(){
-// Hiding the element that currently holds focus drops focus to <body> and
-// the keyboard user loses their place, so hand it back to the trigger.
-if(list.contains(document.activeElement)) secBtn.focus();
-list.hidden = true;
-secBtn.setAttribute("aria-expanded","false");
-}
-secBtn.addEventListener("click", function(){
-const open = list.hidden;
-list.hidden = !open;
-secBtn.setAttribute("aria-expanded", open ? "true" : "false");
-});
-list.addEventListener("click", function(e){ if(e.target.tagName === "A") closeList(); });
-document.addEventListener("keydown", function(e){ if(e.key === "Escape") closeList(); });
-document.addEventListener("click", function(e){
-if(!wrap.contains(e.target)) closeList();
-});
-topBtn.addEventListener("click", function(){
-closeList();
-const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-window.scrollTo({top:0, behavior: reduce ? "auto" : "smooth"});
-});
-// The cluster stays visible rather than appearing on scroll. Gating it on the
-// masthead leaving the viewport read better on the first screen, but it made
-// the control's existence depend on an IntersectionObserver callback, so a
-// browser that never delivered one would hide the feature outright. A small
-// corner cluster costs little; being reliably there is worth more than being
-// clever. Active-section highlighting below stays a pure enhancement: if the
-// observer never fires, the jump list simply has no highlight.
-// Mark the section currently occupying the upper part of the viewport.
-if("IntersectionObserver" in window){
+if(!secs.length) return;
 const spy = new IntersectionObserver(function(entries){
 entries.forEach(function(en){
 const a = byId[en.target.id];
-if(!a) return;
-if(en.isIntersecting){
-for(const k in byId){ byId[k].classList.remove("active"); }
-a.classList.add("active");
-}
+if(!a || !en.isIntersecting) return;
+links.forEach(function(l){ l.removeAttribute(ONPAGE_CUR_ATTR); });
+a.setAttribute(ONPAGE_CUR_ATTR, "true");
 });
 }, {rootMargin:"-15% 0px -70% 0px", threshold:0});
 secs.forEach(function(sec){ spy.observe(sec); });
 }
+// ---------- back to top ----------
+// A single floating control (see .back-to-top in CSS_CORE), built only when
+// the page is tall enough that scrolling back up by hand is real friction.
+// Below that height it would be a corner clutter item with nothing to solve,
+// so it is never mounted at all rather than hidden.
+function initBackToTop(){
+if(document.documentElement.scrollHeight <= window.innerHeight * 3) return;
+const btn = document.createElement("button");
+btn.type = "button";
+btn.className = "back-to-top";
+btn.textContent = "Top";
+btn.setAttribute("aria-label", "Back to top");
+btn.addEventListener("click", function(){
+const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+window.scrollTo({top:0, behavior: reduce ? "auto" : "smooth"});
+});
+document.body.appendChild(btn);
 }
 // ---------- reveal motion (no scroll-spy: pages are separate documents) ----------
 // --rv is the stagger index the CSS multiplies by --rv-step. It is assigned
@@ -1169,9 +1140,10 @@ initReveal();
 initMarkTips();
 // Deferred by one task: page-specific extra_js is appended AFTER JS_CORE inside
 // the same script tag, and two pages (models #within-era, momentum #stratified)
-// un-hide a section from there. Running inline would measure those sections
-// while they are still display:none and drop them from the jump list forever.
-setTimeout(initPageNav, 0);
+// un-hide a section from there. Running inline would measure the page's
+// scrollHeight for the back-to-top gate before that resize happens.
+setTimeout(initOnPageIndex, 0);
+setTimeout(initBackToTop, 0);
 // ---------- one site-wide card cell ----------
 // OBYID (Map id->{name,set,rarity,...}) and CARDLINKS (object id->{set_id,number,
 // tcg_pid,cm_pid,art}) are defined per page in EXTRA_JS before any cardCell() call.
