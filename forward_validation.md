@@ -200,7 +200,7 @@ This run's weakest era slice is **ME**: held-out IC 0.259
 +/- 0.199 over 6 folds and 55 cards, against a
 static-ablated 0.212.
 
-**Finding: the ME cell IS a real effect.** The permutation test rejects zero (p = 0.014) and 8 of 8 candidates agree on its positive sign (roster median 0.337), so this is a property of the era rather than of the one model the selection step output. It must be treated as a standing defect, not as thin-sample noise.
+**Finding: the ME cell IS a real effect.** The permutation test rejects zero (p = 0.014) and 8 of 8 candidates agree on its positive sign (roster median 0.337), so this is a property of the era rather than of the one model the selection step output. Its sign is positive, so this is the weakest slice still carrying real skill, not a defect: smaller than the other eras, not wrong.
 
 Evidence, all computed on the SAME held-out out-of-fold predictions as the
 headline (nothing is refit, nothing is re-selected):
@@ -497,7 +497,7 @@ they are directly interpretable. The largest-magnitude Ridge coefficients
 indicate which features move the relative-return prediction most across the
 cross-section.
 
-## 2026-07-01 outlook flags
+## 2026-09-01 outlook flags
 
 Flags now use the INTERVAL-AWARE rule: candidate_up requires a positive point
 prediction AND a lower band that clears (roughly) zero (pred_lo90 > -0.02);
@@ -509,7 +509,7 @@ dashboard can show both; when no conformal band is available the flag falls back
 to that percentile rule.
 
 0 candidate_up and 3 candidate_down (interval-aware rule) out of
-478 modeled cards priced at 2026-07-01.
+478 modeled cards priced at 2026-09-01.
 
 Top candidate_up:
 (none)

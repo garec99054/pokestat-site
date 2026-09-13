@@ -683,7 +683,7 @@ Trading is thin there too: 67% of vintage products have their market estimate
 BELOW the cheapest live ask (0% in every band under 5 years) and 2 have one
 listing. The obvious explanation -- smaller print runs -- is **unmeasurable
 here**: no print-run figure exists anywhere in this database, and the
-catalogue-breadth proxy comes out at 0.77, pointing AWAY from the scarcity story
+catalogue-breadth proxy comes out at 0.78, pointing AWAY from the scarcity story
 rather than supporting it. That null is published rather than suppressed, and it
 does not clear the confound: the proxy has no resolution at the 2016-vs-2026
 distance.
