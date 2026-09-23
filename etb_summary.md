@@ -30,7 +30,7 @@ and each one is measured below rather than asserted.**
    2.2).
 2. **ETBs did not beat the rest of sealed.** Against booster boxes over the same
    window with the same construction: -0.7pp/yr (t = -0.08). Against singles:
-   +13.2pp/yr (t = 0.98), which does not clear this repo's |t| >= 2 bar. "ETBs
+   +13.3pp/yr (t = 0.99), which does not clear this repo's |t| >= 2 bar. "ETBs
    went up" is largely "the Pokemon market went up" (section 2.4).
 3. **Older product has the higher point estimates, but none of the AGE contrasts
    is established.** Of 3 contrasts against the youngest on-sale cohort, 1
@@ -218,12 +218,12 @@ but "did ETBs beat the alternative".
 | --- | --- | --- | --- | --- | --- |
 | `booster_box` | 54 | 59.6%/yr | -0.7pp | -0.08 | no |
 | `booster_bundle` | 27 | 54.0%/yr | +2.9pp | 0.31 | no |
-| `singles` | 9,244 | 40.0%/yr | +13.2pp | 0.98 | no |
+| `singles` | 9,217 | 39.8%/yr | +13.3pp | 0.99 | no |
 
 **Not one benchmark difference clears the bar.** ETBs and booster boxes are
 statistically indistinguishable over this window; the ~20-point edge over
 singles has a t of about 1.0 and is not established. The singles benchmark also
-deserves a caveat in the other direction: it is an equal-weighted index of 9,244
+deserves a caveat in the other direction: it is an equal-weighted index of 9,217
 cards above a $1 floor, so it is dominated by cheap commons and probably
 understates what a comparable singles portfolio did.
 
@@ -303,7 +303,7 @@ the recent window:
 | trailing 12m | Singles | 40.4%/yr | 73.5%/yr | -19.1pp | -37.9pp | +5.4pp | -1.57 | no detectable difference |
 | full window (30m) | Booster boxes | 58.4%/yr | 59.6%/yr | -0.7pp | -17.3pp | +19.1pp | -0.08 | no detectable difference |
 | full window (30m) | Booster bundles | 58.4%/yr | 54.0%/yr | +2.9pp | -13.9pp | +22.8pp | 0.31 | no detectable difference |
-| full window (30m) | Singles | 58.4%/yr | 40.0%/yr | +13.2pp | -11.6pp | +44.9pp | 0.98 | no detectable difference |
+| full window (30m) | Singles | 58.4%/yr | 39.8%/yr | +13.3pp | -11.6pp | +45.3pp | 0.99 | no detectable difference |
 
 0 of 6 judgeable comparisons differ from ETBs. The full-window null from section
 2.4 therefore survives into the recent sub-window unchanged: **the recent rise
@@ -315,7 +315,7 @@ claim is "cannot be distinguished", not "they are the same".
 `etb_recent_benchmarks.csv` but excluded from every verdict above, because an
 interval built on a handful of monthly observations is not one. That gate is
 load-bearing rather than decorative: the most extreme of those excluded rows is
-trailing 3m ETBs vs singles at t = -8.20 on 3 monthly returns, and quoting it
+trailing 3m ETBs vs singles at t = -8.14 on 3 monthly returns, and quoting it
 would have published a significant result off a window whose sign does not
 survive to twelve months.
 

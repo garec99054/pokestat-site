@@ -9,40 +9,40 @@ n = 5436 card-date observations across 8 snapshot dates.
 
 | flag | n | mean_return | median_return |
 | --- | --- | --- | --- |
-| fair | 4685 | 8.5% | 6.7% |
+| fair | 4682 | 8.5% | 6.6% |
 | overvalued | 335 | 9.7% | 5.7% |
-| undervalued | 416 | 10.8% | 8.9% |
+| undervalued | 419 | 10.8% | 9.0% |
 
-**Spread (undervalued mean return minus overvalued mean return): +1.0%**
+**Spread (undervalued mean return minus overvalued mean return): +1.1%**
 
 ## Per-date result
 
 | snapshot_date | flag | n | mean_return | median_return |
 | --- | --- | --- | --- | --- |
-| 2024-09-01 | fair | 511 | 2.7% | 2.1% |
+| 2024-09-01 | fair | 510 | 2.6% | 2.1% |
 | 2024-09-01 | overvalued | 37 | 2.8% | 0.1% |
-| 2024-09-01 | undervalued | 48 | 3.0% | 1.2% |
-| 2024-12-01 | fair | 515 | 21.0% | 14.5% |
+| 2024-09-01 | undervalued | 49 | 3.2% | 2.2% |
+| 2024-12-01 | fair | 514 | 21.0% | 14.6% |
 | 2024-12-01 | overvalued | 40 | 32.0% | 24.5% |
-| 2024-12-01 | undervalued | 52 | 29.8% | 24.7% |
-| 2025-03-01 | fair | 553 | 5.3% | 5.6% |
+| 2024-12-01 | undervalued | 53 | 29.4% | 22.8% |
+| 2025-03-01 | fair | 552 | 5.3% | 5.6% |
 | 2025-03-01 | overvalued | 47 | 3.5% | -9.8% |
-| 2025-03-01 | undervalued | 52 | 8.4% | 7.7% |
-| 2025-06-01 | fair | 573 | 6.9% | 5.0% |
+| 2025-03-01 | undervalued | 53 | 8.1% | 7.7% |
+| 2025-06-01 | fair | 572 | 6.9% | 5.0% |
 | 2025-06-01 | overvalued | 44 | 14.1% | 14.8% |
-| 2025-06-01 | undervalued | 52 | -0.5% | -4.5% |
+| 2025-06-01 | undervalued | 53 | 0.3% | -4.2% |
 | 2025-09-01 | fair | 603 | 5.7% | 6.4% |
 | 2025-09-01 | overvalued | 40 | 11.5% | 8.9% |
 | 2025-09-01 | undervalued | 53 | 6.5% | 7.9% |
 | 2025-12-01 | fair | 623 | 5.8% | 3.7% |
 | 2025-12-01 | overvalued | 43 | 0.2% | 1.1% |
-| 2025-12-01 | undervalued | 48 | 9.5% | 8.2% |
-| 2026-03-01 | fair | 654 | 17.3% | 12.9% |
+| 2025-12-01 | undervalued | 48 | 9.8% | 8.2% |
+| 2026-03-01 | fair | 655 | 17.3% | 12.9% |
 | 2026-03-01 | overvalued | 40 | 10.8% | 4.9% |
-| 2026-03-01 | undervalued | 57 | 16.9% | 14.6% |
-| 2026-06-01 | fair | 653 | 3.9% | 4.9% |
-| 2026-06-01 | overvalued | 44 | 4.4% | 5.4% |
-| 2026-06-01 | undervalued | 54 | 11.6% | 11.0% |
+| 2026-03-01 | undervalued | 56 | 17.1% | 15.5% |
+| 2026-06-01 | fair | 653 | 3.8% | 4.7% |
+| 2026-06-01 | overvalued | 44 | 3.9% | 5.2% |
+| 2026-06-01 | undervalued | 54 | 10.7% | 9.5% |
 
 ## Skipped dates
 
@@ -62,7 +62,7 @@ already cached can be used; a shifted window below is that constraint showing.
 - 2025-09-01: fit on 2025-09-01, forward 2025-11-30
 - 2025-12-01: fit on 2025-12-01, forward 2026-03-01
 - 2026-03-01: fit on 2026-03-01, forward 2026-05-30
-- 2026-06-01: fit on 2026-06-01, forward 2026-09-01 (shifted: 92-day window, nearest cached archive)
+- 2026-06-01: fit on 2026-06-01, forward 2026-08-30
 
 ## Look-ahead limitations (read before trusting these numbers)
 
