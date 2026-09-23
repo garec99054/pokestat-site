@@ -892,7 +892,7 @@ html.compact .cardcell .cc-meta{white-space:nowrap;overflow:hidden;text-overflow
     </ul>
   </nav>
 
-  <p class="freshness-stamp">Prices as of 2026-09-16 (TCGplayer daily 2026-09-16, Cardmarket 2026-09-16, monthly panel 2026-09-01). Built 2026-09-16 06:41 UTC. Published upstream: TCGplayer daily 2026-09-15 20:06 UTC, Cardmarket (EU) 2026-09-15 22:16 UTC. Two TCGplayer sources agree within 5% on 99.7% of 13020 cards.</p>
+  <p class="freshness-stamp">Prices as of 2026-09-22 (TCGplayer daily 2026-09-22, Cardmarket 2026-09-22, monthly panel 2026-09-01). Built 2026-09-23 10:56 UTC. Published upstream: TCGplayer daily 2026-09-21 20:05 UTC, Cardmarket (EU) 2026-09-21 22:54 UTC. Two TCGplayer sources agree within 5% on 99.5% of 13759 cards.</p>
 
 </main>
 
@@ -921,7 +921,7 @@ function pp(v){ return v==null?"n/a":(v>0?"+":"")+v.toFixed(1); }
 function ppTd(v){ if(v==null) return '<td class="num">n/a</td>';
 const c=v>0?"ret-pos":(v<0?"ret-neg":""); return '<td class="num '+c+'">'+pp(v)+'</td>'; }
 function shortRarity(r){
-return {"Special Illustration Rare":"SIR","Ultra Rare":"Ultra","Hyper Rare":"Hyper","Mega Hyper Rare":"Mega Hyper"}[r]||r;
+return {"Special Illustration Rare":"SIR","Ultra Rare":"Ultra","Hyper Rare":"Hyper","Mega Hyper Rare":"Mega Hyper","Futuristic Rare":"Futuristic"}[r]||r;
 }
 const SVGNS = "http://www.w3.org/2000/svg";
 // ---------- tooltip ----------

@@ -102,8 +102,8 @@ rebalances >= 8, n_eff >= 4, and
 >= 8 names per quintile leg (a leg mean built from three
 cards is noise amplification, not a portfolio). `null` means a measurable spread
 indistinguishable from zero; `insufficient` means there is not enough
-independent data to distinguish anything. Of the 120 cells computed,
-38 are graded insufficient.
+independent data to distinguish anything. Of the 126 cells computed,
+44 are graded insufficient.
 
 ### Shared-endpoint (bid-ask-bounce) control
 
@@ -129,24 +129,24 @@ same estimator as the headline table above, extended with the skip-1 twins):_
 
 | stratum | cards | formation | rebalances | mean names/rebal | names per leg | n_eff | mean 3m spread | hit rate | t (n_eff) | verdict |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| all cards | 491 | form1m | 27 | 373.667 | 74.733 | 13.253 | -2.9% | 37.0% | -1.817 | null |
-| all cards | 491 | form1m_skip1 | 26 | 370.154 | 74.031 | 16.505 | -1.7% | 38.5% | -1.366 | null |
-| all cards | 491 | form3m | 25 | 366.360 | 73.272 | 5.094 | -6.4% | 16.0% | -1.738 | null |
-| all cards | 491 | form3m_skip1 | 24 | 362.250 | 72.450 | 11.436 | -3.9% | 16.7% | -1.794 | null |
-| all cards | 491 | form6m | 22 | 354.409 | 70.882 | 3.213 | -2.7% | 22.7% | -0.962 | insufficient (n_eff<4) |
-| all cards | 491 | form6m_skip1 | 21 | 350.286 | 70.057 | 7.132 | 2.0% | 66.7% | 0.931 | null |
+| all cards | 503 | form1m | 27 | 373.667 | 74.733 | 13.253 | -2.9% | 37.0% | -1.817 | null |
+| all cards | 503 | form1m_skip1 | 26 | 370.154 | 74.031 | 16.505 | -1.7% | 38.5% | -1.366 | null |
+| all cards | 503 | form3m | 25 | 366.360 | 73.272 | 5.094 | -6.4% | 16.0% | -1.738 | null |
+| all cards | 503 | form3m_skip1 | 24 | 362.250 | 72.450 | 11.436 | -3.9% | 16.7% | -1.794 | null |
+| all cards | 503 | form6m | 22 | 354.409 | 70.882 | 3.213 | -2.7% | 22.7% | -0.962 | insufficient (n_eff<4) |
+| all cards | 503 | form6m_skip1 | 21 | 350.286 | 70.057 | 7.132 | 2.0% | 66.7% | 0.931 | null |
 
 _Era-blocked -- same cards, same dates, same n_eff machinery; only the RANKING
 moves inside the era:_
 
 | stratum | cards | formation | rebalances | mean names/rebal | names per leg | n_eff | mean 3m spread | hit rate | t (n_eff) | verdict |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| within-era ranking | 491 | form1m | 27 | 373.667 | 74.733 | 21.159 | -5.4% | 7.4% | -5.607 | reversion |
-| within-era ranking | 491 | form1m_skip1 | 26 | 370.154 | 74.031 | 18.101 | -3.7% | 19.2% | -3.607 | reversion |
-| within-era ranking | 491 | form3m | 25 | 366.360 | 73.272 | 6.404 | -8.6% | 8.0% | -3.526 | reversion |
-| within-era ranking | 491 | form3m_skip1 | 24 | 362.250 | 72.450 | 16.465 | -5.7% | 8.3% | -4.352 | reversion |
-| within-era ranking | 491 | form6m | 22 | 354.409 | 70.882 | 3.742 | -5.0% | 18.2% | -1.885 | insufficient (n_eff<4) |
-| within-era ranking | 491 | form6m_skip1 | 21 | 350.286 | 70.057 | 5.011 | 0.3% | 57.1% | 0.123 | null |
+| within-era ranking | 492 | form1m | 27 | 373.667 | 74.733 | 21.159 | -5.4% | 7.4% | -5.607 | reversion |
+| within-era ranking | 492 | form1m_skip1 | 26 | 370.154 | 74.031 | 18.101 | -3.7% | 19.2% | -3.607 | reversion |
+| within-era ranking | 492 | form3m | 25 | 366.360 | 73.272 | 6.404 | -8.6% | 8.0% | -3.526 | reversion |
+| within-era ranking | 492 | form3m_skip1 | 24 | 362.250 | 72.450 | 16.465 | -5.7% | 8.3% | -4.352 | reversion |
+| within-era ranking | 492 | form6m | 22 | 354.409 | 70.882 | 3.742 | -5.0% | 18.2% | -1.885 | insufficient (n_eff<4) |
+| within-era ranking | 492 | form6m_skip1 | 21 | 350.286 | 70.057 | 5.011 | 0.3% | 57.1% | 0.123 | null |
 
 ### By era (sets.series)
 
@@ -164,12 +164,12 @@ moves inside the era:_
 | Sword & Shield | 163 | form3m_skip1 | 24 | 163.000 | 32.600 | 6.532 | -8.3% | 4.2% | -3.208 | reversion |
 | Sword & Shield | 163 | form6m | 22 | 163.000 | 32.600 | 5.021 | -8.5% | 9.1% | -2.704 | reversion |
 | Sword & Shield | 163 | form6m_skip1 | 21 | 163.000 | 32.600 | 7.781 | -2.6% | 42.9% | -1.028 | null |
-| Mega Evolution | 81 | form1m | 8 | 38.625 | 7.725 | 8.000 | -3.3% | 37.5% | -0.627 | insufficient (leg<8) |
-| Mega Evolution | 81 | form1m_skip1 | 7 | 36.286 | 7.257 | 7.000 | 2.1% | 57.1% | 0.488 | insufficient (rebalances<8, leg<8) |
-| Mega Evolution | 81 | form3m | 6 | 33.167 | 6.633 | 6.000 | -4.1% | 33.3% | -0.974 | insufficient (rebalances<8, leg<8) |
-| Mega Evolution | 81 | form3m_skip1 | 5 | 28.800 | 5.760 | 5.000 | 0.1% | 40.0% | 0.022 | insufficient (rebalances<8, leg<8) |
-| Mega Evolution | 81 | form6m | 3 | 22.333 | 4.467 | 3.000 | 0.2% | 66.7% | 0.079 | insufficient (rebalances<8, n_eff<4, leg<8) |
-| Mega Evolution | 81 | form6m_skip1 | 2 | 18.000 | 3.600 | 2.000 | -0.6% | 50.0% | -0.205 | insufficient (rebalances<8, n_eff<4, leg<8) |
+| Mega Evolution | 93 | form1m | 8 | 38.625 | 7.725 | 8.000 | -3.3% | 37.5% | -0.627 | insufficient (leg<8) |
+| Mega Evolution | 93 | form1m_skip1 | 7 | 36.286 | 7.257 | 7.000 | 2.1% | 57.1% | 0.488 | insufficient (rebalances<8, leg<8) |
+| Mega Evolution | 93 | form3m | 6 | 33.167 | 6.633 | 6.000 | -4.1% | 33.3% | -0.974 | insufficient (rebalances<8, leg<8) |
+| Mega Evolution | 93 | form3m_skip1 | 5 | 28.800 | 5.760 | 5.000 | 0.1% | 40.0% | 0.022 | insufficient (rebalances<8, leg<8) |
+| Mega Evolution | 93 | form6m | 3 | 22.333 | 4.467 | 3.000 | 0.2% | 66.7% | 0.079 | insufficient (rebalances<8, n_eff<4, leg<8) |
+| Mega Evolution | 93 | form6m_skip1 | 2 | 18.000 | 3.600 | 2.000 | -0.6% | 50.0% | -0.205 | insufficient (rebalances<8, n_eff<4, leg<8) |
 
 ### By rarity tier (crosses eras, so not era-confounded)
 
@@ -185,12 +185,12 @@ Rare Ultra. Both tiers draw from both eras.
 | wider full-art | 266 | form3m_skip1 | 24 | 208.375 | 41.675 | 10.568 | -2.0% | 45.8% | -0.748 | null |
 | wider full-art | 266 | form6m | 22 | 204.727 | 40.945 | 4.747 | -4.9% | 31.8% | -1.276 | null |
 | wider full-art | 266 | form6m_skip1 | 21 | 202.714 | 40.543 | 6.028 | 0.3% | 47.6% | 0.089 | null |
-| chase | 225 | form1m | 27 | 160.667 | 32.133 | 11.941 | 1.2% | 51.9% | 0.504 | null |
-| chase | 225 | form1m_skip1 | 26 | 158.577 | 31.715 | 13.165 | -1.8% | 46.2% | -0.897 | null |
-| chase | 225 | form3m | 25 | 156.320 | 31.264 | 11.496 | -4.8% | 24.0% | -1.812 | null |
-| chase | 225 | form3m_skip1 | 24 | 153.875 | 30.775 | 19.337 | -5.4% | 25.0% | -2.845 | reversion |
-| chase | 225 | form6m | 22 | 149.682 | 29.936 | 6.592 | -0.2% | 50.0% | -0.075 | null |
-| chase | 225 | form6m_skip1 | 21 | 147.571 | 29.514 | 7.191 | 3.6% | 71.4% | 1.434 | null |
+| chase | 237 | form1m | 27 | 160.667 | 32.133 | 11.941 | 1.2% | 51.9% | 0.504 | null |
+| chase | 237 | form1m_skip1 | 26 | 158.577 | 31.715 | 13.165 | -1.8% | 46.2% | -0.897 | null |
+| chase | 237 | form3m | 25 | 156.320 | 31.264 | 11.496 | -4.8% | 24.0% | -1.812 | null |
+| chase | 237 | form3m_skip1 | 24 | 153.875 | 30.775 | 19.337 | -5.4% | 25.0% | -2.845 | reversion |
+| chase | 237 | form6m | 22 | 149.682 | 29.936 | 6.592 | -0.2% | 50.0% | -0.075 | null |
+| chase | 237 | form6m_skip1 | 21 | 147.571 | 29.514 | 7.191 | 3.6% | 71.4% | 1.434 | null |
 
 ### Era x rarity tier
 
@@ -223,12 +223,12 @@ each era contributes both tiers.
 | Sword & Shield / chase | 59 | form3m_skip1 | 24 | 59.000 | 11.800 | 5.852 | -11.0% | 20.8% | -2.269 | reversion |
 | Sword & Shield / chase | 59 | form6m | 22 | 59.000 | 11.800 | 5.474 | -8.4% | 13.6% | -2.262 | reversion |
 | Sword & Shield / chase | 59 | form6m_skip1 | 21 | 59.000 | 11.800 | 8.763 | -3.5% | 38.1% | -1.388 | null |
-| Mega Evolution / chase | 44 | form1m | 6 | 25.500 | 5.100 | 2.361 | 3.3% | 66.7% | 0.968 | insufficient (rebalances<8, n_eff<4, leg<8) |
-| Mega Evolution / chase | 44 | form1m_skip1 | 5 | 23.800 | 4.760 | 5.000 | 8.2% | 60.0% | 1.366 | insufficient (rebalances<8, leg<8) |
-| Mega Evolution / chase | 44 | form3m | 4 | 21.250 | 4.250 | 1.000 | 10.0% | 75.0% | 0.720 | insufficient (rebalances<8, n_eff<4, leg<8) |
-| Mega Evolution / chase | 44 | form3m_skip1 | 3 | 17.000 | 3.400 | 3.000 | 9.0% | 100.0% | 1.485 | insufficient (rebalances<8, n_eff<4, leg<8) |
-| Mega Evolution / chase | 44 | form6m | 1 | 13.000 | 2.600 | 1.000 | 0.1% | 100.0% | n/a | insufficient (rebalances<8, n_eff<4, leg<8) |
-| Mega Evolution / chase | 44 | form6m_skip1 | 0 | n/a | n/a | 0.000 | n/a | n/a | n/a | insufficient (rebalances<8, n_eff<4, leg<8) |
+| Mega Evolution / chase | 56 | form1m | 6 | 25.500 | 5.100 | 2.361 | 3.3% | 66.7% | 0.968 | insufficient (rebalances<8, n_eff<4, leg<8) |
+| Mega Evolution / chase | 56 | form1m_skip1 | 5 | 23.800 | 4.760 | 5.000 | 8.2% | 60.0% | 1.366 | insufficient (rebalances<8, leg<8) |
+| Mega Evolution / chase | 56 | form3m | 4 | 21.250 | 4.250 | 1.000 | 10.0% | 75.0% | 0.720 | insufficient (rebalances<8, n_eff<4, leg<8) |
+| Mega Evolution / chase | 56 | form3m_skip1 | 3 | 17.000 | 3.400 | 3.000 | 9.0% | 100.0% | 1.485 | insufficient (rebalances<8, n_eff<4, leg<8) |
+| Mega Evolution / chase | 56 | form6m | 1 | 13.000 | 2.600 | 1.000 | 0.1% | 100.0% | n/a | insufficient (rebalances<8, n_eff<4, leg<8) |
+| Mega Evolution / chase | 56 | form6m_skip1 | 0 | n/a | n/a | 0.000 | n/a | n/a | n/a | insufficient (rebalances<8, n_eff<4, leg<8) |
 | Mega Evolution / wider full-art | 37 | form1m | 8 | 17.500 | 3.500 | 8.000 | -6.0% | 25.0% | -1.118 | insufficient (leg<8) |
 | Mega Evolution / wider full-art | 37 | form1m_skip1 | 7 | 17.000 | 3.400 | 7.000 | -2.4% | 42.9% | -0.441 | insufficient (rebalances<8, leg<8) |
 | Mega Evolution / wider full-art | 37 | form3m | 6 | 16.333 | 3.267 | 6.000 | -5.7% | 16.7% | -1.572 | insufficient (rebalances<8, leg<8) |
@@ -251,12 +251,12 @@ than to its era. Reported for completeness only.
 | Ultra Rare | 162 | form3m_skip1 | 24 | 104.375 | 20.875 | 22.193 | 1.2% | 62.5% | 0.594 | null |
 | Ultra Rare | 162 | form6m | 22 | 100.727 | 20.145 | 7.280 | -2.8% | 40.9% | -0.877 | null |
 | Ultra Rare | 162 | form6m_skip1 | 21 | 98.714 | 19.743 | 10.815 | 0.0% | 52.4% | 0.017 | null |
-| Special Illustration Rare | 126 | form1m | 27 | 73.593 | 14.719 | 9.093 | 3.8% | 51.9% | 0.895 | null |
-| Special Illustration Rare | 126 | form1m_skip1 | 26 | 71.885 | 14.377 | 9.889 | 1.0% | 53.8% | 0.269 | null |
-| Special Illustration Rare | 126 | form3m | 25 | 70.040 | 14.008 | 12.693 | -1.5% | 44.0% | -0.387 | null |
-| Special Illustration Rare | 126 | form3m_skip1 | 24 | 68.042 | 13.608 | 19.897 | -3.1% | 41.7% | -1.135 | null |
-| Special Illustration Rare | 126 | form6m | 22 | 64.727 | 12.945 | 6.069 | 1.7% | 54.5% | 0.339 | null |
-| Special Illustration Rare | 126 | form6m_skip1 | 21 | 63.095 | 12.619 | 7.530 | 5.1% | 61.9% | 1.166 | null |
+| Special Illustration Rare | 136 | form1m | 27 | 73.593 | 14.719 | 9.093 | 3.8% | 51.9% | 0.895 | null |
+| Special Illustration Rare | 136 | form1m_skip1 | 26 | 71.885 | 14.377 | 9.889 | 1.0% | 53.8% | 0.269 | null |
+| Special Illustration Rare | 136 | form3m | 25 | 70.040 | 14.008 | 12.693 | -1.5% | 44.0% | -0.387 | null |
+| Special Illustration Rare | 136 | form3m_skip1 | 24 | 68.042 | 13.608 | 19.897 | -3.1% | 41.7% | -1.135 | null |
+| Special Illustration Rare | 136 | form6m | 22 | 64.727 | 12.945 | 6.069 | 1.7% | 54.5% | 0.339 | null |
+| Special Illustration Rare | 136 | form6m_skip1 | 21 | 63.095 | 12.619 | 7.530 | 5.1% | 61.9% | 1.166 | null |
 | Rare Ultra | 104 | form1m | 27 | 104.000 | 20.800 | 27.000 | -5.8% | 25.9% | -3.818 | reversion |
 | Rare Ultra | 104 | form1m_skip1 | 26 | 104.000 | 20.800 | 15.119 | -3.0% | 30.8% | -1.395 | null |
 | Rare Ultra | 104 | form3m | 25 | 104.000 | 20.800 | 6.348 | -9.3% | 24.0% | -2.444 | reversion |
@@ -287,6 +287,12 @@ than to its era. Reported for completeness only.
 | Mega Hyper Rare | 7 | form3m_skip1 | 0 | n/a | n/a | 0.000 | n/a | n/a | n/a | insufficient (rebalances<8, n_eff<4, leg<8) |
 | Mega Hyper Rare | 7 | form6m | 0 | n/a | n/a | 0.000 | n/a | n/a | n/a | insufficient (rebalances<8, n_eff<4, leg<8) |
 | Mega Hyper Rare | 7 | form6m_skip1 | 0 | n/a | n/a | 0.000 | n/a | n/a | n/a | insufficient (rebalances<8, n_eff<4, leg<8) |
+| Futuristic Rare | 2 | form1m | 0 | n/a | n/a | 0.000 | n/a | n/a | n/a | insufficient (rebalances<8, n_eff<4, leg<8) |
+| Futuristic Rare | 2 | form1m_skip1 | 0 | n/a | n/a | 0.000 | n/a | n/a | n/a | insufficient (rebalances<8, n_eff<4, leg<8) |
+| Futuristic Rare | 2 | form3m | 0 | n/a | n/a | 0.000 | n/a | n/a | n/a | insufficient (rebalances<8, n_eff<4, leg<8) |
+| Futuristic Rare | 2 | form3m_skip1 | 0 | n/a | n/a | 0.000 | n/a | n/a | n/a | insufficient (rebalances<8, n_eff<4, leg<8) |
+| Futuristic Rare | 2 | form6m | 0 | n/a | n/a | 0.000 | n/a | n/a | n/a | insufficient (rebalances<8, n_eff<4, leg<8) |
+| Futuristic Rare | 2 | form6m_skip1 | 0 | n/a | n/a | 0.000 | n/a | n/a | n/a | insufficient (rebalances<8, n_eff<4, leg<8) |
 
 ### Shared-endpoint control, cell by cell
 
@@ -295,8 +301,8 @@ only claims that need controlling.
 
 | stratum | cards | horizon | base spread | base t(n_eff) | skip-1 spread | skip-1 t(n_eff) | abs ratio skip-1/base | reading |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| within-era ranking | 491 | 1m | -5.4% | -5.607 | -3.7% | -3.607 | 0.677 | SURVIVES the shared-endpoint control |
-| within-era ranking | 491 | 3m | -8.6% | -3.526 | -5.7% | -4.352 | 0.666 | SURVIVES the shared-endpoint control |
+| within-era ranking | 492 | 1m | -5.4% | -5.607 | -3.7% | -3.607 | 0.677 | SURVIVES the shared-endpoint control |
+| within-era ranking | 492 | 3m | -8.6% | -3.526 | -5.7% | -4.352 | 0.666 | SURVIVES the shared-endpoint control |
 | Scarlet & Violet | 247 | 1m | -5.7% | -4.116 | -2.3% | -1.848 | 0.408 | vanishes without P_T -- consistent with a shared-endpoint artifact |
 | Scarlet & Violet | 247 | 3m | -7.3% | -3.704 | -2.8% | -1.392 | 0.390 | vanishes without P_T -- consistent with a shared-endpoint artifact |
 | Sword & Shield | 163 | 1m | -5.2% | -4.824 | -4.6% | -2.098 | 0.884 | SURVIVES the shared-endpoint control |
@@ -326,7 +332,7 @@ By era, reversion clears every sample-size gate in 2 of 3 eras (Scarlet & Violet
 
 No claim is made for Mega Evolution: every horizon there fails a sample-size gate (too few rebalance months, too little effective sample after the overlap deflation, or too few names per quintile leg). A thin slice is not weak evidence, it is no evidence.
 
-Beyond the era cut, 27 of the 108 stratum cells report reversion and 0 report momentum after gating. Those cells are NOT independent of each other -- the era x tier and raw-rarity cells are subsets of the same cards as the era cells (raw rarity is nested inside era here), so counting them as separate confirmations would double-count the same months and the same cards.
+Beyond the era cut, 27 of the 114 stratum cells report reversion and 0 report momentum after gating. Those cells are NOT independent of each other -- the era x tier and raw-rarity cells are subsets of the same cards as the era cells (raw rarity is nested inside era here), so counting them as separate confirmations would double-count the same months and the same cards.
 
 SHARED-ENDPOINT CONTROL -- the decisive filter. 9 of the 31 directional cells form on a window that never touches the price at T, so they are not explainable by measurement error in the single price that is shared between the formation and hold returns. At the era level that is: Sword & Shield @ form1m_skip1 (-4.6%, t(n_eff) -2.098, 26 rebalances, n_eff 10.441, 163 cards); Sword & Shield @ form3m_skip1 (-8.3%, t(n_eff) -3.208, 24 rebalances, n_eff 6.532, 163 cards). Every other directional cell has P_T as both the closing endpoint of its formation return and the opening endpoint of its hold return, where any error in that one monthly price mechanically manufactures a negative, reversion-looking spread (Blume-Stambaugh / bid-ask bounce).
 
