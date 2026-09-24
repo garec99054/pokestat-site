@@ -1,6 +1,6 @@
 # Forward 90-day return model: validation report
 
-There is real, tradeable cross-sectional signal that survives removing the static features. The best model (rf) was chosen on 7 selection folds and scores mean rank IC 0.371 (autocorrelation-aware t-stat 10.295, n_eff 5.425) on the 9 held-out evaluation folds. Ablating the static features leaves mean IC 0.257, so the edge is not purely a set-age effect.
+There is real, tradeable cross-sectional signal that survives removing the static features. The best model (rf) was chosen on 7 selection folds and scores mean rank IC 0.373 (autocorrelation-aware t-stat 10.173, n_eff 5.176) on the 9 held-out evaluation folds. Ablating the static features leaves mean IC 0.258, so the edge is not purely a set-age effect.
 
 Best model chosen on the selection folds: **rf**. Signal strength
 verdict: **strong** (weak if held-out mean IC < 0.05 or IR < 0.5; strong if
@@ -25,7 +25,7 @@ explicitly.
    sharing just P_m -- already observed at prediction time, no look-ahead) remain. A
    1-2 month purge gap (embargo) was audited and does NOT reduce held-out IC (it
    slightly rises), i.e. there is no overlap-inflation to correct, so the conservative
-   status quo is retained: held-out eval mean IC is unchanged at 0.371.
+   status quo is retained: held-out eval mean IC is unchanged at 0.373.
 
 2. **Verdict made noise-aware (framing change).** The static-effect vs strong call
    is not hung on the held-out ablated-eval IC crossing the hard
@@ -46,7 +46,7 @@ explicitly.
    spread, precision/recall, and its selection rank) EXACTLY unchanged and only
    corrects the return-scale outputs. The ensemble's new return-scale band appears in
    the interval table below. This did NOT change which model was chosen, its headline
-   eval IC (0.371), or any Spearman-rank number.
+   eval IC (0.373), or any Spearman-rank number.
 
 4. **Modeled universe expanded to the SWSH era (published-number change; verdict can
    move).** The prior universe was 278 cards (SV + ME only), on which the verdict was
@@ -60,7 +60,7 @@ explicitly.
    either way, and this run's verdict is **strong** (the Signal attribution
    section shows whether the ablated signal now survives).
 
-5. **Candidate roster expanded (published-number change; the winner moved).** Four candidates were added to the roster (4 -> 8): a Spearman-target linear model (rank_linear), a robust Huber regressor (huber), partial least squares (pls) and a shallow random forest (rf). They are registered in the same MODEL_FITTERS table as the originals, so the selection protocol is untouched -- selection on the selection folds, scoring on the disjoint held-out folds -- and only the field it ranks is wider. No hyperparameter of any newcomer was tuned against the evaluation folds. A newcomer won: the selected model moved from ridge (prior published held-out eval IC 0.303, static-ablated eval IC 0.159) to **rf**, whose held-out eval IC is 0.371 and static-ablated eval IC is 0.279 +/- 0.017. Both directions are reported straight in the candidate-roster table below: the new winner is not uniformly better than the old one on every statistic, and the selection folds -- not the held-out ones -- decided. A wider field also means more ways for the selection step to land somewhere else: the roster section quantifies that multiplicity live (selection-vs-held-out rank correlation, how many candidates the selection folds could not separate, and the full held-out range a different pick would have reported), because every number in this report is computed on the one model the step output.
+5. **Candidate roster expanded (published-number change; the winner moved).** Four candidates were added to the roster (4 -> 8): a Spearman-target linear model (rank_linear), a robust Huber regressor (huber), partial least squares (pls) and a shallow random forest (rf). They are registered in the same MODEL_FITTERS table as the originals, so the selection protocol is untouched -- selection on the selection folds, scoring on the disjoint held-out folds -- and only the field it ranks is wider. No hyperparameter of any newcomer was tuned against the evaluation folds. A newcomer won: the selected model moved from ridge (prior published held-out eval IC 0.303, static-ablated eval IC 0.159) to **rf**, whose held-out eval IC is 0.373 and static-ablated eval IC is 0.279 +/- 0.017. Both directions are reported straight in the candidate-roster table below: the new winner is not uniformly better than the old one on every statistic, and the selection folds -- not the held-out ones -- decided. A wider field also means more ways for the selection step to land somewhere else: the roster section quantifies that multiplicity live (selection-vs-held-out rank correlation, how many candidates the selection folds could not separate, and the full held-out range a different pick would have reported), because every number in this report is computed on the one model the step output.
 
 6. **Within-era / within-rarity breakdown (new diagnostic, no headline change).** The report previously admitted, without measuring it, that the held-out edge might be cross-era contrast (SWSH cards are simply older and priced differently than SV cards) rather than within-era skill. It is now measured on the same held-out folds with the same metric: the pooled edge is reproduced almost entirely by within-era ranking, and the era ordering alone carries nothing distinguishable from zero -- the caveat is answered in the model's favour. Numbers in the breakdown section below; the headline IC, the chosen model and the verdict are unaffected -- this diagnostic only interprets them.
 
@@ -71,8 +71,8 @@ A meaningful part of the headline IC survives removing the static set-age/rarity
 
 | diagnostic | mean IC | note |
 | --- | --- | --- |
-| rf full features (all folds) | 0.333 | the reported number |
-| rf STATIC features ablated (all folds) | 0.257 | 23% of the signal gone |
+| rf full features (all folds) | 0.335 | the reported number |
+| rf STATIC features ablated (all folds) | 0.258 | 23% of the signal gone |
 | rf STATIC features ablated (eval folds) | 0.279 +/- 0.017 (1 SE) | held-out, clears the 0.05 floor by more than 1 SE |
 | univariate set_age_months ranking | 0.309 | one feature, no model |
 | rf momentum-only features | 0.143 | some signal on its own (43% of the full-feature IC), well short of the full feature set |
@@ -80,7 +80,7 @@ A meaningful part of the headline IC survives removing the static set-age/rarity
 The held-out ablated-eval IC is 0.279 with a sampling standard error of 0.017 (autocorrelation-aware: ic_std / sqrt(n_eff), n_eff 9.000 of 9 folds), clearing the 0.05 static-effect floor by more than one SE, so genuine non-static signal survives ablation and the verdict is not a mechanical set-age artifact. The noise-aware rule still guards the call: only a crossing wider than one SE tips to 'strong'; a within-one-SE crossing would be reported as 'static-effect (undetermined)'.
 
 Ablated features: set_age_months, log_price, lifecycle_drift, is_sir, is_mega_hyper, is_ultra, is_rare_secret, is_rare_rainbow, is_rare_ultra. The winning
-model's pooled out-of-fold predictions correlate 0.382
+model's pooled out-of-fold predictions correlate 0.383
 (Spearman) with set_age_months -- its ranking still correlates substantially with set_age_months -- a large part of the edge remains the set-age ranking.
 Because 345 of 478 cards appear in every
 fold and set_age barely re-ranks month to month (Spearman rank corr between the
@@ -94,30 +94,30 @@ autocorrelation-deflated IR (n_eff) instead.
 Candidate models were compared on the first 7 folds
 (selection window) and the winner's performance is reported on the disjoint later
 9 folds (evaluation window). Selection-fold mean IC for
-**rf** was 0.285; held-out evaluation-fold mean
-IC was 0.371 (IR 10.295, n_eff
-5.425). The full walk-forward table below shows all models over
+**rf** was 0.286; held-out evaluation-fold mean
+IC was 0.373 (IR 10.173, n_eff
+5.176). The full walk-forward table below shows all models over
 all folds for transparency, but those all-fold numbers are the SELECTION statistic
 and carry optimistic selection bias for the chosen model; the honest number is the
 held-out one.
 
 ### Candidate roster (expanded)
 
-The roster was widened from 4 to 8 candidates and a NEW candidate won: **rf** tops the selection folds. Reported as it fell out -- the selection protocol was not touched, only the set of models it ranks. Note the gap the protocol deliberately accepts: **ensemble** scored a higher held-out eval IC (0.408) than the selected **rf** (0.371). Selecting on that number instead would be choosing a model by the very statistic then reported as its validation score, so the winner stays the one the selection folds chose.
+The roster was widened from 4 to 8 candidates and a NEW candidate won: **rf** tops the selection folds. Reported as it fell out -- the selection protocol was not touched, only the set of models it ranks. Note the gap the protocol deliberately accepts: **ensemble** scored a higher held-out eval IC (0.406) than the selected **rf** (0.373). Selecting on that number instead would be choosing a model by the very statistic then reported as its validation score, so the winner stays the one the selection folds chose.
 
 | rank | candidate | new? | selection-fold IC | held-out eval IC | held-out IR (n_eff) |
 | --- | --- | --- | --- | --- | --- |
-| 1 | **rf** | new | 0.285 | 0.371 | 10.295 |
-| 2 | ensemble |  | 0.276 | 0.408 | 6.907 |
-| 3 | rank_linear | new | 0.270 | 0.378 | 6.951 |
-| 4 | huber | new | 0.270 | 0.383 | 5.338 |
-| 5 | ridge |  | 0.267 | 0.375 | 6.187 |
-| 6 | elasticnet |  | 0.248 | 0.353 | 4.182 |
-| 7 | gbm |  | 0.226 | 0.383 | 13.120 |
-| 8 | pls | new | 0.219 | 0.375 | 3.950 |
+| 1 | **rf** | new | 0.286 | 0.373 | 10.173 |
+| 2 | ensemble |  | 0.282 | 0.406 | 6.683 |
+| 3 | rank_linear | new | 0.270 | 0.378 | 6.936 |
+| 4 | huber | new | 0.270 | 0.383 | 5.317 |
+| 5 | ridge |  | 0.266 | 0.375 | 6.187 |
+| 6 | elasticnet |  | 0.247 | 0.353 | 4.174 |
+| 7 | gbm |  | 0.246 | 0.377 | 10.058 |
+| 8 | pls | new | 0.218 | 0.375 | 3.941 |
 
 
-**Selection multiplicity, stated rather than implied.** Across the 8 scored candidates the rank correlation between the selection-fold IC (which picks) and the held-out eval IC (which is reported) is rho = 0.071. Held-out eval IC across the roster spans 0.353 to 0.408 and held-out IR 3.950 to 13.120, so the reported headline depends on which of 8 candidates the selection folds happened to rank first. On the selection folds themselves the winner's own error bar is +/- 0.081 (autocorrelation-aware), and 7 of the other 7 candidates sit inside it (ensemble, rank_linear, huber, ridge, elasticnet, gbm, pls) -- i.e. the selection step did not statistically separate them. That is at or below the level this report treats as informative (0.5): across this roster the selection statistic carries little or no information about which candidate will score best held out, so which model wins is closer to a draw among candidates it cannot separate than to a considered pick. Say it plainly: the ablation verdict, the within-era / within-rarity breakdown and the conformal intervals below are all computed on the ONE model this step output, and a different draw from this roster would have moved every one of them somewhere inside the ranges just quoted.
+**Selection multiplicity, stated rather than implied.** Across the 8 scored candidates the rank correlation between the selection-fold IC (which picks) and the held-out eval IC (which is reported) is rho = 0.238. Held-out eval IC across the roster spans 0.353 to 0.406 and held-out IR 3.941 to 10.173, so the reported headline depends on which of 8 candidates the selection folds happened to rank first. On the selection folds themselves the winner's own error bar is +/- 0.082 (autocorrelation-aware), and 7 of the other 7 candidates sit inside it (ensemble, rank_linear, huber, ridge, elasticnet, gbm, pls) -- i.e. the selection step did not statistically separate them. That is at or below the level this report treats as informative (0.5): across this roster the selection statistic carries little or no information about which candidate will score best held out, so which model wins is closer to a draw among candidates it cannot separate than to a considered pick. Say it plainly: the ablation verdict, the within-era / within-rarity breakdown and the conformal intervals below are all computed on the ONE model this step output, and a different draw from this roster would have moved every one of them somewhere inside the ranges just quoted.
 
 "new" marks the candidates added for this run: a Spearman-target linear model
 (rank_linear), a robust Huber regressor (huber), partial least squares (pls) and
@@ -132,37 +132,37 @@ cross-validation inside the training rows of the fold being fit).
 
 The modeled universe spans three eras (SWSH, SV, ME) whose cards differ in age, price level and lifecycle stage. A pooled cross-sectional IC can therefore be earned two very different ways: by ranking cards correctly INSIDE an era (skill a buyer can act on within one release window), or merely by ranking the eras against each other. This section separates the two for the chosen model (**rf**).
 
-**Finding: the held-out edge is WITHIN-era skill, not cross-era contrast.** The era-NEUTRALIZED IC (every card ranked only against same-era cards) is 0.344 +/- 0.020 (n_eff 9.000), against a pooled held-out 0.371 +/- 0.036 (n_eff 5.425); the era-CONTRAST-ONLY IC (all within-era information destroyed) is 0.239 +/- 0.506 (n_eff 3.250). So essentially all of the pooled IC is reproduced when era contrast is removed, and the era ordering on its own carries nothing distinguishable from zero. The report's standing caveat -- that the jump from the 278-card SV+ME universe to the 441-card SWSH+SV+ME one might have bought a mechanical old-era/new-era contrast -- is NOT what happened. Evidence caveat (the 4.0 effective-fold bar this repo applies elsewhere before a cell may claim a direction): contrast-only does not clear the one-SE bar, but on n_eff 3.250 it could not have detected a moderate effect either -- read it as absence of evidence, not evidence of absence.
+**Finding: the held-out edge is WITHIN-era skill, not cross-era contrast.** The era-NEUTRALIZED IC (every card ranked only against same-era cards) is 0.344 +/- 0.020 (n_eff 9.000), against a pooled held-out 0.373 +/- 0.037 (n_eff 5.176); the era-CONTRAST-ONLY IC (all within-era information destroyed) is 0.239 +/- 0.506 (n_eff 3.250). So essentially all of the pooled IC is reproduced when era contrast is removed, and the era ordering on its own carries nothing distinguishable from zero. The report's standing caveat -- that the jump from the 278-card SV+ME universe to the 441-card SWSH+SV+ME one might have bought a mechanical old-era/new-era contrast -- is NOT what happened. Evidence caveat (the 4.0 effective-fold bar this repo applies elsewhere before a cell may claim a direction): contrast-only does not clear the one-SE bar, but on n_eff 3.250 it could not have detected a moderate effect either -- read it as absence of evidence, not evidence of absence.
 
-Taken one era at a time: ME (0.268 +/- 0.185, 6 folds, 55 cards), SV (0.351 +/- 0.030, 9 folds, 247 cards), SWSH (0.330 +/- 0.025, 9 folds, 163 cards). 2 of 3 era slices clear zero by more than one autocorrelation-aware SE on a sufficient effective sample (n_eff >= 4.0) (SV, SWSH). NOT counted as evidence, though they clear the one-SE bar: ME (n_eff 3.147) -- below the 4.0 effective-fold bar this repo applies before a cell may claim a direction (the same MIN_CLAIM_N_EFF the momentum study uses), so the cell rests on roughly one independent draw and is reported as insufficient evidence rather than as corroboration. With the static features ablated, 3 of 3 clear zero on a sufficient effective sample (ME, SV, SWSH).
+Taken one era at a time: ME (0.253 +/- 0.189, 6 folds, 55 cards), SV (0.353 +/- 0.030, 9 folds, 247 cards), SWSH (0.330 +/- 0.024, 9 folds, 163 cards). 2 of 3 era slices clear zero by more than one autocorrelation-aware SE on a sufficient effective sample (n_eff >= 4.0) (SV, SWSH). NOT counted as evidence, though they clear the one-SE bar: ME (n_eff 3.161) -- below the 4.0 effective-fold bar this repo applies before a cell may claim a direction (the same MIN_CLAIM_N_EFF the momentum study uses), so the cell rests on roughly one independent draw and is reported as insufficient evidence rather than as corroboration. With the static features ablated, 3 of 3 clear zero on a sufficient effective sample (ME, SV, SWSH).
 
 Era slices, held-out folds only (9 folds):
 
 | slice | cards | folds | held-out IC | +/- 1 SE | n_eff | static-ablated IC | ablated +/- 1 SE | one-SE call |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| pooled (headline) | 465 | 9 | 0.371 | 0.036 | 5.425 | 0.279 | 0.017 | clears 0 by > 1 SE |
-| ME | 55 | 6 | 0.268 | 0.185 | 3.147 | 0.220 | 0.035 | clears 0 by > 1 SE [THIN: n_eff 3.147 < 4.0, insufficient evidence] |
-| SV | 247 | 9 | 0.351 | 0.030 | 7.671 | 0.254 | 0.023 | clears 0 by > 1 SE |
-| SWSH | 163 | 9 | 0.330 | 0.025 | 8.956 | 0.312 | 0.022 | clears 0 by > 1 SE |
+| pooled (headline) | 465 | 9 | 0.373 | 0.037 | 5.176 | 0.279 | 0.017 | clears 0 by > 1 SE |
+| ME | 55 | 6 | 0.253 | 0.189 | 3.161 | 0.215 | 0.039 | clears 0 by > 1 SE [THIN: n_eff 3.161 < 4.0, insufficient evidence] |
+| SV | 247 | 9 | 0.353 | 0.030 | 7.976 | 0.255 | 0.023 | clears 0 by > 1 SE |
+| SWSH | 163 | 9 | 0.330 | 0.024 | 9.000 | 0.310 | 0.022 | clears 0 by > 1 SE |
 | within-era neutralized | 465 | 9 | 0.344 | 0.020 | 9.000 | 0.275 | 0.018 | clears 0 by > 1 SE |
 | between-era contrast only | 465 | 9 | 0.239 | 0.506 | 3.250 | 0.283 | 0.396 | within 1 SE of 0 |
 
-By rarity tier the same test says: within-tier skill survives; the tier ordering on its own does not (neutralized 0.369 +/- 0.018, n_eff 9.000; contrast-only 0.201 +/- 0.462, n_eff 2.307). 4 of 6 scored tiers clear zero by more than one SE on a sufficient effective sample (n_eff >= 4.0). NOT counted as evidence, though they clear the one-SE bar: Hyper Rare (n_eff 1.991), Rare Rainbow (n_eff 3.249) -- below the 4.0 effective-fold bar this repo applies before a cell may claim a direction (the same MIN_CLAIM_N_EFF the momentum study uses), so the tier rests on roughly one independent draw and is reported as insufficient evidence rather than as corroboration. Evidence caveat (the 4.0 effective-fold bar this repo applies elsewhere before a cell may claim a direction): contrast-only does not clear the one-SE bar, but on n_eff 2.307 it could not have detected a moderate effect either -- read it as absence of evidence, not evidence of absence.
+By rarity tier the same test says: within-tier skill survives; the tier ordering on its own does not (neutralized 0.370 +/- 0.017, n_eff 9.000; contrast-only 0.201 +/- 0.462, n_eff 2.307). 4 of 6 scored tiers clear zero by more than one SE on a sufficient effective sample (n_eff >= 4.0). NOT counted as evidence, though they clear the one-SE bar: Hyper Rare (n_eff 1.900), Rare Rainbow (n_eff 3.220) -- below the 4.0 effective-fold bar this repo applies before a cell may claim a direction (the same MIN_CLAIM_N_EFF the momentum study uses), so the tier rests on roughly one independent draw and is reported as insufficient evidence rather than as corroboration. Evidence caveat (the 4.0 effective-fold bar this repo applies elsewhere before a cell may claim a direction): contrast-only does not clear the one-SE bar, but on n_eff 2.307 it could not have detected a moderate effect either -- read it as absence of evidence, not evidence of absence.
 
 Rarity slices, same held-out folds:
 
 | slice | cards | folds | held-out IC | +/- 1 SE | n_eff | static-ablated IC | ablated +/- 1 SE | one-SE call |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| pooled (headline) | 465 | 9 | 0.371 | 0.036 | 5.425 | 0.279 | 0.017 | clears 0 by > 1 SE |
-| Hyper Rare | 33 | 9 | 0.354 | 0.182 | 1.991 | 0.142 | 0.173 | clears 0 by > 1 SE [THIN: n_eff 1.991 < 4.0, insufficient evidence] |
+| pooled (headline) | 465 | 9 | 0.373 | 0.037 | 5.176 | 0.279 | 0.017 | clears 0 by > 1 SE |
+| Hyper Rare | 33 | 9 | 0.356 | 0.187 | 1.900 | 0.141 | 0.174 | clears 0 by > 1 SE [THIN: n_eff 1.900 < 4.0, insufficient evidence] |
 | Mega Hyper Rare | 5 | 0 | n/a | n/a | 0.000 | n/a | n/a | skipped (never >= 8 cards in a fold) |
-| Rare Rainbow | 44 | 9 | 0.335 | 0.090 | 3.249 | 0.442 | 0.056 | clears 0 by > 1 SE [THIN: n_eff 3.249 < 4.0, insufficient evidence] |
-| Rare Secret | 15 | 9 | 0.270 | 0.080 | 9.000 | 0.196 | 0.090 | clears 0 by > 1 SE |
-| Rare Ultra | 104 | 9 | 0.335 | 0.043 | 9.000 | 0.310 | 0.037 | clears 0 by > 1 SE |
-| Special Illustration Rare | 118 | 9 | 0.442 | 0.040 | 9.000 | 0.247 | 0.031 | clears 0 by > 1 SE |
-| Ultra Rare | 146 | 9 | 0.364 | 0.026 | 9.000 | 0.216 | 0.020 | clears 0 by > 1 SE |
-| within-rarity neutralized | 465 | 9 | 0.369 | 0.018 | 9.000 | 0.264 | 0.016 | clears 0 by > 1 SE |
-| between-rarity contrast only | 465 | 9 | 0.201 | 0.462 | 2.307 | 0.337 | 0.314 | within 1 SE of 0 |
+| Rare Rainbow | 44 | 9 | 0.332 | 0.088 | 3.220 | 0.434 | 0.054 | clears 0 by > 1 SE [THIN: n_eff 3.220 < 4.0, insufficient evidence] |
+| Rare Secret | 15 | 9 | 0.260 | 0.084 | 9.000 | 0.198 | 0.090 | clears 0 by > 1 SE |
+| Rare Ultra | 104 | 9 | 0.337 | 0.042 | 9.000 | 0.310 | 0.037 | clears 0 by > 1 SE |
+| Special Illustration Rare | 118 | 9 | 0.446 | 0.040 | 9.000 | 0.246 | 0.030 | clears 0 by > 1 SE |
+| Ultra Rare | 146 | 9 | 0.363 | 0.026 | 9.000 | 0.216 | 0.021 | clears 0 by > 1 SE |
+| within-rarity neutralized | 465 | 9 | 0.370 | 0.017 | 9.000 | 0.262 | 0.015 | clears 0 by > 1 SE |
+| between-rarity contrast only | 465 | 9 | 0.201 | 0.462 | 2.307 | 0.331 | 0.319 | within 1 SE of 0 |
 
 Both tables use the SAME held-out evaluation folds, the SAME per-fold Spearman IC,
 and the SAME out-of-fold predictions as the headline, so every number is directly
@@ -196,19 +196,19 @@ DETERMINISTICALLY as the era with the LOWEST held-out IC for the chosen model
 (**rf**) -- not "the one that looks wrong" -- and it is reported whatever
 the answer turns out to be.
 
-This run's weakest era slice is **ME**: held-out IC 0.268
-+/- 0.185 over 6 folds and 55 cards, against a
-static-ablated 0.220.
+This run's weakest era slice is **ME**: held-out IC 0.253
++/- 0.189 over 6 folds and 55 cards, against a
+static-ablated 0.215.
 
-**Finding: the ME cell IS a real effect.** The permutation test rejects zero (p = 0.011) and 8 of 8 candidates agree on its positive sign (roster median 0.339), so this is a property of the era rather than of the one model the selection step output. Its sign is positive, so this is the weakest slice still carrying real skill, not a defect: smaller than the other eras, not wrong.
+**Finding: the ME cell IS a real effect.** The permutation test rejects zero (p = 0.016) and 8 of 8 candidates agree on its positive sign (roster median 0.339), so this is a property of the era rather than of the one model the selection step output. Its sign is positive, so this is the weakest slice still carrying real skill, not a defect: smaller than the other eras, not wrong.
 
 Evidence, all computed on the SAME held-out out-of-fold predictions as the
 headline (nothing is refit, nothing is re-selected):
 
 | test | result | reads as |
 | --- | --- | --- |
-| permutation (20,000 draws of a random CARD-CONSTANT ranking scored through this slice's own folds) | p = 0.011 (two-sided), null SD 0.107 | separated from zero at the 0.05 level |
-| bootstrap over the slice's cards (5,000 resamples) | 95% CI [0.086, 0.432] which excludes zero | sign flips in 0.3% of resamples |
+| permutation (20,000 draws of a random CARD-CONSTANT ranking scored through this slice's own folds) | p = 0.016 (two-sided), null SD 0.107 | separated from zero at the 0.05 level |
+| bootstrap over the slice's cards (5,000 resamples) | 95% CI [0.068, 0.421] which excludes zero | sign flips in 0.4% of resamples |
 | cross-candidate control (same folds, same cards, same features) | 8 of 8 candidates share the sign; median 0.339 | the roster broadly agrees |
 
 Why the permutation null is a CARD-CONSTANT ranking rather than a per-fold
@@ -217,20 +217,20 @@ honest question is "how often does an ARBITRARY FIXED ranking of these same card
 score this well or this badly through these same overlapping folds?". Shuffling
 each fold independently would answer a different, easier question -- it destroys
 the fold overlap that the n_eff deflation exists to acknowledge, and returns a
-tighter null than the estimator deserves. Removing the static features does not change the picture inside this slice (ablated IC 0.220 vs full 0.268).
+tighter null than the estimator deserves. Removing the static features does not change the picture inside this slice (ablated IC 0.215 vs full 0.253).
 
 Per-candidate IC on this slice:
 
 | candidate | held-out IC inside ME |
 | --- | --- |
-| gbm | 0.436 |
-| ensemble | 0.430 |
+| gbm | 0.456 |
+| ensemble | 0.448 |
 | pls | 0.379 |
-| elasticnet | 0.355 |
-| ridge | 0.322 |
-| rank_linear | 0.287 |
-| huber | 0.272 |
-| rf | 0.268 |
+| elasticnet | 0.356 |
+| ridge | 0.323 |
+| rank_linear | 0.285 |
+| huber | 0.273 |
+| rf | 0.253 |
 
 
 ## Recovered listing-book features (previously discarded tcgcsv fields)
@@ -253,12 +253,12 @@ carriers); the ablation table above is unaffected by their classification.
 
 | arm | features | winner | selection IC | held-out eval IC | held-out IR | static-ablated eval IC |
 | --- | --- | --- | --- | --- | --- | --- |
-| before (market only) | 12 numeric + 9 ind. | rf | 0.292 | 0.338 +/- 0.103 | 3.271 | 0.230 |
-| after (+ listing book) | 18 numeric + 10 ind. | rf | 0.285 | 0.371 +/- 0.036 | 10.295 | 0.279 |
+| before (market only) | 12 numeric + 9 ind. | rf | 0.293 | 0.338 +/- 0.105 | 3.212 | 0.231 |
+| after (+ listing book) | 18 numeric + 10 ind. | rf | 0.286 | 0.373 +/- 0.037 | 10.173 | 0.279 |
 
-Held-out mean rank IC moves 0.338 -> 0.371
-(+0.033); the static-ablated held-out IC moves
-0.230 -> 0.279 (+0.049).
+Held-out mean rank IC moves 0.338 -> 0.373
+(+0.035); the static-ablated held-out IC moves
+0.231 -> 0.279 (+0.048).
 Both arms use the SAME panel, the SAME folds, the SAME selection/evaluation split
 and the SAME metric -- only the feature list differs. The selection folds chose the same model (**rf**) on both sides, so the comparison is not confounded by a change of learner.
 
@@ -266,7 +266,7 @@ The held-out error bars above are the autocorrelation-aware `ic_std / sqrt(n_eff
 used everywhere else in this report, NOT `ic_std / sqrt(folds)`. That matters here
 specifically: the two arms' fold-IC series have different autocorrelation, so the
 naive bar would tighten one side of this comparison more than the other.
-State it plainly: the move (+0.033) is SMALLER than the 'before' arm's own one-SE band (0.103). On these error bars a reader cannot conclude that the improvement clears sampling noise, and no joint significance test of the two arms is claimed anywhere in this section. The 'after' arm's bar is tighter (0.036) only because its fold-IC series is less autocorrelated, not because it has more data.
+State it plainly: the move (+0.035) is SMALLER than the 'before' arm's own one-SE band (0.105). On these error bars a reader cannot conclude that the improvement clears sampling noise, and no joint significance test of the two arms is claimed anywhere in this section. The 'after' arm's bar is tighter (0.037) only because its fold-IC series is less autocorrelated, not because it has more data.
 
 ### Where the gain comes from, and what it really is
 
@@ -286,7 +286,7 @@ else in this report, NOT `ic_std / sqrt(folds)`.
 | market_pos | -0.124 | 0.034 | 0.094 |
 | d_rel_spread_3m | 0.003 | 0.002 | 0.037 |
 
-The gain is CONCENTRATED, not spread across the six new features: adding `mid_skew` alone to the pre-spread feature set already reaches held-out 0.368, against 0.338 without it and 0.371 with all six. The other five contribute the remainder. How `mid_skew` was picked, stated so the number can be read correctly: it is the largest-magnitude univariate IC on the SELECTION folds (0.181), which are disjoint from the held-out folds every number quoted in this paragraph comes from. The pick therefore does not peek at the evaluation data, and the 0.368 is a held-out score for a pre-registered choice rather than the best of six post-hoc looks. Both columns are in the table above so the multiple-comparison context is visible either way.
+The gain is CONCENTRATED, not spread across the six new features: adding `mid_skew` alone to the pre-spread feature set already reaches held-out 0.368, against 0.338 without it and 0.373 with all six. The other five contribute the remainder. How `mid_skew` was picked, stated so the number can be read correctly: it is the largest-magnitude univariate IC on the SELECTION folds (0.181), which are disjoint from the held-out folds every number quoted in this paragraph comes from. The pick therefore does not peek at the evaluation data, and the 0.368 is a held-out score for a pre-registered choice rather than the best of six post-hoc looks. Both columns are in the table above so the multiple-comparison context is visible either way.
 
 The univariate IC of `mid_skew` DECAYS monotonically-ish as the horizon lengthens (1m 0.272, 2m 0.228, 3m 0.172, 6m 0.070). That is the signature of a mechanical catch-up, not of demand forecasting: TCGplayer's `market` is a trailing transaction-weighted average, while `mid` is the CURRENT listing midpoint, so `mid` carries fresher information than `market` at the same instant. A large part of this feature's edge is therefore the stale average converging on a book that was already visible at T -- honest as-of-T signal, but substantially a measurement-lag artifact of how the price series is constructed rather than a forecast of future demand. A buyer paying live listing prices would capture less of it than the IC suggests.
 
@@ -321,17 +321,17 @@ for transparency; the chosen model's honest number is the held-out one above.
 
 | model | mean IC | IC std | IC autocorr | eff folds | IC IR (n_eff) | quintile spread | up prec | up rec | down prec | down rec | folds |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| ridge | 0.328 | 0.140 | 0.590 | 4.126 | 4.747 | 17.5% | 35.7% | 18.3% | 28.9% | 25.4% | 16 |
-| elasticnet | 0.307 | 0.148 | 0.579 | 4.261 | 4.272 | 15.7% | 33.2% | 17.1% | 28.9% | 25.4% | 16 |
-| gbm | 0.314 | 0.146 | 0.675 | 3.100 | 3.779 | 17.0% | 37.5% | 19.3% | 27.0% | 23.8% | 16 |
-| ensemble | 0.350 | 0.153 | 0.680 | 3.042 | 3.988 | 18.3% | 36.4% | 18.7% | 30.2% | 26.6% | 16 |
-| rank_linear | 0.331 | 0.135 | 0.536 | 4.828 | 5.406 | 17.8% | 36.4% | 18.7% | 29.6% | 26.0% | 16 |
-| huber | 0.334 | 0.147 | 0.600 | 3.995 | 4.529 | 17.2% | 36.1% | 18.6% | 29.5% | 25.9% | 16 |
-| pls | 0.307 | 0.149 | 0.528 | 4.939 | 4.561 | 15.8% | 32.0% | 16.4% | 30.2% | 26.6% | 16 |
-| rf | 0.333 | 0.110 | 0.507 | 5.236 | 6.923 | 17.1% | 32.3% | 16.6% | 33.7% | 29.7% | 16 |
+| ridge | 0.327 | 0.140 | 0.588 | 4.151 | 4.759 | 17.5% | 35.7% | 18.3% | 28.5% | 25.1% | 16 |
+| elasticnet | 0.307 | 0.148 | 0.579 | 4.265 | 4.270 | 15.7% | 33.4% | 17.2% | 28.9% | 25.4% | 16 |
+| gbm | 0.319 | 0.142 | 0.691 | 2.922 | 3.857 | 17.2% | 38.0% | 19.5% | 29.0% | 25.5% | 16 |
+| ensemble | 0.352 | 0.151 | 0.689 | 2.947 | 4.006 | 18.6% | 35.1% | 18.0% | 29.6% | 26.0% | 16 |
+| rank_linear | 0.331 | 0.135 | 0.535 | 4.852 | 5.405 | 17.8% | 36.3% | 18.6% | 29.6% | 26.0% | 16 |
+| huber | 0.333 | 0.147 | 0.600 | 3.996 | 4.524 | 17.2% | 36.1% | 18.6% | 29.5% | 25.9% | 16 |
+| pls | 0.306 | 0.150 | 0.529 | 4.934 | 4.548 | 15.8% | 32.0% | 16.4% | 30.2% | 26.6% | 16 |
+| rf | 0.335 | 0.110 | 0.518 | 5.084 | 6.872 | 17.3% | 33.1% | 17.0% | 34.0% | 29.9% | 16 |
 | zero | 0.000 | 0.000 | 0.000 | 16.000 | n/a | 8.4% | 18.7% | 9.6% | 21.1% | 18.5% | 16 |
 | momentum | -0.065 | 0.099 | 0.465 | 5.836 | -1.586 | -3.2% | 13.6% | 7.0% | 18.3% | 16.1% | 16 |
-| reversion | 0.151 | 0.206 | 0.670 | 3.159 | 1.300 | 7.2% | 22.7% | 11.6% | 15.4% | 13.6% | 16 |
+| reversion | 0.150 | 0.206 | 0.670 | 3.158 | 1.295 | 7.2% | 22.5% | 11.6% | 15.6% | 13.7% | 16 |
 
 Baselines that must be beaten to claim signal: zero prediction, momentum-only
 (mom_3m as the score), reversion-only (negative mispricing residual as the
@@ -352,8 +352,8 @@ by card.
 The chosen model (**rf**) calibrates on 3889 eval-fold
 residuals. 5 of 7 rarity tiers cleared the
 200-residual minimum and carry their own band; the rest borrow the
-pooled band [-0.182, 0.198] (width 0.379) and are
-marked as borrowed in the table below. Self-calibrated tier widths range from 0.268 to 0.488 (1.8x)
+pooled band [-0.182, 0.198] (width 0.380) and are
+marked as borrowed in the table below. Self-calibrated tier widths range from 0.268 to 0.487 (1.8x)
 -- the spread a single global band used to average away.
 
 **Why a minimum-n fallback, and why 200.** The realized coverage of
@@ -397,15 +397,15 @@ The in-sample column cannot tell the three apart -- that is the tautology. Note 
 
 | rarity | calibration residuals | own band? | band [q10, q90] | band width | scored rows | realized coverage | nominal |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| Hyper Rare | 297 | own | [-0.137, 0.183] | 0.321 | 297 | 79.5% | 80.0% |
-| Mega Hyper Rare | 19 | borrowed (pooled) | [-0.182, 0.198] | 0.379 | 17 | 82.4% | 80.0% |
-| Rare Rainbow | 396 | own | [-0.153, 0.115] | 0.268 | 396 | 79.5% | 80.0% |
-| Rare Secret | 135 | borrowed (pooled) | [-0.182, 0.198] | 0.379 | 135 | 89.6% | 80.0% |
-| Rare Ultra | 936 | own | [-0.149, 0.177] | 0.325 | 936 | 82.9% | 80.0% |
-| Special Illustration Rare | 883 | own | [-0.180, 0.232] | 0.412 | 883 | 85.2% | 80.0% |
-| Ultra Rare | 1223 | own | [-0.238, 0.249] | 0.488 | 1223 | 80.0% | 80.0% |
+| Hyper Rare | 297 | own | [-0.137, 0.184] | 0.321 | 297 | 79.5% | 80.0% |
+| Mega Hyper Rare | 19 | borrowed (pooled) | [-0.182, 0.198] | 0.380 | 17 | 82.4% | 80.0% |
+| Rare Rainbow | 396 | own | [-0.153, 0.115] | 0.268 | 396 | 79.3% | 80.0% |
+| Rare Secret | 135 | borrowed (pooled) | [-0.182, 0.198] | 0.380 | 135 | 88.9% | 80.0% |
+| Rare Ultra | 936 | own | [-0.148, 0.177] | 0.325 | 936 | 82.9% | 80.0% |
+| Special Illustration Rare | 883 | own | [-0.180, 0.231] | 0.411 | 883 | 85.3% | 80.0% |
+| Ultra Rare | 1223 | own | [-0.238, 0.249] | 0.487 | 1223 | 80.0% | 80.0% |
 
-Across the 5 tiers carrying their own band, realized coverage spans 79.5% to 85.2% -- a 5.7-point spread. Scored on the identical folds with ONE global band instead, the same tiers span 74.4% to 95.7% -- a 21.3-point spread; the per-tier bands are what closed the gap. Tiers still marked borrowed inherit the pooled band and are the ones left visibly off nominal -- disclosed, not fixed.
+Across the 5 tiers carrying their own band, realized coverage spans 79.3% to 85.3% -- a 6.0-point spread. Scored on the identical folds with ONE global band instead, the same tiers span 74.4% to 95.7% -- a 21.3-point spread; the per-tier bands are what closed the gap. Tiers still marked borrowed inherit the pooled band and are the ones left visibly off nominal -- disclosed, not fixed.
 
 The bands are conditioned on rarity only. Coverage along the OTHER slice axis is
 published too, so a residual gap on the axis that was not banded is visible rather
@@ -415,7 +415,7 @@ than assumed away:
 | --- | --- | --- | --- | --- |
 | ME | 199 | 0.478 | 86.9% | 80.0% |
 | SV | 2223 | 0.469 | 81.4% | 80.0% |
-| SWSH | 1467 | 0.351 | 82.6% | 80.0% |
+| SWSH | 1467 | 0.351 | 82.5% | 80.0% |
 
 ### What the modelling is worth, against doing nothing
 
@@ -478,14 +478,14 @@ historical-residual band, not as a promise.
 
 | model | eval residuals | q10 | q90 | pooled band width | honest coverage | honest width | in-sample check | nominal |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| ridge | 3889 | -0.184 | 0.200 | 0.384 | 81.7% | 0.431 | 80.1% | 80.0% |
-| elasticnet | 3889 | -0.182 | 0.206 | 0.388 | 81.2% | 0.433 | 80.0% | 80.0% |
-| gbm | 3889 | -0.188 | 0.186 | 0.374 | 83.7% | 0.442 | 80.2% | 80.0% |
-| ensemble | 3889 | -0.174 | 0.201 | 0.375 | 82.3% | 0.428 | 80.2% | 80.0% |
-| rank_linear | 3889 | -0.247 | 0.271 | 0.518 | 81.4% | 0.553 | 79.9% | 80.0% |
-| huber | 3889 | -0.180 | 0.202 | 0.381 | 82.4% | 0.434 | 80.1% | 80.0% |
+| ridge | 3889 | -0.185 | 0.200 | 0.384 | 81.7% | 0.431 | 80.1% | 80.0% |
+| elasticnet | 3889 | -0.182 | 0.205 | 0.388 | 81.3% | 0.433 | 80.0% | 80.0% |
+| gbm | 3889 | -0.192 | 0.183 | 0.375 | 83.5% | 0.438 | 80.2% | 80.0% |
+| ensemble | 3889 | -0.176 | 0.199 | 0.375 | 82.2% | 0.427 | 80.1% | 80.0% |
+| rank_linear | 3889 | -0.248 | 0.272 | 0.519 | 81.5% | 0.553 | 79.8% | 80.0% |
+| huber | 3889 | -0.180 | 0.202 | 0.382 | 82.4% | 0.434 | 80.1% | 80.0% |
 | pls | 3889 | -0.181 | 0.205 | 0.386 | 80.9% | 0.433 | 80.0% | 80.0% |
-| rf | 3889 | -0.182 | 0.198 | 0.379 | 82.1% | 0.425 | 80.3% | 80.0% |
+| rf | 3889 | -0.182 | 0.198 | 0.380 | 82.1% | 0.425 | 80.3% | 80.0% |
 
 ## What drives predictions
 
@@ -515,13 +515,13 @@ Top candidate_up:
 (none)
 
 Top candidate_down:
-- Noivern V (Evolving Skies): predicted -0.203 (80% band [-0.352, -0.027]) [set_age +0.09; mom_3m -0.07; mid_skew -0.05]
-- Rayquaza V (Evolving Skies): predicted -0.195 (80% band [-0.344, -0.019]) [log_price -0.12; premium_asof +0.12; mom_3m -0.09]
-- Mega Greninja ex (Chaos Rising): predicted -0.182 (80% band [-0.363, +0.016]) [log_price -0.17; mispricing +0.13; lifecycle -0.12]
+- Noivern V (Evolving Skies): predicted -0.205 (80% band [-0.353, -0.029]) [set_age +0.09; mom_3m -0.07; mid_skew -0.05]
+- Rayquaza V (Evolving Skies): predicted -0.196 (80% band [-0.344, -0.019]) [log_price -0.12; premium_asof +0.12; mom_3m -0.09]
+- Mega Greninja ex (Chaos Rising): predicted -0.181 (80% band [-0.363, +0.017]) [log_price -0.17; mispricing +0.13; lifecycle -0.12]
 
 ## Limitations
 
-- Set-age/rarity effect is a LARGE part of the signal, though no longer the whole story. The "older high-rarity cards appreciate, recent cards decline" lifecycle pattern is real and sizeable: ablating the 9 static / near-time-invariant features (set_age_months, log_price, lifecycle_drift, is_sir, is_mega_hyper, is_ultra, is_rare_secret, is_rare_rainbow, is_rare_ultra) drops the all-fold mean IC from 0.333 to 0.257 (23% of it), and a univariate set_age ranking alone scores 0.309. What is new with the wider SWSH+SV+ME cross-section is that the held-out ablated-eval IC (0.279 +/- 0.017) clears the 0.05 floor by more than one SE, so a residual, non-static edge survives -- but it is a minority of the raw IC and may not persist across regimes.
+- Set-age/rarity effect is a LARGE part of the signal, though no longer the whole story. The "older high-rarity cards appreciate, recent cards decline" lifecycle pattern is real and sizeable: ablating the 9 static / near-time-invariant features (set_age_months, log_price, lifecycle_drift, is_sir, is_mega_hyper, is_ultra, is_rare_secret, is_rare_rainbow, is_rare_ultra) drops the all-fold mean IC from 0.335 to 0.258 (23% of it), and a univariate set_age ranking alone scores 0.309. What is new with the wider SWSH+SV+ME cross-section is that the held-out ablated-eval IC (0.279 +/- 0.017) clears the 0.05 floor by more than one SE, so a residual, non-static edge survives -- but it is a minority of the raw IC and may not persist across regimes.
 - The held-out edge is within-era, not cross-era contrast (era-neutralized IC 0.344 +/- 0.020 vs era-contrast-only 0.239 +/- 0.506), but it is NOT uniform across eras. 3 of 3 scored era slices clear zero by more than one autocorrelation-aware SE. See the within-era breakdown section.
 - Folds are NOT independent. The dominant features barely change relative rank
   month to month (set_age Spearman rank corr between the first and last fold is

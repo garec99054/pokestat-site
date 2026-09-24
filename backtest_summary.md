@@ -9,11 +9,11 @@ n = 5436 card-date observations across 8 snapshot dates.
 
 | flag | n | mean_return | median_return |
 | --- | --- | --- | --- |
-| fair | 4682 | 8.6% | 6.7% |
-| overvalued | 336 | 9.7% | 5.7% |
-| undervalued | 418 | 10.7% | 8.9% |
+| fair | 4683 | 8.5% | 6.6% |
+| overvalued | 336 | 9.6% | 5.7% |
+| undervalued | 417 | 10.7% | 8.9% |
 
-**Spread (undervalued mean return minus overvalued mean return): +1.1%**
+**Spread (undervalued mean return minus overvalued mean return): +1.0%**
 
 ## Per-date result
 
@@ -31,18 +31,18 @@ n = 5436 card-date observations across 8 snapshot dates.
 | 2025-06-01 | fair | 573 | 6.9% | 5.0% |
 | 2025-06-01 | overvalued | 44 | 14.1% | 14.8% |
 | 2025-06-01 | undervalued | 52 | -0.5% | -4.5% |
-| 2025-09-01 | fair | 602 | 5.8% | 6.4% |
+| 2025-09-01 | fair | 601 | 5.8% | 6.5% |
 | 2025-09-01 | overvalued | 40 | 11.5% | 8.9% |
-| 2025-09-01 | undervalued | 54 | 6.0% | 7.8% |
+| 2025-09-01 | undervalued | 55 | 6.0% | 7.8% |
 | 2025-12-01 | fair | 623 | 5.8% | 3.7% |
 | 2025-12-01 | overvalued | 43 | 0.2% | 1.1% |
-| 2025-12-01 | undervalued | 48 | 9.5% | 8.2% |
-| 2026-03-01 | fair | 654 | 17.3% | 12.9% |
+| 2025-12-01 | undervalued | 48 | 9.8% | 8.2% |
+| 2026-03-01 | fair | 656 | 17.3% | 12.9% |
 | 2026-03-01 | overvalued | 40 | 10.8% | 4.9% |
-| 2026-03-01 | undervalued | 57 | 16.9% | 14.6% |
-| 2026-06-01 | fair | 653 | 3.9% | 4.9% |
-| 2026-06-01 | overvalued | 44 | 4.4% | 5.4% |
-| 2026-06-01 | undervalued | 54 | 11.6% | 11.0% |
+| 2026-03-01 | undervalued | 55 | 17.0% | 14.6% |
+| 2026-06-01 | fair | 653 | 3.8% | 4.7% |
+| 2026-06-01 | overvalued | 44 | 3.9% | 5.2% |
+| 2026-06-01 | undervalued | 54 | 10.7% | 9.5% |
 
 ## Skipped dates
 
@@ -62,7 +62,7 @@ already cached can be used; a shifted window below is that constraint showing.
 - 2025-09-01: fit on 2025-09-01, forward 2025-11-30
 - 2025-12-01: fit on 2025-12-01, forward 2026-03-01
 - 2026-03-01: fit on 2026-03-01, forward 2026-05-30
-- 2026-06-01: fit on 2026-06-01, forward 2026-09-01 (shifted: 92-day window, nearest cached archive)
+- 2026-06-01: fit on 2026-06-01, forward 2026-08-30
 
 ## Look-ahead limitations (read before trusting these numbers)
 

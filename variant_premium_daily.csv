@@ -2484,7 +2484,7 @@ ex14-22,86458,Kingler δ,ex14,Crystal Guardians,22,Rare,Reverse Holofoil / Norma
 ex14-54,86525,Krabby,ex14,Crystal Guardians,54,Common,Reverse Holofoil / Normal,24.1,0.92,26.195652173913043,23.18,penny
 ex14-36,86578,Lairon,ex14,Crystal Guardians,36,Uncommon,Reverse Holofoil / Normal,48.25,1.03,46.84466019417476,47.22,
 ex14-37,86818,Lombre,ex14,Crystal Guardians,37,Uncommon,Reverse Holofoil / Normal,15.16,1.05,14.438095238095238,14.11,
-,86835,Lotad,,,,,Reverse Holofoil / Normal,18.57,0.76,24.43421052631579,17.81,penny
+ex14-55,86835,Lotad,ex14,Crystal Guardians,55,Common,Reverse Holofoil / Normal,18.57,0.76,24.43421052631579,17.81,penny
 ex14-23,86842,Loudred,ex14,Crystal Guardians,23,Rare,Reverse Holofoil / Normal,9.96,0.82,12.146341463414636,9.14,penny
 ex14-24,87237,Marshtomp,ex14,Crystal Guardians,24,Rare,Reverse Holofoil / Normal,27.49,3.33,8.255255255255255,24.159999999999997,
 ex14-38,87238,Marshtomp,ex14,Crystal Guardians,38,Uncommon,Reverse Holofoil / Normal,26.86,1.81,14.83977900552486,25.05,
@@ -6054,8 +6054,8 @@ base1-72,107069,Devolution Spray,base1,Base,72,Rare,1st Edition / Unlimited,68.0
 base1-73,107070,Impostor Professor Oak,base1,Base,73,Rare,1st Edition / Unlimited,71.28,25.32,2.815165876777251,45.96,
 base1-75,107071,Lass,base1,Base,75,Rare,1st Edition / Unlimited,102.42,9.0,11.38,93.42,
 base1-74,107072,Item Finder,base1,Base,74,Rare,1st Edition / Unlimited,93.13,14.61,6.374401095140315,78.52,
-,107073,Pokemon Trader,,,,,1st Edition / Unlimited,54.93,16.89,3.2522202486678506,38.04,
-,107074,Pokemon Breeder,,,,,1st Edition / Unlimited,76.26,16.91,4.509757539917209,59.35000000000001,
+base1-77,107073,Pokémon Trader,base1,Base,77,Rare,1st Edition / Unlimited,54.93,16.89,3.2522202486678506,38.04,
+base1-76,107074,Pokémon Breeder,base1,Base,76,Rare,1st Edition / Unlimited,76.26,16.91,4.509757539917209,59.35000000000001,
 base1-78,107075,Scoop Up,base1,Base,78,Rare,1st Edition / Unlimited,66.83,17.34,3.854094579008074,49.489999999999995,
 base1-79,107076,Super Energy Removal,base1,Base,79,Rare,1st Edition / Unlimited,158.4,8.56,18.50467289719626,149.84,
 base1-80,107077,Defender,base1,Base,80,Uncommon,1st Edition / Unlimited,27.47,2.96,9.280405405405405,24.509999999999998,
@@ -6063,9 +6063,9 @@ base1-81,107078,Energy Retrieval,base1,Base,81,Uncommon,1st Edition / Unlimited,
 base1-82,107079,Full Heal,base1,Base,82,Uncommon,1st Edition / Unlimited,14.39,1.91,7.534031413612566,12.48,
 base1-83,107080,Maintenance,base1,Base,83,Uncommon,1st Edition / Unlimited,9.5,2.21,4.298642533936651,7.29,
 base1-84,107081,PlusPower,base1,Base,84,Uncommon,1st Edition / Unlimited,15.5,2.13,7.27699530516432,13.370000000000001,
-,107082,Pokemon Center,,,,,1st Edition / Unlimited,11.0,3.26,3.374233128834356,7.74,
-,107083,Pokemon Flute,,,,,1st Edition / Unlimited,37.4,6.13,6.101141924959217,31.27,
-,107084,Pokedex,,,,,1st Edition / Unlimited,25.44,2.03,12.5320197044335,23.41,
+base1-85,107082,Pokémon Center,base1,Base,85,Uncommon,1st Edition / Unlimited,11.0,3.26,3.374233128834356,7.74,
+base1-86,107083,Pokémon Flute,base1,Base,86,Uncommon,1st Edition / Unlimited,37.4,6.13,6.101141924959217,31.27,
+base1-87,107084,Pokédex,base1,Base,87,Uncommon,1st Edition / Unlimited,25.44,2.03,12.5320197044335,23.41,
 base1-88,107085,Professor Oak,base1,Base,88,Uncommon,1st Edition / Unlimited,73.5,4.51,16.29711751662971,68.99,
 base1-89,107086,Revive,base1,Base,89,Uncommon,1st Edition / Unlimited,31.96,7.82,4.086956521739131,24.14,
 base1-90,107087,Super Potion,base1,Base,90,Uncommon,1st Edition / Unlimited,20.68,1.56,13.256410256410255,19.12,
