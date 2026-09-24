@@ -108,7 +108,7 @@ base2-60,45163,Pikachu,base2,Jungle,60,Common,1st Edition / Unlimited,25.63,5.92
 base2-61,45164,Rhyhorn,base2,Jungle,61,Common,1st Edition / Unlimited,2.92,0.46,6.3478260869565215,2.46,penny
 base2-62,45165,Spearow,base2,Jungle,62,Common,1st Edition / Unlimited,2.17,0.57,3.8070175438596494,1.6,penny
 base2-63,45166,Venonat,base2,Jungle,63,Common,1st Edition / Unlimited,2.18,0.53,4.113207547169812,1.6500000000000001,penny
-,45167,Poke Ball,,,,,1st Edition / Unlimited,2.85,0.35,8.142857142857144,2.5,penny
+base2-64,45167,Poké Ball,base2,Jungle,64,Common,1st Edition / Unlimited,2.85,0.35,8.142857142857144,2.5,penny
 base2-17,106979,Clefable,base2,Jungle,17,Rare,1st Edition / Unlimited,15.42,7.79,1.9794608472400512,7.63,
 base2-18,106980,Electrode,base2,Jungle,18,Rare,1st Edition / Unlimited,52.99,8.02,6.607231920199502,44.97,
 base2-19,106981,Flareon,base2,Jungle,19,Rare,1st Edition / Unlimited,47.52,14.88,3.193548387096774,32.64,
@@ -179,7 +179,7 @@ pl2-72,87728,Nidoran ♂,pl2,Rising Rivals,72,Common,Reverse Holofoil / Normal,1
 pl2-73,87737,Nidorina,pl2,Rising Rivals,73,Common,Reverse Holofoil / Normal,2.93,0.46,6.369565217391305,2.47,penny
 pl2-74,87746,Nidorino,pl2,Rising Rivals,74,Common,Reverse Holofoil / Normal,14.99,0.33,45.42424242424242,14.66,penny
 pl2-75,87826,Nuzleaf,pl2,Rising Rivals,75,Common,Reverse Holofoil / Normal,1.67,0.28,5.9642857142857135,1.39,penny
-,88224,Pokemon Contest Hall,,,,,Reverse Holofoil / Normal,3.07,0.29,10.586206896551724,2.78,penny
+pl2-93,88224,Pokémon Contest Hall,pl2,Rising Rivals,93,Uncommon,Reverse Holofoil / Normal,3.07,0.29,10.586206896551724,2.78,penny
 pl2-76,88476,Quagsire GL,pl2,Rising Rivals,76,Common,Reverse Holofoil / Normal,17.5,1.39,12.589928057553958,16.11,
 pl2-31,88527,Raichu GL,pl2,Rising Rivals,31,Rare,Reverse Holofoil / Normal,47.5,7.15,6.643356643356643,40.35,
 pl2-47,88588,Rapidash E4,pl2,Rising Rivals,47,Uncommon,Reverse Holofoil / Normal,4.48,1.14,3.9298245614035094,3.3400000000000007,
@@ -366,9 +366,9 @@ dp7-69,87883,Onix,dp7,Stormfront,69,Common,Reverse Holofoil / Normal,1.85,0.45,4
 dp7-45,88019,Pichu,dp7,Stormfront,45,Uncommon,Reverse Holofoil / Normal,23.56,6.69,3.521674140508221,16.869999999999997,
 dp7-70,88090,Pikachu,dp7,Stormfront,70,Common,Reverse Holofoil / Normal,75.0,11.29,6.643046944198407,63.71,
 dp7-46,88119,Piloswine,dp7,Stormfront,46,Uncommon,Reverse Holofoil / Normal,0.91,0.55,1.6545454545454545,0.36,penny
-,88195,Poke Blower +,,,,,Reverse Holofoil / Normal,3.84,0.67,5.731343283582089,3.17,penny
-,88196,Poke Drawer +,,,,,Reverse Holofoil / Normal,6.98,1.71,4.08187134502924,5.2700000000000005,
-,88197,Poke Healer +,,,,,Reverse Holofoil / Normal,12.49,1.16,10.767241379310345,11.33,
+dp7-88,88195,Poké Blower +,dp7,Stormfront,88,Uncommon,Reverse Holofoil / Normal,3.84,0.67,5.731343283582089,3.17,penny
+dp7-89,88196,Poké Drawer +,dp7,Stormfront,89,Uncommon,Reverse Holofoil / Normal,6.98,1.71,4.08187134502924,5.2700000000000005,
+dp7-90,88197,Poké Healer +,dp7,Stormfront,90,Uncommon,Reverse Holofoil / Normal,12.49,1.16,10.767241379310345,11.33,
 dp7-71,88288,Ponyta,dp7,Stormfront,71,Common,Reverse Holofoil / Normal,4.93,2.03,2.428571428571429,2.9,
 dp7-92,88346,Potion,dp7,Stormfront,92,Common,Reverse Holofoil / Normal,0.43,0.2,2.15,0.22999999999999998,penny
 dp7-91,88357,Premier Ball,dp7,Stormfront,91,Uncommon,Reverse Holofoil / Normal,8.24,0.99,8.323232323232324,7.25,penny
@@ -443,7 +443,7 @@ bw10-40,87662,Musharna,bw10,Plasma Blast,40,Uncommon,Reverse Holofoil / Normal,0
 bw10-19,87835,Octillery,bw10,Plasma Blast,19,Uncommon,Reverse Holofoil / Normal,0.88,0.34,2.5882352941176467,0.54,penny
 bw10-91,88157,Plasma Energy,bw10,Plasma Blast,91,Uncommon,Reverse Holofoil / Normal,1.45,0.33,4.393939393939394,1.1199999999999999,penny
 bw10-82,88160,Plume Fossil,bw10,Plasma Blast,82,Uncommon,Reverse Holofoil / Normal,0.56,0.3,1.866666666666667,0.26000000000000006,penny
-,88210,Pokemon Catcher,,,,,Reverse Holofoil / Normal,1.62,0.79,2.050632911392405,0.8300000000000001,penny
+bw10-83,88210,Pokémon Catcher,bw10,Plasma Blast,83,Uncommon,Reverse Holofoil / Normal,1.62,0.79,2.050632911392405,0.8300000000000001,penny
 bw10-72,88314,Porygon,bw10,Plasma Blast,72,Common,Reverse Holofoil / Normal,0.67,0.38,1.7631578947368423,0.29000000000000004,penny
 bw10-73,88329,Porygon2,bw10,Plasma Blast,73,Uncommon,Reverse Holofoil / Normal,0.98,0.44,2.227272727272727,0.54,penny
 bw10-84,88397,Professor Juniper,bw10,Plasma Blast,84,Uncommon,Reverse Holofoil / Normal,0.61,0.22,2.7727272727272725,0.39,penny
@@ -745,8 +745,8 @@ base6-33,88028,Pidgeot,base6,Legendary Collection,33,Rare,Reverse Holofoil / Nor
 base6-34,88038,Pidgeotto,base6,Legendary Collection,34,Rare,Reverse Holofoil / Normal,149.99,11.35,13.214977973568283,138.64000000000001,
 base6-85,88046,Pidgey,base6,Legendary Collection,85,Common,Reverse Holofoil / Normal,150.0,1.5,100.0,148.5,
 base6-86,88075,Pikachu,base6,Legendary Collection,86,Common,Reverse Holofoil / Normal,1574.99,6.34,248.4211356466877,1568.65,
-,88207,Pokemon Breeder,,,,,Reverse Holofoil / Normal,69.99,4.87,14.371663244353181,65.11999999999999,
-,88242,Pokemon Trader,,,,,Reverse Holofoil / Normal,51.47,4.38,11.751141552511415,47.089999999999996,
+base6-102,88207,Pokémon Breeder,base6,Legendary Collection,102,Rare,Reverse Holofoil / Normal,69.99,4.87,14.371663244353181,65.11999999999999,
+base6-103,88242,Pokémon Trader,base6,Legendary Collection,103,Rare,Reverse Holofoil / Normal,51.47,4.38,11.751141552511415,47.089999999999996,
 base6-87,88282,Ponyta,base6,Legendary Collection,87,Common,Reverse Holofoil / Normal,51.48,0.69,74.60869565217392,50.79,penny
 base6-110,88332,Potion,base6,Legendary Collection,110,Common,Reverse Holofoil / Normal,36.22,0.32,113.1875,35.9,penny
 base6-101,88351,Potion Energy,base6,Legendary Collection,101,Uncommon,Reverse Holofoil / Normal,85.81,0.93,92.26881720430107,84.88,penny
@@ -863,8 +863,8 @@ ecard1-59,88029,Pidgeot,ecard1,Expedition Base Set,59,Rare,Reverse Holofoil / No
 ecard1-88,88039,Pidgeotto,ecard1,Expedition Base Set,88,Uncommon,Reverse Holofoil / Normal,52.0,13.53,3.8433111603843315,38.47,
 ecard1-123,88047,Pidgey,ecard1,Expedition Base Set,123,Common,Reverse Holofoil / Normal,93.81,9.72,9.651234567901234,84.09,
 ecard1-124,88076,Pikachu,ecard1,Expedition Base Set,124,Common,Reverse Holofoil / Normal,99.99,27.82,3.5941768511861967,72.16999999999999,
-,88229,Pokemon Nurse,,,,,Reverse Holofoil / Normal,31.33,16.02,1.9556803995006242,15.309999999999999,
-,88238,Pokemon Reversal,,,,,Reverse Holofoil / Normal,11.42,3.27,3.492354740061162,8.15,
+ecard1-145,88229,Pokémon Nurse,ecard1,Expedition Base Set,145,Uncommon,Reverse Holofoil / Normal,31.33,16.02,1.9556803995006242,15.309999999999999,
+ecard1-146,88238,Pokémon Reversal,ecard1,Expedition Base Set,146,Uncommon,Reverse Holofoil / Normal,11.42,3.27,3.492354740061162,8.15,
 ecard1-125,88256,Poliwag,ecard1,Expedition Base Set,125,Common,Reverse Holofoil / Normal,40.05,20.96,1.9107824427480913,19.089999999999996,
 ecard1-89,88264,Poliwhirl,ecard1,Expedition Base Set,89,Uncommon,Reverse Holofoil / Normal,76.66,26.25,2.920380952380952,50.41,
 ecard1-60,88275,Poliwrath,ecard1,Expedition Base Set,60,Rare,Reverse Holofoil / Normal,50.25,38.36,1.3099582898852973,11.89,
@@ -1988,7 +1988,7 @@ neo3-64,87851,Old Rod,neo3,Neo Revelation,64,Common,1st Edition / Unlimited,0.76
 neo3-47,87947,Paras,neo3,Neo Revelation,47,Common,1st Edition / Unlimited,3.13,0.75,4.173333333333333,2.38,penny
 neo3-35,87955,Parasect,neo3,Neo Revelation,35,Uncommon,1st Edition / Unlimited,3.8,1.51,2.5165562913907285,2.29,
 neo3-36,88114,Piloswine,neo3,Neo Revelation,36,Uncommon,1st Edition / Unlimited,2.65,1.25,2.12,1.4,
-,88208,Pokemon Breeder Fields,,,,,1st Edition / Unlimited,17.23,4.12,4.182038834951456,13.11,
+neo3-62,88208,Pokémon Breeder Fields,neo3,Neo Revelation,62,Uncommon,1st Edition / Unlimited,17.23,4.12,4.182038834951456,13.11,
 neo3-12,88322,Porygon2,neo3,Neo Revelation,12,Rare Holo,1st Edition Holofoil / Unlimited Holofoil,120.0,48.55,2.47167868177137,71.45,
 neo3-48,88469,Quagsire,neo3,Neo Revelation,48,Common,1st Edition / Unlimited,15.11,7.09,2.1311706629055007,8.02,
 neo3-49,88492,Qwilfish,neo3,Neo Revelation,49,Common,1st Edition / Unlimited,2.83,0.88,3.215909090909091,1.9500000000000002,penny
@@ -2075,7 +2075,7 @@ dp5-70,88088,Pikachu,dp5,Majestic Dawn,70,Common,Reverse Holofoil / Normal,63.74
 dp5-71,88145,Piplup,dp5,Majestic Dawn,71,Common,Reverse Holofoil / Normal,29.91,2.17,13.783410138248849,27.740000000000002,
 dp5-72,88146,Piplup,dp5,Majestic Dawn,72,Common,Reverse Holofoil / Normal,10.0,7.15,1.3986013986013985,2.8499999999999996,
 dp5-28,88169,Plusle,dp5,Majestic Dawn,28,Rare,Reverse Holofoil / Normal,24.99,11.54,2.165511265164645,13.45,
-,88187,Poke Ball,,,,,Reverse Holofoil / Normal,1.34,0.35,3.828571428571429,0.9900000000000001,penny
+dp5-85,88187,Poké Ball,dp5,Majestic Dawn,85,Uncommon,Reverse Holofoil / Normal,1.34,0.35,3.828571428571429,0.9900000000000001,penny
 dp5-44,88370,Prinplup,dp5,Majestic Dawn,44,Uncommon,Reverse Holofoil / Normal,2.68,0.56,4.785714285714286,2.12,penny
 dp5-86,88479,Quick Ball,dp5,Majestic Dawn,86,Uncommon,Reverse Holofoil / Normal,4.3,0.51,8.431372549019608,3.79,penny
 dp5-45,88511,Raichu,dp5,Majestic Dawn,45,Uncommon,Reverse Holofoil / Normal,42.34,2.88,14.701388888888891,39.46,
@@ -2484,7 +2484,7 @@ ex14-22,86458,Kingler δ,ex14,Crystal Guardians,22,Rare,Reverse Holofoil / Norma
 ex14-54,86525,Krabby,ex14,Crystal Guardians,54,Common,Reverse Holofoil / Normal,24.1,0.92,26.195652173913043,23.18,penny
 ex14-36,86578,Lairon,ex14,Crystal Guardians,36,Uncommon,Reverse Holofoil / Normal,48.25,1.03,46.84466019417476,47.22,
 ex14-37,86818,Lombre,ex14,Crystal Guardians,37,Uncommon,Reverse Holofoil / Normal,15.16,1.05,14.438095238095238,14.11,
-ex14-55,86835,Lotad,ex14,Crystal Guardians,55,Common,Reverse Holofoil / Normal,18.57,0.76,24.43421052631579,17.81,penny
+,86835,Lotad,,,,,Reverse Holofoil / Normal,18.57,0.76,24.43421052631579,17.81,penny
 ex14-23,86842,Loudred,ex14,Crystal Guardians,23,Rare,Reverse Holofoil / Normal,9.96,0.82,12.146341463414636,9.14,penny
 ex14-24,87237,Marshtomp,ex14,Crystal Guardians,24,Rare,Reverse Holofoil / Normal,27.49,3.33,8.255255255255255,24.159999999999997,
 ex14-38,87238,Marshtomp,ex14,Crystal Guardians,38,Uncommon,Reverse Holofoil / Normal,26.86,1.81,14.83977900552486,25.05,
@@ -2497,8 +2497,8 @@ ex14-81,87669,Mysterious Shard,ex14,Crystal Guardians,81,Uncommon,Reverse Holofo
 ex14-59,87813,Numel,ex14,Crystal Guardians,59,Common,Reverse Holofoil / Normal,16.49,0.58,28.43103448275862,15.909999999999998,penny
 ex14-39,87823,Nuzleaf,ex14,Crystal Guardians,39,Uncommon,Reverse Holofoil / Normal,21.33,1.9,11.226315789473684,19.43,
 ex14-26,87980,Pelipper δ,ex14,Crystal Guardians,26,Rare,Reverse Holofoil / Normal,34.83,2.68,12.996268656716417,32.15,
-,88185,Poke Ball,,,,,Reverse Holofoil / Normal,5.86,0.44,13.318181818181818,5.42,penny
-,88245,Pokenav,,,,,Reverse Holofoil / Normal,2.42,0.5,4.84,1.92,penny
+ex14-82,88185,Poké Ball,ex14,Crystal Guardians,82,Uncommon,Reverse Holofoil / Normal,5.86,0.44,13.318181818181818,5.42,penny
+ex14-83,88245,PokéNav,ex14,Crystal Guardians,83,Uncommon,Reverse Holofoil / Normal,2.42,0.5,4.84,1.92,penny
 ex14-87,88341,Potion,ex14,Crystal Guardians,87,Common,Reverse Holofoil / Normal,3.13,0.09,34.77777777777778,3.04,penny
 ex14-60,89041,Seedot,ex14,Crystal Guardians,60,Common,Reverse Holofoil / Normal,11.79,0.32,36.84375,11.469999999999999,penny
 ex14-40,89198,Shuppet,ex14,Crystal Guardians,40,Uncommon,Reverse Holofoil / Normal,25.85,1.17,22.094017094017097,24.68,
@@ -2584,7 +2584,7 @@ neo1-94,87495,Miracle Berry,neo1,Neo Genesis,94,Uncommon,1st Edition / Unlimited
 neo1-101,87574,Moo-Moo Milk,neo1,Neo Genesis,101,Common,1st Edition / Unlimited,4.07,0.89,4.573033707865169,3.18,penny
 neo1-24,87646,Murkrow,neo1,Neo Genesis,24,Rare,1st Edition / Unlimited,9.66,4.28,2.2570093457943923,5.38,
 neo1-67,87681,Natu,neo1,Neo Genesis,67,Common,1st Edition / Unlimited,2.07,0.82,2.524390243902439,1.25,penny
-,87690,New Pokedex,,,,,1st Edition / Unlimited,1.53,0.64,2.390625,0.89,penny
+neo1-95,87690,New Pokédex,neo1,Neo Genesis,95,Uncommon,1st Edition / Unlimited,1.53,0.64,2.390625,0.89,penny
 neo1-42,87791,Noctowl,neo1,Neo Genesis,42,Uncommon,1st Edition / Unlimited,10.21,3.87,2.6382428940568476,6.340000000000001,
 neo1-68,87838,Oddish,neo1,Neo Genesis,68,Common,1st Edition / Unlimited,2.16,1.07,2.018691588785047,1.09,
 neo1-69,87875,Onix,neo1,Neo Genesis,69,Common,1st Edition / Unlimited,3.47,1.32,2.628787878787879,2.1500000000000004,
@@ -2592,8 +2592,8 @@ neo1-43,87995,Phanpy,neo1,Neo Genesis,43,Uncommon,1st Edition / Unlimited,3.24,1
 neo1-12,88011,Pichu,neo1,Neo Genesis,12,Rare Holo,1st Edition Holofoil / Unlimited Holofoil,267.05,126.94,2.1037498030565622,140.11,
 neo1-70,88072,Pikachu,neo1,Neo Genesis,70,Common,1st Edition / Unlimited,38.85,13.68,2.8399122807017547,25.17,
 neo1-44,88116,Piloswine,neo1,Neo Genesis,44,Uncommon,1st Edition / Unlimited,3.54,1.69,2.094674556213018,1.85,
-,88204,PokeGear,,,,,1st Edition / Unlimited,2.56,2.75,0.9309090909090909,-0.18999999999999995,
-,88228,Pokemon March,,,,,1st Edition / Unlimited,8.01,1.45,5.524137931034483,6.56,
+neo1-88,88204,PokéGear,neo1,Neo Genesis,88,Rare,1st Edition / Unlimited,2.56,2.75,0.9309090909090909,-0.18999999999999995,
+neo1-102,88228,Pokémon March,neo1,Neo Genesis,102,Common,1st Edition / Unlimited,8.01,1.45,5.524137931034483,6.56,
 neo1-96,88388,Professor Elm,neo1,Neo Genesis,96,Uncommon,1st Edition / Unlimited,3.49,1.56,2.2371794871794872,1.9300000000000002,
 neo1-110,88414,Psychic Energy,neo1,Neo Genesis,110,,1st Edition / Unlimited,1.37,0.46,2.9782608695652173,0.9100000000000001,penny
 neo1-45,88468,Quagsire,neo1,Neo Genesis,45,Uncommon,1st Edition / Unlimited,8.7,7.86,1.1068702290076335,0.839999999999999,
@@ -2722,8 +2722,8 @@ ecard2-99,87949,Paras,ecard2,Aquapolis,99,Common,Reverse Holofoil / Normal,40.99
 ecard2-27,87954,Parasect,ecard2,Aquapolis,27,Rare,Reverse Holofoil / Normal,44.49,13.47,3.3028953229398663,31.020000000000003,
 ecard2-100,87998,Phanpy,ecard2,Aquapolis,100,Common,Reverse Holofoil / Normal,53.36,14.52,3.674931129476584,38.84,
 ecard2-101,88134,Pinsir,ecard2,Aquapolis,101,Common,Reverse Holofoil / Normal,50.21,7.33,6.849931787175989,42.88,
-,88225,Pokemon Fan Club,,,,,Reverse Holofoil / Normal,28.65,7.43,3.8559892328398386,21.22,
-,88230,Pokemon Park,,,,,Reverse Holofoil / Normal,69.99,23.65,2.9594080338266386,46.339999999999996,
+ecard2-130,88225,Pokémon Fan Club,ecard2,Aquapolis,130,Uncommon,Reverse Holofoil / Normal,28.65,7.43,3.8559892328398386,21.22,
+ecard2-131,88230,Pokémon Park,ecard2,Aquapolis,131,Uncommon,Reverse Holofoil / Normal,69.99,23.65,2.9594080338266386,46.339999999999996,
 ecard2-102,88283,Ponyta,ecard2,Aquapolis,102,Common,Reverse Holofoil / Normal,53.15,9.51,5.588853838065194,43.64,
 ,88306,Porygon (103a),,,,,Reverse Holofoil / Normal,125.0,6.27,19.936204146730464,118.73,
 ,88307,Porygon (103b),,,,,Reverse Holofoil / Normal,99.95,8.53,11.71746776084408,91.42,
@@ -2829,8 +2829,8 @@ ex10-43,87792,Noctowl,ex10,Unseen Forces,43,Uncommon,Reverse Holofoil / Normal,3
 ex10-64,87842,Oddish,ex10,Unseen Forces,64,Common,Reverse Holofoil / Normal,99.99,0.58,172.39655172413794,99.41,penny
 ex10-65,87881,Onix,ex10,Unseen Forces,65,Common,Reverse Holofoil / Normal,41.0,0.91,45.05494505494505,40.09,penny
 ex10-66,88127,Pineco,ex10,Unseen Forces,66,Common,Reverse Holofoil / Normal,19.74,0.38,51.94736842105263,19.36,penny
-,88184,Poke Ball,,,,,Reverse Holofoil / Normal,12.04,0.69,17.44927536231884,11.35,penny
-,88235,Pokemon Reversal,,,,,Reverse Holofoil / Normal,21.08,2.61,8.07662835249042,18.47,
+ex10-87,88184,Poké Ball,ex10,Unseen Forces,87,Uncommon,Reverse Holofoil / Normal,12.04,0.69,17.44927536231884,11.35,penny
+ex10-88,88235,Pokémon Reversal,ex10,Unseen Forces,88,Uncommon,Reverse Holofoil / Normal,21.08,2.61,8.07662835249042,18.47,
 ex10-67,88258,Poliwag,ex10,Unseen Forces,67,Common,Reverse Holofoil / Normal,34.45,1.01,34.10891089108911,33.440000000000005,
 ex10-68,88266,Poliwhirl,ex10,Unseen Forces,68,Common,Reverse Holofoil / Normal,53.31,1.63,32.70552147239264,51.68,
 ex10-69,88309,Porygon,ex10,Unseen Forces,69,Common,Reverse Holofoil / Normal,31.16,0.81,38.46913580246913,30.35,penny
@@ -2904,7 +2904,7 @@ hgss2-56,87884,Onix,hgss2,HS—Unleashed,56,Common,Reverse Holofoil / Normal,5.5
 hgss2-57,87885,Onix,hgss2,HS—Unleashed,57,Common,Reverse Holofoil / Normal,1.38,0.35,3.9428571428571426,1.0299999999999998,penny
 hgss2-36,88171,Plusle,hgss2,HS—Unleashed,36,Uncommon,Reverse Holofoil / Normal,6.0,3.17,1.8927444794952681,2.83,
 hgss2-80,88179,PlusPower,hgss2,HS—Unleashed,80,Uncommon,Reverse Holofoil / Normal,2.33,0.56,4.160714285714286,1.77,penny
-,88216,Pokemon Circulator,,,,,Reverse Holofoil / Normal,1.04,0.28,3.714285714285714,0.76,penny
+hgss2-81,88216,Pokémon Circulator,hgss2,HS—Unleashed,81,Uncommon,Reverse Holofoil / Normal,1.04,0.28,3.714285714285714,0.76,penny
 hgss2-58,88260,Poliwag,hgss2,HS—Unleashed,58,Common,Reverse Holofoil / Normal,6.67,0.47,14.191489361702128,6.2,penny
 hgss2-37,88268,Poliwhirl,hgss2,HS—Unleashed,37,Uncommon,Reverse Holofoil / Normal,25.51,4.82,5.29253112033195,20.69,
 hgss2-21,88279,Poliwrath,hgss2,HS—Unleashed,21,Rare,Reverse Holofoil / Normal,10.72,4.51,2.3769401330376945,6.210000000000001,
@@ -3083,11 +3083,11 @@ hgss1-27,87987,Persian,hgss1,HeartGold & SoulSilver,27,Rare,Reverse Holofoil / N
 hgss1-77,88003,Phanpy,hgss1,HeartGold & SoulSilver,77,Common,Reverse Holofoil / Normal,18.5,0.86,21.511627906976745,17.64,penny
 hgss1-28,88022,Pichu,hgss1,HeartGold & SoulSilver,28,Rare,Reverse Holofoil / Normal,40.31,10.92,3.6913919413919416,29.39,
 hgss1-78,88095,Pikachu,hgss1,HeartGold & SoulSilver,78,Common,Reverse Holofoil / Normal,50.4,11.64,4.329896907216495,38.76,
-,88189,Poke Ball,,,,,Reverse Holofoil / Normal,2.58,0.28,9.214285714285714,2.3,penny
-,88205,Pokegear 3.0,,,,,Reverse Holofoil / Normal,36.23,11.54,3.1395147313691507,24.689999999999998,
-,88217,Pokemon Collector,,,,,Reverse Holofoil / Normal,21.0,8.15,2.576687116564417,12.85,
-,88220,Pokemon Communication,,,,,Reverse Holofoil / Normal,29.6,3.16,9.367088607594937,26.44,
-,88236,Pokemon Reversal,,,,,Reverse Holofoil / Normal,6.54,1.91,3.424083769633508,4.63,
+hgss1-95,88189,Poké Ball,hgss1,HeartGold & SoulSilver,95,Uncommon,Reverse Holofoil / Normal,2.58,0.28,9.214285714285714,2.3,penny
+hgss1-96,88205,Pokégear 3.0,hgss1,HeartGold & SoulSilver,96,Uncommon,Reverse Holofoil / Normal,36.23,11.54,3.1395147313691507,24.689999999999998,
+hgss1-97,88217,Pokémon Collector,hgss1,HeartGold & SoulSilver,97,Uncommon,Reverse Holofoil / Normal,21.0,8.15,2.576687116564417,12.85,
+hgss1-98,88220,Pokémon Communication,hgss1,HeartGold & SoulSilver,98,Uncommon,Reverse Holofoil / Normal,29.6,3.16,9.367088607594937,26.44,
+hgss1-99,88236,Pokémon Reversal,hgss1,HeartGold & SoulSilver,99,Uncommon,Reverse Holofoil / Normal,6.54,1.91,3.424083769633508,4.63,
 hgss1-100,88392,Professor Elm's Training Method,hgss1,HeartGold & SoulSilver,100,Uncommon,Reverse Holofoil / Normal,2.74,0.31,8.838709677419356,2.43,penny
 hgss1-101,88400,Professor Oak's New Theory,hgss1,HeartGold & SoulSilver,101,Uncommon,Reverse Holofoil / Normal,6.96,0.74,9.405405405405405,6.22,penny
 hgss1-49,88486,Quilava,hgss1,HeartGold & SoulSilver,49,Uncommon,Reverse Holofoil / Normal,8.0,2.02,3.9603960396039604,5.98,
@@ -3453,9 +3453,9 @@ pl1-58,87833,Octillery,pl1,Platinum,58,Uncommon,Reverse Holofoil / Normal,1.73,0
 pl1-37,87910,Palkia,pl1,Platinum,37,Rare,Reverse Holofoil / Normal,15.95,5.1,3.127450980392157,10.85,
 pl1-85,88149,Piplup,pl1,Platinum,85,Common,Reverse Holofoil / Normal,38.49,4.52,8.515486725663719,33.97,
 pl1-112,88178,PlusPower,pl1,Platinum,112,Uncommon,Reverse Holofoil / Normal,1.73,0.42,4.1190476190476195,1.31,penny
-,88188,Poke Ball,,,,,Reverse Holofoil / Normal,0.67,0.33,2.0303030303030303,0.34,penny
-,88203,Pokedex HANDY910is,,,,,Reverse Holofoil / Normal,1.49,0.42,3.547619047619048,1.07,penny
-,88233,Pokemon Rescue,,,,,Reverse Holofoil / Normal,2.39,0.45,5.311111111111111,1.9400000000000002,penny
+pl1-113,88188,Poké Ball,pl1,Platinum,113,Uncommon,Reverse Holofoil / Normal,0.67,0.33,2.0303030303030303,0.34,penny
+pl1-114,88203,Pokédex HANDY910is,pl1,Platinum,114,Uncommon,Reverse Holofoil / Normal,1.49,0.42,3.547619047619048,1.07,penny
+pl1-115,88233,Pokémon Rescue,pl1,Platinum,115,Uncommon,Reverse Holofoil / Normal,2.39,0.45,5.311111111111111,1.9400000000000002,penny
 pl1-86,88301,Poochyena,pl1,Platinum,86,Common,Reverse Holofoil / Normal,13.74,2.59,5.3050193050193055,11.15,
 pl1-59,88371,Prinplup,pl1,Platinum,59,Uncommon,Reverse Holofoil / Normal,9.19,1.26,7.2936507936507935,7.93,
 pl1-60,88377,Probopass,pl1,Platinum,60,Uncommon,Reverse Holofoil / Normal,1.66,0.46,3.6086956521739126,1.2,penny
@@ -3479,7 +3479,7 @@ pl1-97,89658,Swablu,pl1,Platinum,97,Common,Reverse Holofoil / Normal,5.02,0.7,7.
 pl1-98,89765,Tauros,pl1,Platinum,98,Common,Reverse Holofoil / Normal,5.41,0.66,8.196969696969697,4.75,penny
 pl1-116,89805,Team Galactic's Invention G-101 Energy Gain,pl1,Platinum,116,Uncommon,Reverse Holofoil / Normal,7.33,2.16,3.393518518518518,5.17,
 pl1-117,89806,Team Galactic's Invention G-103 Power Spray,pl1,Platinum,117,Uncommon,Reverse Holofoil / Normal,3.49,2.09,1.6698564593301437,1.4000000000000004,
-,89807,Team Galactic's Invention G-105 Poke Turn,,,,,Reverse Holofoil / Normal,17.5,5.05,3.4653465346534653,12.45,
+pl1-118,89807,Team Galactic's Invention G-105 Poké Turn,pl1,Platinum,118,Uncommon,Reverse Holofoil / Normal,17.5,5.05,3.4653465346534653,12.45,
 pl1-99,89961,Torchic,pl1,Platinum,99,Common,Reverse Holofoil / Normal,20.52,1.32,15.545454545454545,19.2,
 pl1-100,89971,Torkoal,pl1,Platinum,100,Common,Reverse Holofoil / Normal,4.57,0.37,12.351351351351353,4.2,penny
 pl1-39,89986,Torterra,pl1,Platinum,39,Rare,Reverse Holofoil / Normal,10.68,2.87,3.7212543554006965,7.81,
@@ -3554,7 +3554,7 @@ bw7-16,87993,Petilil,bw7,Boundaries Crossed,16,Uncommon,Reverse Holofoil / Norma
 bw7-123,88059,Pidove,bw7,Boundaries Crossed,123,Common,Reverse Holofoil / Normal,20.8,1.46,14.246575342465754,19.34,
 bw7-25,88062,Pignite,bw7,Boundaries Crossed,25,Uncommon,Reverse Holofoil / Normal,3.57,1.24,2.879032258064516,2.33,
 bw7-50,88103,Pikachu,bw7,Boundaries Crossed,50,Common,Reverse Holofoil / Normal,47.51,4.45,10.676404494382021,43.059999999999995,
-,88193,Poke Ball,,,,,Reverse Holofoil / Normal,0.33,0.21,1.5714285714285716,0.12000000000000002,penny
+bw7-131,88193,Poké Ball,bw7,Boundaries Crossed,131,Common,Reverse Holofoil / Normal,0.33,0.21,1.5714285714285716,0.12000000000000002,penny
 bw7-132,88348,Potion,bw7,Boundaries Crossed,132,Common,Reverse Holofoil / Normal,0.42,0.18,2.3333333333333335,0.24,penny
 bw7-32,88441,Psyduck,bw7,Boundaries Crossed,32,Common,Reverse Holofoil / Normal,66.18,17.36,3.8122119815668207,48.82000000000001,
 bw7-33,88442,Psyduck,bw7,Boundaries Crossed,33,Common,Reverse Holofoil / Normal,62.04,6.4,9.69375,55.64,
@@ -3740,7 +3740,7 @@ ex9-80,87889,Oran Berry,ex9,Emerald,80,Uncommon,Reverse Holofoil / Normal,10.42,
 ex9-59,88016,Pichu,ex9,Emerald,59,Common,Reverse Holofoil / Normal,162.49,7.84,20.72576530612245,154.65,
 ex9-60,88080,Pikachu,ex9,Emerald,60,Common,Reverse Holofoil / Normal,599.99,16.05,37.382554517133954,583.94,
 ex9-39,88165,Plusle,ex9,Emerald,39,Uncommon,Reverse Holofoil / Normal,100.0,4.91,20.36659877800407,95.09,
-,88244,Pokenav,,,,,Reverse Holofoil / Normal,4.98,0.44,11.318181818181818,4.54,penny
+ex9-81,88244,PokéNav,ex9,Emerald,81,Uncommon,Reverse Holofoil / Normal,4.98,0.44,11.318181818181818,4.54,penny
 ex9-82,88382,Professor Birch,ex9,Emerald,82,Uncommon,Reverse Holofoil / Normal,9.74,0.42,23.190476190476193,9.32,penny
 ex9-105,88419,Psychic Energy,ex9,Emerald,105,Rare Holo,Holofoil / Normal,21.83,19.99,1.0920460230115057,1.8399999999999999,
 ex9-61,88557,Ralts,ex9,Emerald,61,Common,Reverse Holofoil / Normal,40.49,1.64,24.689024390243905,38.85,
@@ -3902,7 +3902,7 @@ bw4-81,87988,Persian,bw4,Next Destinies,81,Rare,Reverse Holofoil / Normal,2.84,0
 bw4-83,88058,Pidove,bw4,Next Destinies,83,Common,Reverse Holofoil / Normal,0.89,0.28,3.1785714285714284,0.61,penny
 bw4-39,88102,Pikachu,bw4,Next Destinies,39,Common,Reverse Holofoil / Normal,33.9,4.87,6.960985626283367,29.029999999999998,
 bw4-1,88140,Pinsir,bw4,Next Destinies,1,Rare,Reverse Holofoil / Normal,1.08,0.73,1.4794520547945207,0.3500000000000001,penny
-,88215,Pokemon Center,,,,,Reverse Holofoil / Normal,0.46,0.24,1.9166666666666667,0.22000000000000003,penny
+bw4-90,88215,Pokémon Center,bw4,Next Destinies,90,Uncommon,Reverse Holofoil / Normal,0.46,0.24,1.9166666666666667,0.22000000000000003,penny
 bw4-93,88374,Prism Energy,bw4,Next Destinies,93,Uncommon,Reverse Holofoil / Normal,16.09,2.85,5.645614035087719,13.24,
 bw4-40,88522,Raichu,bw4,Next Destinies,40,Uncommon,Reverse Holofoil / Normal,10.93,3.52,3.1051136363636362,7.41,
 bw4-55,88564,Ralts,bw4,Next Destinies,55,Common,Reverse Holofoil / Normal,4.93,0.3,16.433333333333334,4.63,penny
@@ -4266,7 +4266,7 @@ dp6-112,87844,Oddish,dp6,Legends Awakened,112,Common,Reverse Holofoil / Normal,2
 dp6-68,87986,Persian,dp6,Legends Awakened,68,Uncommon,Reverse Holofoil / Normal,6.82,0.64,10.65625,6.180000000000001,penny
 dp6-69,88118,Piloswine,dp6,Legends Awakened,69,Uncommon,Reverse Holofoil / Normal,3.0,0.4,7.5,2.6,penny
 dp6-113,88128,Pineco,dp6,Legends Awakened,113,Common,Reverse Holofoil / Normal,2.28,0.34,6.705882352941176,1.9399999999999997,penny
-,88198,Poke Radar,,,,,Reverse Holofoil / Normal,1.57,0.24,6.541666666666667,1.33,penny
+dp6-133,88198,Poké Radar,dp6,Legends Awakened,133,Uncommon,Reverse Holofoil / Normal,1.57,0.24,6.541666666666667,1.33,penny
 dp6-114,88259,Poliwag,dp6,Legends Awakened,114,Common,Reverse Holofoil / Normal,7.25,0.88,8.238636363636363,6.37,penny
 dp6-115,88267,Poliwhirl,dp6,Legends Awakened,115,Common,Reverse Holofoil / Normal,21.36,4.51,4.736141906873614,16.85,
 dp6-35,88278,Poliwrath,dp6,Legends Awakened,35,Rare,Reverse Holofoil / Normal,13.04,2.45,5.322448979591836,10.59,
@@ -4392,9 +4392,9 @@ ex6-10,88031,Pidgeot,ex6,FireRed & LeafGreen,10,Rare Holo,Holofoil / Normal,17.2
 ex6-45,88040,Pidgeotto,ex6,FireRed & LeafGreen,45,Uncommon,Reverse Holofoil / Normal,29.98,0.9,33.31111111111111,29.080000000000002,penny
 ex6-73,88048,Pidgey,ex6,FireRed & LeafGreen,73,Common,Reverse Holofoil / Normal,12.13,0.48,25.270833333333336,11.65,penny
 ex6-74,88078,Pikachu,ex6,FireRed & LeafGreen,74,Common,Reverse Holofoil / Normal,199.33,11.47,17.37837837837838,187.86,
-,88183,Poke Ball,,,,,Reverse Holofoil / Normal,6.79,1.38,4.920289855072464,5.41,
-,88201,PokeDex (HANDY909),,,,,Reverse Holofoil / Normal,4.51,1.33,3.3909774436090223,3.1799999999999997,
-,88239,Pokemon Reversal,,,,,Reverse Holofoil / Normal,17.75,4.56,3.8925438596491233,13.190000000000001,
+ex6-95,88183,Poké Ball,ex6,FireRed & LeafGreen,95,Uncommon,Reverse Holofoil / Normal,6.79,1.38,4.920289855072464,5.41,
+ex6-96,88201,PokéDex HANDY909,ex6,FireRed & LeafGreen,96,Uncommon,Reverse Holofoil / Normal,4.51,1.33,3.3909774436090223,3.1799999999999997,
+ex6-97,88239,Pokémon Reversal,ex6,FireRed & LeafGreen,97,Uncommon,Reverse Holofoil / Normal,17.75,4.56,3.8925438596491233,13.190000000000001,
 ex6-75,88257,Poliwag,ex6,FireRed & LeafGreen,75,Common,Reverse Holofoil / Normal,50.48,0.89,56.7191011235955,49.589999999999996,penny
 ex6-46,88265,Poliwhirl,ex6,FireRed & LeafGreen,46,Uncommon,Reverse Holofoil / Normal,44.69,4.42,10.110859728506787,40.269999999999996,
 ex6-76,88285,Ponyta,ex6,FireRed & LeafGreen,76,Common,Reverse Holofoil / Normal,20.53,0.84,24.440476190476193,19.69,penny
@@ -4490,7 +4490,7 @@ bw2-18,87941,Pansear,bw2,Emerging Powers,18,Common,Reverse Holofoil / Normal,1.5
 bw2-78,87963,Patrat,bw2,Emerging Powers,78,Common,Reverse Holofoil / Normal,1.33,0.2,6.65,1.1300000000000001,penny
 bw2-13,87991,Petilil,bw2,Emerging Powers,13,Common,Reverse Holofoil / Normal,1.82,0.33,5.515151515151515,1.49,penny
 bw2-80,88056,Pidove,bw2,Emerging Powers,80,Common,Reverse Holofoil / Normal,4.16,0.29,14.344827586206899,3.87,penny
-,88209,Pokemon Catcher,,,,,Reverse Holofoil / Normal,5.5,1.5,3.6666666666666665,4.0,
+bw2-95,88209,Pokémon Catcher,bw2,Emerging Powers,95,Uncommon,Reverse Holofoil / Normal,5.5,1.5,3.6666666666666665,4.0,
 bw2-64,88458,Purrloin,bw2,Emerging Powers,64,Common,Reverse Holofoil / Normal,3.91,0.35,11.171428571428573,3.56,penny
 bw2-96,88653,Recycle,bw2,Emerging Powers,96,Uncommon,Reverse Holofoil / Normal,1.0,0.49,2.0408163265306123,0.51,penny
 bw2-49,88805,Roggenrola,bw2,Emerging Powers,49,Common,Reverse Holofoil / Normal,1.0,0.33,3.0303030303030303,0.6699999999999999,penny
@@ -4588,7 +4588,7 @@ ex7-25,87504,Misdreavus,ex7,Team Rocket Returns,25,Rare,Reverse Holofoil / Norma
 ex7-69,87880,Onix,ex7,Team Rocket Returns,69,Common,Reverse Holofoil / Normal,37.85,1.1,34.40909090909091,36.75,
 ex7-13,88117,Piloswine,ex7,Team Rocket Returns,13,Rare Holo,Reverse Holofoil / Normal,39.0,31.49,1.2384884090187362,7.510000000000002,
 ex7-13,88117,Piloswine,ex7,Team Rocket Returns,13,Rare Holo,Holofoil / Normal,26.99,31.49,0.8570974912670689,-4.5,
-,88234,Pokemon Retriever,,,,,Reverse Holofoil / Normal,45.0,1.78,25.280898876404493,43.22,
+ex7-84,88234,Pokémon Retriever,ex7,Team Rocket Returns,84,Uncommon,Reverse Holofoil / Normal,45.0,1.78,25.280898876404493,43.22,
 ex7-85,88352,Pow! Hand Extension,ex7,Team Rocket Returns,85,Uncommon,Reverse Holofoil / Normal,63.56,42.19,1.5065181322588292,21.370000000000005,
 ex7-26,88470,Quagsire,ex7,Team Rocket Returns,26,Rare,Reverse Holofoil / Normal,134.05,8.71,15.390355912743972,125.34,
 ex7-27,88493,Qwilfish,ex7,Team Rocket Returns,27,Rare,Reverse Holofoil / Normal,69.95,1.9,36.81578947368421,68.05,
@@ -4600,7 +4600,7 @@ ex7-86,88767,Rocket's Admin.,ex7,Team Rocket Returns,86,Uncommon,Reverse Holofoi
 ex7-87,88771,Rocket's Hideout,ex7,Team Rocket Returns,87,Uncommon,Reverse Holofoil / Normal,29.74,6.63,4.4856711915535445,23.11,
 ex7-46,88775,Rocket's Meowth,ex7,Team Rocket Returns,46,Uncommon,Reverse Holofoil / Normal,246.98,19.92,12.398594377510038,227.06,
 ex7-88,88780,Rocket's Mission,ex7,Team Rocket Returns,88,Uncommon,Reverse Holofoil / Normal,50.0,1.28,39.0625,48.72,
-,88784,Rocket's Poke Ball,,,,,Reverse Holofoil / Normal,31.49,5.9,5.337288135593219,25.589999999999996,
+ex7-89,88784,Rocket's Poké Ball,ex7,Team Rocket Returns,89,Uncommon,Reverse Holofoil / Normal,31.49,5.9,5.337288135593219,25.589999999999996,
 ex7-101,88787,Rocket's Scizor ex,ex7,Team Rocket Returns,101,Rare Holo EX,Holofoil / Normal,349.18,600.0,0.5819666666666666,-250.82,
 ex7-90,88798,Rocket's Tricky Gym,ex7,Team Rocket Returns,90,Uncommon,Reverse Holofoil / Normal,19.97,3.21,6.221183800623053,16.759999999999998,
 ex7-47,88799,Rocket's Wobbuffet,ex7,Team Rocket Returns,47,Uncommon,Reverse Holofoil / Normal,86.9,6.33,13.728278041074251,80.57000000000001,
@@ -5244,7 +5244,7 @@ neo4-75,87194,Mareep,neo4,Neo Destiny,75,Common,1st Edition / Unlimited,6.9,2.65
 neo4-16,87496,Miracle Energy,neo4,Neo Destiny,16,Rare Holo,1st Edition Holofoil / Unlimited Holofoil,69.5,27.15,2.5598526703499083,42.35,
 neo4-76,87997,Phanpy,neo4,Neo Destiny,76,Common,1st Edition / Unlimited,4.7,1.71,2.7485380116959064,2.99,
 neo4-77,88123,Pineco,neo4,Neo Destiny,77,Common,1st Edition / Unlimited,2.57,0.73,3.5205479452054793,1.8399999999999999,penny
-,88232,Pokemon Personality Test,,,,,1st Edition / Unlimited,24.63,10.15,2.4266009852216746,14.479999999999999,
+neo4-102,88232,Pokémon Personality Test,neo4,Neo Destiny,102,Uncommon,1st Edition / Unlimited,24.63,10.15,2.4266009852216746,14.479999999999999,
 neo4-78,88305,Porygon,neo4,Neo Destiny,78,Common,1st Edition / Unlimited,13.04,1.93,6.756476683937824,11.11,
 neo4-79,88433,Psyduck,neo4,Neo Destiny,79,Common,1st Edition / Unlimited,74.12,29.05,2.551462994836489,45.07000000000001,
 neo4-95,88497,Radio Tower,neo4,Neo Destiny,95,Rare,1st Edition / Unlimited,10.82,8.61,1.256678281068525,2.210000000000001,
@@ -5356,8 +5356,8 @@ xy2-58,91195,Scraggy,xy2,Flashfire,58,Common,Reverse Holofoil / Normal,0.47,0.27
 xy2-59,91196,Scrafty,xy2,Flashfire,59,Rare,Reverse Holofoil / Normal,0.89,0.44,2.022727272727273,0.45,penny
 xy2-60,91197,Forretress,xy2,Flashfire,60,Rare,Reverse Holofoil / Normal,2.35,1.15,2.0434782608695654,1.2000000000000002,
 xy2-61,91198,Durant,xy2,Flashfire,61,Rare,Reverse Holofoil / Normal,0.88,0.36,2.4444444444444446,0.52,penny
-,91199,Flabebe (62),,,,,Reverse Holofoil / Normal,1.68,0.24,7.0,1.44,penny
-,91200,Flabebe (63),,,,,Reverse Holofoil / Normal,0.66,0.28,2.357142857142857,0.38,penny
+xy2-62,91199,Flabébé,xy2,Flashfire,62,Common,Reverse Holofoil / Normal,1.68,0.24,7.0,1.44,penny
+xy2-63,91200,Flabébé,xy2,Flashfire,63,Common,Reverse Holofoil / Normal,0.66,0.28,2.357142857142857,0.38,penny
 xy2-64,91201,Floette,xy2,Flashfire,64,Rare,Reverse Holofoil / Normal,1.24,0.77,1.6103896103896103,0.47,penny
 xy2-65,91202,Floette,xy2,Flashfire,65,Uncommon,Reverse Holofoil / Normal,1.33,0.48,2.7708333333333335,0.8500000000000001,penny
 xy2-67,91204,Spritzee,xy2,Flashfire,67,Common,Reverse Holofoil / Normal,0.59,0.28,2.1071428571428568,0.30999999999999994,penny
@@ -5380,8 +5380,8 @@ xy2-89,91226,Fiery Torch,xy2,Flashfire,89,Uncommon,Reverse Holofoil / Normal,0.4
 xy2-90,91227,Lysandre,xy2,Flashfire,90,Uncommon,Reverse Holofoil / Normal,1.33,0.27,4.925925925925926,1.06,penny
 xy2-91,91228,Magnetic Storm,xy2,Flashfire,91,Uncommon,Reverse Holofoil / Normal,0.66,0.17,3.8823529411764706,0.49,penny
 xy2-92,91229,Pal Pad,xy2,Flashfire,92,Uncommon,Reverse Holofoil / Normal,10.86,0.51,21.294117647058822,10.35,penny
-,91230,Pokemon Center Lady,,,,,Reverse Holofoil / Normal,1.81,0.3,6.033333333333334,1.51,penny
-,91231,Pokemon Fan Club,,,,,Reverse Holofoil / Normal,0.63,0.33,1.909090909090909,0.3,penny
+xy2-93,91230,Pokémon Center Lady,xy2,Flashfire,93,Uncommon,Reverse Holofoil / Normal,1.81,0.3,6.033333333333334,1.51,penny
+xy2-94,91231,Pokémon Fan Club,xy2,Flashfire,94,Uncommon,Reverse Holofoil / Normal,0.63,0.33,1.909090909090909,0.3,penny
 xy2-95,91232,Protection Cube,xy2,Flashfire,95,Uncommon,Reverse Holofoil / Normal,2.04,0.31,6.580645161290323,1.73,penny
 xy2-96,91233,Sacred Ash,xy2,Flashfire,96,Uncommon,Reverse Holofoil / Normal,6.38,0.46,13.869565217391303,5.92,penny
 xy2-97,91234,Startling Megaphone,xy2,Flashfire,97,Uncommon,Reverse Holofoil / Normal,0.88,0.31,2.838709677419355,0.5700000000000001,penny
@@ -5934,7 +5934,7 @@ xy8-97,107216,Mr. Mime,xy8,BREAKthrough,97,Rare,Reverse Holofoil / Normal,1.98,0
 xy8-98,107217,Snubbull,xy8,BREAKthrough,98,Common,Reverse Holofoil / Normal,6.42,1.4,4.585714285714286,5.02,
 xy8-99,107218,Granbull,xy8,BREAKthrough,99,Uncommon,Reverse Holofoil / Normal,0.8,0.37,2.1621621621621623,0.43000000000000005,penny
 xy8-100,107219,Ralts,xy8,BREAKthrough,100,Common,Reverse Holofoil / Normal,3.76,0.6,6.266666666666667,3.1599999999999997,penny
-,107220,Flabebe,,,,,Reverse Holofoil / Normal,0.66,0.28,2.357142857142857,0.38,penny
+xy8-101,107220,Flabébé,xy8,BREAKthrough,101,Common,Reverse Holofoil / Normal,0.66,0.28,2.357142857142857,0.38,penny
 xy8-102,107221,Floette,xy8,BREAKthrough,102,Uncommon,Reverse Holofoil / Normal,1.35,0.51,2.6470588235294117,0.8400000000000001,penny
 xy8-103,107222,Florges,xy8,BREAKthrough,103,Rare,Reverse Holofoil / Normal,2.14,0.58,3.6896551724137936,1.56,penny
 xy8-105,107224,Spritzee,xy8,BREAKthrough,105,Common,Reverse Holofoil / Normal,0.67,0.27,2.4814814814814814,0.4,penny
@@ -6166,7 +6166,7 @@ xy9-100,111631,Great Ball,xy9,BREAKpoint,100,Uncommon,Reverse Holofoil / Normal,
 xy9-101,111632,Gyarados Spirit Link,xy9,BREAKpoint,101,Uncommon,Reverse Holofoil / Normal,5.53,0.31,17.838709677419356,5.220000000000001,penny
 xy9-102,111633,Max Elixir,xy9,BREAKpoint,102,Uncommon,Reverse Holofoil / Normal,2.35,1.36,1.727941176470588,0.99,
 xy9-103,111634,Max Potion,xy9,BREAKpoint,103,Uncommon,Reverse Holofoil / Normal,0.48,0.21,2.2857142857142856,0.27,penny
-,111635,Pokemon Catcher,,,,,Reverse Holofoil / Normal,0.38,0.08,4.75,0.3,penny
+xy9-105,111635,Pokémon Catcher,xy9,BREAKpoint,105,Uncommon,Reverse Holofoil / Normal,0.38,0.08,4.75,0.3,penny
 xy9-106,111636,Potion,xy9,BREAKpoint,106,Uncommon,Reverse Holofoil / Normal,0.33,0.02,16.5,0.31,penny
 xy9-107,111637,Professor Sycamore,xy9,BREAKpoint,107,Uncommon,Reverse Holofoil / Normal,0.52,0.24,2.166666666666667,0.28,penny
 xy9-108,111638,Psychic's Third Eye,xy9,BREAKpoint,108,Uncommon,Reverse Holofoil / Normal,0.43,0.13,3.3076923076923075,0.3,penny
@@ -6219,9 +6219,9 @@ g1-63,113721,Imakuni?,g1,Generations,63,Uncommon,Reverse Holofoil / Normal,13.4,
 g1-64,113722,Maintenance,g1,Generations,64,Uncommon,Reverse Holofoil / Normal,0.4,0.22,1.8181818181818183,0.18000000000000002,penny
 g1-65,113723,Max Revive,g1,Generations,65,Uncommon,Reverse Holofoil / Normal,0.54,0.28,1.9285714285714286,0.26,penny
 g1-66,113724,Olympia,g1,Generations,66,Uncommon,Reverse Holofoil / Normal,1.08,0.3,3.6000000000000005,0.78,penny
-,113725,Poke Ball,,,,,Reverse Holofoil / Normal,0.37,0.19,1.9473684210526316,0.18,penny
-,113726,Pokemon Center Lady,,,,,Reverse Holofoil / Normal,1.48,0.29,5.103448275862069,1.19,penny
-,113727,Pokemon Fan Club,,,,,Reverse Holofoil / Normal,0.59,0.4,1.4749999999999999,0.18999999999999995,penny
+g1-67,113725,Poké Ball,g1,Generations,67,Uncommon,Reverse Holofoil / Normal,0.37,0.19,1.9473684210526316,0.18,penny
+g1-68,113726,Pokémon Center Lady,g1,Generations,68,Uncommon,Reverse Holofoil / Normal,1.48,0.29,5.103448275862069,1.19,penny
+g1-69,113727,Pokémon Fan Club,g1,Generations,69,Uncommon,Reverse Holofoil / Normal,0.59,0.4,1.4749999999999999,0.18999999999999995,penny
 g1-70,113728,Revitalizer,g1,Generations,70,Uncommon,Reverse Holofoil / Normal,1.68,0.82,2.048780487804878,0.86,penny
 g1-71,113729,Red Card,g1,Generations,71,Uncommon,Reverse Holofoil / Normal,0.76,0.34,2.235294117647059,0.42,penny
 g1-72,113730,Shauna,g1,Generations,72,Uncommon,Reverse Holofoil / Normal,0.43,0.16,2.6875,0.27,penny
@@ -6320,7 +6320,7 @@ xy10-103,117875,Lass's Special,xy10,Fates Collide,103,Uncommon,Reverse Holofoil 
 xy10-104,117876,Mega Catcher,xy10,Fates Collide,104,Uncommon,Reverse Holofoil / Normal,0.35,0.16,2.1875,0.18999999999999997,penny
 xy10-106,117877,Old Amber Aerodactyl,xy10,Fates Collide,106,Uncommon,Reverse Holofoil / Normal,0.37,0.18,2.055555555555556,0.19,penny
 xy10-105,117878,N,xy10,Fates Collide,105,Uncommon,Reverse Holofoil / Normal,3.96,1.87,2.1176470588235294,2.09,
-,117879,Pokemon Fan Club,,,,,Reverse Holofoil / Normal,0.43,0.24,1.7916666666666667,0.19,penny
+xy10-107,117879,Pokémon Fan Club,xy10,Fates Collide,107,Uncommon,Reverse Holofoil / Normal,0.43,0.24,1.7916666666666667,0.19,penny
 xy10-109,117880,Random Receiver,xy10,Fates Collide,109,Uncommon,Reverse Holofoil / Normal,0.56,0.25,2.24,0.31000000000000005,penny
 xy10-110,117881,Scorched Earth,xy10,Fates Collide,110,Uncommon,Reverse Holofoil / Normal,0.44,0.17,2.5882352941176467,0.27,penny
 xy10-111,117882,Shauna,xy10,Fates Collide,111,Uncommon,Reverse Holofoil / Normal,0.38,0.11,3.4545454545454546,0.27,penny
@@ -6330,7 +6330,7 @@ xy10-113,117886,Ultra Ball,xy10,Fates Collide,113,Uncommon,Reverse Holofoil / No
 xy10-115,117887,Strong Energy,xy10,Fates Collide,115,Uncommon,Reverse Holofoil / Normal,1.2,0.9,1.3333333333333333,0.29999999999999993,penny
 xy11-77,120153,Azumarill,xy11,Steam Siege,77,Uncommon,Reverse Holofoil / Normal,12.8,1.77,7.231638418079096,11.030000000000001,
 xy11-96,120156,Talonflame,xy11,Steam Siege,96,Rare,Reverse Holofoil / Normal,0.68,0.39,1.7435897435897436,0.29000000000000004,penny
-,120157,Captivating Poke Puff,,,,,Reverse Holofoil / Normal,0.37,0.22,1.6818181818181819,0.15,penny
+xy11-99,120157,Captivating Poké Puff,xy11,Steam Siege,99,Uncommon,Reverse Holofoil / Normal,0.37,0.22,1.6818181818181819,0.15,penny
 xy11-1,120990,Tangela,xy11,Steam Siege,1,Common,Reverse Holofoil / Normal,0.42,0.26,1.6153846153846152,0.15999999999999998,penny
 xy11-2,120991,Tangrowth,xy11,Steam Siege,2,Uncommon,Reverse Holofoil / Normal,0.5,0.16,3.125,0.33999999999999997,penny
 xy11-3,120992,Hoppip,xy11,Steam Siege,3,Common,Reverse Holofoil / Normal,0.43,0.2,2.15,0.22999999999999998,penny
@@ -6409,7 +6409,7 @@ xy11-100,121224,Claw Fossil Anorith,xy11,Steam Siege,100,Uncommon,Reverse Holofo
 xy11-101,121225,Gardevoir Spirit Link,xy11,Steam Siege,101,Uncommon,Reverse Holofoil / Normal,0.73,0.24,3.0416666666666665,0.49,penny
 xy11-102,121226,Greedy Dice,xy11,Steam Siege,102,Uncommon,Reverse Holofoil / Normal,0.33,0.15,2.2,0.18000000000000002,penny
 xy11-103,121227,Ninja Boy,xy11,Steam Siege,103,Uncommon,Reverse Holofoil / Normal,0.41,0.14,2.928571428571428,0.26999999999999996,penny
-,121228,Pokemon Ranger,,,,,Reverse Holofoil / Normal,0.44,0.15,2.9333333333333336,0.29000000000000004,penny
+xy11-104,121228,Pokémon Ranger,xy11,Steam Siege,104,Uncommon,Reverse Holofoil / Normal,0.44,0.15,2.9333333333333336,0.29000000000000004,penny
 xy11-105,121229,Special Charge,xy11,Steam Siege,105,Uncommon,Reverse Holofoil / Normal,2.28,0.35,6.514285714285714,1.9299999999999997,penny
 xy11-106,121230,Steelix Spirit Link,xy11,Steam Siege,106,Uncommon,Reverse Holofoil / Normal,0.64,0.26,2.4615384615384617,0.38,penny
 ,126301,Fairy Energy (2013 Unnumbered),,,,,Holofoil / Normal,2.26,0.93,2.43010752688172,1.3299999999999996,penny
@@ -6473,7 +6473,7 @@ xy12-78,124091,Full Heal,xy12,Evolutions,78,Uncommon,Reverse Holofoil / Normal,0
 xy12-79,124092,Maintenance,xy12,Evolutions,79,Uncommon,Reverse Holofoil / Normal,0.7,0.15,4.666666666666667,0.5499999999999999,penny
 xy12-80,124093,Misty's Determination,xy12,Evolutions,80,Uncommon,Reverse Holofoil / Normal,0.57,0.3,1.9,0.26999999999999996,penny
 xy12-81,124094,Pidgeot Spirit Link,xy12,Evolutions,81,Uncommon,Reverse Holofoil / Normal,0.61,0.16,3.8125,0.44999999999999996,penny
-,124095,Pokedex,,,,,Reverse Holofoil / Normal,0.9,0.14,6.428571428571428,0.76,penny
+xy12-82,124095,Pokédex,xy12,Evolutions,82,Uncommon,Reverse Holofoil / Normal,0.9,0.14,6.428571428571428,0.76,penny
 xy12-83,124096,Potion,xy12,Evolutions,83,Uncommon,Reverse Holofoil / Normal,0.46,0.09,5.111111111111112,0.37,penny
 xy12-84,124097,Professor Oak's Hint,xy12,Evolutions,84,Uncommon,Reverse Holofoil / Normal,0.39,0.08,4.875,0.31,penny
 xy12-85,124098,Revive,xy12,Evolutions,85,Uncommon,Reverse Holofoil / Normal,1.42,0.16,8.875,1.26,penny
@@ -6814,7 +6814,7 @@ sm3-123,138618,Sophocles,sm3,Burning Shadows,123,Uncommon,Reverse Holofoil / Nor
 sm3-127,138621,Wicke,sm3,Burning Shadows,127,Uncommon,Reverse Holofoil / Normal,0.42,0.19,2.2105263157894735,0.22999999999999998,penny
 sm3-113,138622,Bodybuilding Dumbbells,sm3,Burning Shadows,113,Uncommon,Reverse Holofoil / Normal,0.3,0.16,1.875,0.13999999999999999,penny
 sm3-114,138625,Escape Rope,sm3,Burning Shadows,114,Uncommon,Reverse Holofoil / Normal,0.42,0.3,1.4,0.12,penny
-,138626,Rotom Dex Poke Finder Mode,,,,,Reverse Holofoil / Normal,0.32,0.22,1.4545454545454546,0.1,penny
+sm3-122,138626,Rotom Dex Poké Finder Mode,sm3,Burning Shadows,122,Uncommon,Reverse Holofoil / Normal,0.32,0.22,1.4545454545454546,0.1,penny
 sm3-125,138627,Tormenting Spray,sm3,Burning Shadows,125,Uncommon,Reverse Holofoil / Normal,0.23,0.1,2.3,0.13,penny
 sm3-126,138628,Weakness Policy,sm3,Burning Shadows,126,Uncommon,Reverse Holofoil / Normal,0.34,0.03,11.333333333333334,0.31000000000000005,penny
 sm3-128,138629,Wishful Baton,sm3,Burning Shadows,128,Uncommon,Reverse Holofoil / Normal,0.46,0.29,1.5862068965517244,0.17000000000000004,penny
@@ -6858,13 +6858,13 @@ sm35-52,146714,Zorua,sm35,Shining Legends,52,Common,Reverse Holofoil / Normal,2.
 sm35-58,146721,Damage Mover,sm35,Shining Legends,58,Uncommon,Reverse Holofoil / Normal,0.27,0.2,1.35,0.07,penny
 sm35-59,146722,Energy Retrieval,sm35,Shining Legends,59,Uncommon,Reverse Holofoil / Normal,0.34,0.19,1.7894736842105263,0.15000000000000002,penny
 sm35-60,146723,Great Ball,sm35,Shining Legends,60,Uncommon,Reverse Holofoil / Normal,0.32,0.14,2.2857142857142856,0.18,penny
-,146724,Pokemon Catcher,,,,,Reverse Holofoil / Normal,0.3,0.14,2.142857142857143,0.15999999999999998,penny
+sm35-64,146724,Pokémon Catcher,sm35,Shining Legends,64,Uncommon,Reverse Holofoil / Normal,0.3,0.14,2.142857142857143,0.15999999999999998,penny
 sm35-66,146725,Super Scoop Up,sm35,Shining Legends,66,Uncommon,Reverse Holofoil / Normal,0.3,0.24,1.25,0.06,penny
 sm35-67,146726,Switch,sm35,Shining Legends,67,Uncommon,Reverse Holofoil / Normal,0.39,0.23,1.6956521739130435,0.16,penny
 sm35-68,146727,Ultra Ball,sm35,Shining Legends,68,Uncommon,Reverse Holofoil / Normal,1.11,0.27,4.111111111111112,0.8400000000000001,penny
 sm35-61,146728,Hau,sm35,Shining Legends,61,Uncommon,Reverse Holofoil / Normal,0.34,0.14,2.4285714285714284,0.2,penny
 sm35-62,146729,Lillie,sm35,Shining Legends,62,Uncommon,Reverse Holofoil / Normal,0.43,0.31,1.3870967741935483,0.12,penny
-,146730,Pokemon Breeder,,,,,Reverse Holofoil / Normal,0.54,0.23,2.347826086956522,0.31000000000000005,penny
+sm35-63,146730,Pokémon Breeder,sm35,Shining Legends,63,Uncommon,Reverse Holofoil / Normal,0.54,0.23,2.347826086956522,0.31000000000000005,penny
 sm35-65,146732,Sophocles,sm35,Shining Legends,65,Uncommon,Reverse Holofoil / Normal,0.29,0.17,1.7058823529411762,0.11999999999999997,penny
 sm35-69,146733,Double Colorless Energy,sm35,Shining Legends,69,Uncommon,Reverse Holofoil / Normal,1.07,0.52,2.057692307692308,0.55,penny
 sm35-70,146734,Warp Energy,sm35,Shining Legends,70,Uncommon,Reverse Holofoil / Normal,0.36,0.3,1.2,0.06,penny
@@ -7055,7 +7055,7 @@ sm5-128,157745,Mars,sm5,Ultra Prism,128,Uncommon,Reverse Holofoil / Normal,0.7,0
 sm5-129,157746,Missing Clover,sm5,Ultra Prism,129,Uncommon,Reverse Holofoil / Normal,0.27,0.13,2.076923076923077,0.14,penny
 sm5-131,157747,Order Pad,sm5,Ultra Prism,131,Uncommon,Reverse Holofoil / Normal,0.46,0.27,1.7037037037037037,0.19,penny
 sm5-132,157748,Pal Pad,sm5,Ultra Prism,132,Uncommon,Reverse Holofoil / Normal,2.08,0.28,7.428571428571428,1.8,penny
-,157749,Pokemon Fan Club,,,,,Reverse Holofoil / Normal,0.41,0.22,1.8636363636363635,0.18999999999999997,penny
+sm5-133,157749,Pokémon Fan Club,sm5,Ultra Prism,133,Uncommon,Reverse Holofoil / Normal,0.41,0.22,1.8636363636363635,0.18999999999999997,penny
 sm5-134,157750,Unidentified Fossil,sm5,Ultra Prism,134,Uncommon,Reverse Holofoil / Normal,0.39,0.23,1.6956521739130435,0.16,penny
 sm5-135,157751,Volkner,sm5,Ultra Prism,135,Uncommon,Reverse Holofoil / Normal,0.82,0.49,1.673469387755102,0.32999999999999996,penny
 ,157753,Unit Energy GRW,,,,,Reverse Holofoil / Normal,1.14,0.52,2.192307692307692,0.6199999999999999,penny
@@ -7124,8 +7124,8 @@ sm6-75,165729,Rockruff,sm6,Forbidden Light,75,Common,Reverse Holofoil / Normal,3
 sm6-76,165730,Lycanroc,sm6,Forbidden Light,76,Rare,Reverse Holofoil / Normal,1.41,1.06,1.3301886792452828,0.34999999999999987,
 sm6-77,165731,Buzzwole,sm6,Forbidden Light,77,Rare,Reverse Holofoil / Normal,2.76,2.98,0.9261744966442952,-0.2200000000000002,
 sm6-78,165732,Pangoro,sm6,Forbidden Light,78,Rare,Reverse Holofoil / Normal,0.57,0.39,1.4615384615384615,0.17999999999999994,penny
-,165741,Flabebe (83),,,,,Reverse Holofoil / Normal,1.52,0.47,3.2340425531914896,1.05,penny
-,165742,Flabebe (84),,,,,Reverse Holofoil / Normal,1.71,0.43,3.9767441860465116,1.28,penny
+sm6-83,165741,Flabébé,sm6,Forbidden Light,83,Common,Reverse Holofoil / Normal,1.52,0.47,3.2340425531914896,1.05,penny
+sm6-84,165742,Flabébé,sm6,Forbidden Light,84,Common,Reverse Holofoil / Normal,1.71,0.43,3.9767441860465116,1.28,penny
 sm6-85,165743,Floette,sm6,Forbidden Light,85,Uncommon,Reverse Holofoil / Normal,1.15,0.54,2.1296296296296293,0.6099999999999999,penny
 sm6-86,165744,Florges,sm6,Forbidden Light,86,Rare,Reverse Holofoil / Normal,1.2,0.93,1.2903225806451613,0.2699999999999999,penny
 sm6-87,165745,Sylveon,sm6,Forbidden Light,87,Rare,Reverse Holofoil / Normal,19.78,12.45,1.5887550200803215,7.330000000000002,
@@ -7262,7 +7262,7 @@ sm7-136,170997,Life Herb,sm7,Celestial Storm,136,Uncommon,Reverse Holofoil / Nor
 sm7-137,170998,Lisia,sm7,Celestial Storm,137,Uncommon,Reverse Holofoil / Normal,0.86,0.31,2.7741935483870965,0.55,penny
 sm7-138,170999,Lure Ball,sm7,Celestial Storm,138,Uncommon,Reverse Holofoil / Normal,0.58,0.23,2.5217391304347823,0.35,penny
 sm7-139,171000,The Masked Royal,sm7,Celestial Storm,139,Uncommon,Reverse Holofoil / Normal,0.38,0.28,1.357142857142857,0.09999999999999998,penny
-,171001,PokeNav,,,,,Reverse Holofoil / Normal,0.57,0.25,2.28,0.31999999999999995,penny
+sm7-140,171001,PokéNav,sm7,Celestial Storm,140,Uncommon,Reverse Holofoil / Normal,0.57,0.25,2.28,0.31999999999999995,penny
 sm7-141,171002,Rainbow Brush,sm7,Celestial Storm,141,Uncommon,Reverse Holofoil / Normal,0.41,0.26,1.5769230769230769,0.14999999999999997,penny
 sm7-142,171003,Rare Candy,sm7,Celestial Storm,142,Uncommon,Reverse Holofoil / Normal,1.39,0.37,3.7567567567567566,1.02,penny
 sm7-143,171004,Shrine of Punishment,sm7,Celestial Storm,143,Uncommon,Reverse Holofoil / Normal,0.72,0.66,1.0909090909090908,0.05999999999999994,penny
@@ -7591,7 +7591,7 @@ sm9-148,183946,Metal Goggles,sm9,Team Up,148,Uncommon,Reverse Holofoil / Normal,
 sm9-149,183949,Morgan,sm9,Team Up,149,Uncommon,Reverse Holofoil / Normal,0.45,0.21,2.142857142857143,0.24000000000000002,penny
 sm9-150,183950,Nanu,sm9,Team Up,150,Uncommon,Reverse Holofoil / Normal,0.37,0.32,1.15625,0.04999999999999999,penny
 sm9-151,183953,Nita,sm9,Team Up,151,Uncommon,Reverse Holofoil / Normal,0.34,0.25,1.36,0.09000000000000002,penny
-,183954,Pokemon Communication,,,,,Reverse Holofoil / Normal,0.71,0.17,4.1764705882352935,0.5399999999999999,penny
+sm9-152,183954,Pokémon Communication,sm9,Team Up,152,Uncommon,Reverse Holofoil / Normal,0.71,0.17,4.1764705882352935,0.5399999999999999,penny
 sm9-153,183956,Return Label,sm9,Team Up,153,Uncommon,Reverse Holofoil / Normal,0.36,0.2,1.7999999999999998,0.15999999999999998,penny
 sm9-154,183957,Sabrina's Suggestion,sm9,Team Up,154,Uncommon,Reverse Holofoil / Normal,0.48,0.27,1.7777777777777777,0.20999999999999996,penny
 sm9-155,183959,Unidentified Fossil,sm9,Team Up,155,Uncommon,Reverse Holofoil / Normal,0.38,0.19,2.0,0.19,penny
@@ -7752,7 +7752,7 @@ sm10-178,189283,Lt. Surge's Strategy,sm10,Unbroken Bonds,178,Uncommon,Reverse Ho
 sm10-179,189284,Martial Arts Dojo,sm10,Unbroken Bonds,179,Uncommon,Reverse Holofoil / Normal,0.61,0.33,1.8484848484848484,0.27999999999999997,penny
 sm10-180,189285,Metal Core Barrier,sm10,Unbroken Bonds,180,Uncommon,Reverse Holofoil / Normal,0.32,0.26,1.2307692307692308,0.06,penny
 sm10-181,189287,Molayne,sm10,Unbroken Bonds,181,Uncommon,Reverse Holofoil / Normal,0.3,0.18,1.6666666666666667,0.12,penny
-,189289,Pokegear 3.0,,,,,Reverse Holofoil / Normal,3.47,1.08,3.212962962962963,2.39,
+sm10-182,189289,Pokégear 3.0,sm10,Unbroken Bonds,182,Uncommon,Reverse Holofoil / Normal,3.47,1.08,3.212962962962963,2.39,
 sm10-183,189291,Power Plant,sm10,Unbroken Bonds,183,Uncommon,Reverse Holofoil / Normal,0.38,0.18,2.111111111111111,0.2,penny
 sm10-185,189294,Samson Oak,sm10,Unbroken Bonds,185,Uncommon,Reverse Holofoil / Normal,0.49,0.22,2.227272727272727,0.27,penny
 sm10-186,189295,Stealthy Hood,sm10,Unbroken Bonds,186,Uncommon,Reverse Holofoil / Normal,0.51,0.3,1.7000000000000002,0.21000000000000002,penny
@@ -7925,8 +7925,8 @@ sm11-200,195255,Hapu,sm11,Unified Minds,200,Uncommon,Reverse Holofoil / Normal,0
 sm11-201,195256,Karate Belt,sm11,Unified Minds,201,Uncommon,Reverse Holofoil / Normal,0.58,0.26,2.2307692307692304,0.31999999999999995,penny
 sm11-202,195257,Misty's Favor,sm11,Unified Minds,202,Uncommon,Reverse Holofoil / Normal,9.68,1.35,7.17037037037037,8.33,
 sm11-203,195258,Normalium Z: Tackle,sm11,Unified Minds,203,Uncommon,Reverse Holofoil / Normal,0.4,0.17,2.3529411764705883,0.23,penny
-,195259,Poke Maniac,,,,,Reverse Holofoil / Normal,0.53,0.27,1.962962962962963,0.26,penny
-,195262,Pokemon Research Lab,,,,,Reverse Holofoil / Normal,0.71,0.31,2.290322580645161,0.39999999999999997,penny
+sm11-204,195259,Poké Maniac,sm11,Unified Minds,204,Uncommon,Reverse Holofoil / Normal,0.53,0.27,1.962962962962963,0.26,penny
+sm11-205,195262,Pokémon Research Lab,sm11,Unified Minds,205,Uncommon,Reverse Holofoil / Normal,0.71,0.31,2.290322580645161,0.39999999999999997,penny
 sm11-206,195263,Reset Stamp,sm11,Unified Minds,206,Uncommon,Reverse Holofoil / Normal,0.81,0.35,2.3142857142857145,0.4600000000000001,penny
 sm11-207,195264,Slumbering Forest,sm11,Unified Minds,207,Uncommon,Reverse Holofoil / Normal,0.55,0.38,1.4473684210526316,0.17000000000000004,penny
 sm11-208,195265,Stadium Nav,sm11,Unified Minds,208,Uncommon,Reverse Holofoil / Normal,1.66,0.74,2.243243243243243,0.9199999999999999,penny
@@ -7983,7 +7983,7 @@ sm115-59,197712,Koga's Trap,sm115,Hidden Fates,59,Uncommon,Reverse Holofoil / No
 sm115-60,197714,Lt. Surge's Strategy,sm115,Hidden Fates,60,Uncommon,Reverse Holofoil / Normal,0.38,0.2,1.9,0.18,penny
 sm115-61,197716,Misty's Cerulean City Gym,sm115,Hidden Fates,61,Uncommon,Reverse Holofoil / Normal,0.34,0.17,2.0,0.17,penny
 sm115-62,197717,Misty's Determination,sm115,Hidden Fates,62,Uncommon,Reverse Holofoil / Normal,1.76,0.33,5.333333333333333,1.43,penny
-,197724,Pokemon Center Lady,,,,,Reverse Holofoil / Normal,0.54,0.3,1.8000000000000003,0.24000000000000005,penny
+sm115-64,197724,Pokémon Center Lady,sm115,Hidden Fates,64,Uncommon,Reverse Holofoil / Normal,0.54,0.3,1.8000000000000003,0.24000000000000005,penny
 sm115-65,197725,Sabrina's Suggestion,sm115,Hidden Fates,65,Uncommon,Reverse Holofoil / Normal,0.4,0.13,3.076923076923077,0.27,penny
 sm12-2,201132,Oddish,sm12,Cosmic Eclipse,2,Common,Reverse Holofoil / Normal,1.34,0.31,4.322580645161291,1.03,penny
 sm12-3,201133,Gloom,sm12,Cosmic Eclipse,3,Uncommon,Reverse Holofoil / Normal,0.87,0.24,3.625,0.63,penny
@@ -8037,8 +8037,8 @@ sm12-23,201189,Ponyta,sm12,Cosmic Eclipse,23,Common,Reverse Holofoil / Normal,0.
 sm12-146,201190,Azurill,sm12,Cosmic Eclipse,146,Common,Reverse Holofoil / Normal,14.05,10.06,1.39662027833002,3.99,
 sm12-147,201191,Cottonee,sm12,Cosmic Eclipse,147,Common,Reverse Holofoil / Normal,0.43,0.28,1.5357142857142856,0.14999999999999997,penny
 sm12-148,201192,Whimsicott,sm12,Cosmic Eclipse,148,Rare,Reverse Holofoil / Normal,2.06,0.63,3.2698412698412698,1.4300000000000002,penny
-,201193,Flabebe - 149/236,,,,,Reverse Holofoil / Normal,0.81,0.34,2.3823529411764706,0.47000000000000003,penny
-,201194,Flabebe - 150/236,,,,,Reverse Holofoil / Normal,0.61,0.26,2.346153846153846,0.35,penny
+sm12-149,201193,Flabébé,sm12,Cosmic Eclipse,149,Common,Reverse Holofoil / Normal,0.81,0.34,2.3823529411764706,0.47000000000000003,penny
+sm12-150,201194,Flabébé,sm12,Cosmic Eclipse,150,Common,Reverse Holofoil / Normal,0.61,0.26,2.346153846153846,0.35,penny
 sm12-24,201195,Rapidash,sm12,Cosmic Eclipse,24,Uncommon,Reverse Holofoil / Normal,0.64,0.27,2.3703703703703702,0.37,penny
 sm12-151,201196,Floette,sm12,Cosmic Eclipse,151,Uncommon,Reverse Holofoil / Normal,19.87,1.91,10.403141361256546,17.96,
 sm12-25,201197,Flareon,sm12,Cosmic Eclipse,25,Uncommon,Reverse Holofoil / Normal,6.74,0.86,7.837209302325582,5.88,penny
@@ -8141,7 +8141,7 @@ sm12-193,201314,Guzma & Hala,sm12,Cosmic Eclipse,193,Uncommon,Reverse Holofoil /
 sm12-194,201315,Island Challenge Amulet,sm12,Cosmic Eclipse,194,Uncommon,Reverse Holofoil / Normal,0.43,0.06,7.166666666666667,0.37,penny
 sm12-195,201316,Lana's Fishing Rod,sm12,Cosmic Eclipse,195,Uncommon,Reverse Holofoil / Normal,0.61,0.24,2.5416666666666665,0.37,penny
 sm12-196,201317,Lillie's Full Force,sm12,Cosmic Eclipse,196,Uncommon,Reverse Holofoil / Normal,1.14,0.27,4.222222222222221,0.8699999999999999,penny
-,201318,Lillie's Poke Doll,,,,,Reverse Holofoil / Normal,2.12,0.43,4.930232558139536,1.6900000000000002,penny
+sm12-197,201318,Lillie's Poké Doll,sm12,Cosmic Eclipse,197,Uncommon,Reverse Holofoil / Normal,2.12,0.43,4.930232558139536,1.6900000000000002,penny
 sm12-198,201319,Mallow & Lana,sm12,Cosmic Eclipse,198,Uncommon,Reverse Holofoil / Normal,0.98,0.33,2.9696969696969697,0.6499999999999999,penny
 sm12-199,201320,Misty & Lorelei,sm12,Cosmic Eclipse,199,Uncommon,Reverse Holofoil / Normal,4.5,0.59,7.627118644067797,3.91,penny
 sm12-200,201321,N's Resolve,sm12,Cosmic Eclipse,200,Uncommon,Reverse Holofoil / Normal,1.13,0.35,3.2285714285714286,0.7799999999999999,penny
@@ -8299,10 +8299,10 @@ swsh1-168,208494,Lum Berry,swsh1,Sword & Shield,168,Uncommon,Reverse Holofoil / 
 swsh1-170,208498,Metal Saucer,swsh1,Sword & Shield,170,Uncommon,Reverse Holofoil / Normal,0.28,0.19,1.473684210526316,0.09000000000000002,penny
 swsh1-171,208500,Ordinary Rod,swsh1,Sword & Shield,171,Uncommon,Reverse Holofoil / Normal,0.33,0.23,1.434782608695652,0.1,penny
 swsh1-172,208502,Pal Pad,swsh1,Sword & Shield,172,Uncommon,Reverse Holofoil / Normal,0.33,0.29,1.1379310344827587,0.040000000000000036,penny
-,208503,Poke Kid,,,,,Reverse Holofoil / Normal,0.38,0.22,1.7272727272727273,0.16,penny
-,208504,Pokegear 3.0,,,,,Reverse Holofoil / Normal,0.86,0.39,2.205128205128205,0.47,penny
-,208505,Pokemon Catcher,,,,,Reverse Holofoil / Normal,0.17,0.19,0.8947368421052632,-0.01999999999999999,penny
-,208506,Pokemon Center Lady,,,,,Reverse Holofoil / Normal,0.34,0.22,1.5454545454545456,0.12000000000000002,penny
+swsh1-173,208503,Poké Kid,swsh1,Sword & Shield,173,Uncommon,Reverse Holofoil / Normal,0.38,0.22,1.7272727272727273,0.16,penny
+swsh1-174,208504,Pokégear 3.0,swsh1,Sword & Shield,174,Uncommon,Reverse Holofoil / Normal,0.86,0.39,2.205128205128205,0.47,penny
+swsh1-175,208505,Pokémon Catcher,swsh1,Sword & Shield,175,Uncommon,Reverse Holofoil / Normal,0.17,0.19,0.8947368421052632,-0.01999999999999999,penny
+swsh1-176,208506,Pokémon Center Lady,swsh1,Sword & Shield,176,Uncommon,Reverse Holofoil / Normal,0.34,0.22,1.5454545454545456,0.12000000000000002,penny
 swsh1-177,208507,Potion,swsh1,Sword & Shield,177,Uncommon,Reverse Holofoil / Normal,0.25,0.11,2.272727272727273,0.14,penny
 swsh1-179,208511,Quick Ball,swsh1,Sword & Shield,179,Uncommon,Reverse Holofoil / Normal,0.46,0.28,1.6428571428571428,0.18,penny
 swsh1-180,208513,Rare Candy,swsh1,Sword & Shield,180,Uncommon,Reverse Holofoil / Normal,0.55,0.24,2.291666666666667,0.31000000000000005,penny
@@ -8436,7 +8436,7 @@ swsh2-160,213263,Galar Mine,swsh2,Rebel Clash,160,Uncommon,Reverse Holofoil / No
 swsh2-161,213264,Milo,swsh2,Rebel Clash,161,Uncommon,Reverse Holofoil / Normal,0.23,0.15,1.5333333333333334,0.08000000000000002,penny
 swsh2-162,213267,Nugget,swsh2,Rebel Clash,162,Uncommon,Reverse Holofoil / Normal,0.3,0.1,2.9999999999999996,0.19999999999999998,penny
 swsh2-163,213268,Oleana,swsh2,Rebel Clash,163,Uncommon,Reverse Holofoil / Normal,0.28,0.05,5.6000000000000005,0.23000000000000004,penny
-,213271,Poke Ball,,,,,Reverse Holofoil / Normal,0.23,0.12,1.9166666666666667,0.11000000000000001,penny
+swsh2-164,213271,Poké Ball,swsh2,Rebel Clash,164,Uncommon,Reverse Holofoil / Normal,0.23,0.12,1.9166666666666667,0.11000000000000001,penny
 swsh2-165,213272,Scoop Up Net,swsh2,Rebel Clash,165,Uncommon,Reverse Holofoil / Normal,1.26,0.33,3.818181818181818,0.9299999999999999,penny
 swsh2-166,213274,Skyla,swsh2,Rebel Clash,166,Uncommon,Reverse Holofoil / Normal,0.76,0.15,5.066666666666667,0.61,penny
 swsh2-167,213275,Sonia,swsh2,Rebel Clash,167,Uncommon,Reverse Holofoil / Normal,0.7,0.22,3.1818181818181817,0.48,penny
@@ -8482,7 +8482,7 @@ swsh3-162,219276,Glimwood Tangle,swsh3,Darkness Ablaze,162,Uncommon,Reverse Holo
 swsh3-163,219277,Kabu,swsh3,Darkness Ablaze,163,Uncommon,Reverse Holofoil / Normal,0.32,0.05,6.3999999999999995,0.27,penny
 swsh3-164,219278,Old PC,swsh3,Darkness Ablaze,164,Uncommon,Reverse Holofoil / Normal,0.25,0.04,6.25,0.21,penny
 swsh3-165,219280,Piers,swsh3,Darkness Ablaze,165,Uncommon,Reverse Holofoil / Normal,0.27,0.17,1.588235294117647,0.1,penny
-,219281,Pokemon Breeder's Nurturing,,,,,Reverse Holofoil / Normal,0.53,0.2,2.65,0.33,penny
+swsh3-166,219281,Pokémon Breeder's Nurturing,swsh3,Darkness Ablaze,166,Uncommon,Reverse Holofoil / Normal,0.53,0.2,2.65,0.33,penny
 swsh3-167,219282,Rare Fossil,swsh3,Darkness Ablaze,167,Uncommon,Reverse Holofoil / Normal,0.5,0.11,4.545454545454546,0.39,penny
 swsh3-168,219284,Rose,swsh3,Darkness Ablaze,168,Uncommon,Reverse Holofoil / Normal,0.32,0.04,8.0,0.28,penny
 swsh3-169,219285,Rose Tower,swsh3,Darkness Ablaze,169,Uncommon,Reverse Holofoil / Normal,0.26,0.17,1.5294117647058822,0.09,penny
@@ -8619,8 +8619,8 @@ swsh35-54,223054,Hyper Potion,swsh35,Champion's Path,54,Uncommon,Reverse Holofoi
 swsh35-55,223055,Kabu,swsh35,Champion's Path,55,Uncommon,Reverse Holofoil / Normal,0.12,0.12,1.0,0.0,penny
 swsh35-57,223057,Milo,swsh35,Champion's Path,57,Uncommon,Reverse Holofoil / Normal,0.14,0.14,1.0,0.0,penny
 swsh35-58,223058,Piers,swsh35,Champion's Path,58,Uncommon,Reverse Holofoil / Normal,0.36,0.21,1.7142857142857142,0.15,penny
-,223059,Poke Ball,,,,,Reverse Holofoil / Normal,0.24,0.15,1.6,0.09,penny
-,223060,Pokemon Center Lady,,,,,Reverse Holofoil / Normal,0.32,0.24,1.3333333333333335,0.08000000000000002,penny
+swsh35-59,223059,Poké Ball,swsh35,Champion's Path,59,Common,Reverse Holofoil / Normal,0.24,0.15,1.6,0.09,penny
+swsh35-60,223060,Pokémon Center Lady,swsh35,Champion's Path,60,Uncommon,Reverse Holofoil / Normal,0.32,0.24,1.3333333333333335,0.08000000000000002,penny
 swsh35-61,223061,Potion,swsh35,Champion's Path,61,Common,Reverse Holofoil / Normal,0.23,0.18,1.277777777777778,0.05000000000000002,penny
 swsh35-63,223063,Rotom Bike,swsh35,Champion's Path,63,Uncommon,Reverse Holofoil / Normal,0.27,0.19,1.4210526315789473,0.08000000000000002,penny
 swsh35-64,223064,Rotom Phone,swsh35,Champion's Path,64,Uncommon,Reverse Holofoil / Normal,0.31,0.22,1.4090909090909092,0.09,penny
@@ -9089,7 +9089,7 @@ swsh7-69,246845,Swoobat,swsh7,Evolving Skies,69,Uncommon,Reverse Holofoil / Norm
 swsh7-37,246846,Feebas,swsh7,Evolving Skies,37,Common,Reverse Holofoil / Normal,0.22,0.15,1.4666666666666668,0.07,penny
 swsh7-125,246847,Eevee,swsh7,Evolving Skies,125,Common,Reverse Holofoil / Normal,4.11,0.47,8.744680851063832,3.6400000000000006,penny
 swsh7-126,246848,Teddiursa,swsh7,Evolving Skies,126,Common,Reverse Holofoil / Normal,0.27,0.15,1.8000000000000003,0.12000000000000002,penny
-,246849,Flabebe,,,,,Reverse Holofoil / Normal,0.21,0.04,5.25,0.16999999999999998,penny
+swsh7-71,246849,Flabébé,swsh7,Evolving Skies,71,Common,Reverse Holofoil / Normal,0.21,0.04,5.25,0.16999999999999998,penny
 swsh7-127,246850,Ursaring,swsh7,Evolving Skies,127,Uncommon,Reverse Holofoil / Normal,0.26,0.12,2.166666666666667,0.14,penny
 swsh7-38,246851,Milotic,swsh7,Evolving Skies,38,Rare,Reverse Holofoil / Normal,0.32,0.19,1.6842105263157894,0.13,penny
 swsh7-72,246852,Floette,swsh7,Evolving Skies,72,Uncommon,Reverse Holofoil / Normal,0.22,0.11,2.0,0.11,penny
@@ -9450,7 +9450,7 @@ swsh9-127,263850,Hawlucha,swsh9,Brilliant Stars,127,Common,Reverse Holofoil / No
 swsh9-129,263852,Acerola's Premonition,swsh9,Brilliant Stars,129,Uncommon,Reverse Holofoil / Normal,0.22,0.13,1.6923076923076923,0.09,penny
 swsh9-130,263853,Barry,swsh9,Brilliant Stars,130,Uncommon,Reverse Holofoil / Normal,0.19,0.13,1.4615384615384615,0.06,penny
 swsh9-131,263854,Blunder Policy,swsh9,Brilliant Stars,131,Uncommon,Reverse Holofoil / Normal,0.18,0.07,2.571428571428571,0.10999999999999999,penny
-,263856,Cafe Master,,,,,Reverse Holofoil / Normal,0.16,0.12,1.3333333333333335,0.04000000000000001,penny
+swsh9-133,263856,Café Master,swsh9,Brilliant Stars,133,Uncommon,Reverse Holofoil / Normal,0.16,0.12,1.3333333333333335,0.04000000000000001,penny
 swsh9-135,263857,Choice Belt,swsh9,Brilliant Stars,135,Uncommon,Reverse Holofoil / Normal,0.28,0.13,2.153846153846154,0.15000000000000002,penny
 swsh9-136,263858,Cleansing Gloves,swsh9,Brilliant Stars,136,Uncommon,Reverse Holofoil / Normal,0.14,0.11,1.272727272727273,0.030000000000000013,penny
 swsh9-137,263859,Collapsed Stadium,swsh9,Brilliant Stars,137,Uncommon,Reverse Holofoil / Normal,0.24,0.2,1.2,0.03999999999999998,penny
@@ -9580,48 +9580,48 @@ swsh10-157,272409,Unidentified Fossil,swsh10,Astral Radiance,157,Uncommon,Revers
 swsh10-158,272410,Wait and See Turbo,swsh10,Astral Radiance,158,Uncommon,Reverse Holofoil / Normal,0.16,0.06,2.666666666666667,0.1,penny
 swsh10-159,272411,Zisu,swsh10,Astral Radiance,159,Uncommon,Reverse Holofoil / Normal,0.16,0.09,1.777777777777778,0.07,penny
 swsh10-108,272708,Registeel,swsh10,Astral Radiance,108,Rare,Reverse Holofoil / Normal,0.35,0.26,1.346153846153846,0.08999999999999997,penny
-,274433,Bulbasaur,,,,,Reverse Holofoil / Normal,0.7,0.32,2.1875,0.37999999999999995,penny
-,274434,Ivysaur,,,,,Reverse Holofoil / Normal,0.82,0.24,3.4166666666666665,0.58,penny
-,274436,Charmander,,,,,Reverse Holofoil / Normal,0.6,0.24,2.5,0.36,penny
-,274438,Charmeleon,,,,,Reverse Holofoil / Normal,0.89,0.27,3.2962962962962963,0.62,penny
-,274445,Squirtle,,,,,Reverse Holofoil / Normal,1.05,0.37,2.837837837837838,0.68,penny
-,274451,Wartortle,,,,,Reverse Holofoil / Normal,0.82,0.23,3.5652173913043477,0.59,penny
-,274457,Wimpod,,,,,Reverse Holofoil / Normal,0.27,0.11,2.4545454545454546,0.16000000000000003,penny
-,276944,Spinarak,,,,,Reverse Holofoil / Normal,1.07,0.25,4.28,0.8200000000000001,penny
-,276945,Ariados,,,,,Reverse Holofoil / Normal,0.24,0.14,1.714285714285714,0.09999999999999998,penny
-,276946,Pikachu (27),,,,,Reverse Holofoil / Normal,1.15,0.54,2.1296296296296293,0.6099999999999999,penny
-,276947,Numel,,,,,Reverse Holofoil / Normal,0.44,0.21,2.0952380952380953,0.23,penny
-,276948,Camerupt,,,,,Reverse Holofoil / Normal,0.3,0.17,1.764705882352941,0.12999999999999998,penny
-,276949,Slowpoke,,,,,Reverse Holofoil / Normal,0.4,0.22,1.8181818181818183,0.18000000000000002,penny
-,276950,Slowbro,,,,,Reverse Holofoil / Normal,0.6,0.2,2.9999999999999996,0.39999999999999997,penny
-,276951,Magikarp,,,,,Reverse Holofoil / Normal,0.54,0.24,2.2500000000000004,0.30000000000000004,penny
-,276965,Chansey,,,,,Reverse Holofoil / Normal,0.47,0.19,2.4736842105263155,0.27999999999999997,penny
-,276966,Natu,,,,,Reverse Holofoil / Normal,0.34,0.13,2.6153846153846154,0.21000000000000002,penny
-,276969,Xatu,,,,,Reverse Holofoil / Normal,0.27,0.14,1.9285714285714286,0.13,penny
-,276972,Lunatone,,,,,Reverse Holofoil / Normal,0.25,0.14,1.7857142857142856,0.10999999999999999,penny
-,276973,Eevee,,,,,Reverse Holofoil / Normal,0.78,0.28,2.7857142857142856,0.5,penny
-,276975,Aipom,,,,,Reverse Holofoil / Normal,0.29,0.18,1.6111111111111112,0.10999999999999999,penny
-,276978,Ambipom,,,,,Reverse Holofoil / Normal,0.28,0.13,2.153846153846154,0.15000000000000002,penny
-,276981,Onix,,,,,Reverse Holofoil / Normal,0.47,0.15,3.1333333333333333,0.31999999999999995,penny
-,276982,Bidoof,,,,,Reverse Holofoil / Normal,0.41,0.2,2.05,0.20999999999999996,penny
-,276983,Bibarel,,,,,Reverse Holofoil / Normal,0.33,0.16,2.0625,0.17,penny
-,276984,Larvitar,,,,,Reverse Holofoil / Normal,0.37,0.16,2.3125,0.21,penny
-,276985,Pidove,,,,,Reverse Holofoil / Normal,0.38,0.17,2.235294117647059,0.21,penny
-,276988,Tranquill,,,,,Reverse Holofoil / Normal,0.26,0.12,2.166666666666667,0.14,penny
-,276989,Unfezant,,,,,Reverse Holofoil / Normal,0.32,0.13,2.4615384615384617,0.19,penny
-,276990,Pupitar,,,,,Reverse Holofoil / Normal,0.35,0.11,3.1818181818181817,0.24,penny
-,276991,Blanche,,,,,Reverse Holofoil / Normal,0.32,0.16,2.0,0.16,penny
-,276992,Candela,,,,,Reverse Holofoil / Normal,0.29,0.11,2.6363636363636362,0.18,penny
-,276993,Solrock,,,,,Reverse Holofoil / Normal,0.3,0.16,1.875,0.13999999999999999,penny
-,276994,Egg Incubator,,,,,Reverse Holofoil / Normal,0.31,0.18,1.7222222222222223,0.13,penny
-,276995,Lure Module,,,,,Reverse Holofoil / Normal,0.31,0.12,2.5833333333333335,0.19,penny
-,276996,PokeStop,,,,,Reverse Holofoil / Normal,0.52,0.23,2.260869565217391,0.29000000000000004,penny
-,276997,Rare Candy,,,,,Reverse Holofoil / Normal,0.39,0.2,1.95,0.19,penny
-,276998,Spark,,,,,Reverse Holofoil / Normal,0.28,0.13,2.153846153846154,0.15000000000000002,penny
-,277002,Alolan Rattata,,,,,Reverse Holofoil / Normal,0.36,0.13,2.769230769230769,0.22999999999999998,penny
-,277003,Alolan Raticate,,,,,Reverse Holofoil / Normal,0.37,0.17,2.176470588235294,0.19999999999999998,penny
-,277012,Steelix,,,,,Reverse Holofoil / Normal,0.3,0.16,1.875,0.13999999999999999,penny
-,277027,Meltan,,,,,Reverse Holofoil / Normal,0.27,0.14,1.9285714285714286,0.13,penny
+pgo-1,274433,Bulbasaur,pgo,Pokémon GO,1,Common,Reverse Holofoil / Normal,0.7,0.32,2.1875,0.37999999999999995,penny
+pgo-2,274434,Ivysaur,pgo,Pokémon GO,2,Uncommon,Reverse Holofoil / Normal,0.82,0.24,3.4166666666666665,0.58,penny
+pgo-8,274436,Charmander,pgo,Pokémon GO,8,Common,Reverse Holofoil / Normal,0.6,0.24,2.5,0.36,penny
+pgo-9,274438,Charmeleon,pgo,Pokémon GO,9,Uncommon,Reverse Holofoil / Normal,0.89,0.27,3.2962962962962963,0.62,penny
+pgo-15,274445,Squirtle,pgo,Pokémon GO,15,Common,Reverse Holofoil / Normal,1.05,0.37,2.837837837837838,0.68,penny
+pgo-16,274451,Wartortle,pgo,Pokémon GO,16,Uncommon,Reverse Holofoil / Normal,0.82,0.23,3.5652173913043477,0.59,penny
+pgo-25,274457,Wimpod,pgo,Pokémon GO,25,Common,Reverse Holofoil / Normal,0.27,0.11,2.4545454545454546,0.16000000000000003,penny
+pgo-6,276944,Spinarak,pgo,Pokémon GO,6,Common,Reverse Holofoil / Normal,1.07,0.25,4.28,0.8200000000000001,penny
+pgo-7,276945,Ariados,pgo,Pokémon GO,7,Uncommon,Reverse Holofoil / Normal,0.24,0.14,1.714285714285714,0.09999999999999998,penny
+pgo-27,276946,Pikachu,pgo,Pokémon GO,27,Common,Reverse Holofoil / Normal,1.15,0.54,2.1296296296296293,0.6099999999999999,penny
+pgo-13,276947,Numel,pgo,Pokémon GO,13,Common,Reverse Holofoil / Normal,0.44,0.21,2.0952380952380953,0.23,penny
+pgo-14,276948,Camerupt,pgo,Pokémon GO,14,Uncommon,Reverse Holofoil / Normal,0.3,0.17,1.764705882352941,0.12999999999999998,penny
+pgo-19,276949,Slowpoke,pgo,Pokémon GO,19,Common,Reverse Holofoil / Normal,0.4,0.22,1.8181818181818183,0.18000000000000002,penny
+pgo-20,276950,Slowbro,pgo,Pokémon GO,20,Uncommon,Reverse Holofoil / Normal,0.6,0.2,2.9999999999999996,0.39999999999999997,penny
+pgo-21,276951,Magikarp,pgo,Pokémon GO,21,Common,Reverse Holofoil / Normal,0.54,0.24,2.2500000000000004,0.30000000000000004,penny
+pgo-51,276965,Chansey,pgo,Pokémon GO,51,Uncommon,Reverse Holofoil / Normal,0.47,0.19,2.4736842105263155,0.27999999999999997,penny
+pgo-32,276966,Natu,pgo,Pokémon GO,32,Common,Reverse Holofoil / Normal,0.34,0.13,2.6153846153846154,0.21000000000000002,penny
+pgo-33,276969,Xatu,pgo,Pokémon GO,33,Uncommon,Reverse Holofoil / Normal,0.27,0.14,1.9285714285714286,0.13,penny
+pgo-34,276972,Lunatone,pgo,Pokémon GO,34,Uncommon,Reverse Holofoil / Normal,0.25,0.14,1.7857142857142856,0.10999999999999999,penny
+pgo-54,276973,Eevee,pgo,Pokémon GO,54,Common,Reverse Holofoil / Normal,0.78,0.28,2.7857142857142856,0.5,penny
+pgo-56,276975,Aipom,pgo,Pokémon GO,56,Common,Reverse Holofoil / Normal,0.29,0.18,1.6111111111111112,0.10999999999999999,penny
+pgo-57,276978,Ambipom,pgo,Pokémon GO,57,Common,Reverse Holofoil / Normal,0.28,0.13,2.153846153846154,0.15000000000000002,penny
+pgo-36,276981,Onix,pgo,Pokémon GO,36,Common,Reverse Holofoil / Normal,0.47,0.15,3.1333333333333333,0.31999999999999995,penny
+pgo-59,276982,Bidoof,pgo,Pokémon GO,59,Common,Reverse Holofoil / Normal,0.41,0.2,2.05,0.20999999999999996,penny
+pgo-60,276983,Bibarel,pgo,Pokémon GO,60,Common,Reverse Holofoil / Normal,0.33,0.16,2.0625,0.17,penny
+pgo-37,276984,Larvitar,pgo,Pokémon GO,37,Common,Reverse Holofoil / Normal,0.37,0.16,2.3125,0.21,penny
+pgo-61,276985,Pidove,pgo,Pokémon GO,61,Common,Reverse Holofoil / Normal,0.38,0.17,2.235294117647059,0.21,penny
+pgo-62,276988,Tranquill,pgo,Pokémon GO,62,Common,Reverse Holofoil / Normal,0.26,0.12,2.166666666666667,0.14,penny
+pgo-63,276989,Unfezant,pgo,Pokémon GO,63,Uncommon,Reverse Holofoil / Normal,0.32,0.13,2.4615384615384617,0.19,penny
+pgo-38,276990,Pupitar,pgo,Pokémon GO,38,Uncommon,Reverse Holofoil / Normal,0.35,0.11,3.1818181818181817,0.24,penny
+pgo-64,276991,Blanche,pgo,Pokémon GO,64,Uncommon,Reverse Holofoil / Normal,0.32,0.16,2.0,0.16,penny
+pgo-65,276992,Candela,pgo,Pokémon GO,65,Uncommon,Reverse Holofoil / Normal,0.29,0.11,2.6363636363636362,0.18,penny
+pgo-39,276993,Solrock,pgo,Pokémon GO,39,Uncommon,Reverse Holofoil / Normal,0.3,0.16,1.875,0.13999999999999999,penny
+pgo-66,276994,Egg Incubator,pgo,Pokémon GO,66,Uncommon,Reverse Holofoil / Normal,0.31,0.18,1.7222222222222223,0.13,penny
+pgo-67,276995,Lure Module,pgo,Pokémon GO,67,Uncommon,Reverse Holofoil / Normal,0.31,0.12,2.5833333333333335,0.19,penny
+pgo-68,276996,PokéStop,pgo,Pokémon GO,68,Uncommon,Reverse Holofoil / Normal,0.52,0.23,2.260869565217391,0.29000000000000004,penny
+pgo-69,276997,Rare Candy,pgo,Pokémon GO,69,Uncommon,Reverse Holofoil / Normal,0.39,0.2,1.95,0.19,penny
+pgo-70,276998,Spark,pgo,Pokémon GO,70,Uncommon,Reverse Holofoil / Normal,0.28,0.13,2.153846153846154,0.15000000000000002,penny
+pgo-41,277002,Alolan Rattata,pgo,Pokémon GO,41,Common,Reverse Holofoil / Normal,0.36,0.13,2.769230769230769,0.22999999999999998,penny
+pgo-42,277003,Alolan Raticate,pgo,Pokémon GO,42,Common,Reverse Holofoil / Normal,0.37,0.17,2.176470588235294,0.19999999999999998,penny
+pgo-44,277012,Steelix,pgo,Pokémon GO,44,Uncommon,Reverse Holofoil / Normal,0.3,0.16,1.875,0.13999999999999999,penny
+pgo-45,277027,Meltan,pgo,Pokémon GO,45,Common,Reverse Holofoil / Normal,0.27,0.14,1.9285714285714286,0.13,penny
 swsh11-163,282257,Mirage Gate,swsh11,Lost Origin,163,Uncommon,Reverse Holofoil / Normal,0.38,0.18,2.111111111111111,0.2,penny
 swsh11-1,283861,Oddish,swsh11,Lost Origin,1,Common,Reverse Holofoil / Normal,0.29,0.15,1.9333333333333333,0.13999999999999999,penny
 swsh11-2,283862,Gloom,swsh11,Lost Origin,2,Uncommon,Reverse Holofoil / Normal,0.99,0.18,5.5,0.81,penny
@@ -9942,8 +9942,8 @@ swsh12pt5-131,478182,Friends in Sinnoh,swsh12pt5,Crown Zenith,131,Uncommon,Rever
 swsh12pt5-132,478184,Great Ball,swsh12pt5,Crown Zenith,132,Uncommon,Reverse Holofoil / Normal,0.31,0.12,2.5833333333333335,0.19,penny
 swsh12pt5-135,478188,Lost Vacuum,swsh12pt5,Crown Zenith,135,Uncommon,Reverse Holofoil / Normal,0.31,0.12,2.5833333333333335,0.19,penny
 swsh12pt5-67,478189,Enamorus,swsh12pt5,Crown Zenith,67,Rare,Reverse Holofoil / Normal,0.39,0.19,2.0526315789473686,0.2,penny
-,478191,Poke Ball,,,,,Reverse Holofoil / Normal,0.31,0.13,2.3846153846153846,0.18,penny
-,478192,Pokemon Catcher,,,,,Reverse Holofoil / Normal,0.31,0.06,5.166666666666667,0.25,penny
+swsh12pt5-137,478191,Poké Ball,swsh12pt5,Crown Zenith,137,Common,Reverse Holofoil / Normal,0.31,0.13,2.3846153846153846,0.18,penny
+swsh12pt5-138,478192,Pokémon Catcher,swsh12pt5,Crown Zenith,138,Uncommon,Reverse Holofoil / Normal,0.31,0.06,5.166666666666667,0.25,penny
 swsh12pt5-68,478193,Graveler,swsh12pt5,Crown Zenith,68,Uncommon,Reverse Holofoil / Normal,0.31,0.07,4.428571428571428,0.24,penny
 swsh12pt5-139,478194,Potion,swsh12pt5,Crown Zenith,139,Common,Reverse Holofoil / Normal,0.36,0.11,3.2727272727272725,0.25,penny
 swsh12pt5-69,478195,Solrock,swsh12pt5,Crown Zenith,69,Uncommon,Reverse Holofoil / Normal,0.32,0.06,5.333333333333334,0.26,penny
@@ -10053,7 +10053,7 @@ sv1-85,487949,Kirlia,sv1,Scarlet & Violet,85,Common,Reverse Holofoil / Normal,0.
 sv1-87,487952,Shuppet,sv1,Scarlet & Violet,87,Common,Reverse Holofoil / Normal,0.21,0.11,1.909090909090909,0.09999999999999999,penny
 sv1-89,487955,Drifloon,sv1,Scarlet & Violet,89,Common,Reverse Holofoil / Normal,0.23,0.12,1.9166666666666667,0.11000000000000001,penny
 sv1-90,487956,Drifblim,sv1,Scarlet & Violet,90,Uncommon,Reverse Holofoil / Normal,0.27,0.1,2.7,0.17,penny
-,487958,Flabebe,,,,,Reverse Holofoil / Normal,0.16,0.09,1.777777777777778,0.07,penny
+sv1-91,487958,Flabébé,sv1,Scarlet & Violet,91,Common,Reverse Holofoil / Normal,0.16,0.09,1.777777777777778,0.07,penny
 sv1-92,487959,Floette,sv1,Scarlet & Violet,92,Common,Reverse Holofoil / Normal,0.16,0.08,2.0,0.08,penny
 sv1-93,487960,Florges,sv1,Scarlet & Violet,93,Uncommon,Reverse Holofoil / Normal,0.22,0.15,1.4666666666666668,0.07,penny
 sv1-94,487961,Dedenne,sv1,Scarlet & Violet,94,Common,Reverse Holofoil / Normal,0.3,0.15,2.0,0.15,penny
@@ -10126,9 +10126,9 @@ sv1-181,488087,Nest Ball,sv1,Scarlet & Violet,181,Uncommon,Reverse Holofoil / No
 sv1-182,488088,Pal Pad,sv1,Scarlet & Violet,182,Common,Reverse Holofoil / Normal,0.35,0.24,1.4583333333333333,0.10999999999999999,penny
 sv1-183,488089,Penny,sv1,Scarlet & Violet,183,Uncommon,Reverse Holofoil / Normal,0.42,0.21,2.0,0.21,penny
 sv1-184,488090,Picnic Basket,sv1,Scarlet & Violet,184,Uncommon,Reverse Holofoil / Normal,0.25,0.11,2.272727272727273,0.14,penny
-,488091,Poke Ball,,,,,Reverse Holofoil / Normal,0.12,0.1,1.2,0.01999999999999999,penny
-,488092,Pokegear 3.0,,,,,Reverse Holofoil / Normal,1.51,0.36,4.194444444444445,1.15,penny
-,488093,Pokemon Catcher,,,,,Reverse Holofoil / Normal,0.32,0.15,2.1333333333333333,0.17,penny
+sv1-185,488091,Poké Ball,sv1,Scarlet & Violet,185,Common,Reverse Holofoil / Normal,0.12,0.1,1.2,0.01999999999999999,penny
+sv1-186,488092,Pokégear 3.0,sv1,Scarlet & Violet,186,Common,Reverse Holofoil / Normal,1.51,0.36,4.194444444444445,1.15,penny
+sv1-187,488093,Pokémon Catcher,sv1,Scarlet & Violet,187,Common,Reverse Holofoil / Normal,0.32,0.15,2.1333333333333333,0.17,penny
 sv1-188,488094,Potion,sv1,Scarlet & Violet,188,Common,Reverse Holofoil / Normal,0.18,0.11,1.6363636363636362,0.06999999999999999,penny
 sv1-191,488098,Rare Candy,sv1,Scarlet & Violet,191,Common,Reverse Holofoil / Normal,0.28,0.2,1.4000000000000001,0.08000000000000002,penny
 sv1-193,488100,Rocky Helmet,sv1,Scarlet & Violet,193,Uncommon,Reverse Holofoil / Normal,0.2,0.09,2.2222222222222223,0.11000000000000001,penny
@@ -10447,7 +10447,7 @@ sv3-187,509779,Brassius,sv3,Obsidian Flames,187,Uncommon,Reverse Holofoil / Norm
 sv3-189,509781,Letter of Encouragement,sv3,Obsidian Flames,189,Uncommon,Reverse Holofoil / Normal,0.31,0.23,1.3478260869565217,0.07999999999999999,penny
 sv3-190,509782,Ortega,sv3,Obsidian Flames,190,Uncommon,Reverse Holofoil / Normal,0.36,0.2,1.7999999999999998,0.15999999999999998,penny
 sv3-191,509783,Patrol Cap,sv3,Obsidian Flames,191,Uncommon,Reverse Holofoil / Normal,0.29,0.2,1.4499999999999997,0.08999999999999997,penny
-,509784,Pokemon League Headquarters,,,,,Reverse Holofoil / Normal,0.34,0.22,1.5454545454545456,0.12000000000000002,penny
+sv3-192,509784,Pokémon League Headquarters,sv3,Obsidian Flames,192,Uncommon,Reverse Holofoil / Normal,0.34,0.22,1.5454545454545456,0.12000000000000002,penny
 sv3-193,509785,Poppy,sv3,Obsidian Flames,193,Uncommon,Reverse Holofoil / Normal,0.34,0.22,1.5454545454545456,0.12000000000000002,penny
 sv3-194,509786,Ryme,sv3,Obsidian Flames,194,Common,Reverse Holofoil / Normal,0.25,0.2,1.25,0.04999999999999999,penny
 sv3-195,509787,Team Star Grunt,sv3,Obsidian Flames,195,Uncommon,Reverse Holofoil / Normal,0.31,0.23,1.3478260869565217,0.07999999999999999,penny
@@ -11063,7 +11063,7 @@ sv6-81,550125,Kadabra,sv6,Twilight Masquerade,81,Common,Reverse Holofoil / Norma
 sv6-83,550127,Girafarig,sv6,Twilight Masquerade,83,Common,Reverse Holofoil / Normal,0.31,0.14,2.214285714285714,0.16999999999999998,penny
 sv6-84,550128,Farigiraf,sv6,Twilight Masquerade,84,Uncommon,Reverse Holofoil / Normal,0.3,0.15,2.0,0.15,penny
 sv6-85,550129,Chimecho,sv6,Twilight Masquerade,85,Common,Reverse Holofoil / Normal,0.18,0.1,1.7999999999999998,0.07999999999999999,penny
-,550130,Flabebe,,,,,Reverse Holofoil / Normal,0.19,0.12,1.5833333333333335,0.07,penny
+sv6-86,550130,Flabébé,sv6,Twilight Masquerade,86,Common,Reverse Holofoil / Normal,0.19,0.12,1.5833333333333335,0.07,penny
 sv6-87,550131,Floette,sv6,Twilight Masquerade,87,Common,Reverse Holofoil / Normal,0.21,0.12,1.75,0.09,penny
 sv6-88,550132,Florges,sv6,Twilight Masquerade,88,Uncommon,Reverse Holofoil / Normal,0.29,0.1,2.8999999999999995,0.18999999999999997,penny
 sv6-89,550133,Swirlix,sv6,Twilight Masquerade,89,Common,Reverse Holofoil / Normal,0.22,0.16,1.375,0.06,penny
@@ -11851,7 +11851,7 @@ zsv10pt5-75,642526,Minccino,zsv10pt5,Black Bolt,75,Common,Reverse Holofoil / Nor
 zsv10pt5-76,642527,Cinccino,zsv10pt5,Black Bolt,76,Uncommon,Reverse Holofoil / Normal,0.28,0.15,1.866666666666667,0.13000000000000003,penny
 zsv10pt5-81,642528,Energy Coin,zsv10pt5,Black Bolt,81,Uncommon,Reverse Holofoil / Normal,0.24,0.13,1.846153846153846,0.10999999999999999,penny
 ,642529,Antique Cover Fossil,,,,,Reverse Holofoil / Normal,0.25,0.17,1.4705882352941175,0.07999999999999999,penny
-,642530,Pokegear 3.0,,,,,Reverse Holofoil / Normal,0.53,0.32,1.65625,0.21000000000000002,penny
+zsv10pt5-84,642530,Pokégear 3.0,zsv10pt5,Black Bolt,84,Uncommon,Reverse Holofoil / Normal,0.53,0.32,1.65625,0.21000000000000002,penny
 zsv10pt5-79,642531,Air Balloon,zsv10pt5,Black Bolt,79,Uncommon,Reverse Holofoil / Normal,0.47,0.22,2.1363636363636362,0.24999999999999997,penny
 zsv10pt5-83,642532,N's Plan,zsv10pt5,Black Bolt,83,Uncommon,Reverse Holofoil / Normal,0.32,0.27,1.1851851851851851,0.04999999999999999,penny
 ,642533,Professor's Research [Professor Juniper],,,,,Reverse Holofoil / Normal,0.24,0.13,1.846153846153846,0.10999999999999999,penny
@@ -12029,7 +12029,7 @@ me1-119,654458,Lillie's Determination,me1,Mega Evolution,119,Uncommon,Reverse Ho
 me1-120,654459,Lt. Surge's Bargain,me1,Mega Evolution,120,Uncommon,Reverse Holofoil / Normal,0.2,0.13,1.5384615384615385,0.07,penny
 me1-121,654460,Mega Signal,me1,Mega Evolution,121,Uncommon,Reverse Holofoil / Normal,0.24,0.2,1.2,0.03999999999999998,penny
 me1-122,654461,Mystery Garden,me1,Mega Evolution,122,Uncommon,Reverse Holofoil / Normal,0.23,0.2,1.15,0.03,penny
-,654462,Pokemon Center Lady,,,,,Reverse Holofoil / Normal,0.23,0.2,1.15,0.03,penny
+me1-123,654462,Pokémon Center Lady,me1,Mega Evolution,123,Common,Reverse Holofoil / Normal,0.23,0.2,1.15,0.03,penny
 me1-124,654463,Premium Power Pro,me1,Mega Evolution,124,Uncommon,Reverse Holofoil / Normal,0.25,0.18,1.3888888888888888,0.07,penny
 me1-125,654464,Rare Candy,me1,Mega Evolution,125,Common,Reverse Holofoil / Normal,0.26,0.23,1.1304347826086956,0.03,penny
 me1-126,654465,Repel,me1,Mega Evolution,126,Uncommon,Reverse Holofoil / Normal,0.25,0.15,1.6666666666666667,0.1,penny
@@ -12156,7 +12156,7 @@ me2pt5-194,676006,Mystery Garden,me2pt5,Ascended Heroes,194,Uncommon,Reverse Hol
 me2pt5-195,676007,N's PP Up,me2pt5,Ascended Heroes,195,Uncommon,Reverse Holofoil / Normal,0.3,0.2,1.4999999999999998,0.09999999999999998,penny
 me2pt5-196,676008,Night Stretcher,me2pt5,Ascended Heroes,196,Common,Reverse Holofoil / Normal,0.4,0.27,1.4814814814814814,0.13,penny
 me2pt5-197,676009,Nighttime Mine,me2pt5,Ascended Heroes,197,Uncommon,Reverse Holofoil / Normal,0.31,0.26,1.1923076923076923,0.04999999999999999,penny
-,676010,Poke Pad,,,,,Reverse Holofoil / Normal,0.73,0.42,1.7380952380952381,0.31,penny
+me2pt5-198,676010,Poké Pad,me2pt5,Ascended Heroes,198,Common,Reverse Holofoil / Normal,0.73,0.42,1.7380952380952381,0.31,penny
 me2pt5-199,676011,Premium Power Pro,me2pt5,Ascended Heroes,199,Uncommon,Reverse Holofoil / Normal,0.29,0.14,2.071428571428571,0.14999999999999997,penny
 me2pt5-200,676012,Surfer,me2pt5,Ascended Heroes,200,Common,Reverse Holofoil / Normal,0.23,0.18,1.277777777777778,0.05000000000000002,penny
 me2pt5-201,676013,Team Rocket's Archer,me2pt5,Ascended Heroes,201,Uncommon,Reverse Holofoil / Normal,0.28,0.16,1.7500000000000002,0.12000000000000002,penny
@@ -12177,13 +12177,13 @@ me2pt5-215,676027,Waitress,me2pt5,Ascended Heroes,215,Common,Reverse Holofoil / 
 me2pt5-216,676028,Prism Energy,me2pt5,Ascended Heroes,216,Uncommon,Reverse Holofoil / Normal,0.31,0.2,1.5499999999999998,0.10999999999999999,penny
 me2pt5-217,676029,Team Rocket's Energy,me2pt5,Ascended Heroes,217,Uncommon,Reverse Holofoil / Normal,0.41,0.25,1.64,0.15999999999999998,penny
 me3-83,684320,Potion,me3,Perfect Order,83,Common,Reverse Holofoil / Normal,0.24,0.1,2.4,0.13999999999999999,penny
-,684321,Poke Ball,,,,,Reverse Holofoil / Normal,0.19,0.17,1.1176470588235294,0.01999999999999999,penny
+me3-80,684321,Poké Ball,me3,Perfect Order,80,Common,Reverse Holofoil / Normal,0.19,0.17,1.1176470588235294,0.01999999999999999,penny
 me3-72,684322,Energy Search,me3,Perfect Order,72,Common,Reverse Holofoil / Normal,0.18,0.17,1.0588235294117645,0.009999999999999981,penny
 me3-76,684323,Judge,me3,Perfect Order,76,Uncommon,Reverse Holofoil / Normal,0.23,0.25,0.92,-0.01999999999999999,penny
-,684324,Pokemon Catcher,,,,,Reverse Holofoil / Normal,0.25,0.17,1.4705882352941175,0.07999999999999999,penny
+me3-82,684324,Pokémon Catcher,me3,Perfect Order,82,Common,Reverse Holofoil / Normal,0.25,0.17,1.4705882352941175,0.07999999999999999,penny
 me3-71,684325,Crushing Hammer,me3,Perfect Order,71,Common,Reverse Holofoil / Normal,0.24,0.26,0.923076923076923,-0.020000000000000018,penny
 me3-74,684330,Hole-Digging Shovel,me3,Perfect Order,74,Common,Reverse Holofoil / Normal,0.21,0.11,1.909090909090909,0.09999999999999999,penny
-,684332,Poke Pad - 081/088,,,,,Reverse Holofoil / Normal,0.4,0.22,1.8181818181818183,0.18000000000000002,penny
+me3-81,684332,Poké Pad,me3,Perfect Order,81,Uncommon,Reverse Holofoil / Normal,0.4,0.22,1.8181818181818183,0.18000000000000002,penny
 me3-42,684334,Binacle,me3,Perfect Order,42,Common,Reverse Holofoil / Normal,0.22,0.11,2.0,0.11,penny
 me3-43,684335,Barbaracle,me3,Perfect Order,43,Uncommon,Reverse Holofoil / Normal,0.25,0.11,2.272727272727273,0.14,penny
 me3-70,684343,Core Memory,me3,Perfect Order,70,Uncommon,Reverse Holofoil / Normal,0.21,0.16,1.3125,0.04999999999999999,penny

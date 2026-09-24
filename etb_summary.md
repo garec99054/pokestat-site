@@ -5,9 +5,9 @@ The canonical ETB artifact. Everything below is computed live from
 this document is typed by hand, and the per-product table behind every average
 is published beside it as `data/output/etb_products.csv`.
 
-Window **2024-03 .. 2026-09** (31 monthly observations, ONE regime) | **110 ETB
-products** across **61 sets** | 2,761 product-months | headline index
-**58.4%/yr**, HAC 95% CI [21.3%, 106.9%]
+Window **2024-03 .. 2026-09** (31 monthly observations, ONE regime) | **111 ETB
+products** across **62 sets** | 2,792 product-months | headline index
+**58.6%/yr**, HAC 95% CI [21.4%, 107.1%]
 
 *This is measurement, not investment advice. Nothing here recommends buying,
 holding or selling anything.*
@@ -16,12 +16,12 @@ holding or selling anything.*
 
 ## 1. The bottom line
 
-**Yes, ETB prices went up a lot over 2024-03 .. 2026-09 -- about 58.4% a year,
-an index multiple of 3.16x in 2.5 years. Four things immediately qualify that,
+**Yes, ETB prices went up a lot over 2024-03 .. 2026-09 -- about 58.6% a year,
+an index multiple of 3.17x in 2.5 years. Four things immediately qualify that,
 and each one is measured below rather than asserted.**
 
 1. **The number is a construction choice.** Across the 15 defensible ways to
-   build this index the answer spans 58.1% to 90.5%/yr -- a 32.4-point range.
+   build this index the answer spans 58.3% to 90.4%/yr -- a 32.1-point range.
    The headline above is the chained/geometric index over every product because
    that is the construction that admits the 39 products which entered
    mid-window. The higher numbers you will see quoted elsewhere -- including
@@ -29,16 +29,16 @@ and each one is measured below rather than asserted.**
    products that already existed at the start AND survived to the end (section
    2.2).
 2. **ETBs did not beat the rest of sealed.** Against booster boxes over the same
-   window with the same construction: -0.7pp/yr (t = -0.08). Against singles:
-   +13.3pp/yr (t = 0.99), which does not clear this repo's |t| >= 2 bar. "ETBs
+   window with the same construction: -0.6pp/yr (t = -0.07). Against singles:
+   +13.4pp/yr (t = 1.00), which does not clear this repo's |t| >= 2 bar. "ETBs
    went up" is largely "the Pokemon market went up" (section 2.4).
 3. **Older product has the higher point estimates, but none of the AGE contrasts
    is established.** Of 3 contrasts against the youngest on-sale cohort, 1
    clears this repo's significance bar -- and the one that does is the
    PRE-RELEASE cohort, i.e. products bought at a pre-order quote, which is a
    statement about quotes rather than about age. Product 1-3 years past release
-   grew 89.7%/yr against 64.5%/yr for boxes under a year old and on sale, but
-   that difference does not clear the bar (t = 1.21); nor does the 3y+ one (t =
+   grew 89.2%/yr against 64.5%/yr for boxes under a year old and on sale, but
+   that difference does not clear the bar (t = 1.18); nor does the 3y+ one (t =
    0.12) at 68.9%/yr, which is BELOW the 1-3y figure, so the monotone "older is
    better" reading is not supported either (section 4.4). An earlier version of
    this report pooled pre-release entrants into the youngest cohort and
@@ -51,8 +51,8 @@ and each one is measured below rather than asserted.**
    (section 4.3). **That is a statement about growth RATES, and it is not the
    answer to "older ETBs sell at higher prices, no?".** That question is about
    price LEVELS, it is a different quantity, and section 4.6 answers it --
-   **yes**: at 2026-09 mass-retail price rises with age at Spearman rho = 0.703
-   (p = 2.2e-11, n = 68), a median $115 at <1yr (n = 6) against $831 at 8yr+ (n
+   **yes**: at 2026-09 mass-retail price rises with age at Spearman rho = 0.701
+   (p = 1.9e-11, n = 69), a median $115 at <1yr (n = 6) against $831 at 8yr+ (n
    = 15). Two disclosures travel with it and are quoted in full in 4.6: within
    one calendar month age and release cohort are the SAME variable (R^2 =
    1.000), so that rho ranks VINTAGES and cannot be read as an ageing curve; and
@@ -64,7 +64,7 @@ and each one is measured below rather than asserted.**
 4. **A holder does not keep the index.** Sales tax in, marketplace take out and
    shipping cost roughly 20.2% of the box plus $12.30 -- charged ONCE, which is
    why the answer is about time. At the measured growth rate a 3-month hold nets
-   -46.1%/yr, a 12-month hold 22.8%/yr and a 24-month hold 40.5%/yr. In the
+   -46.0%/yr, a 12-month hold 23.0%/yr and a 24-month hold 40.7%/yr. In the
    realised data a 3-month flip lost money 80% of the time *during a boom*
    (section 6).
 
@@ -74,7 +74,7 @@ longer than 8 months (the point at which the one-time frictions amortise, at the
 growth rate this window delivered), the box was retired rather than newly
 released, and the market kept rising. That last condition did almost all of the
 work and this data cannot speak to whether it repeats: the archive contains 31
-months of a single boom whose deepest index drawdown was -4.0%. A fall of 43.3%
+months of a single boom whose deepest index drawdown was -4.0%. A fall of 43.4%
 from here would erase the entire two-year edge over a savings account, and if
 prices merely go FLAT a 12-month hold returns 0.75x -- a real loss, because the
 frictions are charged anyway.
@@ -88,8 +88,8 @@ at any horizon this archive can honestly test (section 5).
 
 ### 2.1 The headline index
 
-Chained, geometric, all products: base 100 at 2024-03 -> **315.9** at 2026-09,
-i.e. **58.4%/yr**, HAC 95% CI [21.3%, 106.9%], t = 3.38 on 30 monthly log
+Chained, geometric, all products: base 100 at 2024-03 -> **316.7** at 2026-09,
+i.e. **58.6%/yr**, HAC 95% CI [21.4%, 107.1%], t = 3.39 on 30 monthly log
 returns with 3 Newey-West lags.
 
 The standard error matters here. Monthly price levels in a boom are massively
@@ -98,29 +98,29 @@ interval in this document is estimated on the mean monthly LOG RETURN with a HAC
 covariance, which telescopes to exactly the endpoint growth rate but carries an
 error bar that knows the months are not independent.
 
-The median ETB was $67.99 in 2024-03 and $218.37 in 2026-09.
+The median ETB was $66.75 in 2024-03 and $218.32 in 2026-09.
 
 ### 2.2 The headline moves a lot -- so the construction is the finding
 
 | link | aggregator | survivorship | products | index end | CAGR | 95% lo | 95% hi |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| constant | geometric | all | 62 | 445.3 | 81.7%/yr | 35.3% | 144.1% |
-| constant | arithmetic | all | 62 | 496.2 | 89.8%/yr | 37.9% | 161.1% |
-| constant | value | all | 62 | 500.8 | 90.5%/yr | 44.8% | 150.5% |
-| chained | geometric | all | 110 | 315.9 | 58.4%/yr | 21.3% | 106.9% |
-| chained | arithmetic | all | 110 | 371.8 | 69.1%/yr | 28.3% | 122.8% |
-| chained | value | all | 110 | 372.1 | 69.1%/yr | 35.9% | 110.6% |
-| constant | geometric | exclude_delisted | 62 | 445.3 | 81.7%/yr | 35.3% | 144.1% |
-| constant | arithmetic | exclude_delisted | 62 | 496.2 | 89.8%/yr | 37.9% | 161.1% |
-| constant | value | exclude_delisted | 62 | 500.8 | 90.5%/yr | 44.8% | 150.5% |
-| chained | geometric | exclude_delisted | 105 | 314.4 | 58.1%/yr | 20.4% | 107.7% |
-| chained | arithmetic | exclude_delisted | 105 | 369.6 | 68.7%/yr | 27.4% | 123.4% |
-| chained | value | exclude_delisted | 105 | 359.7 | 66.9%/yr | 33.7% | 108.3% |
-| chained | geometric | full_history_only | 62 | 445.3 | 81.7%/yr | 35.3% | 144.1% |
-| chained | arithmetic | full_history_only | 62 | 483.1 | 87.8%/yr | 38.9% | 153.8% |
-| chained | value | full_history_only | 62 | 500.8 | 90.5%/yr | 44.8% | 150.5% |
+| constant | geometric | all | 63 | 444.9 | 81.7%/yr | 35.4% | 143.8% |
+| constant | arithmetic | all | 63 | 495.0 | 89.6%/yr | 37.9% | 160.7% |
+| constant | value | all | 63 | 500.3 | 90.4%/yr | 44.8% | 150.4% |
+| chained | geometric | all | 111 | 316.7 | 58.6%/yr | 21.4% | 107.1% |
+| chained | arithmetic | all | 111 | 372.4 | 69.2%/yr | 28.4% | 122.9% |
+| chained | value | all | 111 | 372.3 | 69.2%/yr | 35.9% | 110.6% |
+| constant | geometric | exclude_delisted | 63 | 444.9 | 81.7%/yr | 35.4% | 143.8% |
+| constant | arithmetic | exclude_delisted | 63 | 495.0 | 89.6%/yr | 37.9% | 160.7% |
+| constant | value | exclude_delisted | 63 | 500.3 | 90.4%/yr | 44.8% | 150.4% |
+| chained | geometric | exclude_delisted | 106 | 315.3 | 58.3%/yr | 20.5% | 107.9% |
+| chained | arithmetic | exclude_delisted | 106 | 370.2 | 68.8%/yr | 27.5% | 123.6% |
+| chained | value | exclude_delisted | 106 | 359.8 | 66.9%/yr | 33.7% | 108.4% |
+| chained | geometric | full_history_only | 63 | 444.9 | 81.7%/yr | 35.4% | 143.8% |
+| chained | arithmetic | full_history_only | 63 | 482.6 | 87.7%/yr | 38.9% | 153.6% |
+| chained | value | full_history_only | 63 | 500.3 | 90.4%/yr | 44.8% | 150.4% |
 
-Range: **58.1% to 90.5%/yr, 32.4 points apart**, median 81.7%. That spread is
+Range: **58.3% to 90.4%/yr, 32.1 points apart**, median 81.7%. That spread is
 not noise -- every cell is a defensible index -- so a single headline quoted
 without its construction is unfalsifiable.
 
@@ -128,14 +128,14 @@ without its construction is unfalsifiable.
 
 | construction | membership | products | CAGR |
 | --- | --- | --- | --- |
-| constant basket, geometric | full-history only (forced by construction) | 62 | 81.7%/yr |
-| chained, geometric | full-history only (imposed) | 62 | 81.7%/yr |
-| chained, geometric | every product (headline) | 110 | 58.4%/yr |
+| constant basket, geometric | full-history only (forced by construction) | 63 | 81.7%/yr |
+| chained, geometric | full-history only (imposed) | 63 | 81.7%/yr |
+| chained, geometric | every product (headline) | 111 | 58.6%/yr |
 
-Rows 1 and 2 differ **only** by the linking method and they agree to 2.8e-14
+Rows 1 and 2 differ **only** by the linking method and they agree to 4.3e-14
 percentage points, which is zero to machine precision -- on a balanced panel a
 chained Jevons index equals the direct one exactly, and
-`tests/test_etb_index.py` pins that identity. So the 23.3-point drop from row 2
+`tests/test_etb_index.py` pins that identity. So the 23.1-point drop from row 2
 to row 3 is **entirely** the 39 late-entering products, which compounded far
 more slowly than the cohort that was already being priced in 2024-03.
 
@@ -148,10 +148,10 @@ survivorship at all, because it has already excluded every non-survivor.
 ### 2.3 Robustness: does the result depend on how it was measured?
 
 **The uncleaned universe.** A one-line `name LIKE '%elite trainer%'` query
-returns 113 priced products, of which 65 span the window; its constant basket
-grows 81.2%/yr and its chained index 58.7%/yr. The curated universe (which drops
+returns 115 priced products, of which 67 span the window; its constant basket
+grows 80.9%/yr and its chained index 58.9%/yr. The curated universe (which drops
 multi-unit cases, "[Set of 2]" SKUs, code cards and the larger ETB Plus -- see
-3.1) gives 81.7% and 58.4%: the cleaning moved the constant basket by +0.6pp and
+3.1) gives 81.7% and 58.6%: the cleaning moved the constant basket by +0.8pp and
 the chained index by -0.3pp. **So the universe definition is not where the
 headline comes from** -- which rules out the first thing a sceptic should check.
 
@@ -160,8 +160,8 @@ trailing sales average:
 
 | field | what it is | products | CAGR |
 | --- | --- | --- | --- |
-| `market` | TCGplayer market (trailing sales average) -- headline | 110 | 58.4%/yr |
-| `low` | cheapest live ask | 110 | 62.2%/yr |
+| `market` | TCGplayer market (trailing sales average) -- headline | 111 | 58.6%/yr |
+| `low` | cheapest live ask | 111 | 62.4%/yr |
 
 Same sign, same order of magnitude.
 
@@ -169,11 +169,11 @@ Same sign, same order of magnitude.
 
 | period | from | to | total | annualised |
 | --- | --- | --- | --- | --- |
-| full window | 2024-03 | 2026-09 | 215.9% | 58.4%/yr |
-| first half | 2024-03 | 2025-06 | 88.2% | 65.8%/yr |
-| second half | 2025-06 | 2026-09 | 67.9% | 51.3%/yr |
-| trailing 12m | 2025-09 | 2026-09 | 40.4% | 40.4%/yr |
-| trailing 6m | 2026-03 | 2026-09 | 21.8% | 48.4%/yr |
+| full window | 2024-03 | 2026-09 | 216.7% | 58.6%/yr |
+| first half | 2024-03 | 2025-06 | 88.1% | 65.8%/yr |
+| second half | 2025-06 | 2026-09 | 68.4% | 51.7%/yr |
+| trailing 12m | 2025-09 | 2026-09 | 40.8% | 40.8%/yr |
+| trailing 6m | 2026-03 | 2026-09 | 22.0% | 48.9%/yr |
 
 **Drawdown.** Worst peak-to-trough fall in the whole archive: **-4.0%** (2026-07
 -> 2026-09), with 6 negative months out of 30 and a worst single month of -2.9%.
@@ -185,15 +185,15 @@ series independently, at set level:
 
 | source | unit | units | constant basket | chained | sets of this panel covered | share of panel sets |
 | --- | --- | --- | --- | --- | --- | --- |
-| price_history (this module) | product | 110 | 81.7%/yr | 58.4%/yr | 61 | 100% |
-| sealed_index (pre-aggregated) | set | 61 | 80.3%/yr | 63.6%/yr | 61 | 100% |
+| price_history (this module) | product | 111 | 81.7%/yr | 58.6%/yr | 62 | 100% |
+| sealed_index (pre-aggregated) | set | 62 | 80.1%/yr | 63.7%/yr | 62 | 100% |
 
-They agree to a few points. The remaining difference is composition -- one is 61
-sets, the other 110 products -- not a pipeline defect.
+They agree to a few points. The remaining difference is composition -- one is 62
+sets, the other 111 products -- not a pipeline defect.
 
 **But do not read that agreement as a check on the whole index.** `sealed_index`
-only carries a set-month when an ETB was actually priced there; it covers 61 of
-this panel's 61 sets (100%). So the one available second pipeline remains
+only carries a set-month when an ETB was actually priced there; it covers 62 of
+this panel's 62 sets (100%). So the one available second pipeline remains
 structurally partial, and quoting the agreement without this coverage share
 would overstate how much of the index has actually been corroborated (section
 2.6).
@@ -205,7 +205,7 @@ can be re-run either way:
 | channel | products | CAGR | 95% lo | 95% hi |
 | --- | --- | --- | --- | --- |
 | Pokemon Center exclusive | 37 | 44.2%/yr | -4.6% | 117.9% |
-| Mass-retail | 73 | 66.2%/yr | 33.9% | 106.3% |
+| Mass-retail | 74 | 66.4%/yr | 34.0% | 106.7% |
 
 ### 2.4 Against the rest of the market
 
@@ -216,22 +216,22 @@ but "did ETBs beat the alternative".
 
 | benchmark | units | its CAGR | ETB edge | t (HAC, paired) | clears \|t\| >= 2 |
 | --- | --- | --- | --- | --- | --- |
-| `booster_box` | 54 | 59.6%/yr | -0.7pp | -0.08 | no |
-| `booster_bundle` | 27 | 54.0%/yr | +2.9pp | 0.31 | no |
-| `singles` | 9,217 | 39.8%/yr | +13.3pp | 0.99 | no |
+| `booster_box` | 54 | 59.6%/yr | -0.6pp | -0.07 | no |
+| `booster_bundle` | 27 | 54.0%/yr | +3.0pp | 0.32 | no |
+| `singles` | 9,332 | 39.8%/yr | +13.4pp | 1.00 | no |
 
 **Not one benchmark difference clears the bar.** ETBs and booster boxes are
 statistically indistinguishable over this window; the ~20-point edge over
 singles has a t of about 1.0 and is not established. The singles benchmark also
-deserves a caveat in the other direction: it is an equal-weighted index of 9,217
+deserves a caveat in the other direction: it is an equal-weighted index of 9,332
 cards above a $1 floor, so it is dominated by cheap commons and probably
 understates what a comparable singles portfolio did.
 
 ### 2.5 Dispersion -- what the average hides
 
-Per-product growth, over the 98 products with enough history to annualise: p10
--2.8%/yr, median 63.9%/yr, p90 124.4%/yr -- an interquartile range of 51 points.
-11% of them went DOWN, and 68% have growth that clears |t| >= 2 on their own
+Per-product growth, over the 99 products with enough history to annualise: p10
+-2.5%/yr, median 64.8%/yr, p90 124.4%/yr -- an interquartile range of 48 points.
+11% of them went DOWN, and 69% have growth that clears |t| >= 2 on their own
 error bar. The full table is section 7.3 and `etb_products.csv`.
 
 ### 2.6 The products are not independent observations
@@ -239,8 +239,8 @@ error bar. The full table is section 7.3 and `etb_products.csv`.
 Every count above is a count of SKUs, and SKUs cluster inside sets: one release
 can ship a regular box, a Pokemon Center box and two artwork variants, four
 listings whose prices move together because they are the same cardboard. This
-panel's 110 products are only 61 release events -- 1.80 SKUs per set. **Read "N
-of 110 products rose" as at most 61 independent confirmations, not 110.** Any
+panel's 111 products are only 62 release events -- 1.79 SKUs per set. **Read "N
+of 111 products rose" as at most 62 independent confirmations, not 111.** Any
 cross-sectional share or count in this document -- including the 2-sigma count
 just above -- inherits that inflation.
 
@@ -250,8 +250,8 @@ robustness cut:
 
 | unit of observation | units | full-history units | of which rose | chained index | constant basket | worst full-history unit |
 | --- | --- | --- | --- | --- | --- | --- |
-| SKU (product) | 110 | 62 | 62 | 58.4%/yr | 81.7%/yr | 11.6%/yr |
-| set (release event) | 61 | 35 | 35 | 65.1%/yr | 81.0%/yr | 32.6%/yr |
+| SKU (product) | 111 | 63 | 63 | 58.6%/yr | 81.7%/yr | 11.6%/yr |
+| set (release event) | 62 | 36 | 36 | 65.3%/yr | 80.9%/yr | 32.6%/yr |
 
 The index level barely moves (+6.7pp on the chained construction), so the
 equal-weight-by-SKU choice is not what produced the headline. What DOES move is
@@ -259,7 +259,7 @@ the floor: the worst single SKU fell to 11.6%/yr while the worst whole SET only
 reached 32.6%/yr, because a set's weak variant is averaged against its strong
 ones. Both are true; the SKU figure is the honest answer to "what is the worst
 thing I could have bought" and the set figure to "how many distinct releases
-went up". Every one of the 35 full-history SETS rose, which is the version of
+went up". Every one of the 36 full-history SETS rose, which is the version of
 "all of them rose" that survives clustering.
 
 ### 2.7 Is it still going, and is it ETBs?
@@ -270,20 +270,20 @@ on its trailing 12 months (2025-09 to 2026-09) and the benchmark null from 2.4
 is re-run inside that sub-window.
 
 **Still going, and not detectably slower.** The trailing 12 months compound at
-40.4%/yr [-1.7%, 100.4%] against 58.4%/yr over the full window -- the same
+40.8%/yr [-1.3%, 100.9%] against 58.6%/yr over the full window -- the same
 number within its interval. Tested directly rather than eyeballed, a
 last-12-months dummy on monthly log returns (Newey-West, 3 lags) gives
--1.7pp/month, t = -0.81, p = 0.42: **no detectable change in pace**. Read that
+-1.6pp/month, t = -0.80, p = 0.43: **no detectable change in pace**. Read that
 as ruling out a collapse and nothing more -- its standard error is 2.07pp/month
 against a mean of about 3.9pp, so it could only have caught roughly a halving. 6
 of the archive's months were negative and the worst drawdown inside the recent
 window was -4.0%.
 
-**It is broad, not a handful of boxes.** 88 of 91 products priced at both ends
-rose (97%), median 1.55x, and even the 10th percentile is 1.17x. Concentration
-is mild: the top decile of movers carries 20% of the summed log rise, 1.96x its
+**It is broad, not a handful of boxes.** 89 of 92 products priced at both ends
+rose (97%), median 1.56x, and even the 10th percentile is 1.17x. Concentration
+is mild: the top decile of movers carries 19% of the summed log rise, 1.93x its
 even share. Nor is breadth narrowing -- on a cohort held fixed across both
-halves, the share rising went 97% to 98%.
+halves, the share rising went 97% to 99%.
 
 The 3 products that fell are named rather than averaged away: Mega Evolution
 Pokemon Center Elite Trainer Box (Exclusive) [Mega Gardevoir] (0.54x); Mega
@@ -298,30 +298,30 @@ the recent window:
 
 | window | vs | ETBs | them | gap | lo | hi | t | verdict |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| trailing 12m | Booster boxes | 40.4%/yr | 26.1%/yr | +11.3pp | -16.9pp | +49.1pp | 0.72 | no detectable difference |
-| trailing 12m | Booster bundles | 40.4%/yr | 44.3%/yr | -2.7pp | -14.9pp | +11.3pp | -0.40 | no detectable difference |
-| trailing 12m | Singles | 40.4%/yr | 73.5%/yr | -19.1pp | -37.9pp | +5.4pp | -1.57 | no detectable difference |
-| full window (30m) | Booster boxes | 58.4%/yr | 59.6%/yr | -0.7pp | -17.3pp | +19.1pp | -0.08 | no detectable difference |
-| full window (30m) | Booster bundles | 58.4%/yr | 54.0%/yr | +2.9pp | -13.9pp | +22.8pp | 0.31 | no detectable difference |
-| full window (30m) | Singles | 58.4%/yr | 39.8%/yr | +13.3pp | -11.6pp | +45.3pp | 0.99 | no detectable difference |
+| trailing 12m | Booster boxes | 40.8%/yr | 26.1%/yr | +11.7pp | -16.6pp | +49.5pp | 0.74 | no detectable difference |
+| trailing 12m | Booster bundles | 40.8%/yr | 44.3%/yr | -2.4pp | -14.6pp | +11.6pp | -0.35 | no detectable difference |
+| trailing 12m | Singles | 40.8%/yr | 73.1%/yr | -18.6pp | -37.5pp | +5.9pp | -1.53 | no detectable difference |
+| full window (30m) | Booster boxes | 58.6%/yr | 59.6%/yr | -0.6pp | -17.2pp | +19.3pp | -0.07 | no detectable difference |
+| full window (30m) | Booster bundles | 58.6%/yr | 54.0%/yr | +3.0pp | -13.7pp | +22.8pp | 0.32 | no detectable difference |
+| full window (30m) | Singles | 58.6%/yr | 39.8%/yr | +13.4pp | -11.3pp | +45.0pp | 1.00 | no detectable difference |
 
 0 of 6 judgeable comparisons differ from ETBs. The full-window null from section
 2.4 therefore survives into the recent sub-window unchanged: **the recent rise
 is a Pokemon-market rise, not an ETB one.** These are low-power nulls -- the
-trailing-12-month intervals run roughly -16.9pp to +49.1pp -- so the honest
+trailing-12-month intervals run roughly -16.6pp to +49.5pp -- so the honest
 claim is "cannot be distinguished", not "they are the same".
 
 9 shorter-window comparisons are computed and printed in
 `etb_recent_benchmarks.csv` but excluded from every verdict above, because an
 interval built on a handful of monthly observations is not one. That gate is
 load-bearing rather than decorative: the most extreme of those excluded rows is
-trailing 3m ETBs vs singles at t = -8.14 on 3 monthly returns, and quoting it
+trailing 3m ETBs vs singles at t = -7.94 on 3 monthly returns, and quoting it
 would have published a significant result off a window whose sign does not
 survive to twelve months.
 
 **The one split that does show a gap is channel, and it is the weakest inference
 here.** Mass-retail boxes ran 1.69x against 1.28x for Pokemon Center exclusives
-(31.5%, t = 5.11). Differencing two groups cancels the market-wide factor but
+(31.8%, t = 5.18). Differencing two groups cancels the market-wide factor but
 NOT a channel-specific one -- a Pokemon Center release calendar or a restock
 decision leaves the within-channel residuals correlated -- so that t is an upper
 bound on the evidence, not a clean test. Age bands and price quartiles show no
@@ -342,9 +342,9 @@ its longhand annualisation -- importing nothing from `etb_core` or `etb_index`
 | | pipeline | independent rebuild |
 |---|---|---|
 | constant-basket geometric CAGR | 81.7%/yr | 81.7%/yr |
-| full-history basket | -- | 62 products |
-| of which rose | -- | 62 |
-| worst / median member | -- | 11.6%/yr / 77.5%/yr |
+| full-history basket | -- | 63 products |
+| of which rose | -- | 63 |
+| worst / median member | -- | 11.6%/yr / 77.9%/yr |
 
 The two **agree** to +0.0pp (tolerance +0.5pp). That is a check on the
 ARITHMETIC only -- both sides compute the same defined quantity on the same
@@ -361,11 +361,11 @@ anything else looks at it). Published verbatim so it is checkable:
 
 | rule | catalogue rows | priced products | example |
 | --- | --- | --- | --- |
-| `INCLUDED` | 121 | 110 | Celebrations Elite Trainer Box |
+| `INCLUDED` | 121 | 111 | Celebrations Elite Trainer Box |
 | `NOT_A_BOX` | 115 | 0 | Code Card - Celebrations Elite Trainer Box |
 | `MULTI_UNIT` | 80 | 0 | Celebrations Elite Trainer Box Case |
 | `MIXED_LOT` | 3 | 0 | Costco Pokemon Evolving Skies Elite Trainer Box and Tin |
-| `ETB_PLUS` | 4 | 3 | Crown Zenith Pokemon Center Elite Trainer Box Plus |
+| `ETB_PLUS` | 4 | 4 | Pokemon GO Pokemon Center Elite Trainer Box Plus (Exclusive) |
 
 The exclusions that actually cost priced products are the multi-unit SKUs (cases
 and "[Set of 2]" listings, whose price level is not one box) and ETB Plus (a
@@ -375,16 +375,16 @@ produced the result.
 
 ### 3.2 Coverage, stated as a weakness
 
-110 products x 31 months would be 3,410 observations; the panel has 2,761. The
+111 products x 31 months would be 3,441 observations; the panel has 2,792. The
 shortfall is entirely structural. The obvious two-way framing -- "either it
 started late or it was delisted" -- is wrong twice over here, so the split below
 is mutually exclusive and exhaustive by construction and the code raises if the
-buckets stop summing to 110:
+buckets stop summing to 111:
 
 | coverage shape | products | share | what it is |
 | --- | --- | --- | --- |
-| complete | 62 | 56% | priced in every month of the grid |
-| late start only | 37 | 34% | a newer release; enters mid-window and never leaves |
+| complete | 63 | 57% | priced in every month of the grid |
+| late start only | 37 | 33% | a newer release; enters mid-window and never leaves |
 | delisted only | 3 | 3% | priced from the start, then stops being listed |
 | late start and delisted | 2 | 2% | enters mid-window AND stops before the end |
 | interior gap only | 6 | 5% | spans the full window but is missing months inside it |
@@ -416,7 +416,7 @@ delisted product's trailing 3-month return before it stopped being priced:
 So a survivor-only basket is missing continued appreciation, not hiding a
 collapse -- this particular bias makes the constant-basket number, if anything,
 conservative. It is a different bias (missing the slow late entrants) that
-inflates it, and section 2.2 quantifies that one at 23.3 points.
+inflates it, and section 2.2 quantifies that one at 23.1 points.
 
 ### 3.4 What the prices are, and are not
 
@@ -426,7 +426,7 @@ specific things a reader should not assume:
 
 * **There is no bid in this data.** `low`/`high` are the cheapest and dearest
   ASKS. Anything computed from `high - low` is a listing dispersion, not a
-  spread -- the naive calculation gives a "spread" of 195% of the market price
+  spread -- the naive calculation gives a "spread" of 199% of the market price
   (section 6.6).
 * **TCGplayer-Direct quotes do not exist for sealed product.** `direct_low` is
   NULL for every sealed row in the archive, so the direct-discount feature the
@@ -438,18 +438,18 @@ specific things a reader should not assume:
 This study was commissioned around a preliminary headline: a constant-basket
 geometric index on the raw catalogue query, with every full-history product
 positive. **Both halves of that reproduce exactly, and neither should be the
-headline.** Recomputed live on the uncleaned universe: **81.2%/yr**, over 65
-full-history products of which **65 rose and 0 fell**.
+headline.** Recomputed live on the uncleaned universe: **80.9%/yr**, over 67
+full-history products of which **67 rose and 0 fell**.
 
 It is not a calculation error. It is the wrong object, for the reason section
 2.2 isolates -- it is a survivor-cohort index, and the "all positive" property
 is true *by construction of which products get a full history*, not because ETBs
-do not fall. The curated panel makes that visible: 19 of 110 products are down
+do not fall. The curated panel makes that visible: 19 of 111 products are down
 over their own window, of which 19 are late entrants and 0 are full-history
 products. A fixed basket cannot contain a single one of the fallers.
 
-The honest headline is 58.4%/yr with a 95% interval of [21.3%, 106.9%], and even
-that is one cell of a 32.4-point grid.
+The honest headline is 58.6%/yr with a 95% interval of [21.4%, 107.1%], and even
+that is one cell of a 32.1-point grid.
 
 ## 4. Why? The age story -- and why it mostly cannot be told
 
@@ -474,7 +474,7 @@ normalisation, not a fact. What the lifecycle module publishes instead is the
 FAN of answers you get from the three standard identifying restrictions, each of
 which fits every observed price identically (largest fitted-price change across
 the three restrictions: 7.0e-14, measured rather than asserted): a ten-year
-ageing multiple anywhere from **0.74x to 680.83x** -- a **918x** span that is
+ageing multiple anywhere from **0.74x to 672.72x** -- a **904x** span that is
 pure assumption.
 
 Anyone who tells you how much an ETB appreciates per year *because it aged* is
@@ -483,19 +483,19 @@ choosing one point in that fan.
 ### 4.2 What IS identified: the shape, not the slope
 
 Slope CHANGES need no identifying assumption -- they survive the fixed effects.
-Joint test that the age profile is linear: **chi2(5) = 87.0, p = 2.8e-17**. The
+Joint test that the age profile is linear: **chi2(5) = 85.7, p = 5.5e-17**. The
 profile bends, decisively.
 
 | age (months) | slope change (log/yr) | SE | t | significant | products crossing |
 | --- | --- | --- | --- | --- | --- |
-| 12 | 0.642 | 0.098 | 6.55 | yes | 38 |
-| 24 | -0.039 | 0.103 | -0.38 | no | 33 |
-| 36 | -0.216 | 0.065 | -3.34 | yes | 31 |
-| 60 | -0.013 | 0.082 | -0.16 | no | 21 |
+| 12 | 0.649 | 0.098 | 6.60 | yes | 38 |
+| 24 | -0.060 | 0.103 | -0.58 | no | 34 |
+| 36 | -0.199 | 0.065 | -3.08 | yes | 32 |
+| 60 | -0.014 | 0.082 | -0.17 | no | 21 |
 | 84 | 0.012 | 0.076 | 0.15 | no | 13 |
 
 The normalisation-free contrast between the young band and the mature band
-(12-24m -> 36-60m) is **-0.255 log/yr (t = -2.84)**: mature boxes compounded at
+(12-24m -> 36-60m) is **-0.259 log/yr (t = -2.89)**: mature boxes compounded at
 a *lower* annual factor than young ones, which is the opposite of "it takes off
 once it is retired".
 
@@ -503,10 +503,10 @@ once it is retired".
 `etb_lifecycle_stability.csv`:**
 
 1. The acceleration at 12 months **vanishes** once the launch cohort is excluded
-   (-0.120, t = -0.70). It is the launch cooldown ending, not a property of
+   (-0.111, t = -0.64). It is the launch cooldown ending, not a property of
    one-year-old boxes.
 2. The deceleration is estimated almost entirely from the first calendar half;
-   in the second half it is 0.001 (t = 0.01), i.e. indistinguishable from zero.
+   in the second half it is 0.009 (t = 0.12), i.e. indistinguishable from zero.
    Of 6 subsamples tested, 4 are significant.
 
 ### 4.3 The decision-relevant result needs no assumption at all
@@ -582,7 +582,7 @@ what it establishes is a fact about pre-order quotes rather than about age.
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | pre-release at entry | 26 | 15 | -8.5%/yr | -38.9% | 36.9% | 2.0%/yr | 62% | -44.4pp | -2.63 |
 | 0-12m old at entry | 24 | 12 | 64.5%/yr | 4.0% | 160.2% | 64.8%/yr | 12% | n/a | n/a |
-| 1-3y old at entry | 26 | 11 | 89.7%/yr | 37.3% | 162.1% | 88.0%/yr | 0% | +15.3pp | 1.21 |
+| 1-3y old at entry | 27 | 12 | 89.2%/yr | 37.3% | 160.6% | 87.0%/yr | 0% | +15.0pp | 1.18 |
 | 3y+ old at entry | 34 | 29 | 68.9%/yr | 34.5% | 112.3% | 62.6%/yr | 0% | +2.7pp | 0.12 |
 
 Reading the rows against each other:
@@ -594,8 +594,8 @@ Reading the rows against each other:
 * The youngest ON-SALE cohort's own index grew 64.5%/yr with t = 2.13 --
   **distinguishable from flat** at the same bar. 12% of those boxes are down
   over their own window.
-* Product 1-3 years past release grew 89.7%/yr; its paired difference against
-  the youngest on-sale cohort **does not clear the bar** (t = 1.21).
+* Product 1-3 years past release grew 89.2%/yr; its paired difference against
+  the youngest on-sale cohort **does not clear the bar** (t = 1.18).
 * Product 3+ years past release grew 68.9%/yr; its difference **does not clear
   the bar** (t = 0.12), and it sits BELOW the 1-3y cohort in point estimate, so
   this is not a monotone "older is better" effect even before the error bars are
@@ -606,12 +606,12 @@ pooled into the youngest cohort, that cohort's index came out at 39.1%/yr and
 "not distinguishable from flat", and the 1-3y contrast against it cleared the
 significance bar at t = 2.86 -- which is where the claim "the gains belong to
 out-of-print product" came from. Separating the pre-order quotes moves the
-youngest on-sale cohort to 64.5%/yr and leaves the 1-3y contrast at t = 1.21.
+youngest on-sale cohort to 64.5%/yr and leaves the 1-3y contrast at t = 1.18.
 The ordering of the point estimates is broadly unchanged; what does not survive
 is the claim that any of the AGEING contrasts was tested. See section 7.4.
 
 Note also the sample these contrasts rest on: buckets of 24 to 34 SKUs, which
-are only 11 to 29 distinct releases (the `sets` column above), all sharing ONE
+are only 12 to 29 distinct releases (the `sets` column above), all sharing ONE
 31-month calendar window -- a post-hoc slice of a small panel, not an
 experiment.
 
@@ -636,7 +636,7 @@ This is the owner's own observation, and it is correct as a statement about
 today's shelf. It is also the single easiest number in this study to misread, so
 the gradient and the reason it cannot be extrapolated are stated together
 throughout: **at 2026-09, mass-retail ETB price rises with age at Spearman rho =
-0.703 (p = 2.2e-11, n = 68) -- and within a single calendar month a product's
+0.701 (p = 1.9e-11, n = 69) -- and within a single calendar month a product's
 age IS its release cohort, with R^2 = 1.000, so that rho ranks vintages and
 cannot separate "boxes gain value as they age" from "boxes made in 2016 are
 scarcer than boxes made in 2026".** Neither half of that sentence is quotable
@@ -646,7 +646,7 @@ Three things qualify it further, all measured.
 
 **It is a mass-retail fact, not an ETB fact.** Pokemon Center exclusives give
 rho = 0.350 (p = 0.03, n = 37) -- indistinguishable from zero, and no PC product
-in the archive is older than about 5 years. The pooled rho = 0.534 is therefore
+in the archive is older than about 5 years. The pooled rho = 0.530 is therefore
 partly a statement about which channel happens to be old.
 
 **The shape is not a trend, and this sample cannot order the bands.**
@@ -656,22 +656,22 @@ partly a statement about which channel happens to be old.
 | <1yr | 6 | $115 | $71 | $178 | 6 |
 | 1-2yr | 9 | $140 | $118 | $167 | 7 |
 | 2-3yr | 8 | $137 | $114 | $154 | 6 |
-| 3-5yr | 12 | $207 | $152 | $327 | 11 |
+| 3-5yr | 13 | $195 | $156 | $326 | 12 |
 | 5-8yr | 18 | $192 | $143 | $566 | 14 |
 | 8yr+ | 15 | $831 | $636 | $1,256 | 13 |
 
 Every row of that table is a different set of products bought in a different
 decade -- it is a vintage ranking, printed by age because that is how the
 question was asked. The medians do NOT rise monotonically: there are 2
-inversions, the worst being 3-5yr -> 5-8yr at -7.2% -- the dip the owner
+inversions, the worst being 1-2yr -> 2-3yr at -2.5% -- the dip the owner
 noticed. Of those 2 dips, 0 separate at the bootstrap median interval, and the
 step up into the oldest band does separate either -- despite supplying 89% of
-the whole top-to-bottom range by itself. With 68 products spread over 6 bands
+the whole top-to-bottom range by itself. With 69 products spread over 6 bands
 and a long right tail, **the band ORDER above is not established by this
 sample** -- neither the owner's dip nor the headline step. The point estimates
 are what they are; their ordering is not. The counterweight is kept honestly the
-other way too: dropping the vintage band entirely still leaves rho = 0.483 (p =
-2.5e-04, n = 53) and a fitted 23.8%/yr against 26.8%/yr on the full sample, so
+other way too: dropping the vintage band entirely still leaves rho = 0.481 (p =
+2.3e-04, n = 54) and a fitted 23.8%/yr against 26.9%/yr on the full sample, so
 the gradient is not only the vintage tail.
 
 **The oldest band is where the level lives and where the sample is worst.** Only
@@ -696,18 +696,18 @@ holding period requires that ageing CAUSES the gap, which is the one thing R^2 =
 1.000 forbids. The panel answers the question the cross-section cannot, because
 it watches the same box age.
 
-Across 98 products with a full price path, mass-retail in-window appreciation
-runs 67.8%/yr median with 6% negative. Its dependence on age is +2.1pp/yr per
-year of age (t = 1.31) -- **no age dependence distinguishable from zero**.
-Excluding products still inside their launch window it is -1.8pp/yr (t = -1.21):
+Across 99 products with a full price path, mass-retail in-window appreciation
+runs 68.4%/yr median with 6% negative. Its dependence on age is +2.0pp/yr per
+year of age (t = 1.30) -- **no age dependence distinguishable from zero**.
+Excluding products still inside their launch window it is -1.8pp/yr (t = -1.22):
 older boxes appreciated more *slowly*, the opposite sign to what an ageing
 reading of the cross-section predicts. The headline null is the conservative
 statement and the one to quote; the excl-launch cut is a post-hoc slice of one
 regime, published because its sign is decision-relevant, not because it
 establishes that age is bad for a box.
 
-Put on one scale: the cross-sectional gradient implies 81.1% over the median
-observed span, while boxes actually returned 236.8%. The gradient can account
+Put on one scale: the cross-sectional gradient implies 81.3% over the median
+observed span, while boxes actually returned 237.2%. The gradient can account
 for at most 49% of the realised log move -- an upper bound, since it credits the
 whole implied part to age. **The rest is calendar, and no box bought today can
 assume it.** That ceiling is a bound on how much of the gradient an ageing story
@@ -719,13 +719,13 @@ the crossing.
 
 | channel | from | to | cross-section implies | boxes that crossed | they actually did | contradicted |
 | --- | --- | --- | --- | --- | --- | --- |
-| mass_retail | 1-2yr | 2-3yr | -2.5% | 6 | 369.3% | yes |
-| mass_retail | 3-5yr | 5-8yr | -7.2% | 13 | 225.0% | yes |
+| mass_retail | 1-2yr | 2-3yr | -2.5% | 7 | 328.2% | yes |
+| mass_retail | 3-5yr | 5-8yr | -1.3% | 13 | 225.0% | yes |
 | pokemon_center | 1-2yr | 2-3yr | -24.1% | 5 | 371.8% | yes |
 
-The headline one is the owner's dip: mass retail 3-5yr -> 5-8yr implies -7.2%,
-and the 13 boxes that genuinely aged past that boundary returned 225.0% median
-[169.0%, 237.2%]. The cross-sectional dip is a fact about which sets are 5-8
+The headline one is the owner's dip: mass retail 1-2yr -> 2-3yr implies -2.5%,
+and the 7 boxes that genuinely aged past that boundary returned 328.2% median
+[316.9%, 454.6%]. The cross-sectional dip is a fact about which sets are 5-8
 years old, not about what happens to a box on its fifth birthday.
 
 **No forecast follows.** `projection_support` reports `forecast_supported = no`
@@ -735,8 +735,8 @@ flagged `is_measured = False`:
 
 on a $115 box at 10 years -- *flat in nominal terms* -> 1.00x ($115); *today's
 box walks the current cross-section* -> 8.83x ($1,014); *the 2024-2026 rate
-continues* -> 176.47x ($20,269). Every one of those is an ASSUMPTION carried
-forward, not a measurement, and they disagree by a factor of 176.
+continues* -> 183.89x ($21,122). Every one of those is an ASSUMPTION carried
+forward, not a measurement, and they disagree by a factor of 184.
 
 **The spread between them, from one dataset, is the finding** -- it is why this
 study publishes no holding period.
@@ -753,14 +753,14 @@ over the next H months? It is not "will ETBs go up" -- section 2 measures that.
 
 | horizon (months) | purged folds | mean held-out IC | effective n | t | clears both gates |
 | --- | --- | --- | --- | --- | --- |
-| 1 | 24 | 0.271 | 10.37 | 3.57 | yes |
-| 3 | 20 | -0.031 | 3.86 | -0.20 | no |
-| 6 | 14 | -0.121 | 1.82 | -0.73 | no |
-| 12 | 2 | -0.200 | 1.00 | -0.98 | no |
+| 1 | 24 | 0.266 | 10.02 | 3.49 | yes |
+| 3 | 20 | -0.027 | 4.10 | -0.18 | no |
+| 6 | 14 | -0.121 | 1.92 | -0.78 | no |
+| 12 | 2 | -0.201 | 1.00 | -0.99 | no |
 
 At the pre-registered primary horizon of 6 months the mean held-out rank
 correlation is **-0.121** -- the point estimate is NEGATIVE -- on an effective
-sample of 1.82 against the repo's 4.0 bar. At H = 12 there are **zero** usable
+sample of 1.92 against the repo's 4.0 bar. At H = 12 there are **zero** usable
 folds: a 31-month archive cannot test a one-year hold with a leakage-free design
 at all, which is itself a finding about the data rather than about the model.
 
@@ -782,27 +782,27 @@ opposite:
 
 | relationship | mean IC | t | effective n |
 | --- | --- | --- | --- |
-| mid_skew -> market | 0.271 | 4.36 | 10.34 |
-| mid_skew -> book mid | -0.238 | -4.51 | 10.53 |
-| mid_skew -> gap change | -0.449 | -16.68 | 24.00 |
+| mid_skew -> market | 0.271 | 4.44 | 10.50 |
+| mid_skew -> book mid | -0.238 | -4.60 | 10.88 |
+| mid_skew -> gap change | -0.449 | -16.75 | 24.00 |
 
 A high skew predicts the market price RISING and the book midpoint FALLING, with
 the gap between them closing hard. That is two measurements of one price
 converging, not a forecast of value.
 
-**Economics.** The top-quintile portfolio at H = 1 returns 169.8%/yr against the
-basket's 98.8%/yr -- an edge of +71.0pp gross (t = 2.68). Twelve rebalances a
+**Economics.** The top-quintile portfolio at H = 1 returns 170.1%/yr against the
+basket's 98.9%/yr -- an edge of +71.3pp gross (t = 2.77). Twelve rebalances a
 year at the round-trip cost from section 6 is a 85.8pp drag, so the NET edge is
--14.8pp. It loses to doing nothing.
+-14.5pp. It loses to doing nothing.
 
 **The model does not beat its own best single input.**
 
 | horizon | best single feature | its IC | fitted model IC | which wins |
 | --- | --- | --- | --- | --- |
-| 1 | `mid_skew` | 0.271 | 0.271 | tie |
-| 3 | `mid_skew` | 0.247 | -0.031 | the single feature |
-| 6 | `mid_skew` | 0.284 | -0.121 | the single feature |
-| 12 | `rel_spread` | -0.285 | -0.200 | model |
+| 1 | `mid_skew` | 0.271 | 0.266 | tie |
+| 3 | `mid_skew` | 0.244 | -0.027 | the single feature |
+| 6 | `mid_skew` | 0.282 | -0.121 | the single feature |
+| 12 | `rel_spread` | -0.266 | -0.201 | model |
 
 That is textbook small-sample overfitting, and it means the ML layer adds
 nothing here that a one-line feature ranking does not. Full detail, including
@@ -828,15 +828,15 @@ heavy box. That is roughly **20.2% of the box price plus $12.30 fixed**, charged
 once. Because it is charged once, it amortises -- which is the whole answer to
 "how long should I hold".
 
-At the measured gross index rate of 58.4%/yr, on a $218 box (the median ETB
+At the measured gross index rate of 58.6%/yr, on a $218 box (the median ETB
 price in 2026-09):
 
 | hold (months) | gross | net | net rate | friction drag | gross growth needed to beat cash | beats cash |
 | --- | --- | --- | --- | --- | --- | --- |
-| 3 | 1.12x | 0.86x | -46.1%/yr | 104.5pp/yr | 196.2%/yr | no |
-| 6 | 1.26x | 0.97x | -6.6%/yr | 65.0pp/yr | 76.2%/yr | no |
-| 12 | 1.58x | 1.23x | 22.8%/yr | 35.6pp/yr | 35.8%/yr | yes |
-| 24 | 2.51x | 1.97x | 40.5%/yr | 17.9pp/yr | 19.3%/yr | yes |
+| 3 | 1.12x | 0.86x | -46.0%/yr | 104.6pp/yr | 196.2%/yr | no |
+| 6 | 1.26x | 0.97x | -6.5%/yr | 65.1pp/yr | 76.2%/yr | no |
+| 12 | 1.59x | 1.23x | 23.0%/yr | 35.6pp/yr | 35.8%/yr | yes |
+| 24 | 2.51x | 1.98x | 40.7%/yr | 17.9pp/yr | 19.3%/yr | yes |
 
 **The minimum hold to beat a 4.5% savings account is 8 months** (9 months on a
 cheap box, 7 on an expensive one -- shipping and the flat fee do not scale).
@@ -844,29 +844,29 @@ This is arithmetic about the fee structure and is the one conclusion in this
 entire document that does not depend on the regime.
 
 An OPTIMAL hold is a different matter and the study declines to name one: the
-best observed horizon was 18 months at 66.8%/yr net, but a 30-month archive
+best observed horizon was 18 months at 66.6%/yr net, but a 30-month archive
 contains exactly 1 non-overlapping window of that length. One window is an
 anecdote.
 
 ### 6.2 What actually happened, box by box
 
-37,446 realised holding periods across 110 products, all net of costs:
+37,911 realised holding periods across 111 products, all net of costs:
 
 | hold | holding periods | independent windows | median net | 5th pct | 95th pct | share that lost money |
 | --- | --- | --- | --- | --- | --- | --- |
-| 3 | 2,408 | 10 | 0.83x | 0.51x | 1.25x | 80% |
-| 6 | 2,093 | 5 | 1.00x | 0.57x | 1.64x | 50% |
-| 12 | 1,507 | 2 | 1.44x | 0.87x | 2.83x | 11% |
-| 24 | 506 | 1 | 2.70x | 1.53x | 6.86x | 1% |
+| 3 | 2,436 | 10 | 0.83x | 0.51x | 1.24x | 80% |
+| 6 | 2,118 | 5 | 1.00x | 0.57x | 1.64x | 50% |
+| 12 | 1,526 | 2 | 1.44x | 0.87x | 2.82x | 10% |
+| 24 | 513 | 1 | 2.69x | 1.54x | 6.80x | 1% |
 
 **A three-month flip lost money 80% of the time during a boom.** Six months was
-a coin flip (50%). Twelve months lost 11% of the time. A product-clustered
-bootstrap puts the median 12-month net rate at 44.3%/yr, 95% CI [37.1%, 53.7%]
-over 96 products.
+a coin flip (50%). Twelve months lost 10% of the time. A product-clustered
+bootstrap puts the median 12-month net rate at 43.8%/yr, 95% CI [36.8%, 51.4%]
+over 97 products.
 
 Note the two 12-month numbers in this document that DISAGREE: applying the
-chained index rate uniformly gives 22.8%/yr, while the pooled realised holds
-give 44.3%/yr. They are different objects -- pooling triples over-weights
+chained index rate uniformly gives 23.0%/yr, while the pooled realised holds
+give 43.8%/yr. They are different objects -- pooling triples over-weights
 long-history survivor products, and the middle of the window grew faster than
 its ends. The gap is roughly the size of the entire friction drag, which is
 itself a warning about how much of any of these numbers is a construction
@@ -876,9 +876,9 @@ choice.
 
 | products | 10th pct box | median box | 90th pct box | the basket | middle-50% spread | share worse than basket |
 | --- | --- | --- | --- | --- | --- | --- |
-| 96 | 0.98x | 1.44x | 2.45x | 1.30x | 73pp | 35% |
+| 97 | 0.99x | 1.44x | 2.45x | 1.30x | 71pp | 35% |
 
-At twelve months the middle 50% of single-box outcomes spans about 73 annualised
+At twelve months the middle 50% of single-box outcomes spans about 71 annualised
 points and 35% of picks did worse than simply owning the basket.
 
 ### 6.4 When you bought mattered more than how long you held
@@ -888,8 +888,8 @@ points and 35% of picks did worse than simply owning the basket.
 | bought before release (pre-order quote) | 18 | 17 | -34.5%/yr | 72% |
 | bought 0-6m after release | 138 | 32 | 24.9%/yr | 25% |
 | bought 6-12m after release | 142 | 28 | 52.0%/yr | 11% |
-| bought 1-3y after release | 473 | 47 | 60.1%/yr | 5% |
-| bought 3y+ after release | 736 | 51 | 39.6%/yr | 10% |
+| bought 1-3y after release | 489 | 48 | 59.1%/yr | 5% |
+| bought 3y+ after release | 739 | 52 | 39.7%/yr | 10% |
 
 Buying inside six months of release and holding a year lost money 25% of the
 time; buying product already 1-3 years old lost 5% of the time. **The worst row
@@ -919,12 +919,12 @@ Two numbers, both regime-facing:
 * **Flat is not break-even.** If prices merely stop rising, a 12-month hold
   returns 0.75x -- a 24.6% annualised loss, because the frictions are charged
   anyway.
-* **A fall of 43.3% from the terminal price erases the entire 24-month edge over
-  a savings account**, and 47.8% turns it into a nominal loss. That is about 63%
+* **A fall of 43.4% from the terminal price erases the entire 24-month edge over
+  a savings account**, and 47.9% turns it into a nominal loss. That is about 63%
   of the gain -- it does not require prices to return to where they started.
 
 At 24 months the net answer keeps its sign under every sensitivity cell; at 6
-months the same knobs move it across zero (-33.8% to 24.5%/yr), so short-horizon
+months the same knobs move it across zero (-33.8% to 24.7%/yr), so short-horizon
 verdicts are assumptions rather than measurements.
 
 ### 6.6 One brief the data contradicted
@@ -933,9 +933,9 @@ This study was briefed on a "~15-20% bid-ask on thin sealed listings". **The
 archive does not support that**, and the obvious way to compute it is wrong.
 `price_history` carries a LISTING book -- `low` is the cheapest ask, `high` the
 dearest -- and no bid at all. Treating `high - low` as a spread gives a median
-of 195% of the market price, because `high` has a median of 2.98x market. What
-IS measurable: `low/market` has a median of 0.980, and a round trip executed at
-`low` on both ends returned a median 1.010x of what a market-to-market round
+of 199% of the market price, because `high` has a median of 3.01x market. What
+IS measurable: `low/market` has a median of 0.979, and a round trip executed at
+`low` on both ends returned a median 1.014x of what a market-to-market round
 trip returned, with only 45% of products worse off. The measurable spread very
 nearly cancels. The holder's real loss is fees, tax and shipping -- which is why
 the undercut constant defaults to zero and is swept to 15% anyway (worth 11.3
@@ -958,15 +958,15 @@ are excluded on terms-of-service grounds. "The last few years" means 2.5 years.
 
 ### 7.2 Everything else worth knowing before quoting a number
 
-* **The headline is a construction choice.** The 15-cell grid spans 58.1% to
-  90.5%/yr. Any single figure quoted without its construction is unfalsifiable.
+* **The headline is a construction choice.** The 15-cell grid spans 58.3% to
+  90.4%/yr. Any single figure quoted without its construction is unfalsifiable.
 * **Prices are TCGplayer quotes, not executions.** `market` is a trailing sales
   average; nobody transacted at the index. Section 6 is the correction, and its
   cost constants are stated assumptions, not fetched facts.
 * **The age effect is unidentified** (section 4.1) and the ML layer is a null
   (section 5). Neither is a placeholder for a result that is coming later; both
   are the answer this data supports.
-* **12 of 110 products are observed for fewer than the 12 months required to
+* **12 of 111 products are observed for fewer than the 12 months required to
   annualise.** Their cumulative return is a fact and is published; their CAGR is
   blank rather than a number like -99.9%/yr, which is what annualising a 3-month
   window produces.
@@ -981,11 +981,11 @@ are excluded on terms-of-service grounds. "The last few years" means 2.5 years.
 
 ### 7.3 Every ETB in the study
 
-110 products, sorted by annualised growth; blank CAGR means fewer than 12
+111 products, sorted by annualised growth; blank CAGR means fewer than 12
 observed months. The same rows, with every column, are in
-**`data/output/etb_products.csv`**. Of these, 67 have a growth rate that clears
+**`data/output/etb_products.csv`**. Of these, 68 have a growth rate that clears
 |t| >= 2 on their own Newey-West error bar and 19 are down over their observed
-window. Those are SKU counts: 110 SKUs are 61 sets (1.80 per set), so divide by
+window. Those are SKU counts: 111 SKUs are 62 sets (1.79 per set), so divide by
 roughly that before treating them as independent (section 2.6).
 
 **Read the `total spans a gap?` column.** 2 rows carry `GAP`, meaning at least 6
@@ -1033,6 +1033,7 @@ blank-CAGR gate protects the ANNUALISED column but not this one.
 | 256,138 | Brilliant Stars Elite Trainer Box | swsh9 | 31 | 0 | 25 | 37.38 | 160.76 | 330.1% |  | 79.2%/yr | 3.35 | -20.1% | no | yes | no | no |
 | 265,527 | Astral Radiance Elite Trainer Box | swsh10 | 31 | 0 | 22 | 33.56 | 143.70 | 328.2% |  | 78.9%/yr | 2.82 | -10.8% | no | yes | no | no |
 | 478,756 | Scarlet & Violet Pokemon Center Elite Trainer Box (Exclusive) [Miraidon] | sv1 | 31 | 0 | 12 | 74.94 | 317.06 | 323.1% |  | 78.1%/yr | 2.30 | -13.8% | yes | yes | no | no |
+| 270,708 | Pokemon GO Elite Trainer Box | pgo | 31 | 0 | 20 | 40.25 | 169.87 | 322.0% |  | 77.9%/yr | 3.48 | -8.2% | no | yes | no | no |
 | 478,335 | Scarlet & Violet Elite Trainer Box [Koraidon] | sv1 | 31 | 0 | 12 | 32.52 | 135.58 | 316.9% |  | 77.0%/yr | 3.31 | -8.0% | no | yes | no | no |
 | 512,813 | Paradox Rift Elite Trainer Box [Iron Valiant] | sv4 | 31 | 0 | 4 | 32.70 | 136.13 | 316.3% |  | 76.9%/yr | 3.07 | -10.1% | no | yes | no | no |
 | 478,336 | Scarlet & Violet Elite Trainer Box [Miraidon] | sv1 | 31 | 0 | 12 | 35.95 | 148.18 | 312.2% |  | 76.2%/yr | 3.07 | -10.4% | no | yes | no | no |
@@ -1131,7 +1132,7 @@ moves with it. Corrected 2026-07-25.
 | share losing money, "bought 0-6m after release", 12-month hold | 30% | 25% | revised down | etb_summary.md 6.4, etb_hold_summary.md 5 |
 | chained index of the "0-12m old at entry" cohort | 39.1% | 64.5% | revised up | etb_summary.md 1 and 4.4, etb.html |
 | share of the "0-12m old at entry" cohort down over its own window | 35% | 12% | revised down | etb_summary.md 1 and 4.4 |
-| t of the 1-3y cohort's difference from the youngest cohort | t = 2.86 | t = 1.21 | revised down | etb_summary.md 1 and 4.4, etb.html, etb_hold_summary.md 5 |
+| t of the 1-3y cohort's difference from the youngest cohort | t = 2.86 | t = 1.18 | revised down | etb_summary.md 1 and 4.4, etb.html, etb_hold_summary.md 5 |
 
 **One misunderstanding, 4 independent modules.** Every row traces to the same
 wrong assumption: that a product's first priced row is a price somebody could
