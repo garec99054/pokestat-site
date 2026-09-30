@@ -9,19 +9,19 @@ n = 5436 card-date observations across 8 snapshot dates.
 
 | flag | n | mean_return | median_return |
 | --- | --- | --- | --- |
-| fair | 4683 | 8.5% | 6.6% |
+| fair | 4682 | 8.5% | 6.6% |
 | overvalued | 336 | 9.6% | 5.7% |
-| undervalued | 417 | 10.7% | 8.9% |
+| undervalued | 418 | 10.5% | 8.9% |
 
-**Spread (undervalued mean return minus overvalued mean return): +1.0%**
+**Spread (undervalued mean return minus overvalued mean return): +0.9%**
 
 ## Per-date result
 
 | snapshot_date | flag | n | mean_return | median_return |
 | --- | --- | --- | --- | --- |
-| 2024-09-01 | fair | 510 | 2.6% | 2.1% |
+| 2024-09-01 | fair | 509 | 2.7% | 2.1% |
 | 2024-09-01 | overvalued | 37 | 2.8% | 0.1% |
-| 2024-09-01 | undervalued | 49 | 3.2% | 2.2% |
+| 2024-09-01 | undervalued | 50 | 2.5% | 1.2% |
 | 2024-12-01 | fair | 515 | 21.0% | 14.5% |
 | 2024-12-01 | overvalued | 40 | 32.0% | 24.5% |
 | 2024-12-01 | undervalued | 52 | 29.9% | 24.7% |
