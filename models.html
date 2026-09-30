@@ -621,9 +621,12 @@ padding:18px 20px;background:var(--panel);font-size:var(--fs-3);color:var(--ink-
 .hub-card{
 display:block;border:1px solid var(--border);border-radius:var(--radius);
 padding:15px 17px;background:var(--panel);text-decoration:none;color:inherit;
-transition:border-color .15s ease-out,transform .15s ease-out;
 }
-.hub-card:hover{border-color:var(--accent);transform:translateY(-1px);}
+.hub-card:hover{border-color:var(--accent);}
+@media (prefers-reduced-motion:no-preference){
+.hub-card{transition:border-color .15s ease-out,transform .15s ease-out;}
+.hub-card:hover{transform:translateY(-1px);}
+}
 .hub-card .hc-title{font-weight:650;color:var(--ink);font-size:var(--fs-4);margin:0 0 4px;}
 .hub-card .hc-desc{color:var(--ink-muted);font-size:var(--fs-2);margin:0;line-height:1.45;}
 .hub-grid .hc-desc{
@@ -888,9 +891,9 @@ svg.mchart .k0{fill:var(--ink-subtle);font-size:11px;text-anchor:middle}svg.mcha
 
   <header class="masthead" data-reveal>
     <h1>Which model was selected, and why</h1>
-    <p class="lede prose">The models that were tried, and the three simple rules each one had to beat: predict no change, follow the recent winners, or bet against them. Every model was trained only on months before the ones it was scored on, and scored on months it had never seen. The winner is then pulled apart to show how much of its edge is telling cards apart inside a single release window, and how much is just older sets ranked against newer ones.</p>
+    <p class="lede prose">The models that were tried, and the three simple rules each one had to beat: predict no change, follow the recent winners, or bet against them. Every model was trained only on months before the ones it was scored on, and scored on months it had never seen. There the winner (rf) scored held-out IC 0.37 (95% range 0.28 to 0.46), where 0 is no skill and 1 is a perfect ranking. The winner is then pulled apart to show how much of its edge is telling cards apart inside a single release window, and how much is just older sets ranked against newer ones.</p>
     <details class="explain"><summary><span class="custom">Technical wording</span></summary>
-      <div class="explain-body"><p>Candidate models and the three baselines that must be beaten (a zero prediction, a momentum-only score, and a reversion-only score) over the walk-forward folds. The selected model is graded honestly on disjoint held-out evaluation folds, then broken down to show whether its edge is skill inside one release window or merely the eras ranked against each other.</p></div>
+      <div class="explain-body"><p>Candidate models and the three baselines that must be beaten (a zero prediction, a momentum-only score, and a reversion-only score) over the walk-forward folds. The selected model is graded on disjoint held-out evaluation folds, then broken down to show whether its edge is skill inside one release window or merely the eras ranked against each other.</p></div>
     </details>
   </header>
 
@@ -900,7 +903,7 @@ svg.mchart .k0{fill:var(--ink-subtle);font-size:11px;text-anchor:middle}svg.mcha
     <ol>
       <li><a href="#models">Model leaderboard</a></li>
       <li><a href="#listing-book">Recovered listing-book features: what they bought, and what they really are</a></li>
-      <li><a href="#within-era">Is that edge within-era skill, or just cross-era contrast?</a></li>
+      <li><a href="#within-era">Within-era skill versus cross-era contrast</a></li>
       <li><a href="#scorecard">Live forecasts, scored</a></li>
     </ol>
   </nav>
@@ -924,7 +927,7 @@ svg.mchart .k0{fill:var(--ink-subtle);font-size:11px;text-anchor:middle}svg.mcha
             <th class="num" title="IC information ratio using an overlap-deflated effective sample size, not the naive fold count.">IC IR (n_eff)</th>
             <th class="num" title="Top-minus-bottom quintile realized return spread.">Quintile spread</th>
             <th class="num" title="Precision of the up-flag calls.">Up precision</th>
-            <th class="num" title="Split-conformal 80 percent interval hit rate, measured OUT of the calibration sample: each held-out fold is scored against bands calibrated on strictly prior folds.">Interval coverage (honest)</th>
+            <th class="num" title="Split-conformal 80 percent interval hit rate, measured OUT of the calibration sample: each held-out fold is scored against bands calibrated on strictly prior folds.">Interval coverage (held-out)</th>
           </tr>
         </thead>
         <tbody id="leaderboard-body"></tbody>
@@ -936,17 +939,17 @@ svg.mchart .k0{fill:var(--ink-subtle);font-size:11px;text-anchor:middle}svg.mcha
 
   <section id="listing-book" data-reveal>
     <h2>Recovered listing-book features: what they bought, and what they really are</h2>
-    <p class="section-note">tcgcsv returns five price points for every product &mdash;
+    <p class="section-note">tcgcsv returns five price points for every product:
       <code>lowPrice</code>, <code>midPrice</code>, <code>highPrice</code>,
       <code>marketPrice</code>, <code>directLowPrice</code>. The panel used to keep only
       <code>marketPrice</code> and discard the rest at aggregation time. They describe the
-      <em>shape</em> of the listing book around the traded price &mdash; width, where trades
-      clear inside it, ask-side overhang, dealer inventory &mdash; which is a liquidity and
+      <em>shape</em> of the listing book around the traded price (width, where trades
+      clear inside it, ask-side overhang, dealer inventory), which is a liquidity and
       dealer-pressure proxy.</p>
     <p class="section-note">Six scale-free features are derived from them, all normalised by
       <code>market</code> and all read from the date-T snapshot (and the T&minus;3m snapshot for
-      the two deltas), so they are strictly as-of-T: <code>rel_spread</code>, <code>market_pos</code>, <code>mid_skew</code>, <code>direct_discount</code>, <code>d_rel_spread_3m</code>, <code>d_market_pos_3m</code>. They are populated across all 29
-      historical monthly snapshots (low 100%, mid 100%, high 100%, direct_low 42%), which is what makes them usable as training
+      the two deltas), so they are strictly as-of-T: <code>rel_spread</code>, <code>market_pos</code>, <code>mid_skew</code>, <code>direct_discount</code>, <code>d_rel_spread_3m</code>, <code>d_market_pos_3m</code>. Their coverage across the
+      historical monthly snapshots is low 100%, mid 100%, high 100%, direct_low 42%, which is what makes them usable as training
       features at all rather than a present-day snapshot leaking backwards.</p>
     <div class="callout"><strong>Held-out mean rank IC moved 0.335 &rarr; 0.369 (+0.034).</strong> The static-ablated held-out IC moved 0.236 &rarr; 0.285, and the selection folds chose the same model (<code>rf</code>) on both arms, so the comparison is not confounded by a change of learner: same panel, same folds, same selection and evaluation split, only the feature list differs. <strong>But read the size against the error bars.</strong> State it plainly: the move (+0.034) is SMALLER than the 'before' arm's own one-SE band (0.105). On these error bars a reader cannot conclude that the improvement clears sampling noise, and no joint significance test of the two arms is claimed anywhere in this section.</div>
     <figure class="chartfig" data-reveal><svg class="mchart" viewBox="0 0 560 168" width="560" height="168" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Held-out IC before and after the listing-book features" style="max-width:560px;width:100%;height:auto;display:block;margin:0 auto;"><line x1="150" y1="22" x2="150" y2="128" class="k1"/><text x="150" y="144" class="k0">0</text><line x1="226.4" y1="22" x2="226.4" y2="128" class="k1"/><text x="226.4" y="144" class="k0">0.1</text><line x1="302.7" y1="22" x2="302.7" y2="128" class="k1"/><text x="302.7" y="144" class="k0">0.2</text><line x1="379.1" y1="22" x2="379.1" y2="128" class="k1"/><text x="379.1" y="144" class="k0">0.3</text><line x1="455.5" y1="22" x2="455.5" y2="128" class="k1"/><text x="455.5" y="144" class="k0">0.4</text><line x1="150" y1="22" x2="150" y2="128" class="k5"/><rect x="150" y="40.5" width="255.8" height="16" fill="var(--neutral)" opacity="0.5" rx="2"/><line x1="325.6" y1="48.5" x2="486" y2="48.5" class="k2"/><line x1="325.6" y1="43.5" x2="325.6" y2="53.5" class="k2"/><line x1="486" y1="43.5" x2="486" y2="53.5" class="k2"/><text x="140" y="52" font-size="11" fill="var(--ink)" text-anchor="end">before (market only)</text><text x="492" y="52" class="k7">0.335</text><rect x="150" y="93.5" width="281.8" height="16" fill="var(--accent)" opacity="0.9" rx="2"/><line x1="406.6" y1="101.5" x2="457" y2="101.5" class="k2"/><line x1="406.6" y1="96.5" x2="406.6" y2="106.5" class="k2"/><line x1="457" y1="96.5" x2="457" y2="106.5" class="k2"/><text x="140" y="105" font-size="11" fill="var(--ink)" text-anchor="end" font-weight="600">after (+ listing book)</text><text x="492" y="105" class="k7">0.369</text><text x="318" y="162" class="k8">Held-out mean rank IC (whiskers = ±1 SE)</text></svg><figcaption class="chart-cap">Held-out mean rank IC for the two arms with each arm's own one-standard-error band. The bands overlap: the improvement is real on the held-out folds but is not shown to clear sampling noise, and no joint significance test of the two arms is claimed. Data: forward_validation.</figcaption></figure>
@@ -961,8 +964,8 @@ svg.mchart .k0{fill:var(--ink-subtle);font-size:11px;text-anchor:middle}svg.mcha
       <p class="takeaway" style="margin-top:12px;"><strong>What that decay means, stated rather than buried.</strong> That is the signature of a mechanical catch-up, not of demand forecasting: TCGplayer's `market` is a trailing transaction-weighted average, while `mid` is the CURRENT listing midpoint, so `mid` carries fresher information than `market` at the same instant. A large part of this feature's edge is therefore the stale average converging on a book that was already visible at T -- honest as-of-T signal, but substantially a measurement-lag artifact of how the price series is constructed rather than a forecast of future demand. A buyer paying live listing prices would capture less of it than the IC suggests.</p>
       <p class="slice-legend">This is disclosed rather than buried because it changes how the
         improvement should be read: the recovered fields are legitimate, leakage-free, as-of-T
-        data from an already-approved source, and the IC gain is real on held-out folds &mdash;
-        but it is mostly one feature, and that feature is substantially exploiting a lag inside
+        data from an already-approved source, and the IC gain is real on held-out folds.
+        But it is mostly one feature, and that feature is substantially exploiting a lag inside
         the price series rather than predicting the market.</p>
     <div class="table-wrap">
       <table><thead><tr><th title="Feature derived from the recovered listing-book price points.">Feature</th><th class="num" title="Univariate IC on the SELECTION folds. This column nominated the driver feature; it is disjoint from the held-out folds.">Selection-fold IC</th><th class="num" title="Univariate IC on the held-out evaluation folds. This column is what gets reported.">Held-out IC</th><th class="num" title="One autocorrelation-aware standard error, ic_std over the square root of the effective fold count.">&plusmn; 1 SE</th></tr></thead><tbody><tr class="slice-total"><td><code>mid_skew</code></td><td class="num">+0.181</td><td class="num">+0.172</td><td class="num">&plusmn;0.051</td></tr><tr><td><code>d_market_pos_3m</code></td><td class="num">-0.117</td><td class="num">-0.103</td><td class="num">&plusmn;0.032</td></tr><tr><td><code>rel_spread</code></td><td class="num">+0.055</td><td class="num">-0.041</td><td class="num">&plusmn;0.198</td></tr><tr><td><code>direct_discount</code></td><td class="num">+0.040</td><td class="num">+0.036</td><td class="num">&plusmn;0.044</td></tr><tr><td><code>market_pos</code></td><td class="num">-0.124</td><td class="num">+0.034</td><td class="num">&plusmn;0.094</td></tr><tr><td><code>d_rel_spread_3m</code></td><td class="num">+0.003</td><td class="num">+0.002</td><td class="num">&plusmn;0.037</td></tr></tbody></table>
@@ -973,7 +976,7 @@ svg.mchart .k0{fill:var(--ink-subtle);font-size:11px;text-anchor:middle}svg.mcha
   </section>
 
   <section id="within-era" data-reveal style="display:none;">
-    <h2>Is that edge within-era skill, or just cross-era contrast?</h2>
+    <h2>Within-era skill versus cross-era contrast</h2>
     <p class="section-note">A pooled cross-sectional IC can be earned two ways: by ranking cards
       correctly inside one release window, which is the decision a buyer actually faces, or merely by
       ranking the eras against each other. Both tables re-score the same held-out folds and the same
@@ -1057,7 +1060,7 @@ svg.mchart .k0{fill:var(--ink-subtle);font-size:11px;text-anchor:middle}svg.mcha
   <nav class="related" aria-label="Related pages" data-reveal>
     <p class="rel-head">Where to go next</p>
     <ul class="rel-list">
-      <li><a href="backtest.html">Does the edge survive out of sample?</a></li>
+      <li><a href="backtest.html">The edge, out of sample</a></li>
       <li><a href="momentum.html">The null result it is measured against</a></li>
       <li><a href="how-it-works.html">How the model is fitted</a></li>
       <li><a href="outlook.html">The predictions it produces</a></li>
@@ -1065,7 +1068,7 @@ svg.mchart .k0{fill:var(--ink-subtle);font-size:11px;text-anchor:middle}svg.mcha
     </ul>
   </nav>
 
-  <p class="freshness-stamp">Prices as of 2026-09-30 (TCGplayer daily 2026-09-30, Cardmarket 2026-09-30, monthly panel 2026-09-01). Built 2026-09-30 06:46 UTC. Published upstream: TCGplayer daily 2026-09-29 20:05 UTC, Cardmarket (EU) 2026-09-29 22:54 UTC. Two TCGplayer sources agree within 5% on 99.6% of 13759 cards.</p>
+  <p class="freshness-stamp">Prices as of 2026-09-30 (TCGplayer daily 2026-09-30, Cardmarket 2026-09-30, monthly panel 2026-09-01). Built 2026-09-30 15:04 UTC. Published upstream: TCGplayer daily 2026-09-29 20:05 UTC, Cardmarket (EU) 2026-09-29 22:54 UTC. Two TCGplayer sources agree within 5% on 99.6% of 13759 cards.</p>
 
 </main>
 
@@ -1665,7 +1668,7 @@ document.getElementById("attr-note").innerHTML =
 : 'The residual is within noise, so the score is essentially a set-age lifecycle effect, not diversified alpha.')
 +' <a href="how-it-works.html#lifecycle">See the set-age lifecycle curve.</a>'
 +(V.listingBook ? ' <a href="#listing-book">What the recovered listing-book features changed.</a>' : '')
-+(V.breakdown ? ' <a href="#within-era">Is that edge within-era skill or cross-era contrast?</a>' : '');
++(V.breakdown ? ' <a href="#within-era">Within-era skill versus cross-era contrast.</a>' : '');
 }
 // ---------------------------------------------------------------------------
 // Within-era / within-rarity breakdown. Every cell, including the one-SE call
@@ -1852,7 +1855,7 @@ document.getElementById("probe-candidates-body").innerHTML = (P.candidates||[]).
 + '</td>' + icCell(c.ic, null) + '</tr>').join("");
 document.getElementById("probe-legend").innerHTML =
 'Why the permutation null is a CARD-CONSTANT ranking rather than a per-fold shuffle: the '
-+ 'model\u2019s within-slice ordering barely changes month to month, so the honest question is '
++ 'model\u2019s within-slice ordering barely changes month to month, so the real question is '
 + '\u201chow often does an ARBITRARY FIXED ranking of these same cards score this well or this '
 + 'badly through these same overlapping folds?\u201d. Shuffling each fold independently would '
 + 'answer a different, easier question. It destroys the fold overlap the n_eff deflation '

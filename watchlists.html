@@ -621,9 +621,12 @@ padding:18px 20px;background:var(--panel);font-size:var(--fs-3);color:var(--ink-
 .hub-card{
 display:block;border:1px solid var(--border);border-radius:var(--radius);
 padding:15px 17px;background:var(--panel);text-decoration:none;color:inherit;
-transition:border-color .15s ease-out,transform .15s ease-out;
 }
-.hub-card:hover{border-color:var(--accent);transform:translateY(-1px);}
+.hub-card:hover{border-color:var(--accent);}
+@media (prefers-reduced-motion:no-preference){
+.hub-card{transition:border-color .15s ease-out,transform .15s ease-out;}
+.hub-card:hover{transform:translateY(-1px);}
+}
 .hub-card .hc-title{font-weight:650;color:var(--ink);font-size:var(--fs-4);margin:0 0 4px;}
 .hub-card .hc-desc{color:var(--ink-muted);font-size:var(--fs-2);margin:0;line-height:1.45;}
 .hub-grid .hc-desc{
@@ -1003,7 +1006,7 @@ html.compact .cardcell .cc-meta{white-space:nowrap;overflow:hidden;text-overflow
     </ul>
   </nav>
 
-  <p class="freshness-stamp">Prices as of 2026-09-30 (TCGplayer daily 2026-09-30, Cardmarket 2026-09-30, monthly panel 2026-09-01). Built 2026-09-30 06:46 UTC. Published upstream: TCGplayer daily 2026-09-29 20:05 UTC, Cardmarket (EU) 2026-09-29 22:54 UTC. Two TCGplayer sources agree within 5% on 99.6% of 13759 cards.</p>
+  <p class="freshness-stamp">Prices as of 2026-09-30 (TCGplayer daily 2026-09-30, Cardmarket 2026-09-30, monthly panel 2026-09-01). Built 2026-09-30 15:04 UTC. Published upstream: TCGplayer daily 2026-09-29 20:05 UTC, Cardmarket (EU) 2026-09-29 22:54 UTC. Two TCGplayer sources agree within 5% on 99.6% of 13759 cards.</p>
 
 </main>
 

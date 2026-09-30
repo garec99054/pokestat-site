@@ -621,9 +621,12 @@ padding:18px 20px;background:var(--panel);font-size:var(--fs-3);color:var(--ink-
 .hub-card{
 display:block;border:1px solid var(--border);border-radius:var(--radius);
 padding:15px 17px;background:var(--panel);text-decoration:none;color:inherit;
-transition:border-color .15s ease-out,transform .15s ease-out;
 }
-.hub-card:hover{border-color:var(--accent);transform:translateY(-1px);}
+.hub-card:hover{border-color:var(--accent);}
+@media (prefers-reduced-motion:no-preference){
+.hub-card{transition:border-color .15s ease-out,transform .15s ease-out;}
+.hub-card:hover{transform:translateY(-1px);}
+}
 .hub-card .hc-title{font-weight:650;color:var(--ink);font-size:var(--fs-4);margin:0 0 4px;}
 .hub-card .hc-desc{color:var(--ink-muted);font-size:var(--fs-2);margin:0;line-height:1.45;}
 .hub-grid .hc-desc{
@@ -1064,9 +1067,9 @@ color:var(--ink-subtle);}
 
   <header class="masthead" data-reveal>
     <h1>Full 90-day outlook, all modeled chase cards</h1>
-    <p class="lede prose">Every card the model covers, ranked by how much its price should move over the next 90 days compared with the rest of the market. Each one comes with a range, not just a single number. The ranking does work, but weakly, and a lot of what looks like skill is really old sets behaving like old sets. It measures what happened. It is not a buy list. The Models page measures how much, two different ways.</p>
+    <p class="lede prose">Every card the model covers, ranked by how much its price should move over the next 90 days compared with the rest of the market. Each one comes with a range, not just a single number. The ranking does work, but weakly: held-out IC 0.37 (95% range 0.28 to 0.46), where 0 is no skill and 1 is a perfect ranking. A lot of what looks like skill is really old sets behaving like old sets. It measures what happened. It is not a buy list. The Models page measures how much, two different ways.</p>
     <details class="explain"><summary><span class="custom">Technical wording</span></summary>
-      <div class="explain-body"><p>Every modeled chase card ranked by its predicted market-relative price move over the next 90 days, each with an honest split-conformal 80 percent band. The headline accuracy is real on paper, and it is heavily entangled with the set-age lifecycle: see Models for exactly how much, measured two ways.</p></div>
+      <div class="explain-body"><p>Every modeled chase card ranked by its predicted market-relative price move over the next 90 days, each with a split-conformal 80 percent band. The headline accuracy is real on paper, and it is heavily entangled with the set-age lifecycle: see Models for exactly how much, measured two ways.</p></div>
     </details>
   </header>
 
@@ -1159,7 +1162,7 @@ color:var(--ink-subtle);}
     </ul>
   </nav>
 
-  <p class="freshness-stamp">Prices as of 2026-09-30 (TCGplayer daily 2026-09-30, Cardmarket 2026-09-30, monthly panel 2026-09-01). Built 2026-09-30 06:46 UTC. Published upstream: TCGplayer daily 2026-09-29 20:05 UTC, Cardmarket (EU) 2026-09-29 22:54 UTC. Two TCGplayer sources agree within 5% on 99.6% of 13759 cards.</p>
+  <p class="freshness-stamp">Prices as of 2026-09-30 (TCGplayer daily 2026-09-30, Cardmarket 2026-09-30, monthly panel 2026-09-01). Built 2026-09-30 15:04 UTC. Published upstream: TCGplayer daily 2026-09-29 20:05 UTC, Cardmarket (EU) 2026-09-29 22:54 UTC. Two TCGplayer sources agree within 5% on 99.6% of 13759 cards.</p>
 
 </main>
 
@@ -2052,7 +2055,7 @@ const bandPs = M.band
 +M.band.nominal.toFixed(0)+' percent, measured out of the calibration sample (each held-out fold '
 +'scored against bands built from strictly earlier folds). It is a measurement, not a guarantee: '
 +'monthly folds are autocorrelated and the finite-sample conformal rank condition fails at the '
-+'honest effective sample size. Within a tier every card still gets the same width.</p>'
++'effective sample size. Within a tier every card still gets the same width.</p>'
 : '<p>The selected model has no row in the conformal calibration table for this run, so no '
 +'80 percent band and no coverage figure are published here.</p>';
 document.getElementById("explain-outlook").innerHTML =
