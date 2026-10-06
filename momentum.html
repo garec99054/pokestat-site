@@ -897,7 +897,7 @@ html.compact .cardcell .cc-meta{white-space:nowrap;overflow:hidden;text-overflow
     </ul>
   </nav>
 
-  <p class="freshness-stamp">Prices as of 2026-10-06 (TCGplayer daily 2026-10-06, Cardmarket 2026-10-06, monthly panel 2026-10-01). Built 2026-10-06 06:47 UTC. Published upstream: TCGplayer daily 2026-10-05 20:05 UTC, Cardmarket (EU) 2026-10-05 22:54 UTC. Two TCGplayer sources agree within 5% on 99.7% of 13759 cards.<span class="freshness-age" data-feed-dates="2026-10-06,2026-10-05,2026-10-06,2026-10-05" data-age-at-build="1"></span></p>
+  <p class="freshness-stamp">Prices as of 2026-10-06 (TCGplayer daily 2026-10-06, Cardmarket 2026-10-06, monthly panel 2026-10-01). Built 2026-10-06 20:00 UTC. Published upstream: TCGplayer daily 2026-10-05 20:05 UTC, Cardmarket (EU) 2026-10-05 22:54 UTC. Two TCGplayer sources agree within 5% on 99.7% of 13759 cards.<span class="freshness-age" data-feed-dates="2026-10-06,2026-10-05,2026-10-06,2026-10-05" data-age-at-build="1"></span></p>
 
 </main>
 
@@ -908,6 +908,8 @@ html.compact .cardcell .cc-meta{white-space:nowrap;overflow:hidden;text-overflow
 // ---------- formatting ----------
 function fmtMoney(v){ return v == null ? "" : "$" + v.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2}); }
 function fmtPct(v, d){ if(v==null) return ""; d = d==null?1:d; const s = v>0?"+":""; return s + (v*100).toFixed(d) + "%"; }
+// Model returns are logarithms of gross growth relative to the median card.
+function fmtLogReturn(v, d){ return v==null ? "" : fmtPct(Math.expm1(v), d); }
 function fmtSigned(v, d){ if(v==null) return ""; d=d==null?2:d; const s=v>0?"+":""; return s+v.toFixed(d); }
 // An error bar and an effective-fold count are values a generated report is
 // entitled NOT to have: _bd_num loads its own "n/a" cell as null, which a slice
@@ -989,7 +991,7 @@ if(o.lo==null||o.hi==null) return '';
 const col = o.flag==="candidate_up" ? "var(--up)" : (o.flag==="candidate_down" ? "var(--down)" : "var(--neutral)");
 const zx = bandX(0).toFixed(1);
 const x0 = bandX(o.lo).toFixed(1), x1 = bandX(o.hi).toFixed(1), xp = bandX(o.pred).toFixed(1);
-return '<svg class="band" width="'+w+'" height="'+h+'" viewBox="0 0 '+w+' '+h+'">'
+return '<svg class="band" title="80 percent interval on a logarithmic scale" width="'+w+'" height="'+h+'" viewBox="0 0 '+w+' '+h+'">'
 + '<line x1="0" y1="'+y+'" x2="'+w+'" y2="'+y+'" stroke="var(--border)" stroke-width="1"/>'
 + '<line x1="'+zx+'" y1="1" x2="'+zx+'" y2="'+(h-1)+'" stroke="var(--border-strong)" stroke-width="1" stroke-dasharray="2 2"/>'
 + '<line x1="'+x0+'" y1="'+y+'" x2="'+x1+'" y2="'+y+'" stroke="'+col+'" stroke-width="3" opacity="0.45" stroke-linecap="round"/>'
