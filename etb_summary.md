@@ -129,7 +129,7 @@ without its construction is unfalsifiable.
 | chained, geometric | full-history only (imposed) | 58 | 81.2%/yr |
 | chained, geometric | every product (headline) | 111 | 70.3%/yr |
 
-Rows 1 and 2 differ **only** by the linking method and they agree to 1.4e-14
+Rows 1 and 2 differ **only** by the linking method and they agree to 0.0e+00
 percentage points, which is zero to machine precision -- on a balanced panel a
 chained Jevons index equals the direct one exactly, and
 `tests/test_etb_index.py` pins that identity. So the 10.8-point drop from row 2
@@ -362,7 +362,7 @@ anything else looks at it). Published verbatim so it is checkable:
 | `INCLUDED` | 121 | 111 | Celebrations Elite Trainer Box |
 | `NOT_A_BOX` | 115 | 0 | Code Card - Celebrations Elite Trainer Box |
 | `MULTI_UNIT` | 80 | 0 | Celebrations Elite Trainer Box Case |
-| `MIXED_LOT` | 3 | 0 | Costco Pokemon Evolving Skies Elite Trainer Box and Tin |
+| `MIXED_LOT` | 4 | 0 | Ascended Heroes Elite Trainer Box and Pokeball (Sam's Club) |
 | `ETB_PLUS` | 4 | 4 | Pokemon GO Pokemon Center Elite Trainer Box Plus (Exclusive) |
 
 The exclusions that actually cost priced products are the multi-unit SKUs (cases
