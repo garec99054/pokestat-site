@@ -9,37 +9,37 @@ n = 5436 card-date observations across 8 snapshot dates.
 
 | flag | n | mean_return | median_return |
 | --- | --- | --- | --- |
-| fair | 4682 | 8.5% | 6.6% |
-| overvalued | 336 | 9.6% | 5.7% |
-| undervalued | 418 | 10.5% | 8.9% |
+| fair | 4685 | 8.5% | 6.6% |
+| overvalued | 334 | 9.7% | 5.7% |
+| undervalued | 417 | 10.5% | 8.8% |
 
-**Spread (undervalued mean return minus overvalued mean return): +0.9%**
+**Spread (undervalued mean return minus overvalued mean return): +0.8%**
 
 ## Per-date result
 
 | snapshot_date | flag | n | mean_return | median_return |
 | --- | --- | --- | --- | --- |
-| 2024-09-01 | fair | 509 | 2.7% | 2.1% |
-| 2024-09-01 | overvalued | 37 | 2.8% | 0.1% |
+| 2024-09-01 | fair | 510 | 2.7% | 2.1% |
+| 2024-09-01 | overvalued | 36 | 2.7% | -1.0% |
 | 2024-09-01 | undervalued | 50 | 2.5% | 1.2% |
 | 2024-12-01 | fair | 515 | 21.0% | 14.5% |
 | 2024-12-01 | overvalued | 40 | 32.0% | 24.5% |
 | 2024-12-01 | undervalued | 52 | 29.9% | 24.7% |
-| 2025-03-01 | fair | 552 | 5.3% | 5.6% |
-| 2025-03-01 | overvalued | 48 | 3.3% | -8.9% |
-| 2025-03-01 | undervalued | 52 | 8.4% | 7.7% |
+| 2025-03-01 | fair | 554 | 5.3% | 5.6% |
+| 2025-03-01 | overvalued | 47 | 3.5% | -9.8% |
+| 2025-03-01 | undervalued | 51 | 8.3% | 7.7% |
 | 2025-06-01 | fair | 573 | 6.9% | 5.0% |
 | 2025-06-01 | overvalued | 44 | 14.1% | 14.8% |
 | 2025-06-01 | undervalued | 52 | -0.5% | -4.5% |
 | 2025-09-01 | fair | 601 | 5.8% | 6.5% |
 | 2025-09-01 | overvalued | 40 | 11.5% | 8.9% |
 | 2025-09-01 | undervalued | 55 | 6.0% | 7.8% |
-| 2025-12-01 | fair | 623 | 5.8% | 3.7% |
+| 2025-12-01 | fair | 622 | 5.8% | 3.7% |
 | 2025-12-01 | overvalued | 43 | 0.2% | 1.1% |
-| 2025-12-01 | undervalued | 48 | 9.8% | 8.2% |
-| 2026-03-01 | fair | 656 | 17.3% | 12.9% |
+| 2025-12-01 | undervalued | 49 | 9.9% | 8.3% |
+| 2026-03-01 | fair | 657 | 17.3% | 12.9% |
 | 2026-03-01 | overvalued | 40 | 10.8% | 4.9% |
-| 2026-03-01 | undervalued | 55 | 17.0% | 14.6% |
+| 2026-03-01 | undervalued | 54 | 17.0% | 14.5% |
 | 2026-06-01 | fair | 653 | 3.8% | 4.7% |
 | 2026-06-01 | overvalued | 44 | 3.9% | 5.2% |
 | 2026-06-01 | undervalued | 54 | 10.7% | 9.5% |
@@ -67,16 +67,15 @@ already cached can be used; a shifted window below is that constraint showing.
 ## Look-ahead limitations (read before trusting these numbers)
 
 - **Pageview look-ahead is now fixed.** Each snapshot's appeal is recomputed
-  from the trailing 12 months of `feature_pageviews_history` (backfilled
-  monthly Wikipedia pageviews, 2024-06..2026-06) ending at that snapshot's own
-  date, log-scaled and percentile-normalized within that snapshot's cohort --
+  from the trailing 12 complete months of `feature_pageviews_history` (backfilled
+  monthly Wikipedia pageviews, 2024-06..2026-06) ending at the last month before
+  that snapshot's own month, log-scaled and percentile-normalized within that snapshot's cohort --
   the same transform `pokestat/features/pageviews.py` applies, just computed
   as of T instead of reused from 2026. 508 of 5440
   (snapshot, dex) appeal evaluations across all non-skipped snapshots
   (9.3%) had no pageview history in their trailing window (no
   Wikipedia article yet, or a gap in the backfill) and fell back to the
-  static 2026 `feature_pageviews.appeal_10` value for that dex number; that
-  subset still carries the old look-ahead bias.
+  as-of cohort median (neutral 5.5 if no dex had history); no 2026 value is used.
 - **Character premium is now as-of-T (look-ahead removed).** The desirability
   input no longer uses the static 2026 `feature_character_premium.premium_10`; it
   is reconstructed at each snapshot date T from `price_history` via

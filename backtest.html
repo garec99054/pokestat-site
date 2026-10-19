@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<title>Value flags versus forward returns</title>
+<title>Model-estimate flags versus forward returns</title>
 <link rel="icon" href="data:," />
 <script>
 function ccFallback(img){ img.classList.add('cc-thumb--fallback'); img.removeAttribute('src'); }
@@ -11,15 +11,15 @@ function hitsHideImg(img){ img.style.display = "none"; }
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="pokestat" />
-<meta property="og:title" content="Value flags versus forward returns" />
-<meta property="og:description" content="Cards flagged cheap, expensive or fairly priced are followed for about 90 days to see what actually happened next. Both inputs that could have peeked at the future, Wikipedia page views and the..." />
+<meta property="og:title" content="Model-estimate flags versus forward returns" />
+<meta property="og:description" content="Cards flagged below, above or near the model estimate are followed for about 90 days to see what actually happened next. Both inputs that could have peeked at the future, Wikipedia page views and..." />
 <meta property="og:url" content="https://garec99054.github.io/pokestat-site/backtest.html" />
 <meta property="og:image" content="https://garec99054.github.io/pokestat-site/share/backtest.png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Value flags versus forward returns" />
-<meta name="twitter:description" content="Cards flagged cheap, expensive or fairly priced are followed for about 90 days to see what actually happened next. Both inputs that could have peeked at the future, Wikipedia page views and the..." />
+<meta name="twitter:title" content="Model-estimate flags versus forward returns" />
+<meta name="twitter:description" content="Cards flagged below, above or near the model estimate are followed for about 90 days to see what actually happened next. Both inputs that could have peeked at the future, Wikipedia page views and..." />
 <meta name="twitter:image" content="https://garec99054.github.io/pokestat-site/share/backtest.png" />
 <style>
 
@@ -777,6 +777,7 @@ white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:220px;
 }
 html.compact .cardcell .cc-thumb,html.compact .cardcell .cc-thumb--fallback{width:28px;height:39px;}
 html.compact .cardcell .cc-meta{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:200px;}
+.experimental-notice{margin:0 0 1.25rem;padding:.6rem .85rem;background:var(--warn-bg);color:var(--warn-ink);border:1px solid var(--warn-border);border-radius:var(--radius);font-size:.9rem;line-height:1.45}
 figure.regime-fig{
 margin:0 auto 8px;border:1px solid var(--border);border-radius:var(--radius);
 background:var(--panel);padding:16px 18px 12px;overflow-x:auto;max-width:760px;
@@ -886,31 +887,33 @@ svg.mchart .k0{stroke:var(--border-strong)}svg.mchart .k1{fill:var(--ink-subtle)
 <main class="page" id="main" tabindex="-1">
 
   <header class="masthead" data-reveal>
-    <h1>Value flags versus forward returns</h1>
-    <p class="lede prose">Cards flagged cheap, expensive or fairly priced are followed for about 90 days to see what actually happened next. Both inputs that could have peeked at the future, Wikipedia page views and the character popularity premium, were rebuilt to use only what was known on each snapshot date. The cheap cards did not reliably beat the expensive ones: the gap flips sign as the market changes, so it is not something you can trade.</p>
+    <h1>Model-estimate flags versus forward returns</h1>
+    <p class="lede prose">Cards flagged below, above or near the model estimate are followed for about 90 days to see what actually happened next. Both inputs that could have peeked at the future, Wikipedia page views and the character popularity premium, were rebuilt to use only what was known on each snapshot date. The cards below the estimate did not reliably beat those above it: the gap flips sign as the market changes. This is an experimental flag, not a recommendation.</p>
     <details class="explain"><summary><span class="custom">Technical wording</span></summary>
-      <div class="explain-body"><p>Cards flagged undervalued, overvalued, or fair are tracked forward about 90 days, after both the Wikipedia pageview and character-premium look-aheads were reconstructed as-of each snapshot date.</p></div>
+      <div class="explain-body"><p>Cards flagged below, above or near the model estimate are tracked forward about 90 days, after both the Wikipedia pageview and character-premium look-aheads were reconstructed as-of each snapshot date.</p></div>
     </details>
   </header>
 
+  <p class="experimental-notice" id="experimental-notice" role="note">Experimental: these rankings come from models that have not passed a forward test yet. Each month's predictions are saved before prices move and scored after three months. Not a recommendation.</p>
+
 
   <section id="backtest" data-reveal>
-    <h2>Value-flag backtest</h2>
+    <h2>Model-estimate flag backtest</h2>
     <p class="section-note" id="backtest-note"></p>
     <details class="explain">
       <summary><span class="custom"></span></summary>
-      <div class="explain-body" id="explain-backtest"><p>Cards flagged undervalued, overvalued, or fair are tracked forward about 90 days across 8 snapshots. The headline is the undervalued-minus-overvalued mean-return spread of <strong>+0.9 points</strong>, which is positive: so undervalued flags modestly outperformed overvalued ones.</p><p>This spread is small and has been <strong><span class="gloss" tabindex="0" data-tip="A stretch of months over which the market behaved one way, such as a long climb or a long slide. What works in one stretch often stops working in the next." aria-label="regime: A stretch of months over which the market behaved one way, such as a long climb or a long slide. What works in one stretch often stops working in the next.">regime</span>-dependent</strong> (2024 negative: 0 of 2 snapshots positive, mean -1.2 points; 2025 mixed: 2 of 4 snapshots positive, mean -1.3 points; 2026 positive: 2 of 2 snapshots positive, mean +6.5 points), and the leakage-free as-of-T desirability inputs (Wikipedia pageviews and character premium rebuilt at each date) leave no look-ahead lift, so it should be read as a weak, unstable signal rather than a durable edge.</p><p>The per-flag groups are also small and share recurring cards, so the remaining differences are best read as largely noise.</p></div>
+      <div class="explain-body" id="explain-backtest"><p>Cards flagged below, above or near the model estimate are tracked forward about 90 days across 8 snapshots. The headline is the below-minus-above-estimate mean-return spread of <strong>+0.8 points</strong>, which is positive: so below-estimate flags modestly outperformed above-estimate ones.</p><p>This spread is small and has been <strong><span class="gloss" tabindex="0" data-tip="A stretch of months over which the market behaved one way, such as a long climb or a long slide. What works in one stretch often stops working in the next." aria-label="regime: A stretch of months over which the market behaved one way, such as a long climb or a long slide. What works in one stretch often stops working in the next.">regime</span>-dependent</strong> (2024 negative: 0 of 2 snapshots positive, mean -1.2 points; 2025 mixed: 2 of 4 snapshots positive, mean -1.4 points; 2026 positive: 2 of 2 snapshots positive, mean +6.5 points), and the leakage-free as-of-T desirability inputs (Wikipedia pageviews and character premium rebuilt at each date) leave no look-ahead lift, so it should be read as a weak, unstable signal rather than a durable edge.</p><p>The per-flag groups are also small and share recurring cards, so the remaining differences are best read as largely noise.</p></div>
     </details>
-    <figure class="regime-fig" data-reveal><svg class="mchart" viewBox="0 0 680 300" width="680" height="300" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Mean forward return by value flag over snapshot dates" style="max-width:680px;width:100%;height:auto;display:block;margin:0 auto;"><line x1="52" y1="254.3" x2="572" y2="254.3" class="k5"/><text x="44" y="257.8" class="k6">0%</text><line x1="52" y1="179.8" x2="572" y2="179.8" class="k5"/><text x="44" y="183.3" class="k6">10%</text><line x1="52" y1="105.4" x2="572" y2="105.4" class="k5"/><text x="44" y="108.9" class="k6">20%</text><line x1="52" y1="30.9" x2="572" y2="30.9" class="k5"/><text x="44" y="34.4" class="k6">30%</text><line x1="52" y1="254.3" x2="572" y2="254.3" stroke="var(--border-strong)" stroke-width="1.2" stroke-dasharray="3 3"/><line x1="52" y1="16" x2="52" y2="258" class="k0"/><line x1="52" y1="258" x2="572" y2="258" class="k0"/><line x1="52" y1="258" x2="52" y2="262" class="k0"/><text x="52" y="274" class="k1">24-09</text><line x1="126.3" y1="258" x2="126.3" y2="262" class="k0"/><text x="126.3" y="274" class="k1">24-12</text><line x1="200.6" y1="258" x2="200.6" y2="262" class="k0"/><text x="200.6" y="274" class="k1">25-03</text><line x1="274.9" y1="258" x2="274.9" y2="262" class="k0"/><text x="274.9" y="274" class="k1">25-06</text><line x1="349.1" y1="258" x2="349.1" y2="262" class="k0"/><text x="349.1" y="274" class="k1">25-09</text><line x1="423.4" y1="258" x2="423.4" y2="262" class="k0"/><text x="423.4" y="274" class="k1">25-12</text><line x1="497.7" y1="258" x2="497.7" y2="262" class="k0"/><text x="497.7" y="274" class="k1">26-03</text><line x1="572" y1="258" x2="572" y2="262" class="k0"/><text x="572" y="274" class="k1">26-06</text><text x="312" y="296" class="k7">Snapshot date</text><text x="12" y="137" transform="rotate(-90 12 137)" class="k7">Mean forward return</text><polyline points="52,235.7 126.3,31.6 200.6,191.7 274.9,258 349.1,209.6 423.4,181.3 497.7,127.7 572,174.6" fill="none" stroke="var(--down-text)" stroke-width="1.9" stroke-linejoin="round" stroke-linecap="round"/><circle cx="52" cy="235.7" r="2" class="k2"/><circle cx="126.3" cy="31.6" r="2" class="k2"/><circle cx="200.6" cy="191.7" r="2" class="k2"/><circle cx="274.9" cy="258" r="2" class="k2"/><circle cx="349.1" cy="209.6" r="2" class="k2"/><circle cx="423.4" cy="181.3" r="2" class="k2"/><circle cx="497.7" cy="127.7" r="2" class="k2"/><circle cx="572" cy="174.6" r="2" class="k2"/><polyline points="52,234.2 126.3,97.9 200.6,214.8 274.9,202.9 349.1,211.1 423.4,211.1 497.7,125.5 572,226" fill="none" stroke="var(--neutral)" stroke-width="1.9" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="2 3"/><circle cx="52" cy="234.2" r="2" class="k3"/><circle cx="126.3" cy="97.9" r="2" class="k3"/><circle cx="200.6" cy="214.8" r="2" class="k3"/><circle cx="274.9" cy="202.9" r="2" class="k3"/><circle cx="349.1" cy="211.1" r="2" class="k3"/><circle cx="423.4" cy="211.1" r="2" class="k3"/><circle cx="497.7" cy="125.5" r="2" class="k3"/><circle cx="572" cy="226" r="2" class="k3"/><polyline points="52,233.4 126.3,16 200.6,229.7 274.9,149.3 349.1,168.6 423.4,252.8 497.7,173.9 572,225.2" fill="none" stroke="var(--up-text)" stroke-width="1.9" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="6 4"/><circle cx="52" cy="233.4" r="2" class="k4"/><circle cx="126.3" cy="16" r="2" class="k4"/><circle cx="200.6" cy="229.7" r="2" class="k4"/><circle cx="274.9" cy="149.3" r="2" class="k4"/><circle cx="349.1" cy="168.6" r="2" class="k4"/><circle cx="423.4" cy="252.8" r="2" class="k4"/><circle cx="497.7" cy="173.9" r="2" class="k4"/><circle cx="572" cy="225.2" r="2" class="k4"/><text x="578" y="178.1" font-size="11" fill="var(--down-text)" font-weight="600">undervalued</text><text x="578" y="228.7" font-size="11" fill="var(--up-text)" font-weight="600">overvalued</text><text x="578" y="241.7" font-size="11" fill="var(--ink-muted)" font-weight="600">fair</text></svg><figcaption>Mean forward
-      ~90-day return of each value-flag cohort at every backtest snapshot. The lines
-      cross the zero baseline in both directions: the undervalued-minus-overvalued
-      edge is regime-dependent, not a stable signal. Data: backtest_summary.</figcaption></figure>
+    <figure class="regime-fig" data-reveal><svg class="mchart" viewBox="0 0 680 300" width="680" height="300" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Mean forward return by model-estimate flag over snapshot dates" style="max-width:680px;width:100%;height:auto;display:block;margin:0 auto;"><line x1="52" y1="254.3" x2="572" y2="254.3" class="k5"/><text x="44" y="257.8" class="k6">0%</text><line x1="52" y1="179.8" x2="572" y2="179.8" class="k5"/><text x="44" y="183.3" class="k6">10%</text><line x1="52" y1="105.4" x2="572" y2="105.4" class="k5"/><text x="44" y="108.9" class="k6">20%</text><line x1="52" y1="30.9" x2="572" y2="30.9" class="k5"/><text x="44" y="34.4" class="k6">30%</text><line x1="52" y1="254.3" x2="572" y2="254.3" stroke="var(--border-strong)" stroke-width="1.2" stroke-dasharray="3 3"/><line x1="52" y1="16" x2="52" y2="258" class="k0"/><line x1="52" y1="258" x2="572" y2="258" class="k0"/><line x1="52" y1="258" x2="52" y2="262" class="k0"/><text x="52" y="274" class="k1">24-09</text><line x1="126.3" y1="258" x2="126.3" y2="262" class="k0"/><text x="126.3" y="274" class="k1">24-12</text><line x1="200.6" y1="258" x2="200.6" y2="262" class="k0"/><text x="200.6" y="274" class="k1">25-03</text><line x1="274.9" y1="258" x2="274.9" y2="262" class="k0"/><text x="274.9" y="274" class="k1">25-06</text><line x1="349.1" y1="258" x2="349.1" y2="262" class="k0"/><text x="349.1" y="274" class="k1">25-09</text><line x1="423.4" y1="258" x2="423.4" y2="262" class="k0"/><text x="423.4" y="274" class="k1">25-12</text><line x1="497.7" y1="258" x2="497.7" y2="262" class="k0"/><text x="497.7" y="274" class="k1">26-03</text><line x1="572" y1="258" x2="572" y2="262" class="k0"/><text x="572" y="274" class="k1">26-06</text><text x="312" y="296" class="k7">Snapshot date</text><text x="12" y="137" transform="rotate(-90 12 137)" class="k7">Mean forward return</text><polyline points="52,235.7 126.3,31.6 200.6,192.5 274.9,258 349.1,209.6 423.4,180.6 497.7,127.7 572,174.6" fill="none" stroke="var(--down-text)" stroke-width="1.9" stroke-linejoin="round" stroke-linecap="round"/><circle cx="52" cy="235.7" r="2" class="k2"/><circle cx="126.3" cy="31.6" r="2" class="k2"/><circle cx="200.6" cy="192.5" r="2" class="k2"/><circle cx="274.9" cy="258" r="2" class="k2"/><circle cx="349.1" cy="209.6" r="2" class="k2"/><circle cx="423.4" cy="180.6" r="2" class="k2"/><circle cx="497.7" cy="127.7" r="2" class="k2"/><circle cx="572" cy="174.6" r="2" class="k2"/><polyline points="52,234.2 126.3,97.9 200.6,214.8 274.9,202.9 349.1,211.1 423.4,211.1 497.7,125.5 572,226" fill="none" stroke="var(--neutral)" stroke-width="1.9" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="2 3"/><circle cx="52" cy="234.2" r="2" class="k3"/><circle cx="126.3" cy="97.9" r="2" class="k3"/><circle cx="200.6" cy="214.8" r="2" class="k3"/><circle cx="274.9" cy="202.9" r="2" class="k3"/><circle cx="349.1" cy="211.1" r="2" class="k3"/><circle cx="423.4" cy="211.1" r="2" class="k3"/><circle cx="497.7" cy="125.5" r="2" class="k3"/><circle cx="572" cy="226" r="2" class="k3"/><polyline points="52,234.2 126.3,16 200.6,228.2 274.9,149.3 349.1,168.6 423.4,252.8 497.7,173.9 572,225.2" fill="none" stroke="var(--up-text)" stroke-width="1.9" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="6 4"/><circle cx="52" cy="234.2" r="2" class="k4"/><circle cx="126.3" cy="16" r="2" class="k4"/><circle cx="200.6" cy="228.2" r="2" class="k4"/><circle cx="274.9" cy="149.3" r="2" class="k4"/><circle cx="349.1" cy="168.6" r="2" class="k4"/><circle cx="423.4" cy="252.8" r="2" class="k4"/><circle cx="497.7" cy="173.9" r="2" class="k4"/><circle cx="572" cy="225.2" r="2" class="k4"/><text x="578" y="178.1" font-size="11" fill="var(--down-text)" font-weight="600">below</text><text x="578" y="228.7" font-size="11" fill="var(--up-text)" font-weight="600">above</text><text x="578" y="241.7" font-size="11" fill="var(--ink-muted)" font-weight="600">near</text></svg><figcaption>Mean forward
+      ~90-day return of each model-estimate flag cohort at every backtest snapshot. The lines
+      cross the zero baseline in both directions: the below-minus-above-estimate
+      gap is regime-dependent, not a stable signal. Data: backtest_summary.</figcaption></figure>
     <div class="split">
       <div>
         <div class="table-wrap" style="margin-bottom:18px;">
           <table id="pooled-table">
             <thead><tr>
-              <th title="Value flag: undervalued, fair, or overvalued at the snapshot.">Flag</th>
+              <th title="Model-estimate flag at the snapshot: below, near or above.">Flag</th>
               <th class="num" title="Card-date observations in the group.">n</th>
               <th class="num" title="Mean forward ~90-day return, percent points.">Mean return</th>
               <th class="num" title="Median forward ~90-day return, percent points.">Median return</th>
@@ -922,7 +925,7 @@ svg.mchart .k0{stroke:var(--border-strong)}svg.mchart .k1{fill:var(--ink-subtle)
           <table id="perdate-table">
             <thead><tr>
               <th title="Snapshot date the flag was assigned.">Snapshot</th>
-              <th title="Value flag.">Flag</th>
+              <th title="Model-estimate flag.">Flag</th>
               <th class="num" title="Observations.">n</th>
               <th class="num" title="Mean forward return, percent points.">Mean</th>
               <th class="num" title="Median forward return, percent points.">Median</th>
@@ -936,7 +939,7 @@ svg.mchart .k0{stroke:var(--border-strong)}svg.mchart .k1{fill:var(--ink-subtle)
         <p style="margin:0 0 10px;">Both the Wikipedia pageview appeal input and the character
           premium input are now reconstructed as of each snapshot date T, using only information a
           trader at T could have had. Under the earlier look-ahead-biased desirability input the
-          undervalued flag showed mechanical outperformance; with the leakage removed that edge is
+          below-estimate flag showed mechanical outperformance; with the leakage removed that edge is
           gone.</p>
         <ul id="backtest-caveats"></ul>
       </div>
@@ -954,7 +957,7 @@ svg.mchart .k0{stroke:var(--border-strong)}svg.mchart .k1{fill:var(--ink-subtle)
     </ul>
   </nav>
 
-  <p class="freshness-stamp">Prices as of 2026-10-19 (TCGplayer daily 2026-10-19, Cardmarket 2026-10-19, monthly panel 2026-10-01). Built 2026-10-19 01:54 UTC. Published upstream: TCGplayer daily 2026-10-18 20:05 UTC, Cardmarket (EU) 2026-10-18 22:54 UTC.<span class="freshness-age" data-feed-dates="2026-10-19,2026-10-18,2026-10-19,2026-10-18" data-age-at-build="1"></span></p>
+  <p class="freshness-stamp">Prices as of 2026-10-19 (TCGplayer daily 2026-10-19, Cardmarket 2026-10-19, monthly panel 2026-10-01). Built 2026-10-19 05:25 UTC. Published upstream: TCGplayer daily 2026-10-18 20:05 UTC, Cardmarket (EU) 2026-10-18 22:54 UTC.<span class="freshness-age" data-feed-dates="2026-10-19,2026-10-18,2026-10-19,2026-10-18" data-age-at-build="1"></span></p>
 
 </main>
 
@@ -1522,42 +1525,43 @@ return '<div class="cardcell' + (compact ? ' cc-compact' : '') + '">'
 + '</div></div>';
 }
 
-const PAGE = {"backtest":{"nObs":5436,"spread":0.9,"appealNum":508,"appealDen":5440,"pooled":[{"flag":"fair","n":4682,"mean":8.5,"median":6.6},{"flag":"overvalued","n":336,"mean":9.6,"median":5.7},{"flag":"undervalued","n":418,"mean":10.5,"median":8.9}],"perDate":[{"date":"2024-09-01","flag":"fair","n":509,"mean":2.7,"median":2.1},{"date":"2024-09-01","flag":"overvalued","n":37,"mean":2.8,"median":0.1},{"date":"2024-09-01","flag":"undervalued","n":50,"mean":2.5,"median":1.2},{"date":"2024-12-01","flag":"fair","n":515,"mean":21.0,"median":14.5},{"date":"2024-12-01","flag":"overvalued","n":40,"mean":32.0,"median":24.5},{"date":"2024-12-01","flag":"undervalued","n":52,"mean":29.9,"median":24.7},{"date":"2025-03-01","flag":"fair","n":552,"mean":5.3,"median":5.6},{"date":"2025-03-01","flag":"overvalued","n":48,"mean":3.3,"median":-8.9},{"date":"2025-03-01","flag":"undervalued","n":52,"mean":8.4,"median":7.7},{"date":"2025-06-01","flag":"fair","n":573,"mean":6.9,"median":5.0},{"date":"2025-06-01","flag":"overvalued","n":44,"mean":14.1,"median":14.8},{"date":"2025-06-01","flag":"undervalued","n":52,"mean":-0.5,"median":-4.5},{"date":"2025-09-01","flag":"fair","n":601,"mean":5.8,"median":6.5},{"date":"2025-09-01","flag":"overvalued","n":40,"mean":11.5,"median":8.9},{"date":"2025-09-01","flag":"undervalued","n":55,"mean":6.0,"median":7.8},{"date":"2025-12-01","flag":"fair","n":623,"mean":5.8,"median":3.7},{"date":"2025-12-01","flag":"overvalued","n":43,"mean":0.2,"median":1.1},{"date":"2025-12-01","flag":"undervalued","n":48,"mean":9.8,"median":8.2},{"date":"2026-03-01","flag":"fair","n":656,"mean":17.3,"median":12.9},{"date":"2026-03-01","flag":"overvalued","n":40,"mean":10.8,"median":4.9},{"date":"2026-03-01","flag":"undervalued","n":55,"mean":17.0,"median":14.6},{"date":"2026-06-01","flag":"fair","n":653,"mean":3.8,"median":4.7},{"date":"2026-06-01","flag":"overvalued","n":44,"mean":3.9,"median":5.2},{"date":"2026-06-01","flag":"undervalued","n":54,"mean":10.7,"median":9.5}]}};
+const PAGE = {"backtest":{"nObs":5436,"spread":0.8,"appealNum":508,"appealDen":5440,"pooled":[{"flag":"fair","n":4685,"mean":8.5,"median":6.6},{"flag":"overvalued","n":334,"mean":9.7,"median":5.7},{"flag":"undervalued","n":417,"mean":10.5,"median":8.8}],"perDate":[{"date":"2024-09-01","flag":"fair","n":510,"mean":2.7,"median":2.1},{"date":"2024-09-01","flag":"overvalued","n":36,"mean":2.7,"median":-1.0},{"date":"2024-09-01","flag":"undervalued","n":50,"mean":2.5,"median":1.2},{"date":"2024-12-01","flag":"fair","n":515,"mean":21.0,"median":14.5},{"date":"2024-12-01","flag":"overvalued","n":40,"mean":32.0,"median":24.5},{"date":"2024-12-01","flag":"undervalued","n":52,"mean":29.9,"median":24.7},{"date":"2025-03-01","flag":"fair","n":554,"mean":5.3,"median":5.6},{"date":"2025-03-01","flag":"overvalued","n":47,"mean":3.5,"median":-9.8},{"date":"2025-03-01","flag":"undervalued","n":51,"mean":8.3,"median":7.7},{"date":"2025-06-01","flag":"fair","n":573,"mean":6.9,"median":5.0},{"date":"2025-06-01","flag":"overvalued","n":44,"mean":14.1,"median":14.8},{"date":"2025-06-01","flag":"undervalued","n":52,"mean":-0.5,"median":-4.5},{"date":"2025-09-01","flag":"fair","n":601,"mean":5.8,"median":6.5},{"date":"2025-09-01","flag":"overvalued","n":40,"mean":11.5,"median":8.9},{"date":"2025-09-01","flag":"undervalued","n":55,"mean":6.0,"median":7.8},{"date":"2025-12-01","flag":"fair","n":622,"mean":5.8,"median":3.7},{"date":"2025-12-01","flag":"overvalued","n":43,"mean":0.2,"median":1.1},{"date":"2025-12-01","flag":"undervalued","n":49,"mean":9.9,"median":8.3},{"date":"2026-03-01","flag":"fair","n":657,"mean":17.3,"median":12.9},{"date":"2026-03-01","flag":"overvalued","n":40,"mean":10.8,"median":4.9},{"date":"2026-03-01","flag":"undervalued","n":54,"mean":17.0,"median":14.5},{"date":"2026-06-01","flag":"fair","n":653,"mean":3.8,"median":4.7},{"date":"2026-06-01","flag":"overvalued","n":44,"mean":3.9,"median":5.2},{"date":"2026-06-01","flag":"undervalued","n":54,"mean":10.7,"median":9.5}]}};
 
 const BT = PAGE.backtest;
+const FL = {"undervalued": "Below model estimate", "overvalued": "Above model estimate", "fair": "Near model estimate"};
 function renderBacktest(){
 document.getElementById("backtest-note").innerHTML =
 'For '+new Set(BT.perDate.map(r=>r.date)).size+' historical snapshot dates ('+BT.nObs
-+' card-date observations), cards flagged undervalued, overvalued, or fair are tracked forward '
++' card-date observations), cards flagged below, above or near the model estimate are tracked forward '
 +'about 90 days, after both the pageview and character-premium look-aheads were removed. Pooled '
-+'across all dates the undervalued-minus-overvalued mean-return spread is <strong>'
-+(BT.spread==null ? 'not computable: a value-flag group was empty'
++'across all dates the below-minus-above-estimate mean-return spread is <strong>'
++(BT.spread==null ? 'not computable: a flag group was empty'
 : BT.spread.toFixed(1)+' points')+'</strong>.';
 const pb=document.getElementById("pooled-body");
 const order={undervalued:0,fair:1,overvalued:2};
 const pooled=BT.pooled.slice().sort((a,b)=>order[a.flag]-order[b.flag]);
-pb.innerHTML = pooled.map(r=>'<tr><td><span class="verdict-word null">'+esc(r.flag)
+pb.innerHTML = pooled.map(r=>'<tr><td><span class="verdict-word null">'+esc(FL[r.flag]||r.flag)
 +'</span></td><td class="num">'+r.n+'</td><td class="num">'+r.mean.toFixed(1)+'%</td>'
 +'<td class="num">'+r.median.toFixed(1)+'%</td></tr>').join("");
 const db=document.getElementById("perdate-body");
 const po={undervalued:0,fair:1,overvalued:2};
 const rows=BT.perDate.slice().sort((a,b)=> a.date<b.date?-1:a.date>b.date?1:po[a.flag]-po[b.flag]);
-db.innerHTML = rows.map(r=>'<tr><td class="num">'+esc(r.date)+'</td><td>'+esc(r.flag)
+db.innerHTML = rows.map(r=>'<tr><td class="num">'+esc(r.date)+'</td><td>'+esc(FL[r.flag]||r.flag)
 +'</td><td class="num">'+r.n+'</td><td class="num">'+r.mean.toFixed(1)+'%</td>'
 +'<td class="num">'+r.median.toFixed(1)+'%</td></tr>').join("");
 document.getElementById("backtest-caveats").innerHTML =
 '<li><strong>Pageview appeal is as-of-T.</strong> Recomputed from the trailing 12 months of '
-+'Wikipedia pageviews ending at each snapshot; '+BT.appealNum+' of '+BT.appealDen+' (snapshot, dex) '
-+'evaluations had no history in the window and fell back to the static current value, still '
-+'carrying old look-ahead bias.</li>'
++'Wikipedia pageviews ending at the last complete month before each snapshot; '+BT.appealNum+' of '+BT.appealDen+' (snapshot, dex) '
++'evaluations had no history in the window and took that snapshot’s cohort median '
++'(a neutral 5.5 when no card had any), never a later value.</li>'
 +'<li><strong>Character premium is as-of-T.</strong> Reconstructed from only that date\u2019s '
 +'price cross-section, a quantity a trader at T could compute; zero fell back to the static 2026 value.</li>'
 +'<li><strong>Small, non-independent samples.</strong> Per-flag groups shrink once split three '
 +'ways, and the same card recurs across snapshots, so pooled rows are not independent draws.</li>'
-+'<li><strong>Not independent of the momentum/reversion study.</strong> The overvalued cohort '
++'<li><strong>Not independent of the momentum/reversion study.</strong> The above-estimate cohort '
 +'here overlaps disproportionately with the past-winner (top) quintile of the momentum study, '
-+'pronounced at the 6-month formation window, while the undervalued/past-loser overlap stays '
-+'near the one-in-five baseline. Treat this under-minus-over spread and the momentum study '
++'pronounced at the 6-month formation window, while the below-estimate/past-loser overlap stays '
++'near the one-in-five baseline. Treat this below-minus-above spread and the momentum study '
 +'as two views of the SAME recent-run-up population, not as independent evidence.</li>';
 }
 renderBacktest();
