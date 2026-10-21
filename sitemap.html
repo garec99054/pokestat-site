@@ -563,7 +563,7 @@ border-radius:999px;border:1px solid var(--border-strong);white-space:nowrap;col
 .stat-cards{
 display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;
 background:var(--border);border:1px solid var(--border);border-radius:var(--radius);
-overflow:hidden;margin:0 0 16px;max-width:760px;
+overflow:hidden;margin:0 auto 16px;max-width:760px;
 }
 .stat-card{background:var(--panel);padding:12px 14px;}
 .stat-card .k{font-size:var(--fs-2);color:var(--ink-subtle);margin:0 0 4px;}
@@ -598,7 +598,7 @@ font-size:var(--fs-2);color:var(--ink-subtle);margin:10px auto 0;max-width:80ch;
 }
 html.compact .slice-legend{display:none;}
 .callout{
-border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:var(--radius);
+border:1px solid var(--border);border-radius:var(--radius);
 padding:14px 18px;background:var(--panel);font-size:var(--fs-3);color:var(--ink-muted);margin-bottom:18px;
 }
 .callout strong{color:var(--ink);}
@@ -947,7 +947,7 @@ dl.sitemap-artifacts dd:last-of-type{margin-bottom:0;padding-bottom:0;border-bot
       <dt><a href="findings.html">The findings, and what they imply</a></dt>
       <dd><p class="sitemap-lede">The most important things this project actually found, in plain terms: what the sealed market does, what the model can and cannot tell you, and what turned...</p><p class="sitemap-sections"><a href="findings.html#finding-1">1. Sealed boxes have grown roughly 70.3% a year, if you hold them</a> · <a href="findings.html#finding-2">2. Older boxes sell for more today, but ageing alone does not explain it</a> · <a href="findings.html#finding-3">3. When the model is unsure, it says so</a> · <a href="findings.html#finding-4">4. Two ideas we tested and rejected, one we cannot test yet</a> · <a href="findings.html#finding-5">5. Card universe: four counts, nested</a> · <a href="findings.html#finding-6">6. How set baselines compare with one shared price formula</a> · <a href="findings.html#finding-7">7. Our price feeds show their dates, live</a> · <a href="findings.html#sources">Where the numbers come from</a></p></dd>
       <dt><a href="changelog.html">What changed</a></dt>
-      <dd><p class="sitemap-lede">This page tracks what changed each time the site rebuilds: which numbers moved, by how much, and whether that was the market moving or the model or currency...</p><p class="sitemap-sections"><a href="changelog.html#b-2026-10-21">Latest build 2026-10-21</a> · <a href="changelog.html#b-2026-10-20">Build 2026-10-20</a> · <a href="changelog.html#b-2026-10-19">Build, 5 runs that day merged 2026-10-19</a> · <a href="changelog.html#b-2026-10-18">Build 2026-10-18</a> · <a href="changelog.html#b-2026-10-17">Build 2026-10-17</a> · <a href="changelog.html#b-2026-10-16">Build 2026-10-16</a> · <a href="changelog.html#b-2026-10-15">Build 2026-10-15</a> · <a href="changelog.html#b-2026-10-14">Build 2026-10-14</a></p></dd>
+      <dd><p class="sitemap-lede">This page tracks what changed each time the site rebuilds: which numbers moved, by how much, and whether that was the market moving or the model or currency...</p><p class="sitemap-sections"><a href="changelog.html#b-2026-10-21">Latest build, 2 runs that day merged 2026-10-21</a> · <a href="changelog.html#b-2026-10-20">Build 2026-10-20</a> · <a href="changelog.html#b-2026-10-19">Build, 5 runs that day merged 2026-10-19</a> · <a href="changelog.html#b-2026-10-18">Build 2026-10-18</a> · <a href="changelog.html#b-2026-10-17">Build 2026-10-17</a> · <a href="changelog.html#b-2026-10-16">Build 2026-10-16</a> · <a href="changelog.html#b-2026-10-15">Build 2026-10-15</a></p></dd>
     </dl>
   </div>
   <div class="sitemap-group">
@@ -1028,7 +1028,7 @@ dl.sitemap-artifacts dd:last-of-type{margin-bottom:0;padding-bottom:0;border-bot
     </ul>
   </nav>
 
-  <p class="freshness-stamp">Prices as of 2026-10-21 (TCGplayer daily 2026-10-21, Cardmarket 2026-10-21, monthly panel 2026-10-01). Built 2026-10-21 00:32 UTC. Published upstream: TCGplayer daily 2026-10-20 20:05 UTC, Cardmarket (EU) 2026-10-20 22:54 UTC.<span class="freshness-age" data-feed-dates="2026-10-21,2026-10-20,2026-10-21,2026-10-20" data-age-at-build="1"></span></p>
+  <p class="freshness-stamp">Prices as of 2026-10-21 (TCGplayer daily 2026-10-21, Cardmarket 2026-10-21, monthly panel 2026-10-01). Built 2026-10-21 01:20 UTC. Published upstream: TCGplayer daily 2026-10-20 20:05 UTC, Cardmarket (EU) 2026-10-20 22:54 UTC.<span class="freshness-age" data-feed-dates="2026-10-21,2026-10-20,2026-10-21,2026-10-20" data-age-at-build="1"></span></p>
 
 </main>
 
@@ -1549,7 +1549,7 @@ return '<div class="cardcell' + (compact ? ' cc-compact' : '') + '">'
 + '</div></div>';
 }
 
-const PAGE = {"nPages":17,"nSections":92};
+const PAGE = {"nPages":17,"nSections":91};
 
 </script>
 </body>
