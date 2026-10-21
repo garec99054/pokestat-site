@@ -53,7 +53,7 @@ function hitsHideImg(img){ img.style.display = "none"; }
 --warn-dot:#c58a2a;
 --shadow-tint:39,39,42;
 --radius:3px;
---fs-1:0.72rem;
+--fs-1:0.75rem;
 --fs-2:0.8rem;
 --fs-3:0.88rem;
 --fs-4:1rem;
@@ -63,7 +63,6 @@ function hitsHideImg(img){ img.style.display = "none"; }
 --ease:cubic-bezier(.16,1,.3,1);
 --t-fast:.15s;
 --t-mid:.24s;
---rv-step:42ms;
 --nav-h:52px;
 --tbl-pad-y:6px;
 --tbl-pad-x:12px;
@@ -179,6 +178,8 @@ font-variant-numeric:tabular-nums;
 font-feature-settings:"tnum" 1,"lnum" 1;
 }
 a{color:var(--accent-ink);}
+html{accent-color:var(--accent);caret-color:var(--accent-ink);scrollbar-color:var(--border-strong) transparent;}
+::selection{background:rgba(var(--accent-rgb),.24);color:var(--ink);}
 a:hover{color:var(--accent-ink);text-decoration-thickness:2px;}
 .page{max-width:1360px;margin:0 auto;padding:20px 20px 44px;}
 .prose{max-width:66ch;}
@@ -306,9 +307,10 @@ box-shadow:0 12px 24px -16px rgba(0,0,0,.35);
 .nav-inner{gap:6px;padding-left:12px;padding-right:12px;}
 .density-toggle,.theme-cycle{font-size:var(--fs-1);padding:5px 8px;}
 }
-header.masthead{border-bottom:1px solid var(--border);padding-bottom:14px;margin-bottom:18px;text-align:center;scroll-margin-top:calc(var(--nav-h) + 24px + var(--onpage-h,0px));}
-header.masthead h1{font-size:var(--fs-6);font-weight:650;margin:0 0 5px;letter-spacing:-0.01em;}
-header.masthead p.lede{margin:0 auto 8px;max-width:80ch;color:var(--ink-muted);font-size:var(--fs-3);}
+header.masthead{border-bottom:1px solid var(--border);padding-bottom:14px;margin-bottom:18px;scroll-margin-top:calc(var(--nav-h) + 24px + var(--onpage-h,0px));}
+header.masthead h1{font-size:var(--fs-7);font-weight:650;margin:0 0 8px;letter-spacing:-0.015em;line-height:1.2;text-wrap:balance;}
+@media (max-width:480px){header.masthead h1{font-size:var(--fs-6);}}
+header.masthead p.lede{margin:0 0 10px;max-width:70ch;color:var(--ink-muted);font-size:var(--fs-4);text-wrap:pretty;}
 .onpage{
 margin:0 0 var(--section-gap);
 --onpage-cur-bg:var(--panel-alt);--onpage-cur-deco:none;
@@ -352,7 +354,7 @@ border-bottom:1px solid var(--border);margin:0 0 var(--section-gap);
 --onpage-cur-bg:transparent;--onpage-cur-deco:underline;
 }
 .onpage-k{margin:0;flex:none;white-space:nowrap;}
-.onpage ol{flex:1;overflow-x:visible;flex-wrap:wrap;padding:0;gap:4px 20px;justify-content:center;background:none;}
+.onpage ol{flex:1;overflow-x:visible;flex-wrap:wrap;padding:0;gap:4px 20px;justify-content:flex-start;background:none;}
 .onpage a{padding:0;border:none;border-radius:0;background:none;min-height:0;display:inline;}
 .onpage a:hover{border-color:transparent;background:none;color:var(--ink);}
 }
@@ -366,11 +368,11 @@ border-radius:var(--radius);
 overflow:hidden;
 }
 .summary-cell{
-background:var(--panel);padding:9px 12px;text-align:center;
+background:var(--panel);padding:9px 12px;
 display:flex;flex-direction:column;justify-content:center;
 }
 .summary-cell .k{font-size:var(--fs-1);text-transform:uppercase;letter-spacing:0.04em;color:var(--ink-subtle);margin:0 0 4px;}
-.summary-cell .v{font-size:var(--fs-5);font-weight:650;margin:0;line-height:1.25;}
+.summary-cell .v{font-size:var(--fs-5);font-weight:650;margin:0;line-height:1.3;}
 .summary-cell .v small{
 font-weight:500;color:var(--ink-muted);font-size:var(--fs-1);display:-webkit-box;
 -webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.3;
@@ -386,10 +388,10 @@ transition:background-color .15s ease-out,border-color .15s ease-out;
 .verdict-chip:hover{border-color:var(--warn-border-hover);color:var(--warn-ink-hover);background:var(--warn-bg-hover);}
 .verdict-chip .dot{width:7px;height:7px;border-radius:50%;background:var(--warn-dot);}
 section{margin-bottom:var(--section-gap);scroll-margin-top:calc(var(--nav-h) + 24px + var(--onpage-h,0px));}
-section > h2{font-size:var(--fs-5);font-weight:650;margin:0 0 4px;letter-spacing:-0.005em;text-align:center;}
-section > p.section-note{margin:0 auto 10px;color:var(--ink-muted);font-size:var(--fs-3);max-width:78ch;text-align:center;}
+section > h2{font-size:var(--fs-5);font-weight:650;margin:0 0 6px;letter-spacing:-0.005em;text-wrap:balance;}
+section > p.section-note{margin:0 0 10px;color:var(--ink-muted);font-size:var(--fs-3);max-width:72ch;text-wrap:pretty;}
 details.explain{
-max-width:78ch;margin:0 auto 12px;border:1px solid var(--border);
+max-width:78ch;margin:0 0 12px;border:1px solid var(--border);
 border-radius:var(--radius);background:var(--panel);
 }
 details.explain > summary{
@@ -422,7 +424,7 @@ line-height:1.6;border-top:1px solid var(--border);margin-top:0;padding-top:12px
 details.explain .explain-body p{margin:0 0 9px;}
 details.explain .explain-body p:last-child{margin-bottom:0;}
 details.explain .explain-body strong{color:var(--ink);}
-details.explain-inline{margin:0 auto 14px;max-width:78ch;text-align:center;}
+details.explain-inline{margin:0 0 14px;max-width:72ch;}
 details.explain-inline > summary{
 cursor:pointer;list-style:none;padding:2px 0;
 font-size:var(--fs-2);font-weight:600;color:var(--accent-ink);
@@ -448,7 +450,7 @@ line-height:1.6;text-align:left;
 details.explain-inline .explain-body p{margin:0 0 9px;}
 details.explain-inline .explain-body p:last-child{margin-bottom:0;}
 details.explain-inline .explain-body strong{color:var(--ink);}
-.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:center;margin-bottom:16px;}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:flex-start;margin-bottom:16px;}
 input[type="search"],select{
 font-family:inherit;font-size:var(--fs-3);padding:7px 10px;
 border:1px solid var(--border-strong);border-radius:var(--radius);
@@ -465,7 +467,7 @@ outline:2px solid var(--accent);outline-offset:2px;border-radius:var(--radius);
 .preset-group button:last-child{border-right:none;}
 .depth-group{margin:0 0 10px auto;width:max-content;}
 .depth-group button{font-size:var(--fs-1);padding:4px 11px;}
-.section-head{display:flex;align-items:baseline;justify-content:center;gap:14px;position:relative;margin-bottom:4px;}
+.section-head{display:flex;align-items:baseline;justify-content:flex-start;gap:14px;position:relative;margin-bottom:4px;}
 .section-head h2{margin:0;}
 .section-head .depth-group{position:absolute;right:0;margin:0;}
 @media (max-width:640px){
@@ -533,6 +535,7 @@ position:absolute;left:8px;top:-48px;z-index:1000;padding:8px 12px;border-radius
 background:var(--accent);color:var(--on-accent);font-weight:600;text-decoration:none;
 }
 .skip-link:focus{top:8px;}
+.skip-link:hover{color:var(--on-accent);}
 @media (max-width:480px){
 .cc-links .chip{padding:6px 10px;min-height:30px;line-height:1.3;}
 }
@@ -552,19 +555,19 @@ border-radius:999px;border:1px solid var(--border-strong);white-space:nowrap;col
 .table-footer{display:flex;justify-content:space-between;align-items:center;margin-top:12px;font-size:var(--fs-2);color:var(--ink-subtle);gap:12px;flex-wrap:wrap;}
 .wl-block{margin-bottom:38px;}
 .wl-block:last-child{margin-bottom:0;}
-.wl-block h3{font-size:var(--fs-4);font-weight:650;margin:0 0 3px;text-align:center;letter-spacing:-0.005em;}
-.wl-sub{text-align:center;color:var(--ink-muted);font-size:var(--fs-3);margin:0 auto 10px;max-width:78ch;}
+.wl-block h2{font-size:var(--fs-5);font-weight:650;margin:0 0 4px;letter-spacing:-0.005em;}
+.wl-sub{color:var(--ink-muted);font-size:var(--fs-3);margin:0 0 10px;max-width:72ch;}
 .wl-duo{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start;}
 .wl-duo > *{min-width:0;}
 @media (max-width:820px){.wl-duo{grid-template-columns:1fr;}}
-.duo-head{font-size:var(--fs-2);font-weight:650;color:var(--ink-muted);text-align:center;margin:0 0 5px;text-transform:uppercase;letter-spacing:0.04em;}
+.duo-head{font-size:var(--fs-3);font-weight:650;color:var(--ink-muted);margin:0 0 5px;}
 .stat-cards{
 display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;
 background:var(--border);border:1px solid var(--border);border-radius:var(--radius);
-overflow:hidden;margin:0 auto 16px;max-width:760px;
+overflow:hidden;margin:0 0 16px;max-width:760px;
 }
-.stat-card{background:var(--panel);padding:12px 14px;text-align:center;}
-.stat-card .k{font-size:var(--fs-1);text-transform:uppercase;letter-spacing:0.04em;color:var(--ink-subtle);margin:0 0 4px;}
+.stat-card{background:var(--panel);padding:12px 14px;}
+.stat-card .k{font-size:var(--fs-2);color:var(--ink-subtle);margin:0 0 4px;}
 .stat-card .v{font-size:var(--fs-5);font-weight:650;margin:0;line-height:1.2;}
 .stat-card .v small{font-weight:500;color:var(--ink-muted);font-size:var(--fs-1);display:block;margin-top:2px;}
 #leaderboard tbody tr.selected{background:rgba(var(--accent-rgb),0.08);}
@@ -604,10 +607,10 @@ padding:14px 18px;background:var(--panel);font-size:var(--fs-3);color:var(--ink-
 .split > *{min-width:0;}
 @media (max-width:900px){.split{grid-template-columns:1fr;}}
 .caveats{
-border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:var(--radius);
+border:1px solid var(--border);border-radius:var(--radius);
 padding:18px 20px;background:var(--panel);font-size:var(--fs-3);color:var(--ink-muted);
 }
-.caveats h4{margin:0 0 10px;color:var(--ink);font-size:var(--fs-3);font-weight:650;}
+.caveats h2,.caveats h3,.caveats h4{margin:0 0 10px;color:var(--ink);font-size:var(--fs-3);font-weight:650;}
 .caveats ul{margin:0;padding-left:1.15em;}
 .caveats li{margin-bottom:11px;}
 .caveats li:last-child{margin-bottom:0;}
@@ -616,7 +619,7 @@ padding:18px 20px;background:var(--panel);font-size:var(--fs-3);color:var(--ink-
 .methods-grid > *{min-width:0;}
 @media (max-width:760px){.methods-grid{grid-template-columns:1fr;}}
 .method-card{border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;background:var(--panel);font-size:var(--fs-3);color:var(--ink-muted);}
-.method-card h4{margin:0 0 8px;color:var(--ink);font-size:var(--fs-3);font-weight:650;}
+.method-card h3,.method-card h4{margin:0 0 8px;color:var(--ink);font-size:var(--fs-3);font-weight:650;}
 .method-card ul{margin:0;padding-left:1.1em;}
 .method-card li{margin-bottom:6px;}
 .method-card p{margin:0 0 8px;}
@@ -677,10 +680,6 @@ transition:border-color var(--t-fast) ease-out,background-color var(--t-fast) ea
 .rel-list a:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
 .gloss{border-bottom:1px dotted var(--accent-ink);cursor:help;}
 .gloss:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:2px;}
-html.motion [data-reveal]{opacity:0;transform:translateY(10px);
-transition:opacity var(--t-mid) var(--ease),transform var(--t-mid) var(--ease);
-transition-delay:calc(var(--rv,0) * var(--rv-step));}
-html.motion [data-reveal].in-view{opacity:1;transform:none;}
 .back-to-top{
 position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));
 z-index:44;width:44px;height:44px;padding:0;border-radius:50%;
@@ -778,7 +777,7 @@ white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:220px;
 }
 html.compact .cardcell .cc-thumb,html.compact .cardcell .cc-thumb--fallback{width:28px;height:39px;}
 html.compact .cardcell .cc-meta{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:200px;}
-.experimental-notice{margin:0 0 1.25rem;padding:.6rem .85rem;background:var(--warn-bg);color:var(--warn-ink);border:1px solid var(--warn-border);border-radius:var(--radius);font-size:.9rem;line-height:1.45}
+.experimental-notice{margin:0 0 1.25rem;max-width:78ch;padding:.6rem .85rem;background:var(--warn-bg);color:var(--warn-ink);border:1px solid var(--warn-border);border-radius:var(--radius);font-size:.9rem;line-height:1.45}
 </style>
 </head>
 <body>
@@ -902,7 +901,7 @@ html.compact .cardcell .cc-meta{white-space:nowrap;overflow:hidden;text-overflow
     </ul>
   </nav>
 
-  <p class="freshness-stamp">Prices as of 2026-10-20 (TCGplayer daily 2026-10-20, Cardmarket 2026-10-20, monthly panel 2026-10-01). Built 2026-10-20 06:40 UTC. Published upstream: TCGplayer daily 2026-10-19 20:06 UTC, Cardmarket (EU) 2026-10-19 22:54 UTC.<span class="freshness-age" data-feed-dates="2026-10-20,2026-10-19,2026-10-20,2026-10-19" data-age-at-build="1"></span></p>
+  <p class="freshness-stamp">Prices as of 2026-10-21 (TCGplayer daily 2026-10-21, Cardmarket 2026-10-21, monthly panel 2026-10-01). Built 2026-10-21 00:32 UTC. Published upstream: TCGplayer daily 2026-10-20 20:05 UTC, Cardmarket (EU) 2026-10-20 22:54 UTC.<span class="freshness-age" data-feed-dates="2026-10-21,2026-10-20,2026-10-21,2026-10-20" data-age-at-build="1"></span></p>
 
 </main>
 
@@ -1332,59 +1331,12 @@ applyVisibility(false);
 relObs.observe(related);
 }
 }
-// ---------- reveal motion (no scroll-spy: pages are separate documents) ----------
-// --rv is the stagger index the CSS multiplies by --rv-step. It is assigned
-// per batch (per observer callback, or per above-the-fold sweep) rather than
-// per document, so a section entering the viewport resolves in reading order
-// while a section further down still starts from zero. RV_MAX caps the delay
-// so a batch of twenty rows never ends on a half-second lag.
-const RV_MAX = 6;
-function revealBatch(list){
-let i = 0;
-for(let k=0;k<list.length;k++){
-const t = list[k];
-if(t.classList.contains("in-view")) continue;
-const r = t.getBoundingClientRect();
-if(r.top < window.innerHeight && r.bottom > 0){
-t.style.setProperty("--rv", String(i < RV_MAX ? i : RV_MAX));
-i++;
-t.classList.add("in-view");
-}
-}
-}
-function initReveal(){
-const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-const targets = Array.prototype.slice.call(document.querySelectorAll("[data-reveal]"));
-if(reduce || !("IntersectionObserver" in window) || location.hash) return;
+// ---------- motion ----------
+// One authored moment: the wordmark settles (html.motion .brand). Sections
+// render visible by default; there is no per-section entrance.
+function initMotion(){
+if(window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 document.documentElement.classList.add("motion");
-const reveal = new IntersectionObserver((entries)=>{
-let i = 0;
-entries.forEach(e=>{
-if(e.isIntersecting){
-e.target.style.setProperty("--rv", String(i < RV_MAX ? i : RV_MAX));
-i++;
-e.target.classList.add("in-view");
-reveal.unobserve(e.target);
-}
-});
-}, {rootMargin:"0px 0px -5% 0px", threshold:0});
-targets.forEach(t=>reveal.observe(t));
-revealBatch(targets);
-setTimeout(()=>{ revealBatch(targets); }, 1200);
-// A programmatic or very fast scroll (an in-page jump, a "scroll to the
-// end" script, a screenshot tool) can carry a short section from below the
-// viewport to above it between two observer samples, so it is never
-// reported as intersecting and would stay opacity:0 forever. This is a
-// fallback, not the primary reveal path: after a generous delay, anything
-// the observer missed is shown anyway rather than left invisible.
-setTimeout(()=>{
-targets.forEach(t=>{
-if(!t.classList.contains("in-view")){
-t.classList.add("in-view");
-reveal.unobserve(t);
-}
-});
-}, 2500);
 }
 // Active-nav visibility no longer needs a scroll-into-view: the grouped nav
 // does not scroll horizontally, and build_nav marks the current page's group
@@ -1399,7 +1351,7 @@ document.addEventListener("mousemove", e=>{ if(tip && tip.classList.contains("sh
 document.addEventListener("keydown", e=>{ if(e.key==="Escape") hideTip(); });
 initTheme();
 initDensity();
-initReveal();
+initMotion();
 initMarkTips();
 // Run before anything below reads --nav-h/--onpage-h (the scroll-margin
 // calc() in CSS_CORE, and the sticky-bar gap a fragment jump has to clear):

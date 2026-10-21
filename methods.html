@@ -52,7 +52,7 @@ function hitsHideImg(img){ img.style.display = "none"; }
 --warn-dot:#c58a2a;
 --shadow-tint:39,39,42;
 --radius:3px;
---fs-1:0.72rem;
+--fs-1:0.75rem;
 --fs-2:0.8rem;
 --fs-3:0.88rem;
 --fs-4:1rem;
@@ -62,7 +62,6 @@ function hitsHideImg(img){ img.style.display = "none"; }
 --ease:cubic-bezier(.16,1,.3,1);
 --t-fast:.15s;
 --t-mid:.24s;
---rv-step:42ms;
 --nav-h:52px;
 --tbl-pad-y:6px;
 --tbl-pad-x:12px;
@@ -178,6 +177,8 @@ font-variant-numeric:tabular-nums;
 font-feature-settings:"tnum" 1,"lnum" 1;
 }
 a{color:var(--accent-ink);}
+html{accent-color:var(--accent);caret-color:var(--accent-ink);scrollbar-color:var(--border-strong) transparent;}
+::selection{background:rgba(var(--accent-rgb),.24);color:var(--ink);}
 a:hover{color:var(--accent-ink);text-decoration-thickness:2px;}
 .page{max-width:1360px;margin:0 auto;padding:20px 20px 44px;}
 .prose{max-width:66ch;}
@@ -305,9 +306,10 @@ box-shadow:0 12px 24px -16px rgba(0,0,0,.35);
 .nav-inner{gap:6px;padding-left:12px;padding-right:12px;}
 .density-toggle,.theme-cycle{font-size:var(--fs-1);padding:5px 8px;}
 }
-header.masthead{border-bottom:1px solid var(--border);padding-bottom:14px;margin-bottom:18px;text-align:center;scroll-margin-top:calc(var(--nav-h) + 24px + var(--onpage-h,0px));}
-header.masthead h1{font-size:var(--fs-6);font-weight:650;margin:0 0 5px;letter-spacing:-0.01em;}
-header.masthead p.lede{margin:0 auto 8px;max-width:80ch;color:var(--ink-muted);font-size:var(--fs-3);}
+header.masthead{border-bottom:1px solid var(--border);padding-bottom:14px;margin-bottom:18px;scroll-margin-top:calc(var(--nav-h) + 24px + var(--onpage-h,0px));}
+header.masthead h1{font-size:var(--fs-7);font-weight:650;margin:0 0 8px;letter-spacing:-0.015em;line-height:1.2;text-wrap:balance;}
+@media (max-width:480px){header.masthead h1{font-size:var(--fs-6);}}
+header.masthead p.lede{margin:0 0 10px;max-width:70ch;color:var(--ink-muted);font-size:var(--fs-4);text-wrap:pretty;}
 .onpage{
 margin:0 0 var(--section-gap);
 --onpage-cur-bg:var(--panel-alt);--onpage-cur-deco:none;
@@ -351,7 +353,7 @@ border-bottom:1px solid var(--border);margin:0 0 var(--section-gap);
 --onpage-cur-bg:transparent;--onpage-cur-deco:underline;
 }
 .onpage-k{margin:0;flex:none;white-space:nowrap;}
-.onpage ol{flex:1;overflow-x:visible;flex-wrap:wrap;padding:0;gap:4px 20px;justify-content:center;background:none;}
+.onpage ol{flex:1;overflow-x:visible;flex-wrap:wrap;padding:0;gap:4px 20px;justify-content:flex-start;background:none;}
 .onpage a{padding:0;border:none;border-radius:0;background:none;min-height:0;display:inline;}
 .onpage a:hover{border-color:transparent;background:none;color:var(--ink);}
 }
@@ -365,11 +367,11 @@ border-radius:var(--radius);
 overflow:hidden;
 }
 .summary-cell{
-background:var(--panel);padding:9px 12px;text-align:center;
+background:var(--panel);padding:9px 12px;
 display:flex;flex-direction:column;justify-content:center;
 }
 .summary-cell .k{font-size:var(--fs-1);text-transform:uppercase;letter-spacing:0.04em;color:var(--ink-subtle);margin:0 0 4px;}
-.summary-cell .v{font-size:var(--fs-5);font-weight:650;margin:0;line-height:1.25;}
+.summary-cell .v{font-size:var(--fs-5);font-weight:650;margin:0;line-height:1.3;}
 .summary-cell .v small{
 font-weight:500;color:var(--ink-muted);font-size:var(--fs-1);display:-webkit-box;
 -webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.3;
@@ -385,10 +387,10 @@ transition:background-color .15s ease-out,border-color .15s ease-out;
 .verdict-chip:hover{border-color:var(--warn-border-hover);color:var(--warn-ink-hover);background:var(--warn-bg-hover);}
 .verdict-chip .dot{width:7px;height:7px;border-radius:50%;background:var(--warn-dot);}
 section{margin-bottom:var(--section-gap);scroll-margin-top:calc(var(--nav-h) + 24px + var(--onpage-h,0px));}
-section > h2{font-size:var(--fs-5);font-weight:650;margin:0 0 4px;letter-spacing:-0.005em;text-align:center;}
-section > p.section-note{margin:0 auto 10px;color:var(--ink-muted);font-size:var(--fs-3);max-width:78ch;text-align:center;}
+section > h2{font-size:var(--fs-5);font-weight:650;margin:0 0 6px;letter-spacing:-0.005em;text-wrap:balance;}
+section > p.section-note{margin:0 0 10px;color:var(--ink-muted);font-size:var(--fs-3);max-width:72ch;text-wrap:pretty;}
 details.explain{
-max-width:78ch;margin:0 auto 12px;border:1px solid var(--border);
+max-width:78ch;margin:0 0 12px;border:1px solid var(--border);
 border-radius:var(--radius);background:var(--panel);
 }
 details.explain > summary{
@@ -421,7 +423,7 @@ line-height:1.6;border-top:1px solid var(--border);margin-top:0;padding-top:12px
 details.explain .explain-body p{margin:0 0 9px;}
 details.explain .explain-body p:last-child{margin-bottom:0;}
 details.explain .explain-body strong{color:var(--ink);}
-details.explain-inline{margin:0 auto 14px;max-width:78ch;text-align:center;}
+details.explain-inline{margin:0 0 14px;max-width:72ch;}
 details.explain-inline > summary{
 cursor:pointer;list-style:none;padding:2px 0;
 font-size:var(--fs-2);font-weight:600;color:var(--accent-ink);
@@ -447,7 +449,7 @@ line-height:1.6;text-align:left;
 details.explain-inline .explain-body p{margin:0 0 9px;}
 details.explain-inline .explain-body p:last-child{margin-bottom:0;}
 details.explain-inline .explain-body strong{color:var(--ink);}
-.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:center;margin-bottom:16px;}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:flex-start;margin-bottom:16px;}
 input[type="search"],select{
 font-family:inherit;font-size:var(--fs-3);padding:7px 10px;
 border:1px solid var(--border-strong);border-radius:var(--radius);
@@ -464,7 +466,7 @@ outline:2px solid var(--accent);outline-offset:2px;border-radius:var(--radius);
 .preset-group button:last-child{border-right:none;}
 .depth-group{margin:0 0 10px auto;width:max-content;}
 .depth-group button{font-size:var(--fs-1);padding:4px 11px;}
-.section-head{display:flex;align-items:baseline;justify-content:center;gap:14px;position:relative;margin-bottom:4px;}
+.section-head{display:flex;align-items:baseline;justify-content:flex-start;gap:14px;position:relative;margin-bottom:4px;}
 .section-head h2{margin:0;}
 .section-head .depth-group{position:absolute;right:0;margin:0;}
 @media (max-width:640px){
@@ -532,6 +534,7 @@ position:absolute;left:8px;top:-48px;z-index:1000;padding:8px 12px;border-radius
 background:var(--accent);color:var(--on-accent);font-weight:600;text-decoration:none;
 }
 .skip-link:focus{top:8px;}
+.skip-link:hover{color:var(--on-accent);}
 @media (max-width:480px){
 .cc-links .chip{padding:6px 10px;min-height:30px;line-height:1.3;}
 }
@@ -551,19 +554,19 @@ border-radius:999px;border:1px solid var(--border-strong);white-space:nowrap;col
 .table-footer{display:flex;justify-content:space-between;align-items:center;margin-top:12px;font-size:var(--fs-2);color:var(--ink-subtle);gap:12px;flex-wrap:wrap;}
 .wl-block{margin-bottom:38px;}
 .wl-block:last-child{margin-bottom:0;}
-.wl-block h3{font-size:var(--fs-4);font-weight:650;margin:0 0 3px;text-align:center;letter-spacing:-0.005em;}
-.wl-sub{text-align:center;color:var(--ink-muted);font-size:var(--fs-3);margin:0 auto 10px;max-width:78ch;}
+.wl-block h2{font-size:var(--fs-5);font-weight:650;margin:0 0 4px;letter-spacing:-0.005em;}
+.wl-sub{color:var(--ink-muted);font-size:var(--fs-3);margin:0 0 10px;max-width:72ch;}
 .wl-duo{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start;}
 .wl-duo > *{min-width:0;}
 @media (max-width:820px){.wl-duo{grid-template-columns:1fr;}}
-.duo-head{font-size:var(--fs-2);font-weight:650;color:var(--ink-muted);text-align:center;margin:0 0 5px;text-transform:uppercase;letter-spacing:0.04em;}
+.duo-head{font-size:var(--fs-3);font-weight:650;color:var(--ink-muted);margin:0 0 5px;}
 .stat-cards{
 display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;
 background:var(--border);border:1px solid var(--border);border-radius:var(--radius);
-overflow:hidden;margin:0 auto 16px;max-width:760px;
+overflow:hidden;margin:0 0 16px;max-width:760px;
 }
-.stat-card{background:var(--panel);padding:12px 14px;text-align:center;}
-.stat-card .k{font-size:var(--fs-1);text-transform:uppercase;letter-spacing:0.04em;color:var(--ink-subtle);margin:0 0 4px;}
+.stat-card{background:var(--panel);padding:12px 14px;}
+.stat-card .k{font-size:var(--fs-2);color:var(--ink-subtle);margin:0 0 4px;}
 .stat-card .v{font-size:var(--fs-5);font-weight:650;margin:0;line-height:1.2;}
 .stat-card .v small{font-weight:500;color:var(--ink-muted);font-size:var(--fs-1);display:block;margin-top:2px;}
 #leaderboard tbody tr.selected{background:rgba(var(--accent-rgb),0.08);}
@@ -603,10 +606,10 @@ padding:14px 18px;background:var(--panel);font-size:var(--fs-3);color:var(--ink-
 .split > *{min-width:0;}
 @media (max-width:900px){.split{grid-template-columns:1fr;}}
 .caveats{
-border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:var(--radius);
+border:1px solid var(--border);border-radius:var(--radius);
 padding:18px 20px;background:var(--panel);font-size:var(--fs-3);color:var(--ink-muted);
 }
-.caveats h4{margin:0 0 10px;color:var(--ink);font-size:var(--fs-3);font-weight:650;}
+.caveats h2,.caveats h3,.caveats h4{margin:0 0 10px;color:var(--ink);font-size:var(--fs-3);font-weight:650;}
 .caveats ul{margin:0;padding-left:1.15em;}
 .caveats li{margin-bottom:11px;}
 .caveats li:last-child{margin-bottom:0;}
@@ -615,7 +618,7 @@ padding:18px 20px;background:var(--panel);font-size:var(--fs-3);color:var(--ink-
 .methods-grid > *{min-width:0;}
 @media (max-width:760px){.methods-grid{grid-template-columns:1fr;}}
 .method-card{border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;background:var(--panel);font-size:var(--fs-3);color:var(--ink-muted);}
-.method-card h4{margin:0 0 8px;color:var(--ink);font-size:var(--fs-3);font-weight:650;}
+.method-card h3,.method-card h4{margin:0 0 8px;color:var(--ink);font-size:var(--fs-3);font-weight:650;}
 .method-card ul{margin:0;padding-left:1.1em;}
 .method-card li{margin-bottom:6px;}
 .method-card p{margin:0 0 8px;}
@@ -676,10 +679,6 @@ transition:border-color var(--t-fast) ease-out,background-color var(--t-fast) ea
 .rel-list a:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
 .gloss{border-bottom:1px dotted var(--accent-ink);cursor:help;}
 .gloss:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:2px;}
-html.motion [data-reveal]{opacity:0;transform:translateY(10px);
-transition:opacity var(--t-mid) var(--ease),transform var(--t-mid) var(--ease);
-transition-delay:calc(var(--rv,0) * var(--rv-step));}
-html.motion [data-reveal].in-view{opacity:1;transform:none;}
 .back-to-top{
 position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));
 z-index:44;width:44px;height:44px;padding:0;border-radius:50%;
@@ -898,7 +897,7 @@ html.compact .cardcell .cc-meta{white-space:nowrap;overflow:hidden;text-overflow
     <h2>Data sources and coverage</h2>
     <div class="methods-grid">
       <div class="method-card">
-        <h4>Data sources</h4>
+        <h3>Data sources</h3>
         <ul>
           <li>TCGplayer USD prices via the tcgcsv.com daily archive (market model, backtest).</li>
           <li>TCGplayer USD prices via a live TCGdex snapshot (second independent USD source, shown
@@ -914,7 +913,7 @@ html.compact .cardcell .cc-meta{white-space:nowrap;overflow:hidden;text-overflow
         </ul>
       </div>
       <div class="method-card">
-        <h4>Cardmarket EU coverage</h4>
+        <h3>Cardmarket EU coverage</h3>
         <p id="cm-coverage" style="margin:0;"></p>
       </div>
     </div>
@@ -927,7 +926,7 @@ html.compact .cardcell .cc-meta{white-space:nowrap;overflow:hidden;text-overflow
     <h2>Model tiering, sourcing, and page doctrine</h2>
     <div class="methods-grid">
       <div class="method-card">
-        <h4>Model tiering</h4>
+        <h3>Model tiering</h3>
         <p>Where model-generated content appears, capability is tiered
           <strong>Fable &gt; Opus &gt; Sonnet/Haiku</strong>: Fable for the deepest reasoning and
           adversarial verification, Opus for framework and analysis work, and Sonnet/Haiku for
@@ -935,7 +934,7 @@ html.compact .cardcell .cc-meta{white-space:nowrap;overflow:hidden;text-overflow
           selection itself is mechanical and model-agnostic.</p>
       </div>
       <div class="method-card">
-        <h4>Trusted reseller sources &amp; ToS discipline</h4>
+        <h3>Trusted reseller sources &amp; ToS discipline</h3>
         <p>Prices come only from official or free archival APIs (tcgcsv.com for the TCGplayer model
           series, and TCGdex for both the Cardmarket EU columns and the second TCGplayer USD cross-
           check). eBay and PriceCharting remain excluded. Marketplace links are user navigation, not
@@ -947,7 +946,7 @@ html.compact .cardcell .cc-meta{white-space:nowrap;overflow:hidden;text-overflow
     </div>
 
     <div class="method-card" style="margin-bottom:20px;">
-      <h4>Page doctrine (amended for this build)</h4>
+      <h3>Page doctrine (amended for this build)</h3>
       <p>Every page is self-contained (inline CSS/JS/SVG) with two amended exceptions: (a) outbound
         links to TCGplayer and Cardmarket product pages, and (b) lazy-loaded external card artwork
         from the two catalog hosts in <code>cards.image_url</code>, <code>images.pokemontcg.io</code>
@@ -963,7 +962,7 @@ html.compact .cardcell .cc-meta{white-space:nowrap;overflow:hidden;text-overflow
   <section id="caveats" data-reveal>
     <h2>Caveats</h2>
     <div class="caveats">
-      <h4>Caveats, read before trusting any number on this site</h4>
+      <h3>Caveats, read before trusting any number on this site</h3>
       <ul id="method-caveats"></ul>
     </div>
   </section>
@@ -989,7 +988,7 @@ html.compact .cardcell .cc-meta{white-space:nowrap;overflow:hidden;text-overflow
     </ul>
   </nav>
 
-  <p class="freshness-stamp">Prices as of 2026-10-20 (TCGplayer daily 2026-10-20, Cardmarket 2026-10-20, monthly panel 2026-10-01). Built 2026-10-20 06:40 UTC. Published upstream: TCGplayer daily 2026-10-19 20:06 UTC, Cardmarket (EU) 2026-10-19 22:54 UTC.<span class="freshness-age" data-feed-dates="2026-10-20,2026-10-19,2026-10-20,2026-10-19" data-age-at-build="1"></span></p>
+  <p class="freshness-stamp">Prices as of 2026-10-21 (TCGplayer daily 2026-10-21, Cardmarket 2026-10-21, monthly panel 2026-10-01). Built 2026-10-21 00:32 UTC. Published upstream: TCGplayer daily 2026-10-20 20:05 UTC, Cardmarket (EU) 2026-10-20 22:54 UTC.<span class="freshness-age" data-feed-dates="2026-10-21,2026-10-20,2026-10-21,2026-10-20" data-age-at-build="1"></span></p>
 
 </main>
 
@@ -1419,59 +1418,12 @@ applyVisibility(false);
 relObs.observe(related);
 }
 }
-// ---------- reveal motion (no scroll-spy: pages are separate documents) ----------
-// --rv is the stagger index the CSS multiplies by --rv-step. It is assigned
-// per batch (per observer callback, or per above-the-fold sweep) rather than
-// per document, so a section entering the viewport resolves in reading order
-// while a section further down still starts from zero. RV_MAX caps the delay
-// so a batch of twenty rows never ends on a half-second lag.
-const RV_MAX = 6;
-function revealBatch(list){
-let i = 0;
-for(let k=0;k<list.length;k++){
-const t = list[k];
-if(t.classList.contains("in-view")) continue;
-const r = t.getBoundingClientRect();
-if(r.top < window.innerHeight && r.bottom > 0){
-t.style.setProperty("--rv", String(i < RV_MAX ? i : RV_MAX));
-i++;
-t.classList.add("in-view");
-}
-}
-}
-function initReveal(){
-const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-const targets = Array.prototype.slice.call(document.querySelectorAll("[data-reveal]"));
-if(reduce || !("IntersectionObserver" in window) || location.hash) return;
+// ---------- motion ----------
+// One authored moment: the wordmark settles (html.motion .brand). Sections
+// render visible by default; there is no per-section entrance.
+function initMotion(){
+if(window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 document.documentElement.classList.add("motion");
-const reveal = new IntersectionObserver((entries)=>{
-let i = 0;
-entries.forEach(e=>{
-if(e.isIntersecting){
-e.target.style.setProperty("--rv", String(i < RV_MAX ? i : RV_MAX));
-i++;
-e.target.classList.add("in-view");
-reveal.unobserve(e.target);
-}
-});
-}, {rootMargin:"0px 0px -5% 0px", threshold:0});
-targets.forEach(t=>reveal.observe(t));
-revealBatch(targets);
-setTimeout(()=>{ revealBatch(targets); }, 1200);
-// A programmatic or very fast scroll (an in-page jump, a "scroll to the
-// end" script, a screenshot tool) can carry a short section from below the
-// viewport to above it between two observer samples, so it is never
-// reported as intersecting and would stay opacity:0 forever. This is a
-// fallback, not the primary reveal path: after a generous delay, anything
-// the observer missed is shown anyway rather than left invisible.
-setTimeout(()=>{
-targets.forEach(t=>{
-if(!t.classList.contains("in-view")){
-t.classList.add("in-view");
-reveal.unobserve(t);
-}
-});
-}, 2500);
 }
 // Active-nav visibility no longer needs a scroll-into-view: the grouped nav
 // does not scroll horizontally, and build_nav marks the current page's group
@@ -1486,7 +1438,7 @@ document.addEventListener("mousemove", e=>{ if(tip && tip.classList.contains("sh
 document.addEventListener("keydown", e=>{ if(e.key==="Escape") hideTip(); });
 initTheme();
 initDensity();
-initReveal();
+initMotion();
 initMarkTips();
 // Run before anything below reads --nav-h/--onpage-h (the scroll-margin
 // calc() in CSS_CORE, and the sticky-bar gap a fragment jump has to clear):
@@ -1557,7 +1509,7 @@ return '<div class="cardcell' + (compact ? ' cc-compact' : '') + '">'
 + '</div></div>';
 }
 
-const PAGE = {"meta":{"universe":478,"band":{"lo":-0.182,"hi":0.203,"width":0.385,"n":3534,"coverage":81.8,"honestWidth":0.441,"insample":80.2,"nominal":80.0,"savingPct":2.1,"sliceKind":"rarity","slices":[{"label":"Hyper Rare","n":264,"own":true,"width":0.321,"scored":264,"coverage":80.3},{"label":"Mega Hyper Rare","n":24,"own":false,"width":0.385,"scored":17,"coverage":70.6},{"label":"Rare Rainbow","n":352,"own":true,"width":0.269,"scored":352,"coverage":77.3},{"label":"Rare Secret","n":120,"own":false,"width":0.385,"scored":120,"coverage":92.5},{"label":"Rare Ultra","n":832,"own":true,"width":0.32,"scored":832,"coverage":82.8},{"label":"Special Illustration Rare","n":823,"own":true,"width":0.42,"scored":823,"coverage":83.8},{"label":"Ultra Rare","n":1119,"own":true,"width":0.478,"scored":1119,"coverage":80.3}],"baselineNaive":{"label":"naive unconditional (no model, one band)","width":0.45,"coverage":82.6},"baselineGlobal":{"label":"model + one global band (previously shipped)","width":0.44,"coverage":84.4},"shipped":{"label":"model + per-rarity bands (**shipped now**)","width":0.441,"coverage":81.8}},"cmCards":4871,"cmDates":32,"cmUniverse":477,"cmCurrency":"USD","eurusd":1.1225,"eurusdDate":"2026-10-19","eraSkill":{"finding":"the held-out edge is WITHIN-era skill, not cross-era contrast.","minNeff":4.0,"pooledIC":0.353,"pooledSE":0.054,"neutralIC":0.317,"neutralSE":0.026,"neutralNEff":5.102,"neutralThin":false,"contrastIC":0.144,"contrastSE":0.926},"strataHeadline":"STRATIFIED RE-EXAMINATION (read this with the line above): the pooled null is partly a COMPOSITION artifact. Ranking the same cards inside their own era instead of across the whole cross-section turns 4 pooled horizon(s) directional, and reversion clears the sample-size gates in 2 of 3 eras. After the shared-endpoint (bid-ask-bounce) control, the era-level reversion that survives is Scarlet & Violet, Sword & Shield only; momentum survives nowhere (0 momentum cells). This is a POST-HOC subgroup finding on one calendar window with no trading costs applied -- it is not a tradeable signal and does not overturn the pooled null. Full tables, sample sizes and caveats below."},"validation":{"bestModel":"rf","heldoutIC":0.353,"heldoutIR":6.571,"heldoutNeff":1.854,"heldoutICLo":-0.33,"heldoutICHi":1.036,"heldoutICNoBook":0.325,"heldoutICNoBookSE":0.165,"selIC":0.28,"verdict":"undetermined","ablFrom":0.334,"ablTo":0.261,"setageCorr":0.381,"flagsUp":0,"flagsDown":1,"roster":[{"model":"ridge","meanIC":0.337,"meanIC_raw":0.337,"icIR":4.92,"quintile":17.7,"upPrec":34.6,"upRec":18.8,"dnPrec":31.3,"dnRec":25.5,"baseline":false,"coverage":80.7,"selected":false},{"model":"elasticnet","meanIC":0.319,"meanIC_raw":0.319,"icIR":3.885,"quintile":16.1,"upPrec":31.4,"upRec":17.1,"dnPrec":31.5,"dnRec":25.6,"baseline":false,"coverage":81.0,"selected":false},{"model":"gbm","meanIC":0.309,"meanIC_raw":0.309,"icIR":3.973,"quintile":16.6,"upPrec":35.4,"upRec":19.3,"dnPrec":30.9,"dnRec":25.2,"baseline":false,"coverage":83.4,"selected":false},{"model":"ensemble","meanIC":0.357,"meanIC_raw":0.357,"icIR":4.124,"quintile":18.8,"upPrec":33.3,"upRec":18.1,"dnPrec":32.9,"dnRec":26.8,"baseline":false,"coverage":81.1,"selected":false},{"model":"rank_linear","meanIC":0.34,"meanIC_raw":0.34,"icIR":5.465,"quintile":17.9,"upPrec":35.3,"upRec":19.2,"dnPrec":32.5,"dnRec":26.5,"baseline":false,"coverage":79.7,"selected":false},{"model":"huber","meanIC":0.344,"meanIC_raw":0.344,"icIR":4.585,"quintile":17.4,"upPrec":34.7,"upRec":18.9,"dnPrec":32.2,"dnRec":26.2,"baseline":false,"coverage":81.2,"selected":false},{"model":"pls","meanIC":0.319,"meanIC_raw":0.319,"icIR":3.909,"quintile":16.0,"upPrec":31.0,"upRec":16.9,"dnPrec":32.8,"dnRec":26.7,"baseline":false,"coverage":80.5,"selected":false},{"model":"rf","meanIC":0.334,"meanIC_raw":0.334,"icIR":7.217,"quintile":17.2,"upPrec":30.1,"upRec":16.4,"dnPrec":35.6,"dnRec":29.0,"baseline":false,"coverage":81.8,"selected":true},{"model":"zero","meanIC":null,"meanIC_raw":0.0,"icIR":null,"quintile":9.2,"upPrec":17.7,"upRec":9.6,"dnPrec":23.4,"dnRec":19.0,"baseline":true,"coverage":null,"selected":false},{"model":"momentum","meanIC":-0.065,"meanIC_raw":-0.065,"icIR":-1.7,"quintile":-3.3,"upPrec":12.7,"upRec":6.9,"dnPrec":19.2,"dnRec":15.7,"baseline":true,"coverage":null,"selected":false},{"model":"reversion","meanIC":0.167,"meanIC_raw":0.167,"icIR":1.387,"quintile":7.8,"upPrec":21.6,"upRec":11.8,"dnPrec":16.7,"dnRec":13.6,"baseline":true,"coverage":null,"selected":false}],"rosterHeldout":[{"model":"rf","heldoutIC":0.353},{"model":"rank_linear","heldoutIC":0.36},{"model":"ridge","heldoutIC":0.36},{"model":"ensemble","heldoutIC":0.396},{"model":"huber","heldoutIC":0.366},{"model":"elasticnet","heldoutIC":0.357},{"model":"gbm","heldoutIC":0.351},{"model":"pls","heldoutIC":0.374}],"band":{"lo":-0.182,"hi":0.203,"width":0.385,"n":3534,"coverage":81.8,"honestWidth":0.441,"insample":80.2,"nominal":80.0,"savingPct":2.1,"sliceKind":"rarity","slices":[{"label":"Hyper Rare","n":264,"own":true,"width":0.321,"scored":264,"coverage":80.3},{"label":"Mega Hyper Rare","n":24,"own":false,"width":0.385,"scored":17,"coverage":70.6},{"label":"Rare Rainbow","n":352,"own":true,"width":0.269,"scored":352,"coverage":77.3},{"label":"Rare Secret","n":120,"own":false,"width":0.385,"scored":120,"coverage":92.5},{"label":"Rare Ultra","n":832,"own":true,"width":0.32,"scored":832,"coverage":82.8},{"label":"Special Illustration Rare","n":823,"own":true,"width":0.42,"scored":823,"coverage":83.8},{"label":"Ultra Rare","n":1119,"own":true,"width":0.478,"scored":1119,"coverage":80.3}],"baselineNaive":{"label":"naive unconditional (no model, one band)","width":0.45,"coverage":82.6},"baselineGlobal":{"label":"model + one global band (previously shipped)","width":0.44,"coverage":84.4},"shipped":{"label":"model + per-rarity bands (**shipped now**)","width":0.441,"coverage":81.8}},"attribution":[{"diagnostic":"rf full features (all folds)","meanIC":0.334,"meanICSE":null,"note":"the reported number"},{"diagnostic":"rf STATIC features ablated (all folds)","meanIC":0.261,"meanICSE":null,"note":"22% of the signal gone"},{"diagnostic":"rf STATIC features ablated (eval folds)","meanIC":0.273,"meanICSE":0.017,"note":"held-out, clears the 0.05 floor by more than 1 SE"},{"diagnostic":"univariate set_age_months ranking","meanIC":0.321,"meanICSE":null,"note":"one feature, no model"},{"diagnostic":"rf momentum-only features","meanIC":0.156,"meanICSE":null,"note":"some signal on its own (47% of the full-feature IC), well short of the full feature set"}],"breakdown":{"minNeff":4.0,"eraFinding":"the held-out edge is WITHIN-era skill, not cross-era contrast.","rarityFinding":"within-tier skill survives; the tier ordering on its own does not","era":[{"slice":"pooled (headline)","cards":465,"folds":8,"ic":0.353,"se":0.054,"nEff":1.854,"ablIC":0.273,"ablSE":0.017,"call":{"text":"clears 0 by > 1 SE","thin":true,"kind":"clears"}},{"slice":"ME","cards":55,"folds":7,"ic":0.378,"se":0.129,"nEff":5.583,"ablIC":0.234,"ablSE":0.038,"call":{"text":"clears 0 by > 1 SE","thin":false,"kind":"clears"}},{"slice":"SV","cards":247,"folds":8,"ic":0.313,"se":0.037,"nEff":4.683,"ablIC":0.258,"ablSE":0.026,"call":{"text":"clears 0 by > 1 SE","thin":false,"kind":"clears"}},{"slice":"SWSH","cards":163,"folds":8,"ic":0.299,"se":0.071,"nEff":1.817,"ablIC":0.284,"ablSE":0.021,"call":{"text":"clears 0 by > 1 SE","thin":true,"kind":"clears"}},{"slice":"within-era neutralized","cards":465,"folds":8,"ic":0.317,"se":0.026,"nEff":5.102,"ablIC":0.267,"ablSE":0.02,"call":{"text":"clears 0 by > 1 SE","thin":false,"kind":"clears"}},{"slice":"between-era contrast only","cards":465,"folds":8,"ic":0.144,"se":0.926,"nEff":1.0,"ablIC":0.156,"ablSE":0.326,"call":{"text":"within 1 SE of 0","thin":false,"kind":"flat"}}],"rarity":[{"slice":"pooled (headline)","cards":465,"folds":8,"ic":0.353,"se":0.054,"nEff":1.854,"ablIC":0.273,"ablSE":0.017,"call":{"text":"clears 0 by > 1 SE","thin":true,"kind":"clears"}},{"slice":"Hyper Rare","cards":33,"folds":8,"ic":0.314,"se":0.185,"nEff":1.91,"ablIC":0.169,"ablSE":0.169,"call":{"text":"clears 0 by > 1 SE","thin":true,"kind":"clears"}},{"slice":"Mega Hyper Rare","cards":5,"folds":0,"ic":null,"se":null,"nEff":0.0,"ablIC":null,"ablSE":null,"call":{"text":"skipped (never >= 8 cards in a fold)","thin":false,"kind":"skipped"}},{"slice":"Rare Rainbow","cards":44,"folds":8,"ic":0.367,"se":0.054,"nEff":5.247,"ablIC":0.449,"ablSE":0.077,"call":{"text":"clears 0 by > 1 SE","thin":false,"kind":"clears"}},{"slice":"Rare Secret","cards":15,"folds":8,"ic":0.254,"se":0.099,"nEff":8.0,"ablIC":0.18,"ablSE":0.097,"call":{"text":"clears 0 by > 1 SE","thin":false,"kind":"clears"}},{"slice":"Rare Ultra","cards":104,"folds":8,"ic":0.286,"se":0.07,"nEff":3.604,"ablIC":0.275,"ablSE":0.029,"call":{"text":"clears 0 by > 1 SE","thin":true,"kind":"clears"}},{"slice":"Special Illustration Rare","cards":118,"folds":8,"ic":0.466,"se":0.047,"nEff":8.0,"ablIC":0.238,"ablSE":0.035,"call":{"text":"clears 0 by > 1 SE","thin":false,"kind":"clears"}},{"slice":"Ultra Rare","cards":146,"folds":8,"ic":0.324,"se":0.034,"nEff":8.0,"ablIC":0.224,"ablSE":0.022,"call":{"text":"clears 0 by > 1 SE","thin":false,"kind":"clears"}},{"slice":"within-rarity neutralized","cards":465,"folds":8,"ic":0.351,"se":0.029,"nEff":5.578,"ablIC":0.258,"ablSE":0.02,"call":{"text":"clears 0 by > 1 SE","thin":false,"kind":"clears"}},{"slice":"between-rarity contrast only","cards":465,"folds":8,"ic":0.249,"se":0.556,"nEff":1.559,"ablIC":0.327,"ablSE":0.334,"call":{"text":"within 1 SE of 0","thin":false,"kind":"flat"}}]},"listingBook":{"arms":[{"arm":"before (market only)","features":"12 numeric + 9 ind.","winner":"rf","selIC":0.285,"evalIC":0.325,"evalSE":0.165,"ir":1.973,"ablIC":0.212,"after":false},{"arm":"after (+ listing book)","features":"18 numeric + 10 ind.","winner":"rf","selIC":0.28,"evalIC":0.353,"evalSE":0.054,"ir":6.571,"ablIC":0.273,"after":true}],"before":{"arm":"before (market only)","features":"12 numeric + 9 ind.","winner":"rf","selIC":0.285,"evalIC":0.325,"evalSE":0.165,"ir":1.973,"ablIC":0.212,"after":false},"after":{"arm":"after (+ listing book)","features":"18 numeric + 10 ind.","winner":"rf","selIC":0.28,"evalIC":0.353,"evalSE":0.054,"ir":6.571,"ablIC":0.273,"after":true},"deltaIC":0.028,"deltaAbl":0.061,"features":[{"feature":"mid_skew","selIC":0.181,"heldIC":0.179,"se":0.069},{"feature":"d_market_pos_3m","selIC":-0.117,"heldIC":-0.122,"se":0.035},{"feature":"rel_spread","selIC":0.055,"heldIC":-0.07,"se":0.17},{"feature":"market_pos","selIC":-0.124,"heldIC":0.052,"se":0.102},{"feature":"d_rel_spread_3m","selIC":0.003,"heldIC":0.044,"se":0.038},{"feature":"direct_discount","selIC":0.04,"heldIC":0.043,"se":0.071}],"featureNames":["rel_spread","market_pos","mid_skew","direct_discount","d_rel_spread_3m","d_market_pos_3m"],"populated":{"low":100,"mid":100,"high":100,"direct_low":42},"driver":"mid_skew","decay":[{"horizon":1,"ic":0.278},{"horizon":2,"ic":0.249},{"horizon":3,"ic":0.179},{"horizon":6,"ic":0.053}],"driverAloneIC":0.35,"withoutIC":0.325,"allSixIC":0.353,"noiseCaveat":"State it plainly: the move (+0.028) is SMALLER than the 'before' arm's own one-SE band (0.165). On these error bars a reader cannot conclude that the improvement clears sampling noise, and no joint significance test of the two arms is claimed anywhere in this section.","artifactCaveat":"That is the signature of a mechanical catch-up, not of demand forecasting: TCGplayer's `market` is a trailing transaction-weighted average, while `mid` is the CURRENT listing midpoint, so `mid` carries fresher information than `market` at the same instant. A large part of this feature's edge is therefore the stale average converging on a book that was already visible at T. It is leakage-free as-of-T signal, but substantially a measurement-lag artifact of how the price series is constructed rather than a forecast of future demand. A buyer paying live listing prices would capture less of it than the IC suggests."},"sliceProbe":{"era":"SWSH","finding":"the SWSH cell IS a real effect.","ic":0.299,"se":0.071,"folds":8,"cards":163,"ablIC":0.284,"nEff":null,"permP":0.0,"permDraws":20000,"nullSD":0.035,"ci":[0.235,0.358],"flipPct":0.0,"candidates":[{"candidate":"pls","ic":0.333},{"candidate":"ensemble","ic":0.327},{"candidate":"gbm","ic":0.317},{"candidate":"huber","ic":0.302},{"candidate":"rf","ic":0.299},{"candidate":"ridge","ic":0.292},{"candidate":"rank_linear","ic":0.29},{"candidate":"elasticnet","ic":0.278}],"sameSign":8,"nCandidates":8,"rosterMedian":0.3,"separated":true},"ablation":{"ablFrom":0.334,"ablTo":0.261,"survives":0.7814,"removed":0.2186,"removedPct":22,"survivesPct":78,"removedWords":"a substantial minority of","survivesWords":"most of","isMajorityStatic":false,"univariateSetage":0.321,"univariateShare":0.9611,"setageCorr":0.381,"sentence":"Ablating the static set-age and rarity features moves all-fold mean IC from 0.334 to 0.261, removing a substantial minority of the signal (22%), so the ranking does not collapse without them. It is still substantially a lifecycle ordering, though: ranking on set age alone with no model at all already scores 0.321, 96% of the full-feature IC, and the model's out-of-fold ranking correlates 0.381 (Spearman) with set age."}}};
+const PAGE = {"meta":{"universe":478,"band":{"lo":-0.182,"hi":0.203,"width":0.385,"n":3534,"coverage":81.8,"honestWidth":0.441,"insample":80.2,"nominal":80.0,"savingPct":2.1,"sliceKind":"rarity","slices":[{"label":"Hyper Rare","n":264,"own":true,"width":0.321,"scored":264,"coverage":80.3},{"label":"Mega Hyper Rare","n":24,"own":false,"width":0.385,"scored":17,"coverage":70.6},{"label":"Rare Rainbow","n":352,"own":true,"width":0.269,"scored":352,"coverage":77.3},{"label":"Rare Secret","n":120,"own":false,"width":0.385,"scored":120,"coverage":92.5},{"label":"Rare Ultra","n":832,"own":true,"width":0.32,"scored":832,"coverage":82.8},{"label":"Special Illustration Rare","n":823,"own":true,"width":0.42,"scored":823,"coverage":83.8},{"label":"Ultra Rare","n":1119,"own":true,"width":0.478,"scored":1119,"coverage":80.3}],"baselineNaive":{"label":"naive unconditional (no model, one band)","width":0.45,"coverage":82.6},"baselineGlobal":{"label":"model + one global band (previously shipped)","width":0.44,"coverage":84.4},"shipped":{"label":"model + per-rarity bands (**shipped now**)","width":0.441,"coverage":81.8}},"cmCards":4871,"cmDates":33,"cmUniverse":477,"cmCurrency":"USD","eurusd":1.1215,"eurusdDate":"2026-10-20","eraSkill":{"finding":"the held-out edge is WITHIN-era skill, not cross-era contrast.","minNeff":4.0,"pooledIC":0.353,"pooledSE":0.054,"neutralIC":0.317,"neutralSE":0.026,"neutralNEff":5.102,"neutralThin":false,"contrastIC":0.144,"contrastSE":0.926},"strataHeadline":"STRATIFIED RE-EXAMINATION (read this with the line above): the pooled null is partly a COMPOSITION artifact. Ranking the same cards inside their own era instead of across the whole cross-section turns 4 pooled horizon(s) directional, and reversion clears the sample-size gates in 2 of 3 eras. After the shared-endpoint (bid-ask-bounce) control, the era-level reversion that survives is Scarlet & Violet, Sword & Shield only; momentum survives nowhere (0 momentum cells). This is a POST-HOC subgroup finding on one calendar window with no trading costs applied -- it is not a tradeable signal and does not overturn the pooled null. Full tables, sample sizes and caveats below."},"validation":{"bestModel":"rf","heldoutIC":0.353,"heldoutIR":6.571,"heldoutNeff":1.854,"heldoutICLo":-0.33,"heldoutICHi":1.0,"heldoutICNoBook":0.325,"heldoutICNoBookSE":0.165,"selIC":0.28,"verdict":"undetermined","ablFrom":0.334,"ablTo":0.261,"setageCorr":0.381,"flagsUp":0,"flagsDown":1,"roster":[{"model":"ridge","meanIC":0.337,"meanIC_raw":0.337,"icIR":4.92,"quintile":17.7,"upPrec":34.6,"upRec":18.8,"dnPrec":31.3,"dnRec":25.5,"baseline":false,"coverage":80.7,"selected":false},{"model":"elasticnet","meanIC":0.319,"meanIC_raw":0.319,"icIR":3.885,"quintile":16.1,"upPrec":31.4,"upRec":17.1,"dnPrec":31.5,"dnRec":25.6,"baseline":false,"coverage":81.0,"selected":false},{"model":"gbm","meanIC":0.309,"meanIC_raw":0.309,"icIR":3.973,"quintile":16.6,"upPrec":35.4,"upRec":19.3,"dnPrec":30.9,"dnRec":25.2,"baseline":false,"coverage":83.4,"selected":false},{"model":"ensemble","meanIC":0.357,"meanIC_raw":0.357,"icIR":4.124,"quintile":18.8,"upPrec":33.3,"upRec":18.1,"dnPrec":32.9,"dnRec":26.8,"baseline":false,"coverage":81.1,"selected":false},{"model":"rank_linear","meanIC":0.34,"meanIC_raw":0.34,"icIR":5.465,"quintile":17.9,"upPrec":35.3,"upRec":19.2,"dnPrec":32.5,"dnRec":26.5,"baseline":false,"coverage":79.7,"selected":false},{"model":"huber","meanIC":0.344,"meanIC_raw":0.344,"icIR":4.585,"quintile":17.4,"upPrec":34.7,"upRec":18.9,"dnPrec":32.2,"dnRec":26.2,"baseline":false,"coverage":81.2,"selected":false},{"model":"pls","meanIC":0.319,"meanIC_raw":0.319,"icIR":3.909,"quintile":16.0,"upPrec":31.0,"upRec":16.9,"dnPrec":32.8,"dnRec":26.7,"baseline":false,"coverage":80.5,"selected":false},{"model":"rf","meanIC":0.334,"meanIC_raw":0.334,"icIR":7.217,"quintile":17.2,"upPrec":30.1,"upRec":16.4,"dnPrec":35.6,"dnRec":29.0,"baseline":false,"coverage":81.8,"selected":true},{"model":"zero","meanIC":null,"meanIC_raw":0.0,"icIR":null,"quintile":9.2,"upPrec":17.7,"upRec":9.6,"dnPrec":23.4,"dnRec":19.0,"baseline":true,"coverage":null,"selected":false},{"model":"momentum","meanIC":-0.065,"meanIC_raw":-0.065,"icIR":-1.7,"quintile":-3.3,"upPrec":12.7,"upRec":6.9,"dnPrec":19.2,"dnRec":15.7,"baseline":true,"coverage":null,"selected":false},{"model":"reversion","meanIC":0.167,"meanIC_raw":0.167,"icIR":1.387,"quintile":7.8,"upPrec":21.6,"upRec":11.8,"dnPrec":16.7,"dnRec":13.6,"baseline":true,"coverage":null,"selected":false}],"rosterHeldout":[{"model":"rf","heldoutIC":0.353},{"model":"rank_linear","heldoutIC":0.36},{"model":"ridge","heldoutIC":0.36},{"model":"ensemble","heldoutIC":0.396},{"model":"huber","heldoutIC":0.366},{"model":"elasticnet","heldoutIC":0.357},{"model":"gbm","heldoutIC":0.351},{"model":"pls","heldoutIC":0.374}],"band":{"lo":-0.182,"hi":0.203,"width":0.385,"n":3534,"coverage":81.8,"honestWidth":0.441,"insample":80.2,"nominal":80.0,"savingPct":2.1,"sliceKind":"rarity","slices":[{"label":"Hyper Rare","n":264,"own":true,"width":0.321,"scored":264,"coverage":80.3},{"label":"Mega Hyper Rare","n":24,"own":false,"width":0.385,"scored":17,"coverage":70.6},{"label":"Rare Rainbow","n":352,"own":true,"width":0.269,"scored":352,"coverage":77.3},{"label":"Rare Secret","n":120,"own":false,"width":0.385,"scored":120,"coverage":92.5},{"label":"Rare Ultra","n":832,"own":true,"width":0.32,"scored":832,"coverage":82.8},{"label":"Special Illustration Rare","n":823,"own":true,"width":0.42,"scored":823,"coverage":83.8},{"label":"Ultra Rare","n":1119,"own":true,"width":0.478,"scored":1119,"coverage":80.3}],"baselineNaive":{"label":"naive unconditional (no model, one band)","width":0.45,"coverage":82.6},"baselineGlobal":{"label":"model + one global band (previously shipped)","width":0.44,"coverage":84.4},"shipped":{"label":"model + per-rarity bands (**shipped now**)","width":0.441,"coverage":81.8}},"attribution":[{"diagnostic":"rf full features (all folds)","meanIC":0.334,"meanICSE":null,"note":"the reported number"},{"diagnostic":"rf STATIC features ablated (all folds)","meanIC":0.261,"meanICSE":null,"note":"22% of the signal gone"},{"diagnostic":"rf STATIC features ablated (eval folds)","meanIC":0.273,"meanICSE":0.017,"note":"held-out, clears the 0.05 floor by more than 1 SE"},{"diagnostic":"univariate set_age_months ranking","meanIC":0.321,"meanICSE":null,"note":"one feature, no model"},{"diagnostic":"rf momentum-only features","meanIC":0.156,"meanICSE":null,"note":"some signal on its own (47% of the full-feature IC), well short of the full feature set"}],"breakdown":{"minNeff":4.0,"eraFinding":"the held-out edge is WITHIN-era skill, not cross-era contrast.","rarityFinding":"within-tier skill survives; the tier ordering on its own does not","era":[{"slice":"pooled (headline)","cards":465,"folds":8,"ic":0.353,"se":0.054,"nEff":1.854,"ablIC":0.273,"ablSE":0.017,"call":{"text":"clears 0 by > 1 SE","thin":true,"kind":"clears"}},{"slice":"ME","cards":55,"folds":7,"ic":0.378,"se":0.129,"nEff":5.583,"ablIC":0.234,"ablSE":0.038,"call":{"text":"clears 0 by > 1 SE","thin":false,"kind":"clears"}},{"slice":"SV","cards":247,"folds":8,"ic":0.313,"se":0.037,"nEff":4.683,"ablIC":0.258,"ablSE":0.026,"call":{"text":"clears 0 by > 1 SE","thin":false,"kind":"clears"}},{"slice":"SWSH","cards":163,"folds":8,"ic":0.299,"se":0.071,"nEff":1.817,"ablIC":0.284,"ablSE":0.021,"call":{"text":"clears 0 by > 1 SE","thin":true,"kind":"clears"}},{"slice":"within-era neutralized","cards":465,"folds":8,"ic":0.317,"se":0.026,"nEff":5.102,"ablIC":0.267,"ablSE":0.02,"call":{"text":"clears 0 by > 1 SE","thin":false,"kind":"clears"}},{"slice":"between-era contrast only","cards":465,"folds":8,"ic":0.144,"se":0.926,"nEff":1.0,"ablIC":0.156,"ablSE":0.326,"call":{"text":"within 1 SE of 0","thin":false,"kind":"flat"}}],"rarity":[{"slice":"pooled (headline)","cards":465,"folds":8,"ic":0.353,"se":0.054,"nEff":1.854,"ablIC":0.273,"ablSE":0.017,"call":{"text":"clears 0 by > 1 SE","thin":true,"kind":"clears"}},{"slice":"Hyper Rare","cards":33,"folds":8,"ic":0.314,"se":0.185,"nEff":1.91,"ablIC":0.169,"ablSE":0.169,"call":{"text":"clears 0 by > 1 SE","thin":true,"kind":"clears"}},{"slice":"Mega Hyper Rare","cards":5,"folds":0,"ic":null,"se":null,"nEff":0.0,"ablIC":null,"ablSE":null,"call":{"text":"skipped (never >= 8 cards in a fold)","thin":false,"kind":"skipped"}},{"slice":"Rare Rainbow","cards":44,"folds":8,"ic":0.367,"se":0.054,"nEff":5.247,"ablIC":0.449,"ablSE":0.077,"call":{"text":"clears 0 by > 1 SE","thin":false,"kind":"clears"}},{"slice":"Rare Secret","cards":15,"folds":8,"ic":0.254,"se":0.099,"nEff":8.0,"ablIC":0.18,"ablSE":0.097,"call":{"text":"clears 0 by > 1 SE","thin":false,"kind":"clears"}},{"slice":"Rare Ultra","cards":104,"folds":8,"ic":0.286,"se":0.07,"nEff":3.604,"ablIC":0.275,"ablSE":0.029,"call":{"text":"clears 0 by > 1 SE","thin":true,"kind":"clears"}},{"slice":"Special Illustration Rare","cards":118,"folds":8,"ic":0.466,"se":0.047,"nEff":8.0,"ablIC":0.238,"ablSE":0.035,"call":{"text":"clears 0 by > 1 SE","thin":false,"kind":"clears"}},{"slice":"Ultra Rare","cards":146,"folds":8,"ic":0.324,"se":0.034,"nEff":8.0,"ablIC":0.224,"ablSE":0.022,"call":{"text":"clears 0 by > 1 SE","thin":false,"kind":"clears"}},{"slice":"within-rarity neutralized","cards":465,"folds":8,"ic":0.351,"se":0.029,"nEff":5.578,"ablIC":0.258,"ablSE":0.02,"call":{"text":"clears 0 by > 1 SE","thin":false,"kind":"clears"}},{"slice":"between-rarity contrast only","cards":465,"folds":8,"ic":0.249,"se":0.556,"nEff":1.559,"ablIC":0.327,"ablSE":0.334,"call":{"text":"within 1 SE of 0","thin":false,"kind":"flat"}}]},"listingBook":{"arms":[{"arm":"before (market only)","features":"12 numeric + 9 ind.","winner":"rf","selIC":0.285,"evalIC":0.325,"evalSE":0.165,"ir":1.973,"ablIC":0.212,"after":false},{"arm":"after (+ listing book)","features":"18 numeric + 10 ind.","winner":"rf","selIC":0.28,"evalIC":0.353,"evalSE":0.054,"ir":6.571,"ablIC":0.273,"after":true}],"before":{"arm":"before (market only)","features":"12 numeric + 9 ind.","winner":"rf","selIC":0.285,"evalIC":0.325,"evalSE":0.165,"ir":1.973,"ablIC":0.212,"after":false},"after":{"arm":"after (+ listing book)","features":"18 numeric + 10 ind.","winner":"rf","selIC":0.28,"evalIC":0.353,"evalSE":0.054,"ir":6.571,"ablIC":0.273,"after":true},"deltaIC":0.028,"deltaAbl":0.061,"features":[{"feature":"mid_skew","selIC":0.181,"heldIC":0.179,"se":0.069},{"feature":"d_market_pos_3m","selIC":-0.117,"heldIC":-0.122,"se":0.035},{"feature":"rel_spread","selIC":0.055,"heldIC":-0.07,"se":0.17},{"feature":"market_pos","selIC":-0.124,"heldIC":0.052,"se":0.102},{"feature":"d_rel_spread_3m","selIC":0.003,"heldIC":0.044,"se":0.038},{"feature":"direct_discount","selIC":0.04,"heldIC":0.043,"se":0.071}],"featureNames":["rel_spread","market_pos","mid_skew","direct_discount","d_rel_spread_3m","d_market_pos_3m"],"populated":{"low":100,"mid":100,"high":100,"direct_low":42},"driver":"mid_skew","decay":[{"horizon":1,"ic":0.278},{"horizon":2,"ic":0.249},{"horizon":3,"ic":0.179},{"horizon":6,"ic":0.053}],"driverAloneIC":0.35,"withoutIC":0.325,"allSixIC":0.353,"noiseCaveat":"State it plainly: the move (+0.028) is SMALLER than the 'before' arm's own one-SE band (0.165). On these error bars a reader cannot conclude that the improvement clears sampling noise, and no joint significance test of the two arms is claimed anywhere in this section.","artifactCaveat":"That is the signature of a mechanical catch-up, not of demand forecasting: TCGplayer's `market` is a trailing transaction-weighted average, while `mid` is the CURRENT listing midpoint, so `mid` carries fresher information than `market` at the same instant. A large part of this feature's edge is therefore the stale average converging on a book that was already visible at T. It is leakage-free as-of-T signal, but substantially a measurement-lag artifact of how the price series is constructed rather than a forecast of future demand. A buyer paying live listing prices would capture less of it than the IC suggests."},"sliceProbe":{"era":"SWSH","finding":"the SWSH cell IS a real effect.","ic":0.299,"se":0.071,"folds":8,"cards":163,"ablIC":0.284,"nEff":null,"permP":0.0,"permDraws":20000,"nullSD":0.035,"ci":[0.235,0.358],"flipPct":0.0,"candidates":[{"candidate":"pls","ic":0.333},{"candidate":"ensemble","ic":0.327},{"candidate":"gbm","ic":0.317},{"candidate":"huber","ic":0.302},{"candidate":"rf","ic":0.299},{"candidate":"ridge","ic":0.292},{"candidate":"rank_linear","ic":0.29},{"candidate":"elasticnet","ic":0.278}],"sameSign":8,"nCandidates":8,"rosterMedian":0.3,"separated":true},"ablation":{"ablFrom":0.334,"ablTo":0.261,"survives":0.7814,"removed":0.2186,"removedPct":22,"survivesPct":78,"removedWords":"a substantial minority of","survivesWords":"most of","isMajorityStatic":false,"univariateSetage":0.321,"univariateShare":0.9611,"setageCorr":0.381,"sentence":"Ablating the static set-age and rarity features moves all-fold mean IC from 0.334 to 0.261, removing a substantial minority of the signal (22%), so the ranking does not collapse without them. It is still substantially a lifecycle ordering, though: ranking on set age alone with no model at all already scores 0.321, 96% of the full-feature IC, and the model's out-of-fold ranking correlates 0.381 (Spearman) with set age."}}};
 
 const M = PAGE.meta, V = PAGE.validation;
 // Two caveats that only exist when the artifacts that measure them exist. Each is

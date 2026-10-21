@@ -1,6 +1,6 @@
 # Forward 90-day return model: validation report
 
-Honest verdict: insufficient independent evidence to establish a positive held-out edge. The best model (rf) was chosen on 7 selection folds and scores mean rank IC 0.353 (autocorrelation-aware t-stat 6.571, n_eff 1.854) on the 8 held-out evaluation folds. 95% range for that mean IC: -0.330 to 1.036 (mean +/- t(0.975, df = max(n_eff - 1, 1)) x ic_std / sqrt(n_eff)). Positive strength claims require at least 4 effective folds and a headline 95% range entirely above zero. Ablation is a separate attribution check; passing it does not establish the overall edge.
+Honest verdict: insufficient independent evidence to establish a positive held-out edge. The best model (rf) was chosen on 7 selection folds and scores mean rank IC 0.353 (autocorrelation-aware t-stat 6.571, n_eff 1.854) on the 8 held-out evaluation folds. 95% range for that mean IC: -0.330 to 1.000 (mean +/- t(0.975, df = max(n_eff - 1, 1)) x ic_std / sqrt(n_eff)). Positive strength claims require at least 4 effective folds and a headline 95% range entirely above zero. Ablation is a separate attribution check; passing it does not establish the overall edge.
 
 Best model chosen on the selection folds: **rf**. Signal strength
 verdict: **undetermined** (weak if held-out mean IC < 0.05 or IR < 0.5; strong if
