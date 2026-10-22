@@ -902,7 +902,7 @@ svg.mchart .k0{fill:var(--ink-subtle);font-size:11px;text-anchor:middle}svg.mcha
     </details>
   </header>
 
-  <p class="experimental-notice" id="experimental-notice" role="note">Experimental: these rankings come from models that have not passed a forward test yet. Each month's predictions are saved before prices move and scored after three months. Not a recommendation. Any model return shown here is before costs. Bought at a realistic price and sold after fees, the top 10% returned -24.3% over 3 months against -38.8% for all cards. It beat the average card in 7 of 8 months and made money in 0 of 8.</p>
+  <p class="experimental-notice" id="experimental-notice" role="note">Experimental: these rankings come from models that have not passed a forward test yet. Each month's predictions are saved before prices move and scored after three months. Not a recommendation. Any model return shown here is before costs. Bought at a realistic price and sold after fees, the top 10% returned -22.9% over 3 months against -37.3% for all cards. It beat the average card in 7 of 8 months and made money in 0 of 8. Fixed fees and shipping swamp cheap cards: among cards $20 and up, the top 10% returned -3.7% against -15.0%, beat them in 8 of 8 months and made money in 4 of 8. The months overlap, so these are not independent results.</p>
 
 
   <nav class="onpage" aria-label="On this page">
@@ -1075,7 +1075,7 @@ svg.mchart .k0{fill:var(--ink-subtle);font-size:11px;text-anchor:middle}svg.mcha
     </ul>
   </nav>
 
-  <p class="freshness-stamp">Prices as of 2026-10-22 (TCGplayer daily 2026-10-22, Cardmarket 2026-10-22, monthly panel 2026-10-01). Built 2026-10-22 06:40 UTC. Published upstream: TCGplayer daily 2026-10-21 20:05 UTC, Cardmarket (EU) 2026-10-21 22:54 UTC.<span class="freshness-age" data-feed-dates="2026-10-22,2026-10-21,2026-10-22,2026-10-21" data-age-at-build="1"></span></p>
+  <p class="freshness-stamp">Prices as of 2026-10-22 (TCGplayer daily 2026-10-22, Cardmarket 2026-10-22, monthly panel 2026-10-01). Built 2026-10-22 23:35 UTC. Published upstream: TCGplayer daily 2026-10-22 20:06 UTC, Cardmarket (EU) 2026-10-22 22:54 UTC.<span class="freshness-age" data-feed-dates="2026-10-22,2026-10-22,2026-10-22,2026-10-22" data-age-at-build="0"></span></p>
 
 </main>
 
@@ -1085,7 +1085,7 @@ svg.mchart .k0{fill:var(--ink-subtle);font-size:11px;text-anchor:middle}svg.mcha
 
 // ---------- formatting ----------
 function fmtMoney(v){ return v == null ? "" : "$" + v.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2}); }
-function fmtPct(v, d){ if(v==null) return ""; d = d==null?1:d; const s = v>0?"+":""; return s + (v*100).toFixed(d) + "%"; }
+function fmtPct(v, d){ if(v==null) return ""; d = d==null?1:d; const t = (v*100).toFixed(d), z = +t === 0; return (z ? "" : v>0 ? "+" : "") + (z ? (0).toFixed(d) : t) + "%"; }
 // Model returns are logarithms of gross growth relative to the median card.
 function fmtLogReturn(v, d){ return v==null ? "" : fmtPct(Math.expm1(v), d); }
 function fmtSigned(v, d){ if(v==null) return ""; d=d==null?2:d; const s=v>0?"+":""; return s+v.toFixed(d); }
