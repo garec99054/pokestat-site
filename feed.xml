@@ -2,9 +2,16 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>pokestat: what changed</title>
   <id>https://garec99054.github.io/pokestat-site/changelog.html</id>
-  <updated>2026-10-21T06:40:18Z</updated>
+  <updated>2026-10-22T06:40:17Z</updated>
   <link rel="self" href="https://garec99054.github.io/pokestat-site/feed.xml" />
   <link rel="alternate" href="https://garec99054.github.io/pokestat-site/changelog.html" />
+  <entry>
+    <title>Build 2026-10-22: 3 figures moved, 13 unchanged.</title>
+    <id>https://garec99054.github.io/pokestat-site/changelog.html#b-2026-10-22</id>
+    <updated>2026-10-22T06:40:17Z</updated>
+    <link rel="alternate" href="https://garec99054.github.io/pokestat-site/changelog.html#b-2026-10-22" />
+    <summary>3 figures moved, 13 unchanged.</summary>
+  </entry>
   <entry>
     <title>Build 2026-10-21: 5 figures moved, 11 unchanged.</title>
     <id>https://garec99054.github.io/pokestat-site/changelog.html#b-2026-10-21</id>
@@ -32,12 +39,5 @@
     <updated>2026-10-18T07:25:52Z</updated>
     <link rel="alternate" href="https://garec99054.github.io/pokestat-site/changelog.html#b-2026-10-18" />
     <summary>4 figures moved, 12 unchanged.</summary>
-  </entry>
-  <entry>
-    <title>Build 2026-10-17: 3 figures moved, 13 unchanged.</title>
-    <id>https://garec99054.github.io/pokestat-site/changelog.html#b-2026-10-17</id>
-    <updated>2026-10-17T06:37:06Z</updated>
-    <link rel="alternate" href="https://garec99054.github.io/pokestat-site/changelog.html#b-2026-10-17" />
-    <summary>3 figures moved, 13 unchanged.</summary>
   </entry>
 </feed>
