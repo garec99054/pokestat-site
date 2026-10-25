@@ -129,7 +129,7 @@ without its construction is unfalsifiable.
 | chained, geometric | full-history only (imposed) | 58 | 81.2%/yr |
 | chained, geometric | every product (headline) | 111 | 70.3%/yr |
 
-Rows 1 and 2 differ **only** by the linking method and they agree to 1.4e-14
+Rows 1 and 2 differ **only** by the linking method and they agree to 0.0e+00
 percentage points, which is zero to machine precision -- on a balanced panel a
 chained Jevons index equals the direct one exactly, and
 `tests/test_etb_index.py` pins that identity. So the 10.8-point drop from row 2
