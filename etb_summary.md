@@ -357,9 +357,9 @@ anything else looks at it). Published verbatim so it is checkable:
 
 | rule | catalogue rows | priced products | example |
 | --- | --- | --- | --- |
-| `INCLUDED` | 121 | 111 | Celebrations Elite Trainer Box |
+| `INCLUDED` | 124 | 111 | Celebrations Elite Trainer Box |
 | `NOT_A_BOX` | 115 | 0 | Code Card - Celebrations Elite Trainer Box |
-| `MULTI_UNIT` | 80 | 0 | Celebrations Elite Trainer Box Case |
+| `MULTI_UNIT` | 81 | 0 | Celebrations Elite Trainer Box Case |
 | `MIXED_LOT` | 4 | 0 | Ascended Heroes Elite Trainer Box and Pokeball (Sam's Club) |
 | `ETB_PLUS` | 4 | 4 | Pokemon GO Pokemon Center Elite Trainer Box Plus (Exclusive) |
 
